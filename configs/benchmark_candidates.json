@@ -1,0 +1,73 @@
+{
+  "schema_version": "1.0",
+  "candidate_count": 8,
+  "candidates": [
+    {
+      "candidate_id": "DIS_NORM",
+      "disease_name": "Normal ECG",
+      "standard_acronym": "NORM",
+      "snomed_ct_concept_id": "426783006",
+      "description": "Normal 12-lead electrocardiogram without rhythm, conduction, or morphological abnormalities."
+    },
+    {
+      "candidate_id": "DIS_AFIB",
+      "disease_name": "Atrial Fibrillation",
+      "standard_acronym": "AFIB",
+      "snomed_ct_concept_id": "164889003",
+      "description": "Supraventricular tachyarrhythmia characterized by uncoordinated atrial activation with irregular ventricular response."
+    },
+    {
+      "candidate_id": "DIS_RBBB",
+      "disease_name": "Right Bundle Branch Block",
+      "standard_acronym": "RBBB",
+      "snomed_ct_concept_id": "59118001",
+      "description": "Conduction block in the right bundle branch resulting in delayed activation of the right ventricle (QRS duration >= 120 ms, rsR' in V1)."
+    },
+    {
+      "candidate_id": "DIS_LBBB",
+      "disease_name": "Left Bundle Branch Block",
+      "standard_acronym": "LBBB",
+      "snomed_ct_concept_id": "164909002",
+      "description": "Conduction block in the left bundle branch resulting in delayed activation of the left ventricle (QRS duration >= 120 ms, broad R in I/V6)."
+    },
+    {
+      "candidate_id": "DIS_SBRAD",
+      "disease_name": "Sinus Bradycardia",
+      "standard_acronym": "SBRAD",
+      "snomed_ct_concept_id": "426177001",
+      "description": "Sinus rhythm with resting ventricular rate < 60 beats per minute."
+    },
+    {
+      "candidate_id": "DIS_STACH",
+      "disease_name": "Sinus Tachycardia",
+      "standard_acronym": "STACH",
+      "snomed_ct_concept_id": "427084000",
+      "description": "Sinus rhythm with resting ventricular rate > 100 beats per minute."
+    },
+    {
+      "candidate_id": "DIS_1AVB",
+      "disease_name": "First Degree AV Block",
+      "standard_acronym": "1AVB",
+      "snomed_ct_concept_id": "270492004",
+      "description": "Delayed atrioventricular conduction characterized by persistent PR interval prolongation > 200 ms with 1:1 AV conduction."
+    },
+    {
+      "candidate_id": "DIS_MI",
+      "disease_name": "Myocardial Infarction",
+      "standard_acronym": "MI",
+      "snomed_ct_concept_id": "164865005",
+      "description": "Myocardial necrosis / acute injury manifest by localized ST-segment elevation (>= 1 mm in >= 2 contiguous leads) or pathological Q waves."
+    }
+  ],
+  "path_invariance_contract": {
+    "control_path_candidate_set": "Exactly the 8 candidates listed above",
+    "ckp_path_candidate_set": "Exactly the 8 candidates listed above",
+    "retrieval_filtering_policy": "STRICTLY PROHIBITED. Clinical Knowledge Pathways (CKP) must NEVER reduce, filter, or re-rank candidate classes prior to reasoning. Both Control and CKP paths evaluate the identical 8 candidate classes."
+  },
+  "classification_modality": {
+    "multi_label": true,
+    "multi_hot_encoding": true,
+    "mutual_exclusivity": false,
+    "independent_scoring": "Each candidate is evaluated independently; supporting one diagnosis does not preclude concurrent co-occurring diagnoses."
+  }
+}

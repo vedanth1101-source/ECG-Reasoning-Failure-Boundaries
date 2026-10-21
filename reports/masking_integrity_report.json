@@ -1,0 +1,70 @@
+{
+  "timestamp": "2026-10-06 13:17:20 UTC",
+  "anti_leakage_status": "VERIFIED_ZERO_LEAKAGE",
+  "no_generative_reconstruction": true,
+  "stepwise_integrity": {
+    "12_lead": {
+      "num_active_leads": 12,
+      "num_masked_leads": 0,
+      "inactive_strictly_zeroed": true,
+      "max_inactive_leakage": 0.0,
+      "active_strictly_unchanged": true,
+      "max_active_divergence": 0.0,
+      "is_reconstructed": false
+    },
+    "10_lead": {
+      "num_active_leads": 10,
+      "num_masked_leads": 2,
+      "inactive_strictly_zeroed": true,
+      "max_inactive_leakage": 0.0,
+      "active_strictly_unchanged": true,
+      "max_active_divergence": 0.0,
+      "is_reconstructed": false
+    },
+    "8_lead": {
+      "num_active_leads": 8,
+      "num_masked_leads": 4,
+      "inactive_strictly_zeroed": true,
+      "max_inactive_leakage": 0.0,
+      "active_strictly_unchanged": true,
+      "max_active_divergence": 0.0,
+      "is_reconstructed": false
+    },
+    "6_lead": {
+      "num_active_leads": 6,
+      "num_masked_leads": 6,
+      "inactive_strictly_zeroed": true,
+      "max_inactive_leakage": 0.0,
+      "active_strictly_unchanged": true,
+      "max_active_divergence": 0.0,
+      "is_reconstructed": false
+    },
+    "4_lead": {
+      "num_active_leads": 4,
+      "num_masked_leads": 8,
+      "inactive_strictly_zeroed": true,
+      "max_inactive_leakage": 0.0,
+      "active_strictly_unchanged": true,
+      "max_active_divergence": 0.0,
+      "is_reconstructed": false
+    },
+    "2_lead": {
+      "num_active_leads": 2,
+      "num_masked_leads": 10,
+      "inactive_strictly_zeroed": true,
+      "max_inactive_leakage": 0.0,
+      "active_strictly_unchanged": true,
+      "max_active_divergence": 0.0,
+      "is_reconstructed": false
+    },
+    "1_lead": {
+      "num_active_leads": 1,
+      "num_masked_leads": 11,
+      "inactive_strictly_zeroed": true,
+      "max_inactive_leakage": 0.0,
+      "active_strictly_unchanged": true,
+      "max_active_divergence": 0.0,
+      "is_reconstructed": false
+    }
+  }
+}

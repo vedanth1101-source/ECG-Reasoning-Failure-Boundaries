@@ -1,0 +1,239 @@
+{
+  "report_name": "Phase 4 Control Reasoning Transformer Training Report",
+  "timestamp": "2026-10-10 07:04:42 UTC",
+  "status": "CONTROL_PATH_TRAINING_COMPLETE",
+  "training_time_seconds": 1094.63,
+  "total_epochs_trained": 15,
+  "best_epoch": 10,
+  "dataset_splits": {
+    "train": {
+      "records": 17418,
+      "folds": "1-8"
+    },
+    "val": {
+      "records": 2183,
+      "fold": "9"
+    },
+    "test": {
+      "records": 2198,
+      "fold": "10",
+      "status": "QUARANTINED_ZERO_TOUCH"
+    }
+  },
+  "model_architecture": {
+    "name": "ControlReasoningTransformer",
+    "d_model": 256,
+    "d_ecg": 768,
+    "parameters": 1830657,
+    "loss_function": "BCEWithLogitsLoss"
+  },
+  "best_validation_metrics": {
+    "val_loss": 0.17369,
+    "macro_auroc": 0.9242,
+    "macro_f1": 0.6349,
+    "per_class_auroc": {
+      "NORM": 0.8765,
+      "AFIB": 0.9795,
+      "RBBB": 0.8544,
+      "LBBB": 0.9822,
+      "SBRAD": 0.9673,
+      "STACH": 0.9862,
+      "1AVB": 0.9346,
+      "MI": 0.8131
+    },
+    "per_class_f1": {
+      "NORM": 0.8554,
+      "AFIB": 0.7445,
+      "RBBB": 0.549,
+      "LBBB": 0.7612,
+      "SBRAD": 0.5373,
+      "STACH": 0.6857,
+      "1AVB": 0.4361,
+      "MI": 0.5097
+    }
+  },
+  "probability_calibration": {
+    "candidate_acronyms": [
+      "NORM",
+      "AFIB",
+      "RBBB",
+      "LBBB",
+      "SBRAD",
+      "STACH",
+      "1AVB",
+      "MI"
+    ],
+    "temperatures": [
+      1.1557,
+      1.0867,
+      1.0066,
+      1.1682,
+      1.0218,
+      1.1669,
+      0.884,
+      1.2036
+    ],
+    "mean_temperature": 1.0867,
+    "pre_calibration": {
+      "mean_nll": 0.17369,
+      "mean_brier": 0.05252,
+      "mean_ece": 0.01777,
+      "per_class_nll": {
+        "NORM": 0.42127,
+        "AFIB": 0.09081,
+        "RBBB": 0.1739,
+        "LBBB": 0.04862,
+        "SBRAD": 0.06737,
+        "STACH": 0.0588,
+        "1AVB": 0.09731,
+        "MI": 0.43145
+      },
+      "per_class_brier": {
+        "NORM": 0.1338,
+        "AFIB": 0.02732,
+        "RBBB": 0.04434,
+        "LBBB": 0.0129,
+        "SBRAD": 0.0193,
+        "STACH": 0.01732,
+        "1AVB": 0.02712,
+        "MI": 0.13805
+      },
+      "per_class_ece": {
+        "NORM": 0.03567,
+        "AFIB": 0.01087,
+        "RBBB": 0.01219,
+        "LBBB": 0.01126,
+        "SBRAD": 0.01287,
+        "STACH": 0.01021,
+        "1AVB": 0.0142,
+        "MI": 0.0349
+      }
+    },
+    "post_calibration": {
+      "mean_nll": 0.17209,
+      "mean_brier": 0.0521,
+      "mean_ece": 0.01369,
+      "per_class_nll": {
+        "NORM": 0.41793,
+        "AFIB": 0.09035,
+        "RBBB": 0.17389,
+        "LBBB": 0.04723,
+        "SBRAD": 0.06734,
+        "STACH": 0.05747,
+        "1AVB": 0.09643,
+        "MI": 0.42608
+      },
+      "per_class_brier": {
+        "NORM": 0.13295,
+        "AFIB": 0.02714,
+        "RBBB": 0.04435,
+        "LBBB": 0.01266,
+        "SBRAD": 0.01927,
+        "STACH": 0.01691,
+        "1AVB": 0.02678,
+        "MI": 0.1367
+      },
+      "per_class_ece": {
+        "NORM": 0.02365,
+        "AFIB": 0.0111,
+        "RBBB": 0.01174,
+        "LBBB": 0.01039,
+        "SBRAD": 0.01341,
+        "STACH": 0.00853,
+        "1AVB": 0.00981,
+        "MI": 0.02087
+      }
+    }
+  },
+  "history": {
+    "train_loss": [
+      0.26584,
+      0.21135,
+      0.19126,
+      0.18164,
+      0.1755,
+      0.17024,
+      0.16501,
+      0.16041,
+      0.15531,
+      0.15144,
+      0.14743,
+      0.14365,
+      0.14081,
+      0.13867,
+      0.13763
+    ],
+    "val_loss": [
+      0.22099,
+      0.18986,
+      0.18919,
+      0.18354,
+      0.17638,
+      0.17564,
+      0.17837,
+      0.17518,
+      0.17428,
+      0.17369,
+      0.17829,
+      0.17767,
+      0.17737,
+      0.17822,
+      0.17844
+    ],
+    "macro_auroc": [
+      0.8566,
+      0.8995,
+      0.906,
+      0.9125,
+      0.9171,
+      0.9194,
+      0.9184,
+      0.9205,
+      0.9221,
+      0.9242,
+      0.9228,
+      0.9218,
+      0.9221,
+      0.9217,
+      0.9218
+    ],
+    "macro_f1": [
+      0.1986,
+      0.5129,
+      0.5288,
+      0.5388,
+      0.5628,
+      0.6299,
+      0.5869,
+      0.6056,
+      0.5843,
+      0.6349,
+      0.6056,
+      0.6183,
+      0.6188,
+      0.6149,
+      0.629
+    ],
+    "epoch_times": [
+      69.6,
+      68.75,
+      76.67,
+      71.94,
+      67.74,
+      66.12,
+      67.31,
+      74.96,
+      73.1,
+      72.53,
+      70.37,
+      70.12,
+      70.77,
+      70.82,
+      70.59
+    ]
+  },
+  "checkpoints": {
+    "best": "E:\\ECG\\checkpoints\\control_reasoning_transformer_best.pt",
+    "final": "E:\\ECG\\checkpoints\\control_reasoning_transformer_final.pt"
+  }
+}

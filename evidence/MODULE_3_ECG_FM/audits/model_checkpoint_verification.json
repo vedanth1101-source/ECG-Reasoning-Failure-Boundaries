@@ -1,0 +1,73 @@
+{
+  "audit_timestamp_utc": "2026-10-13 03:11:20 UTC",
+  "official_reference": {
+    "title": "ECG-FM: An Open Electrocardiogram Foundation Model",
+    "authors": "K. McKeen, S. Masood, A. Toma, B. Rubin, and B. Wang",
+    "journal": "JAMIA Open",
+    "volume": "8",
+    "issue": "5",
+    "article": "ooaf122",
+    "year": 2025,
+    "doi": "https://doi.org/10.1093/jamiaopen/ooaf122",
+    "official_code_repo": "https://github.com/bowang-lab/ECG-FM/",
+    "official_hf_repo": "https://huggingface.co/wanglab/ecg-fm",
+    "expected_parameters_paper": "~90.9M",
+    "expected_layers": 12,
+    "expected_embed_dim": 768,
+    "expected_attention_heads": 12,
+    "expected_ffn_dim": 3072,
+    "expected_channels": 12
+  },
+  "checkpoint_file": {
+    "path": "E:/ECG/checkpoints/ecg_fm/mimic_iv_ecg_physionet_pretrained.pt",
+    "exists": true,
+    "size_bytes": 1090825421,
+    "sha256": "4d0142bcb485eb9f0c7845e0c19ff3463f6ae9d0e458eab69136efe90ceb9b7e",
+    "matches_official_hf_lfs": true
+  },
+  "yaml_config_file": {
+    "path": "E:/ECG/checkpoints/ecg_fm/mimic_iv_ecg_physionet_pretrained.yaml",
+    "exists": true,
+    "size_bytes": 3528,
+    "sha256": "710f5fdc54c31fd88c82d3ec1ad9c39c82a7848201fa6afd84074d5b71b726ab",
+    "matches_official_hf": false
+  },
+  "model_type": {
+    "classification": "PRETRAINED_FOUNDATION_MODEL",
+    "is_pretrained_foundation_model": true,
+    "is_finetuned_model": false,
+    "evidence": [
+      "Top-level keys include pretraining components: ['args', 'cfg', 'model', 'criterion', 'optimizer_history', 'task_state', 'extra_state', 'last_optimizer_state']",
+      "Model architecture name: 'wav2vec2_cmsc' (Wav2Vec2CMSCModel self-supervised pretraining backbone)",
+      "Pretraining task: 'ecg_pretraining'",
+      "No downstream linear classification head present in model state dictionary (state dict contains CMSC and wav2vec 2.0 pretraining heads)"
+    ]
+  },
+  "architecture_audit": {
+    "model_name": "wav2vec2_cmsc",
+    "total_parameters": 90883072,
+    "trainable_parameters": 90883072,
+    "transformer_layers": 12,
+    "hidden_dimension": 768,
+    "attention_heads": 12,
+    "ffn_dimension": 3072,
+    "feature_extractor_conv_layers": "[(256, 2, 2)] * 4",
+    "input_channels": 12,
+    "strict_load_match": true,
+    "missing_keys_count": 0,
+    "unexpected_keys_count": 0
+  },
+  "inference_interface": {
+    "input_contract": "(B, 12, 1000) float32 in mV @ 100 Hz",
+    "output_tensor_shape": [
+      1,
+      768
+    ],
+    "output_dtype": "torch.float32",
+    "output_is_finite": true,
+    "feature_dim": 768,
+    "pooling_method": "mean"
+  },
+  "verdict": "PASS",
+  "verdict_rationale": "The candidate checkpoint 'checkpoints/ecg_fm/mimic_iv_ecg_physionet_pretrained.pt' is conclusively verified as the official pretrained ECG-FM model released by Wang Lab. It is bit-for-bit cryptographically identical to the Hugging Face Git LFS release (SHA-256: 4d0142bcb485eb9f0c7845e0c19ff3463f6ae9d0e458eab69136efe90ceb9b7e), matches the publication's wav2vec2_cmsc architecture (90,883,072 parameters, 12 layers, 768 hidden dim), loads cleanly with strict=True, and deterministically outputs standardized 768-dimensional representations."
+}

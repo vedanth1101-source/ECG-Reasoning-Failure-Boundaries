@@ -1,0 +1,33 @@
+{
+  "probing_target_dimension": 768,
+  "levels": {
+    "12_lead": {
+      "valid_samples": 2187,
+      "heart_rate_mae_bpm": 7.03,
+      "heart_rate_r2": 0.594,
+      "qrs_duration_mae_ms": 11.43,
+      "st_elevation_probe_auc": 0.681
+    },
+    "6_lead": {
+      "valid_samples": 2187,
+      "heart_rate_mae_bpm": 8.49,
+      "heart_rate_r2": 0.476,
+      "qrs_duration_mae_ms": 11.58,
+      "st_elevation_probe_auc": 0.714
+    },
+    "2_lead": {
+      "valid_samples": 2187,
+      "heart_rate_mae_bpm": 11.09,
+      "heart_rate_r2": 0.234,
+      "qrs_duration_mae_ms": 11.78,
+      "st_elevation_probe_auc": 0.673
+    },
+    "1_lead": {
+      "valid_samples": 2187,
+      "heart_rate_mae_bpm": 12.09,
+      "heart_rate_r2": 0.109,
+      "qrs_duration_mae_ms": 12.22,
+      "st_elevation_probe_auc": 0.853
+    }
+  }
+}

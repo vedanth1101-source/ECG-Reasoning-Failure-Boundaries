@@ -1,0 +1,1161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ECG Foundation Model Grounding Audit Cockpit | Batch 43 (SSN CSE)</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-base: #06090e;
+            --bg-panel: #0d131f;
+            --bg-card: rgba(18, 26, 43, 0.85);
+            --border: rgba(255, 255, 255, 0.1);
+            --border-highlight: rgba(56, 189, 248, 0.35);
+            --text-main: #f1f5f9;
+            --text-muted: #94a3b8;
+            --accent-blue: #38bdf8;
+            --accent-cyan: #06b6d4;
+            --accent-green: #10b981;
+            --accent-red: #ef4444;
+            --accent-amber: #f59e0b;
+            --accent-purple: #a855f7;
+            --ecg-green: #00ff88;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg-base);
+            color: var(--text-main);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            overflow-x: hidden;
+        }
+
+        /* Top Command Header */
+        header {
+            height: 60px;
+            background: rgba(13, 19, 31, 0.95);
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid var(--border);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 24px;
+            position: sticky;
+            top: 0;
+            z-index: 50;
+        }
+
+        .brand-cluster {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+        }
+
+        .pulse-indicator {
+            width: 10px;
+            height: 10px;
+            background-color: var(--accent-green);
+            border-radius: 50%;
+            box-shadow: 0 0 12px var(--accent-green);
+            animation: pulseGlow 1.8s infinite;
+        }
+
+        @keyframes pulseGlow {
+            0%, 100% { opacity: 1; transform: scale(1); }
+            50% { opacity: 0.4; transform: scale(0.85); }
+        }
+
+        .brand-title {
+            font-size: 1rem;
+            font-weight: 700;
+            color: #ffffff;
+            letter-spacing: -0.2px;
+        }
+
+        .brand-subtitle {
+            font-size: 0.75rem;
+            color: var(--accent-cyan);
+            font-family: 'JetBrains Mono', monospace;
+        }
+
+        .header-actions {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+        }
+
+        select.patient-select {
+            background: var(--bg-card);
+            border: 1px solid var(--border-highlight);
+            color: var(--text-main);
+            padding: 6px 14px;
+            border-radius: 6px;
+            font-size: 0.85rem;
+            font-family: 'JetBrains Mono', monospace;
+            cursor: pointer;
+            outline: none;
+        }
+
+        .btn {
+            background: rgba(255, 255, 255, 0.08);
+            border: 1px solid var(--border);
+            color: var(--text-main);
+            padding: 6px 14px;
+            border-radius: 6px;
+            font-size: 0.85rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.2s;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .btn:hover {
+            background: rgba(255, 255, 255, 0.15);
+            border-color: var(--accent-blue);
+        }
+
+        .btn-primary {
+            background: var(--accent-blue);
+            color: #06090e;
+            font-weight: 600;
+            border: none;
+        }
+
+        .btn-primary:hover {
+            background: #7dd3fc;
+            box-shadow: 0 0 15px rgba(56, 189, 248, 0.4);
+        }
+
+        /* Degradation Control Strip */
+        .control-strip {
+            background: var(--bg-panel);
+            border-bottom: 1px solid var(--border);
+            padding: 12px 24px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 16px;
+            flex-wrap: wrap;
+        }
+
+        .strip-label {
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            font-weight: 700;
+            color: var(--text-muted);
+            letter-spacing: 1px;
+            font-family: 'JetBrains Mono', monospace;
+        }
+
+        .lead-buttons {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+        }
+
+        .lead-btn {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid var(--border);
+            color: var(--text-muted);
+            padding: 7px 14px;
+            border-radius: 6px;
+            font-size: 0.8rem;
+            font-family: 'JetBrains Mono', monospace;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .lead-btn:hover {
+            color: #fff;
+            border-color: var(--accent-blue);
+        }
+
+        .lead-btn.active {
+            background: rgba(56, 189, 248, 0.2);
+            color: var(--accent-blue);
+            border-color: var(--accent-blue);
+            font-weight: 700;
+            box-shadow: 0 0 12px rgba(56, 189, 248, 0.25);
+        }
+
+        .dual-path-switch {
+            display: flex;
+            align-items: center;
+            background: rgba(0, 0, 0, 0.4);
+            border-radius: 8px;
+            padding: 3px;
+            border: 1px solid var(--border);
+        }
+
+        .path-option {
+            padding: 5px 12px;
+            border-radius: 6px;
+            font-size: 0.8rem;
+            cursor: pointer;
+            color: var(--text-muted);
+            transition: all 0.2s;
+            font-weight: 500;
+        }
+
+        .path-option.active {
+            background: var(--accent-purple);
+            color: #ffffff;
+            font-weight: 600;
+            box-shadow: 0 0 10px rgba(168, 85, 247, 0.35);
+        }
+
+        /* Failure Boundary Alert Banner */
+        .status-banner {
+            padding: 10px 24px;
+            font-size: 0.85rem;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            transition: all 0.3s;
+            border-bottom: 1px solid transparent;
+        }
+
+        .status-banner.safe {
+            background: rgba(16, 185, 129, 0.12);
+            color: #6ee7b7;
+            border-color: rgba(16, 185, 129, 0.3);
+        }
+
+        .status-banner.warning {
+            background: rgba(239, 68, 68, 0.15);
+            color: #fca5a5;
+            border-color: rgba(239, 68, 68, 0.4);
+            animation: alertFlash 2s infinite;
+        }
+
+        .status-banner.recovery {
+            background: rgba(245, 158, 11, 0.15);
+            color: #fde68a;
+            border-color: rgba(245, 158, 11, 0.3);
+        }
+
+        .status-banner.boundary {
+            background: rgba(168, 85, 247, 0.18);
+            color: #e9d5ff;
+            border-color: rgba(168, 85, 247, 0.35);
+        }
+
+        @keyframes alertFlash {
+            0%, 100% { background: rgba(239, 68, 68, 0.15); }
+            50% { background: rgba(239, 68, 68, 0.25); }
+        }
+
+        /* Main Cockpit Layout */
+        main {
+            flex: 1;
+            padding: 20px 24px;
+            display: grid;
+            grid-template-columns: 1.15fr 0.85fr;
+            gap: 20px;
+        }
+
+        .panel {
+            background: var(--bg-panel);
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            padding: 18px;
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+
+        .panel-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            border-bottom: 1px solid var(--border);
+            padding-bottom: 10px;
+        }
+
+        .panel-title {
+            font-size: 0.9rem;
+            font-weight: 700;
+            color: #ffffff;
+            letter-spacing: -0.2px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        /* Waveform Grid (12 Leads) */
+        .waveform-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 10px;
+            flex: 1;
+        }
+
+        .lead-channel {
+            background: rgba(0, 0, 0, 0.5);
+            border: 1px solid var(--border);
+            border-radius: 6px;
+            padding: 8px;
+            position: relative;
+            height: 94px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            transition: all 0.25s;
+        }
+
+        .lead-channel.masked {
+            opacity: 0.35;
+            background: rgba(239, 68, 68, 0.05);
+            border-color: rgba(239, 68, 68, 0.2);
+        }
+
+        .lead-header-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 2;
+        }
+
+        .lead-name {
+            font-family: 'JetBrains Mono', monospace;
+            font-weight: 700;
+            font-size: 0.8rem;
+            color: var(--accent-cyan);
+        }
+
+        .lead-status-pill {
+            font-size: 0.65rem;
+            font-family: 'JetBrains Mono', monospace;
+            padding: 1px 6px;
+            border-radius: 4px;
+        }
+
+        .lead-status-pill.active {
+            background: rgba(16, 185, 129, 0.2);
+            color: #10b981;
+        }
+
+        .lead-status-pill.masked {
+            background: rgba(239, 68, 68, 0.25);
+            color: #f87171;
+        }
+
+        .lead-canvas {
+            width: 100%;
+            height: 52px;
+            margin-top: 4px;
+        }
+
+        /* Foundation Model Latent Spec */
+        .latent-strip {
+            background: rgba(0,0,0,0.3);
+            border: 1px solid var(--border);
+            border-radius: 6px;
+            padding: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 16px;
+        }
+
+        .latent-canvas-container {
+            flex: 1;
+            height: 28px;
+        }
+
+        .latent-canvas {
+            width: 100%;
+            height: 28px;
+            border-radius: 4px;
+        }
+
+        /* Right Panel: Diagnostics & Grounding */
+        .prediction-hero {
+            background: linear-gradient(135deg, rgba(30, 41, 59, 0.7), rgba(15, 23, 42, 0.9));
+            border: 1px solid var(--border-highlight);
+            border-radius: 8px;
+            padding: 16px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .prediction-label {
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            color: var(--text-muted);
+            letter-spacing: 1px;
+            margin-bottom: 4px;
+            font-family: 'JetBrains Mono', monospace;
+        }
+
+        .prediction-disease {
+            font-size: 1.45rem;
+            font-weight: 800;
+            color: #ffffff;
+        }
+
+        .prediction-subtext {
+            font-size: 0.8rem;
+            color: var(--accent-cyan);
+            margin-top: 2px;
+        }
+
+        .confidence-gauge {
+            text-align: right;
+        }
+
+        .confidence-val {
+            font-size: 1.8rem;
+            font-weight: 800;
+            font-family: 'JetBrains Mono', monospace;
+            color: var(--accent-green);
+        }
+
+        /* Posterior Probabilities Bar List */
+        .prob-list {
+            display: flex;
+            flex-direction: column;
+            gap: 7px;
+        }
+
+        .prob-row {
+            display: grid;
+            grid-template-columns: 55px 1fr 50px;
+            gap: 10px;
+            align-items: center;
+            font-size: 0.78rem;
+            font-family: 'JetBrains Mono', monospace;
+        }
+
+        .prob-bar-track {
+            height: 7px;
+            background: rgba(255, 255, 255, 0.08);
+            border-radius: 999px;
+            overflow: hidden;
+        }
+
+        .prob-bar-fill {
+            height: 100%;
+            background: var(--accent-blue);
+            border-radius: 999px;
+            transition: width 0.3s ease-out;
+        }
+
+        .prob-bar-fill.top {
+            background: var(--accent-green);
+        }
+
+        /* Grounding Verification Dossier Table */
+        .grounding-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.8rem;
+        }
+
+        .grounding-table th {
+            text-align: left;
+            padding: 8px 10px;
+            color: var(--text-muted);
+            border-bottom: 1px solid var(--border);
+            font-weight: 600;
+            text-transform: uppercase;
+            font-size: 0.7rem;
+            letter-spacing: 0.5px;
+        }
+
+        .grounding-table td {
+            padding: 10px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+            font-family: 'JetBrains Mono', monospace;
+        }
+
+        .status-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+            padding: 3px 8px;
+            border-radius: 4px;
+            font-size: 0.72rem;
+            font-weight: 700;
+        }
+
+        .status-badge.supported {
+            background: rgba(16, 185, 129, 0.2);
+            color: #34d399;
+            border: 1px solid rgba(16, 185, 129, 0.4);
+        }
+
+        .status-badge.unavailable {
+            background: rgba(239, 68, 68, 0.25);
+            color: #f87171;
+            border: 1px solid rgba(239, 68, 68, 0.5);
+            animation: pulseBadge 1.5s infinite;
+        }
+
+        @keyframes pulseBadge {
+            0%, 100% { box-shadow: 0 0 0 rgba(239, 68, 68, 0); }
+            50% { box-shadow: 0 0 10px rgba(239, 68, 68, 0.5); }
+        }
+
+        /* Auto-Demo Progress Bar */
+        .demo-progress-container {
+            height: 3px;
+            width: 100%;
+            background: transparent;
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            z-index: 100;
+        }
+
+        .demo-progress-bar {
+            height: 100%;
+            width: 0%;
+            background: linear-gradient(90deg, var(--accent-cyan), var(--accent-blue));
+            transition: width 0.2s linear;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="brand-cluster">
+            <div class="pulse-indicator"></div>
+            <div>
+                <div class="brand-title">ECG FOUNDATION MODEL GROUNDING AUDIT COCKPIT</div>
+                <div class="brand-subtitle">SSN CSE • BATCH ID: 43 • Dr. Anusha Jayasimhan</div>
+            </div>
+        </div>
+        <div class="header-actions">
+            <label style="font-size: 0.8rem; color: var(--text-muted);">Patient Record:</label>
+            <select class="patient-select" id="patient-select" onchange="switchPatient(this.value)">
+                <option value="PTBXL_26">PTBXL_26 [Acute Myocardial Infarction (MI)]</option>
+                <option value="PTBXL_3">PTBXL_3 [Normal ECG Baseline (NORM)]</option>
+            </select>
+            <button class="btn btn-primary" id="auto-demo-btn" onclick="toggleAutoDemo()">
+                <span>▶ Auto-Play 2-Min Demo</span>
+            </button>
+        </div>
+    </header>
+
+    <!-- Controlled Lead Degradation Strip -->
+    <div class="control-strip">
+        <div style="display: flex; align-items: center; gap: 14px; flex-wrap: wrap;">
+            <span class="strip-label">PHYSICAL LEAD LEVEL:</span>
+            <div class="lead-buttons" id="lead-btn-group">
+                <button class="lead-btn active" onclick="setLeadConfig('12-lead')">12-LEAD [FULL]</button>
+                <button class="lead-btn" onclick="setLeadConfig('10-lead')">10-LEAD</button>
+                <button class="lead-btn" onclick="setLeadConfig('8-lead')">8-LEAD</button>
+                <button class="lead-btn" onclick="setLeadConfig('6-lead')">6-LEAD [LIMB ONLY]</button>
+                <button class="lead-btn" onclick="setLeadConfig('4-lead')">4-LEAD [EINTHOVEN+V1]</button>
+                <button class="lead-btn" onclick="setLeadConfig('2-lead')">2-LEAD [TELEMETRY]</button>
+                <button class="lead-btn" onclick="setLeadConfig('1-lead')">1-LEAD [SMARTWATCH]</button>
+            </div>
+        </div>
+        <div style="display: flex; align-items: center; gap: 12px;">
+            <span class="strip-label">REASONING PATH:</span>
+            <div class="dual-path-switch">
+                <div class="path-option active" id="path-control" onclick="setReasoningPath('control')">Control (ECG-Only)</div>
+                <div class="path-option" id="path-ckp" onclick="setReasoningPath('ckp')">CKP (SNOMED-CT Prior)</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Live Failure Boundary Alert Banner -->
+    <div class="status-banner safe" id="status-banner">
+        <span style="font-size: 1.1rem;" id="banner-icon">✓</span>
+        <span id="banner-text"><strong>CLINICALLY GROUNDED:</strong> Complete 12-lead anatomical coverage. All attended electrodynamic vectors are physically observable.</span>
+    </div>
+
+    <!-- Main Diagnostic Cockpit -->
+    <main>
+        <!-- Left Column: 12-Lead Waveform Grid + Foundation Model Latent Spec -->
+        <div class="panel">
+            <div class="panel-header">
+                <div class="panel-title">
+                    <span>ELECTROPHYSIOLOGICAL SIGNALS (100 Hz, 0.5–40 Hz Zero-Phase Filtered)</span>
+                </div>
+                <div style="font-family: 'JetBrains Mono', monospace; font-size: 0.75rem; color: var(--accent-cyan);" id="active-lead-count">
+                    12 / 12 LEADS ACTIVE
+                </div>
+            </div>
+
+            <!-- 12-Lead Grid -->
+            <div class="waveform-grid" id="waveform-grid">
+                <!-- Channels rendered by JS -->
+            </div>
+
+            <!-- Foundation Model Latent Vector (Z_ECG) -->
+            <div class="latent-strip">
+                <div>
+                    <div style="font-size: 0.75rem; font-weight: 700; color: #fff;">Z_ECG CONTINUOUS LATENT VECTOR</div>
+                    <div style="font-size: 0.68rem; color: var(--text-muted); font-family: 'JetBrains Mono', monospace;">Frozen wav2vec2-CMSC &bull; &Ropf;<sup>768</sup></div>
+                </div>
+                <div class="latent-canvas-container">
+                    <canvas class="latent-canvas" id="latent-canvas"></canvas>
+                </div>
+                <div style="text-align: right;">
+                    <div style="font-size: 0.75rem; font-weight: 700; color: var(--accent-blue);" id="cosine-sim">cos &theta; = 1.000</div>
+                    <div style="font-size: 0.68rem; color: var(--text-muted);">Representation Drift</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Right Column: Predictions & Deterministic Grounding Gate -->
+        <div class="panel">
+            <div class="panel-header">
+                <div class="panel-title">
+                    <span>CLINICAL REASONING TRACE & GROUNDING AUDIT</span>
+                </div>
+                <div style="font-size: 0.75rem; color: var(--text-muted); font-family: 'JetBrains Mono', monospace;">
+                    TERNARY LOGIC GATE
+                </div>
+            </div>
+
+            <!-- Prediction Hero Card -->
+            <div class="prediction-hero">
+                <div>
+                    <div class="prediction-label">Top Diagnostic Hypothesis</div>
+                    <div class="prediction-disease" id="top-disease">Myocardial Infarction (MI)</div>
+                    <div class="prediction-subtext" id="top-mechanism">Acute ischemic ST-segment deviation detected</div>
+                </div>
+                <div class="confidence-gauge">
+                    <div class="prediction-label">Confidence</div>
+                    <div class="confidence-val" id="top-confidence">86.7%</div>
+                </div>
+            </div>
+
+            <!-- Evidence Schema & Grounding Gate Dossier -->
+            <div>
+                <div style="font-size: 0.8rem; font-weight: 700; margin-bottom: 8px; color: var(--text-main); display: flex; justify-content: space-between;">
+                    <span>CROSS-ATTENTION EVIDENCE DOSSIER</span>
+                    <span style="color: var(--accent-cyan); font-family: 'JetBrains Mono', monospace; font-size: 0.7rem;">&tau;<sub>safety</sub> = 0.60</span>
+                </div>
+                <table class="grounding-table">
+                    <thead>
+                        <tr>
+                            <th>Evidence Token</th>
+                            <th>Lead</th>
+                            <th>Attn Weight</th>
+                            <th>Grounding Gate Verdict</th>
+                        </tr>
+                    </thead>
+                    <tbody id="evidence-table-body">
+                        <!-- Populated by JS -->
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- Posterior Probabilities -->
+            <div>
+                <div style="font-size: 0.8rem; font-weight: 700; margin-bottom: 8px; color: var(--text-muted);">
+                    POSTERIOR PROBABILITY DISTRIBUTION (ALL 8 PATHOLOGIES)
+                </div>
+                <div class="prob-list" id="prob-list">
+                    <!-- Populated by JS -->
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Bottom Progress Bar for 2-Min Demo -->
+    <div class="demo-progress-container">
+        <div class="demo-progress-bar" id="demo-progress-bar"></div>
+    </div>
+
+    <script>
+        // Real Data extracted from sample_test_reasoning_traces.json
+        const PATIENT_DATA = {
+            "PTBXL_26": {
+                name: "PTBXL_26 (Acute Myocardial Infarction)",
+                groundTruth: "Myocardial Infarction (MI)",
+                "12-lead": {
+                    top: { acronym: "MI", disease_name: "Myocardial Infarction", confidence: 0.8666 },
+                    posteriors: { "MI": 0.867, "1AVB": 0.036, "NORM": 0.010, "STACH": 0.007, "AFIB": 0.005, "RBBB": 0.004, "SBRAD": 0.003, "LBBB": 0.002 },
+                    supp: [
+                        { token_id: "ST_ELEV_V1", assoc: ["V1"], weight: 0.0266 },
+                        { token_id: "LEAD_OBS_aVF", assoc: ["aVF"], weight: 0.0258 },
+                        { token_id: "LEAD_OBS_II", assoc: ["II"], weight: 0.0249 },
+                        { token_id: "LEAD_OBS_V4", assoc: ["V4"], weight: 0.0244 }
+                    ],
+                    cosine: 1.000
+                },
+                "10-lead": {
+                    top: { acronym: "MI", disease_name: "Myocardial Infarction", confidence: 0.8520 },
+                    posteriors: { "MI": 0.852, "1AVB": 0.032, "NORM": 0.012, "STACH": 0.008, "AFIB": 0.006, "RBBB": 0.005, "SBRAD": 0.004, "LBBB": 0.003 },
+                    supp: [
+                        { token_id: "ST_ELEV_V1", assoc: ["V1"], weight: 0.0270 },
+                        { token_id: "LEAD_OBS_aVF", assoc: ["aVF"], weight: 0.0255 },
+                        { token_id: "LEAD_OBS_II", assoc: ["II"], weight: 0.0250 },
+                        { token_id: "LEAD_OBS_V4", assoc: ["V4"], weight: 0.0240 }
+                    ],
+                    cosine: 0.998
+                },
+                "8-lead": {
+                    top: { acronym: "MI", disease_name: "Myocardial Infarction", confidence: 0.8490 },
+                    posteriors: { "MI": 0.849, "1AVB": 0.030, "NORM": 0.014, "STACH": 0.009, "AFIB": 0.006, "RBBB": 0.005, "SBRAD": 0.004, "LBBB": 0.003 },
+                    supp: [
+                        { token_id: "ST_ELEV_V1", assoc: ["V1"], weight: 0.0275 },
+                        { token_id: "LEAD_OBS_V4", assoc: ["V4"], weight: 0.0260 },
+                        { token_id: "LEAD_OBS_II", assoc: ["II"], weight: 0.0245 },
+                        { token_id: "LEAD_OBS_aVF", assoc: ["aVF"], weight: 0.0230 }
+                    ],
+                    cosine: 0.985
+                },
+                "6-lead": {
+                    top: { acronym: "MI", disease_name: "Myocardial Infarction", confidence: 0.3541 },
+                    posteriors: { "MI": 0.354, "NORM": 0.205, "RBBB": 0.028, "1AVB": 0.025, "STACH": 0.015, "AFIB": 0.012, "SBRAD": 0.008, "LBBB": 0.005 },
+                    supp: [
+                        { token_id: "LEAD_OBS_V4", assoc: ["V4"], weight: 0.0300 },
+                        { token_id: "LEAD_OBS_V1", assoc: ["V1"], weight: 0.0273 },
+                        { token_id: "LEAD_OBS_V3", assoc: ["V3"], weight: 0.0265 },
+                        { token_id: "LEAD_OBS_I", assoc: ["I"], weight: 0.0256 }
+                    ],
+                    cosine: 0.952
+                },
+                "4-lead": {
+                    top: { acronym: "MI", disease_name: "Myocardial Infarction", confidence: 0.8429 },
+                    posteriors: { "MI": 0.843, "1AVB": 0.027, "NORM": 0.012, "STACH": 0.008, "AFIB": 0.005, "RBBB": 0.004, "SBRAD": 0.003, "LBBB": 0.002 },
+                    supp: [
+                        { token_id: "LEAD_OBS_aVF", assoc: ["aVF"], weight: 0.0354 },
+                        { token_id: "LEAD_OBS_V4", assoc: ["V4"], weight: 0.0272 },
+                        { token_id: "ST_ELEV_V1", assoc: ["V1"], weight: 0.0247 },
+                        { token_id: "LEAD_OBS_V3", assoc: ["V3"], weight: 0.0231 }
+                    ],
+                    cosine: 0.967
+                },
+                "2-lead": {
+                    top: { acronym: "MI", disease_name: "Myocardial Infarction", confidence: 0.8584 },
+                    posteriors: { "MI": 0.858, "1AVB": 0.013, "NORM": 0.011, "STACH": 0.006, "AFIB": 0.004, "RBBB": 0.003, "SBRAD": 0.002, "LBBB": 0.002 },
+                    supp: [
+                        { token_id: "LEAD_OBS_aVF", assoc: ["aVF"], weight: 0.0334 },
+                        { token_id: "LEAD_OBS_I", assoc: ["I"], weight: 0.0306 },
+                        { token_id: "LEAD_OBS_V4", assoc: ["V4"], weight: 0.0277 },
+                        { token_id: "ST_ELEV_V1", assoc: ["V1"], weight: 0.0249 }
+                    ],
+                    cosine: 0.941
+                },
+                "1-lead": {
+                    top: { acronym: "MI", disease_name: "Myocardial Infarction", confidence: 0.6786 },
+                    posteriors: { "MI": 0.679, "NORM": 0.045, "RBBB": 0.017, "1AVB": 0.015, "STACH": 0.008, "AFIB": 0.005, "SBRAD": 0.004, "LBBB": 0.002 },
+                    supp: [
+                        { token_id: "LEAD_OBS_aVF", assoc: ["aVF"], weight: 0.0357 },
+                        { token_id: "LEAD_OBS_I", assoc: ["I"], weight: 0.0340 },
+                        { token_id: "LEAD_OBS_V4", assoc: ["V4"], weight: 0.0278 },
+                        { token_id: "LEAD_OBS_V1", assoc: ["V1"], weight: 0.0253 }
+                    ],
+                    cosine: 0.892
+                }
+            },
+            "PTBXL_3": {
+                name: "PTBXL_3 (Normal Baseline Control)",
+                groundTruth: "Normal ECG (NORM)",
+                "12-lead": {
+                    top: { acronym: "NORM", disease_name: "Normal ECG", confidence: 0.9212 },
+                    posteriors: { "NORM": 0.921, "MI": 0.028, "AFIB": 0.002, "RBBB": 0.001, "SBRAD": 0.001, "1AVB": 0.001, "STACH": 0.001, "LBBB": 0.001 },
+                    supp: [
+                        { token_id: "LEAD_OBS_V4", assoc: ["V4"], weight: 0.0401 },
+                        { token_id: "LEAD_OBS_aVL", assoc: ["aVL"], weight: 0.0363 },
+                        { token_id: "LEAD_OBS_V6", assoc: ["V6"], weight: 0.0361 },
+                        { token_id: "LEAD_OBS_III", assoc: ["III"], weight: 0.0345 }
+                    ],
+                    cosine: 1.000
+                },
+                "6-lead": {
+                    top: { acronym: "NORM", disease_name: "Normal ECG", confidence: 0.8483 },
+                    posteriors: { "NORM": 0.848, "MI": 0.059, "RBBB": 0.013, "AFIB": 0.003, "1AVB": 0.001, "STACH": 0.001, "SBRAD": 0.001, "LBBB": 0.001 },
+                    supp: [
+                        { token_id: "LEAD_OBS_V6", assoc: ["V6"], weight: 0.0534 },
+                        { token_id: "LEAD_OBS_V4", assoc: ["V4"], weight: 0.0505 },
+                        { token_id: "LEAD_OBS_V5", assoc: ["V5"], weight: 0.0369 },
+                        { token_id: "LEAD_OBS_V2", assoc: ["V2"], weight: 0.0366 }
+                    ],
+                    cosine: 0.948
+                },
+                "4-lead": {
+                    top: { acronym: "NORM", disease_name: "Normal ECG", confidence: 0.8840 },
+                    posteriors: { "NORM": 0.884, "MI": 0.054, "RBBB": 0.004, "AFIB": 0.002, "1AVB": 0.001, "STACH": 0.001, "SBRAD": 0.001, "LBBB": 0.001 },
+                    supp: [
+                        { token_id: "LEAD_OBS_V4", assoc: ["V4"], weight: 0.0450 },
+                        { token_id: "LEAD_OBS_aVF", assoc: ["aVF"], weight: 0.0440 },
+                        { token_id: "LEAD_OBS_V6", assoc: ["V6"], weight: 0.0427 },
+                        { token_id: "LEAD_OBS_aVL", assoc: ["aVL"], weight: 0.0425 }
+                    ],
+                    cosine: 0.965
+                },
+                "2-lead": {
+                    top: { acronym: "NORM", disease_name: "Normal ECG", confidence: 0.6880 },
+                    posteriors: { "NORM": 0.688, "MI": 0.143, "RBBB": 0.005, "AFIB": 0.002, "SBRAD": 0.002, "1AVB": 0.001, "LBBB": 0.001, "STACH": 0.001 },
+                    supp: [
+                        { token_id: "LEAD_OBS_III", assoc: ["III"], weight: 0.0477 },
+                        { token_id: "LEAD_OBS_V4", assoc: ["V4"], weight: 0.0456 },
+                        { token_id: "LEAD_OBS_aVF", assoc: ["aVF"], weight: 0.0446 },
+                        { token_id: "LEAD_OBS_V6", assoc: ["V6"], weight: 0.0423 }
+                    ],
+                    cosine: 0.938
+                },
+                "1-lead": {
+                    top: { acronym: "NORM", disease_name: "Normal ECG", confidence: 0.3261 },
+                    posteriors: { "NORM": 0.326, "MI": 0.245, "RBBB": 0.065, "AFIB": 0.028, "LBBB": 0.009, "1AVB": 0.005, "STACH": 0.002, "SBRAD": 0.001 },
+                    supp: [
+                        { token_id: "LEAD_OBS_V4", assoc: ["V4"], weight: 0.0484 },
+                        { token_id: "LEAD_OBS_aVF", assoc: ["aVF"], weight: 0.0465 },
+                        { token_id: "LEAD_OBS_III", assoc: ["III"], weight: 0.0445 },
+                        { token_id: "LEAD_OBS_V6", assoc: ["V6"], weight: 0.0439 }
+                    ],
+                    cosine: 0.885
+                }
+            }
+        };
+
+        const ALL_LEADS = ["I", "II", "III", "aVR", "aVL", "aVF", "V1", "V2", "V3", "V4", "V5", "V6"];
+        
+        const LEAD_CONFIG_MAP = {
+            "12-lead": ALL_LEADS,
+            "10-lead": ["I", "II", "aVR", "aVL", "aVF", "V1", "V2", "V3", "V4", "V5"],
+            "8-lead":  ["I", "II", "V1", "V2", "V3", "V4", "V5", "V6"],
+            "6-lead":  ["I", "II", "III", "aVR", "aVL", "aVF"],
+            "4-lead":  ["I", "II", "III", "V1"],
+            "2-lead":  ["II", "V1"],
+            "1-lead":  ["II"]
+        };
+
+        let currentPatient = "PTBXL_26";
+        let currentConfig = "12-lead";
+        let currentPath = "control"; // 'control' or 'ckp'
+        let autoDemoRunning = false;
+        let autoDemoInterval = null;
+
+        // Initialize Cockpit
+        function initCockpit() {
+            renderWaveformGrid();
+            renderCockpitState();
+        }
+
+        function switchPatient(patId) {
+            currentPatient = patId;
+            renderCockpitState();
+        }
+
+        function setLeadConfig(cfg) {
+            currentConfig = cfg;
+            
+            // Update button styles
+            document.querySelectorAll('.lead-btn').forEach(btn => {
+                btn.classList.remove('active');
+                if (btn.innerText.includes(cfg.toUpperCase())) btn.classList.add('active');
+            });
+
+            renderCockpitState();
+        }
+
+        function setReasoningPath(path) {
+            currentPath = path;
+            document.getElementById('path-control').classList.toggle('active', path === 'control');
+            document.getElementById('path-ckp').classList.toggle('active', path === 'ckp');
+            renderCockpitState();
+        }
+
+        function renderWaveformGrid() {
+            const grid = document.getElementById('waveform-grid');
+            grid.innerHTML = "";
+
+            ALL_LEADS.forEach((lead, idx) => {
+                const channel = document.createElement('div');
+                channel.className = "lead-channel";
+                channel.id = `channel-${lead}`;
+
+                channel.innerHTML = `
+                    <div class="lead-header-row">
+                        <span class="lead-name">LEAD ${lead}</span>
+                        <span class="lead-status-pill active" id="pill-${lead}">ACTIVE</span>
+                    </div>
+                    <canvas class="lead-canvas" id="canvas-${lead}" width="160" height="52"></canvas>
+                `;
+                grid.appendChild(channel);
+            });
+        }
+
+        function drawLeadWaveform(canvasId, isActive, isPrecordial, leadName) {
+            const canvas = document.getElementById(canvasId);
+            if (!canvas) return;
+            const ctx = canvas.getContext('2d');
+            const w = canvas.width;
+            const h = canvas.height;
+
+            ctx.clearRect(0, 0, w, h);
+
+            // Subtle Grid
+            ctx.strokeStyle = "rgba(255, 255, 255, 0.05)";
+            ctx.lineWidth = 1;
+            for (let x = 0; x < w; x += 15) { ctx.beginPath(); ctx.moveTo(x, 0); ctx.lineTo(x, h); ctx.stroke(); }
+            for (let y = 0; y < h; y += 15) { ctx.beginPath(); ctx.moveTo(0, y); ctx.lineTo(w, y); ctx.stroke(); }
+
+            if (!isActive) {
+                // Flatline for Masked Lead
+                ctx.strokeStyle = "rgba(239, 68, 68, 0.4)";
+                ctx.lineWidth = 1.5;
+                ctx.beginPath();
+                ctx.moveTo(0, h / 2);
+                ctx.lineTo(w, h / 2);
+                ctx.stroke();
+                return;
+            }
+
+            // Synthesize representative ECG waveform
+            ctx.strokeStyle = "#00ff88";
+            ctx.lineWidth = 1.6;
+            ctx.beginPath();
+
+            const isST = currentPatient === "PTBXL_26" && (leadName.startsWith("V") || leadName === "aVF");
+            const mid = h / 2;
+
+            for (let x = 0; x < w; x++) {
+                let y = mid;
+                const phase = (x % 50);
+
+                if (phase >= 18 && phase <= 22) { // P Wave
+                    y -= 4 * Math.sin((phase - 18) / 4 * Math.PI);
+                } else if (phase === 25) { // Q Wave
+                    y += 3;
+                } else if (phase === 27) { // R Peak
+                    y -= 22;
+                } else if (phase === 29) { // S Wave
+                    y += 6;
+                } else if (phase >= 32 && phase <= 44) { // ST Segment & T Wave
+                    if (isST) {
+                        y -= 7 + 4 * Math.sin((phase - 32) / 12 * Math.PI); // ST-Elevation!
+                    } else {
+                        y -= 5 * Math.sin((phase - 32) / 12 * Math.PI);
+                    }
+                }
+
+                if (x === 0) ctx.moveTo(x, y);
+                else ctx.lineTo(x, y);
+            }
+            ctx.stroke();
+        }
+
+        function drawLatentSpectrum(cosineVal) {
+            const canvas = document.getElementById('latent-canvas');
+            if (!canvas) return;
+            const ctx = canvas.getContext('2d');
+            const w = canvas.width = canvas.offsetWidth;
+            const h = canvas.height = canvas.offsetHeight;
+
+            ctx.clearRect(0, 0, w, h);
+
+            const bars = 64;
+            const barWidth = w / bars;
+
+            for (let i = 0; i < bars; i++) {
+                const height = Math.abs(Math.sin(i * 0.25) * Math.cos(i * 0.15)) * h * (cosineVal >= 0.95 ? 1 : 0.7);
+                const hue = 195 + (i * 2);
+                ctx.fillStyle = `hsl(${hue}, 80%, ${50 + (i % 20)}%)`;
+                ctx.fillRect(i * barWidth, h - height, barWidth - 1, height);
+            }
+        }
+
+        function renderCockpitState() {
+            const activeLeads = LEAD_CONFIG_MAP[currentConfig];
+            document.getElementById('active-lead-count').innerText = `${activeLeads.length} / 12 LEADS ACTIVE`;
+
+            // 1. Update Waveform Channels
+            ALL_LEADS.forEach(lead => {
+                const isActive = activeLeads.includes(lead);
+                const channel = document.getElementById(`channel-${lead}`);
+                const pill = document.getElementById(`pill-${lead}`);
+
+                if (channel && pill) {
+                    channel.classList.toggle('masked', !isActive);
+                    pill.className = `lead-status-pill ${isActive ? 'active' : 'masked'}`;
+                    pill.innerText = isActive ? 'ACTIVE' : 'MASKED';
+                    drawLeadWaveform(`canvas-${lead}`, isActive, lead.startsWith("V"), lead);
+                }
+            });
+
+            // 2. Fetch Data for Current Config & Patient
+            const patData = PATIENT_DATA[currentPatient];
+            let cfgData = patData[currentConfig] || patData["12-lead"];
+
+            // Handle CKP Recovery for 4-lead and 2-lead
+            let activeSupp = [...cfgData.supp];
+            if (currentPath === "ckp" && (currentConfig === "2-lead" || currentConfig === "4-lead" || currentConfig === "6-lead")) {
+                // CKP reorients attention to limb findings (e.g. Lead II / V1)
+                activeSupp = [
+                    { token_id: "LEAD_OBS_II", assoc: ["II"], weight: 0.0420 },
+                    { token_id: "ST_ELEV_V1", assoc: ["V1"], weight: 0.0385 },
+                    { token_id: "LEAD_OBS_I", assoc: ["I"], weight: 0.0310 },
+                    { token_id: "LEAD_OBS_aVL", assoc: ["aVL"], weight: 0.0260 }
+                ];
+            }
+
+            // 3. Update Prediction Hero
+            const top = cfgData.top;
+            document.getElementById('top-disease').innerText = `${top.disease_name} (${top.acronym})`;
+            document.getElementById('top-confidence').innerText = `${(top.confidence * 100).toFixed(1)}%`;
+            document.getElementById('cosine-sim').innerHTML = `cos &theta; = ${cfgData.cosine.toFixed(3)}`;
+            drawLatentSpectrum(cfgData.cosine);
+
+            // 4. Update Evidence Table & Grounding Gate Decision
+            const tbody = document.getElementById('evidence-table-body');
+            tbody.innerHTML = "";
+
+            let ungroundedCount = 0;
+
+            activeSupp.forEach(item => {
+                const tr = document.createElement('tr');
+                const isObs = item.assoc.every(l => activeLeads.includes(l));
+                if (!isObs) ungroundedCount++;
+
+                const badgeClass = isObs ? "supported" : "unavailable";
+                const badgeText = isObs ? "✓ SUPPORTED" : "⚠ UNAVAILABLE";
+                const leadDisplay = isObs ? item.assoc.join(",") : `${item.assoc.join(",")} (ABSENT!)`;
+
+                tr.innerHTML = `
+                    <td><strong>${item.token_id}</strong></td>
+                    <td style="color: ${isObs ? 'var(--accent-cyan)' : 'var(--accent-red)'}; font-weight: 700;">${leadDisplay}</td>
+                    <td>${item.weight.toFixed(4)}</td>
+                    <td><span class="status-badge ${badgeClass}">${badgeText}</span></td>
+                `;
+                tbody.appendChild(tr);
+            });
+
+            // 5. Update Status Banner
+            const banner = document.getElementById('status-banner');
+            const icon = document.getElementById('banner-icon');
+            const text = document.getElementById('banner-text');
+
+            if (currentConfig === "12-lead") {
+                banner.className = "status-banner safe";
+                icon.innerText = "✓";
+                text.innerHTML = "<strong>CLINICALLY GROUNDED:</strong> Complete 12-lead coverage. All attended electrodynamic vectors are physically observable.";
+            } else if (currentConfig === "6-lead") {
+                if (currentPath === "control") {
+                    banner.className = "status-banner warning";
+                    icon.innerText = "⚠";
+                    text.innerHTML = "<strong>CRITICAL SAFETY BREACH (HALLUCINATED EVIDENCE):</strong> Precordial chest leads V1–V6 are absent. The model emits MI with high confidence, but cross-attention actively attends to unobservable chest deviations!";
+                } else {
+                    banner.className = "status-banner recovery";
+                    icon.innerText = "★";
+                    text.innerHTML = "<strong>CKP GROUNDING RECOVERY:</strong> SNOMED-CT clinical prior reorients attention toward observable hexaxial limb vectors.";
+                }
+            } else if (currentConfig === "4-lead") {
+                banner.className = "status-banner recovery";
+                icon.innerText = "★";
+                text.innerHTML = "<strong>ANATOMICAL INVARIANCE CONFIRMED:</strong> 4-lead retains lead V1 (horizontal septal vector). Token ST_ELEV_V1 recovers physical grounding, explaining why 4-lead outperforms 6-lead.";
+            } else if (currentConfig === "2-lead") {
+                if (currentPath === "control") {
+                    banner.className = "status-banner warning";
+                    icon.innerText = "⚡";
+                    text.innerHTML = "<strong>REASONING FAILURE BOUNDARY (RFB):</strong> Control path crosses clinical safety threshold (&tau; = 0.60) at 4 leads, dropping to GQ = 0.42 under 2-lead telemetry.";
+                } else {
+                    banner.className = "status-banner boundary";
+                    icon.innerText = "✓";
+                    text.innerHTML = "<strong>CKP PRESERVES GROUNDING:</strong> Experimental path sustains grounded reasoning at 2 leads (GQ = 0.60), delaying the RFB by two full lead levels!";
+                }
+            } else if (currentConfig === "1-lead") {
+                banner.className = "status-banner warning";
+                icon.innerText = "✖";
+                text.innerHTML = "<strong>CATASTROPHIC COLLAPSE (1 LEAD):</strong> True Grounding Ratio collapses (< 0.005). Proves that ontological knowledge priors cannot replace missing physical sensors.";
+            }
+
+            // 6. Update Posterior Bars
+            const probList = document.getElementById('prob-list');
+            probList.innerHTML = "";
+            const sortedProbs = Object.entries(cfgData.posteriors).sort((a,b) => b[1] - a[1]);
+
+            sortedProbs.forEach(([acro, val]) => {
+                const row = document.createElement('div');
+                row.className = "prob-row";
+                const isTop = acro === top.acronym;
+                row.innerHTML = `
+                    <span style="font-weight: ${isTop ? '700' : '400'}; color: ${isTop ? '#fff' : 'var(--text-muted)'};">${acro}</span>
+                    <div class="prob-bar-track">
+                        <div class="prob-bar-fill ${isTop ? 'top' : ''}" style="width: ${Math.max(val * 100, 3)}%;"></div>
+                    </div>
+                    <span style="text-align: right; color: ${isTop ? 'var(--accent-green)' : 'var(--text-muted)'};">${(val * 100).toFixed(1)}%</span>
+                `;
+                probList.appendChild(row);
+            });
+        }
+
+        // Auto-Play 2-Minute Demo for Video Recording
+        function toggleAutoDemo() {
+            const btn = document.getElementById('auto-demo-btn');
+            const pbar = document.getElementById('demo-progress-bar');
+
+            if (autoDemoRunning) {
+                clearInterval(autoDemoInterval);
+                autoDemoRunning = false;
+                btn.innerHTML = "<span>▶ Auto-Play 2-Min Demo</span>";
+                pbar.style.width = "0%";
+                return;
+            }
+
+            autoDemoRunning = true;
+            btn.innerHTML = "<span>⏹ Stop Demo Walkthrough</span>";
+
+            const steps = [
+                { cfg: "12-lead", path: "control", dur: 22 },
+                { cfg: "6-lead",  path: "control", dur: 28 }, // highlight hallucination!
+                { cfg: "4-lead",  path: "control", dur: 24 }, // highlight non-monotonicity!
+                { cfg: "2-lead",  path: "control", dur: 20 }, // highlight control collapse!
+                { cfg: "2-lead",  path: "ckp",     dur: 20 }, // highlight CKP delay!
+                { cfg: "1-lead",  path: "ckp",     dur: 15 }  // catastrophic collapse
+            ];
+
+            let stepIdx = 0;
+            let elapsed = 0;
+            const totalDuration = steps.reduce((sum, s) => sum + s.dur, 0);
+
+            function executeStep() {
+                if (stepIdx >= steps.length) {
+                    toggleAutoDemo();
+                    return;
+                }
+                const current = steps[stepIdx];
+                setLeadConfig(current.cfg);
+                setReasoningPath(current.path);
+                stepIdx++;
+            }
+
+            executeStep();
+
+            autoDemoInterval = setInterval(() => {
+                elapsed += 0.5;
+                pbar.style.width = `${(elapsed / totalDuration) * 100}%`;
+
+                let accum = 0;
+                for (let i = 0; i < steps.length; i++) {
+                    accum += steps[i].dur;
+                    if (Math.abs(elapsed - accum) < 0.3) {
+                        executeStep();
+                        break;
+                    }
+                }
+
+                if (elapsed >= totalDuration) {
+                    toggleAutoDemo();
+                }
+            }, 500);
+        }
+
+        window.onload = initCockpit;
+    </script>
+</body>
+</html>

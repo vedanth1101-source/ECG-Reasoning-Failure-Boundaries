@@ -1,0 +1,203 @@
+# ==============================================================================
+# .gitignore - ECG Foundation Models Under Progressive Information Loss
+# SSN College of Engineering - Final Year Project (Academic Submission)
+# ==============================================================================
+
+# ------------------------------------------------------------------------------
+# 1. Python Environment, Cache & Bytecode
+# ------------------------------------------------------------------------------
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+*.pyd
+
+# Virtual Environments
+venv/
+.venv/
+env/
+ENV/
+env.bak/
+venv.bak/
+
+# Packaging & Distribution
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+pip-log.txt
+pip-delete-this-directory.txt
+
+# ------------------------------------------------------------------------------
+# 2. C / C++ / CUDA / Cython Compiled Artifacts
+# ------------------------------------------------------------------------------
+*.o
+*.obj
+*.dll
+*.dylib
+*.lib
+*.a
+*.exp
+
+# ------------------------------------------------------------------------------
+# 3. Model Weights & Heavy Checkpoints (~1.1+ GB)
+# ------------------------------------------------------------------------------
+# Never commit heavy binary neural network weights (violates GitHub 100MB limit)
+checkpoints/
+*.pt
+*.pth
+*.ckpt
+*.bin
+*.safetensors
+*.onnx
+*.h5
+*.pkl
+*.pickle
+
+# ------------------------------------------------------------------------------
+# 4. Large Datasets & Waveform Records (~18.4+ GB)
+# ------------------------------------------------------------------------------
+# Datasets (PTB-XL, MIMIC-IV-ECG, Chapman-Shaoxing, Latents, Resampled signals)
+data/
+# Binary array & signal record formats
+*.dat
+*.hea
+*.mat
+*.npy
+*.npz
+*.wfdb
+
+# ------------------------------------------------------------------------------
+# 5. Training Runs, Intermediate Representations & Logs (~15.8+ GB)
+# ------------------------------------------------------------------------------
+# Generated run artifacts from Module 1, 2, 3, 4
+runs/
+wandb/
+mlruns/
+lightning_logs/
+*.tfevents.*
+
+# ------------------------------------------------------------------------------
+# 6. Testing, QA & Profiling
+# ------------------------------------------------------------------------------
+.pytest_cache/
+.coverage
+.coverage.*
+htmlcov/
+.tox/
+.nox/
+.playwright-mcp/
+test-results/
+playwright-report/
+
+# ------------------------------------------------------------------------------
+# 7. LaTeX Intermediate Build Artifacts (Academic Report)
+# ------------------------------------------------------------------------------
+# Ignore build aux files, but preserve .tex, .bib, .cls, .sty, and final .pdf
+*.aux
+*.bbl
+*.bcf
+*.blg
+*.fdb_latexmk
+*.fls
+*.lof
+*.log
+*.lot
+*.out
+*.run.xml
+*.synctex.gz
+*.synctex(busy)
+*.toc
+*.nav
+*.snm
+*.vrb
+*.dvi
+*.xdv
+
+# ------------------------------------------------------------------------------
+# 8. Temporary Files, Scratch Notes & Compressed Archives
+# ------------------------------------------------------------------------------
+scratch/
+scratch_*.txt
+*.tmp
+*.temp
+*.part
+*.crdownload
+
+# Loose root screenshots / browser testing dumps
+0[0-9]_*.png
+
+# Compressed archives (avoid bloating git history)
+*.zip
+*.rar
+*.7z
+*.tar
+*.tar.gz
+*.tgz
+evidence.rar
+report.zip
+
+# ------------------------------------------------------------------------------
+# 9. IDE, Editor & OS Artifacts
+# ------------------------------------------------------------------------------
+# Windows
+Thumbs.db
+Thumbs.db:encryptable
+ehthumbs.db
+ehthumbs_vista.db
+[Dd]esktop.ini
+$RECYCLE.BIN/
+
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+._*
+
+# Linux
+*~
+.fuse_hidden*
+.directory
+
+# IDEs & Editors
+.idea/
+.vscode/
+*.sublime-workspace
+*.sublime-project
+*.swp
+*.swo
+.project
+.settings/
+
+# Jupyter Notebook Checkpoints
+.ipynb_checkpoints/
+
+# AI Tooling Local States
+.gemini/
+.cursor/
+.windsurf/
+
+# ------------------------------------------------------------------------------
+# 10. Secrets, Keys & Environment Variables
+# ------------------------------------------------------------------------------
+.env
+.env.local
+.env.*.local
+.env.development
+.env.test
+.env.production
+*.pem
+*.key
+secrets.json
+credentials.json

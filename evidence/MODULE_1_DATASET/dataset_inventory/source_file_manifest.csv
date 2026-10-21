@@ -1,0 +1,14 @@
+dataset,description,path,exists,size_bytes,size_mb,expected_records,sha256
+PTB-XL,Metadata CSV,data\processed_100hz\preprocessed_database.csv,True,7373644,7.03,21799,16ca491c9d66350d6589182f3c4bb0216cb14d04bd659497166e5198b9de390a
+PTB-XL,Signal NPY Array,data\processed_100hz\signals.npy,True,1046352128,997.88,21799,3063f5d0836aab54ef763931f59c210065edf06323212c27085365a30edc5c4f
+PTB-XL,Labels NPY Array,data\processed_100hz\labels.npy,True,174520,0.17,21799,909d9b26e0caab56a46c48921c3748f1e4e8787b46d252c3310616d5a091a3a7
+PTB-XL,Raw WFDB Records,data\ptbxl,False,0,0.0,0,MISSING
+Chapman,Raw Catalog Manifest,data\external_validation\chapman\records_manifest.csv,True,472632,0.45,10247,476476dff2a73056fcfec7daffa043e546c9bc9b560a9c65b3b881b80255c1ce
+Chapman,Preprocessed CSV,data\processed_100hz\chapman\preprocessed_database.csv,True,1082067,1.03,10158,b8fc49df040c2fbcd94fed87c9c52271f16ab66e793482ef7f89564d62018aeb
+Chapman,Signals NPY Array,data\processed_100hz\chapman\signals.npy,True,487584128,465.0,10158,b3568b0737e9235b2f14dcf19c84aea025761f0cfb1fd2fa9eb532c93dabd0a3
+Chapman,Labels NPY Array,data\processed_100hz\chapman\labels.npy,True,81392,0.08,10158,297a225df1a7f826577a85a5fdbfcc75231bcc288b34f570e7f25a1aa475c4c1
+MIMIC,Full Measurements CSV,data\mimic\machine_measurements.csv,True,182674683,174.21,800000,56f6b1413221bce95bd6f48b28ca1acf27ae0b073d6f2c1d12f3af7500eabbb6
+MIMIC,Sampled Records Manifest,data\external_validation\mimic\records_manifest.csv,True,400043,0.38,5000,178f7934068de5b34723a09a97db842aa0d564705ab2dd4a7d242f49996f19e8
+MIMIC,Preprocessed CSV,data\processed_100hz\mimic\preprocessed_database.csv,True,682087,0.65,5000,7b1748fe0953fd0854bfc652ac3859b5bde248c78d5e05a3043bf2f6973e2642
+MIMIC,Signals NPY Array,data\processed_100hz\mimic\signals.npy,True,240000128,228.88,5000,c30518ad800815355c9291d434dc2b168b1a297a3936b927a9bd313ca8dee41c
+MIMIC,Labels NPY Array,data\processed_100hz\mimic\labels.npy,True,40128,0.04,5000,33572e7a8625452dc8606a56274da1cd9f1948f741eec7484f0dd9da58cb4bac

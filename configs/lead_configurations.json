@@ -1,0 +1,69 @@
+{
+  "primary_levels": [12, 10, 8, 6, 4, 2, 1],
+  "lead_universe": ["I", "II", "III", "aVR", "aVL", "aVF", "V1", "V2", "V3", "V4", "V5", "V6"],
+  "configurations": {
+    "12": {
+      "config_id": "C12_FULL",
+      "num_leads": 12,
+      "leads": ["I", "II", "III", "aVR", "aVL", "aVF", "V1", "V2", "V3", "V4", "V5", "V6"],
+      "type": "device-supported",
+      "motivation": "Full standard 12-lead diagnostic electrocardiogram (AHA/ACC/HRS guideline gold standard). Comprehensive spatial coverage across frontal limb vectors and horizontal precordial planes.",
+      "source": "Standard 12-lead clinical ECG (Mason-Likar / Cabrera standard electrode placement).",
+      "notes": "Includes 8 physically measured channels (I, II, V1-V6) and 4 mathematically derived limb channels (III, aVR, aVL, aVF)."
+    },
+    "10": {
+      "config_id": "C10_PREC_LIMB",
+      "num_leads": 10,
+      "leads": ["I", "II", "aVR", "aVL", "V1", "V2", "V3", "V4", "V5", "V6"],
+      "type": "clinically-motivated simulated configuration",
+      "motivation": "Frontal bipolar monitoring pair (I, II) with augmented lateral/superior vectors (aVR, aVL) and complete precordial survey (V1-V6). Simulates elimination of inferior redundant derived leads (III and aVF).",
+      "source": "Clinically motivated simulated configuration representing precordial preservation with reduced frontal redundancy.",
+      "notes": "Leads III (II - I) and aVF (II - I/2) masked; inferior wall information remains partially decodable from parent Lead II."
+    },
+    "8": {
+      "config_id": "C8_INDEPENDENT",
+      "num_leads": 8,
+      "leads": ["I", "II", "V1", "V2", "V3", "V4", "V5", "V6"],
+      "type": "clinically-motivated simulated",
+      "motivation": "The canonical mathematically independent 8-lead acquisition set. Standard hospital digital cardiographs acquire exactly these 8 independent physical potential differences and compute III, aVR, aVL, aVF in firmware via Einthoven's and Goldberger's equations.",
+      "source": "Clinically motivated simulated configuration representing physical channels acquired by hospital ECG carts before firmware derivation.",
+      "notes": "Zero loss of physical information relative to full 12-lead; derived leads III, aVR, aVL, aVF are masked to test raw measured potential sufficiency."
+    },
+    "6": {
+      "config_id": "C6_LIMB_6",
+      "num_leads": 6,
+      "leads": ["I", "II", "III", "aVR", "aVL", "aVF"],
+      "type": "device-supported",
+      "motivation": "Complete frontal plane hexaxial reference system. Corresponds to clinical 6-lead portable/handheld monitoring systems and historical limb-lead-only acquisitions where precordial chest leads are omitted.",
+      "source": "6-lead portable/handheld devices (e.g. AliveCor KardiaMobile 6L FDA 510(k) K191406).",
+      "notes": "All horizontal precordial leads (V1-V6) are masked. Tests diagnostic reasoning restricted strictly to frontal plane vectors."
+    },
+    "4": {
+      "config_id": "C4_EINTHOVEN_SEPTAL",
+      "num_leads": 4,
+      "leads": ["I", "II", "III", "V1"],
+      "type": "clinically-motivated simulated",
+      "motivation": "Classic 4-electrode patient cable arrangement utilized in emergency transport, step-down telemetry units, and operating rooms (3 limb electrodes establishing Einthoven's triangle I, II, III plus a single chest exploring electrode at V1 for arrhythmia/bundle branch detection).",
+      "source": "Clinically motivated simulated configuration based on 4-electrode hospital transport monitoring cables.",
+      "notes": "Permits rhythm assessment in Lead II and right ventricular / septal conduction delay evaluation in V1."
+    },
+    "2": {
+      "config_id": "C2_TELEMETRY",
+      "num_leads": 2,
+      "leads": ["II", "V1"],
+      "type": "clinically-motivated simulated",
+      "motivation": "Dual-lead telemetry monitoring standard. Lead II provides optimal P-wave morphology and high R-wave amplitude for basic rhythm analysis; Lead V1 provides immediate differentiation between left vs right bundle branch blocks and ventricular ectopy.",
+      "source": "Clinically motivated simulated configuration representing dual-channel inpatient telemetry protocols (e.g., Philips IntelliVue). Designated as 'telemetry-like 2-lead configuration'.",
+      "notes": "Designated as 'telemetry-like 2-lead configuration' to indicate simulated lead loss rather than native telemetry capture."
+    },
+    "1": {
+      "config_id": "C1_SINGLE_LEAD",
+      "num_leads": 1,
+      "leads": ["II"],
+      "type": "clinically-motivated simulated",
+      "motivation": "Lead II rhythm strip. Corresponds to single-lead wearable patches and bipolar vector alignment along the long anatomical electrical axis of ventricular depolarization (base-to-apex vector).",
+      "source": "Clinically motivated simulated configuration representing wearable patch rhythm monitoring. Designated as 'ambulatory-like single-lead configuration'.",
+      "notes": "Designated as 'ambulatory-like single-lead configuration'. Highest informational constraint in the primary degradation ladder."
+    }
+  }
+}

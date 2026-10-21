@@ -1,0 +1,1 @@
+variant,split,record_id,source,file_path,file_exists,file_size_bytes,shape,dtype,is_finite,n_available_leads,n_unavailable_leads,zero_channel_check,available_channel_equality,baseline_equality,metadata_label_mask_aligned,verification_status,failure_reason

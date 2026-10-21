@@ -1,0 +1,322 @@
+{
+  "timestamp": "2026-10-06 14:16:44 UTC",
+  "foundation_model": "Frozen ECG-FM (wav2vec2_cmsc)",
+  "checkpoint": "checkpoints/ecg_fm/mimic_iv_ecg_physionet_pretrained.pt",
+  "trainable_adapters": false,
+  "single_ecg_verification": {
+    "record_id": "00001_hr",
+    "levels": {
+      "12_lead": {
+        "num_active_leads": 12,
+        "active_leads": [
+          "I",
+          "II",
+          "III",
+          "aVR",
+          "aVL",
+          "aVF",
+          "V1",
+          "V2",
+          "V3",
+          "V4",
+          "V5",
+          "V6"
+        ],
+        "masked_leads": [],
+        "max_inactive_leakage": 0.0,
+        "input_shape": [
+          12,
+          1000
+        ],
+        "input_sha256": "c7d7a0e18d98c516",
+        "representation_shape": [
+          768
+        ],
+        "representation_sha256": "1fc2218a28a24c86",
+        "is_reconstructed": false
+      },
+      "10_lead": {
+        "num_active_leads": 10,
+        "active_leads": [
+          "I",
+          "II",
+          "aVR",
+          "aVL",
+          "V1",
+          "V2",
+          "V3",
+          "V4",
+          "V5",
+          "V6"
+        ],
+        "masked_leads": [
+          "III",
+          "aVF"
+        ],
+        "max_inactive_leakage": 0.0,
+        "input_shape": [
+          12,
+          1000
+        ],
+        "input_sha256": "bac497059806d277",
+        "representation_shape": [
+          768
+        ],
+        "representation_sha256": "8c83a44cc140cf02",
+        "is_reconstructed": false
+      },
+      "8_lead": {
+        "num_active_leads": 8,
+        "active_leads": [
+          "I",
+          "II",
+          "V1",
+          "V2",
+          "V3",
+          "V4",
+          "V5",
+          "V6"
+        ],
+        "masked_leads": [
+          "III",
+          "aVR",
+          "aVL",
+          "aVF"
+        ],
+        "max_inactive_leakage": 0.0,
+        "input_shape": [
+          12,
+          1000
+        ],
+        "input_sha256": "662d5764b2e4c999",
+        "representation_shape": [
+          768
+        ],
+        "representation_sha256": "736e935e372c29d0",
+        "is_reconstructed": false
+      },
+      "6_lead": {
+        "num_active_leads": 6,
+        "active_leads": [
+          "I",
+          "II",
+          "III",
+          "aVR",
+          "aVL",
+          "aVF"
+        ],
+        "masked_leads": [
+          "V1",
+          "V2",
+          "V3",
+          "V4",
+          "V5",
+          "V6"
+        ],
+        "max_inactive_leakage": 0.0,
+        "input_shape": [
+          12,
+          1000
+        ],
+        "input_sha256": "9dd1d8705440c7b9",
+        "representation_shape": [
+          768
+        ],
+        "representation_sha256": "6fa7b519607dbb3d",
+        "is_reconstructed": false
+      },
+      "4_lead": {
+        "num_active_leads": 4,
+        "active_leads": [
+          "I",
+          "II",
+          "III",
+          "V1"
+        ],
+        "masked_leads": [
+          "aVR",
+          "aVL",
+          "aVF",
+          "V2",
+          "V3",
+          "V4",
+          "V5",
+          "V6"
+        ],
+        "max_inactive_leakage": 0.0,
+        "input_shape": [
+          12,
+          1000
+        ],
+        "input_sha256": "f3c980088e4c1a50",
+        "representation_shape": [
+          768
+        ],
+        "representation_sha256": "e72d91e6f3a7da4e",
+        "is_reconstructed": false
+      },
+      "2_lead": {
+        "num_active_leads": 2,
+        "active_leads": [
+          "II",
+          "V1"
+        ],
+        "masked_leads": [
+          "I",
+          "III",
+          "aVR",
+          "aVL",
+          "aVF",
+          "V2",
+          "V3",
+          "V4",
+          "V5",
+          "V6"
+        ],
+        "max_inactive_leakage": 0.0,
+        "input_shape": [
+          12,
+          1000
+        ],
+        "input_sha256": "de7b5a84cb2c86f5",
+        "representation_shape": [
+          768
+        ],
+        "representation_sha256": "8b65abf27d6f5cf5",
+        "is_reconstructed": false
+      },
+      "1_lead": {
+        "num_active_leads": 1,
+        "active_leads": [
+          "II"
+        ],
+        "masked_leads": [
+          "I",
+          "III",
+          "aVR",
+          "aVL",
+          "aVF",
+          "V1",
+          "V2",
+          "V3",
+          "V4",
+          "V5",
+          "V6"
+        ],
+        "max_inactive_leakage": 0.0,
+        "input_shape": [
+          12,
+          1000
+        ],
+        "input_sha256": "245297dae496faf6",
+        "representation_shape": [
+          768
+        ],
+        "representation_sha256": "cb615ddb121eeba3",
+        "is_reconstructed": false
+      }
+    },
+    "pairwise_distances": {
+      "12_lead": {
+        "cosine_similarity": 1.0,
+        "cosine_distance_d_l": 0.0
+      },
+      "10_lead": {
+        "cosine_similarity": 0.99728,
+        "cosine_distance_d_l": 0.00272
+      },
+      "8_lead": {
+        "cosine_similarity": 0.99709,
+        "cosine_distance_d_l": 0.00291
+      },
+      "6_lead": {
+        "cosine_similarity": 0.89824,
+        "cosine_distance_d_l": 0.10176
+      },
+      "4_lead": {
+        "cosine_similarity": 0.86775,
+        "cosine_distance_d_l": 0.13225
+      },
+      "2_lead": {
+        "cosine_similarity": 0.84131,
+        "cosine_distance_d_l": 0.15869
+      },
+      "1_lead": {
+        "cosine_similarity": 0.78032,
+        "cosine_distance_d_l": 0.21968
+      }
+    }
+  },
+  "batch_sensitivity_summary": {
+    "12_lead": {
+      "num_active_leads": 12,
+      "mean_cosine_similarity": 1.0,
+      "mean_cosine_distance": -0.0,
+      "median_cosine_distance": -0.0,
+      "std_cosine_distance": 0.0,
+      "p25": -0.0,
+      "p75": 0.0,
+      "p95": 0.0
+    },
+    "10_lead": {
+      "num_active_leads": 10,
+      "mean_cosine_similarity": 0.99815,
+      "mean_cosine_distance": 0.00185,
+      "median_cosine_distance": 0.00161,
+      "std_cosine_distance": 0.00127,
+      "p25": 0.00096,
+      "p75": 0.00238,
+      "p95": 0.00306
+    },
+    "8_lead": {
+      "num_active_leads": 8,
+      "mean_cosine_similarity": 0.9971,
+      "mean_cosine_distance": 0.0029,
+      "median_cosine_distance": 0.0024,
+      "std_cosine_distance": 0.00171,
+      "p25": 0.00158,
+      "p75": 0.00362,
+      "p95": 0.00637
+    },
+    "6_lead": {
+      "num_active_leads": 6,
+      "mean_cosine_similarity": 0.90025,
+      "mean_cosine_distance": 0.09975,
+      "median_cosine_distance": 0.09514,
+      "std_cosine_distance": 0.03448,
+      "p25": 0.07926,
+      "p75": 0.11151,
+      "p95": 0.16472
+    },
+    "4_lead": {
+      "num_active_leads": 4,
+      "mean_cosine_similarity": 0.91815,
+      "mean_cosine_distance": 0.08185,
+      "median_cosine_distance": 0.07527,
+      "std_cosine_distance": 0.03758,
+      "p25": 0.057,
+      "p75": 0.09265,
+      "p95": 0.14147
+    },
+    "2_lead": {
+      "num_active_leads": 2,
+      "mean_cosine_similarity": 0.88203,
+      "mean_cosine_distance": 0.11797,
+      "median_cosine_distance": 0.10509,
+      "std_cosine_distance": 0.04222,
+      "p25": 0.08917,
+      "p75": 0.14334,
+      "p95": 0.18873
+    },
+    "1_lead": {
+      "num_active_leads": 1,
+      "mean_cosine_similarity": 0.85352,
+      "mean_cosine_distance": 0.14648,
+      "median_cosine_distance": 0.14691,
+      "std_cosine_distance": 0.04691,
+      "p25": 0.10898,
+      "p75": 0.17334,
+      "p95": 0.23394
+    }
+  }
+}

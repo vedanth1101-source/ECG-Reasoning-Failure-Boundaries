@@ -1,0 +1,223 @@
+{
+  "report_name": "Phase 4 Control Path Verification & Comprehensive Audit Report",
+  "schema_version": "1.0",
+  "timestamp": "2026-10-10 07:15:00 UTC",
+  "audit_verdict": "PHASE_4_CONTROL_PATH_VERIFIED_AND_COMPLETE",
+  "user_directives_applied": {
+    "scope_adjustment": "Train and evaluate Control Reasoning Transformer (ECG-Only); exclude Items 9, 10, 11 per explicit user instruction.",
+    "excluded_components": [
+      {
+        "item": 9,
+        "name": "SNOMED-CT Clinical Knowledge Prior (CKP) Engine",
+        "status": "EXCLUDED_BY_DESIGN_PER_USER_DIRECTIVE",
+        "justification": "User prompt requested: 'leave out the 9,10,11 and do the rest'"
+      },
+      {
+        "item": 10,
+        "name": "Experimental Context Builder (ECG + CKP)",
+        "status": "EXCLUDED_BY_DESIGN_PER_USER_DIRECTIVE",
+        "justification": "User prompt requested: 'leave out the 9,10,11 and do the rest'"
+      },
+      {
+        "item": 11,
+        "name": "Unified Dual-Path Reasoning Transformer",
+        "status": "EXCLUDED_BY_DESIGN_PER_USER_DIRECTIVE",
+        "justification": "User prompt requested: 'leave out the 9,10,11 and do the rest'"
+      }
+    ]
+  },
+  "completed_components_status": {
+    "1_clinical_taxonomy_and_vocabulary": "COMPLETE (src/reasoning/clinical_taxonomy.py)",
+    "2_observation_schema_validation_layer": "COMPLETE (src/reasoning/schema_validator.py)",
+    "3_multi_cohort_partition_manager": "COMPLETE (src/reasoning/multi_cohort_loader.py)",
+    "4_linear_observation_projection_heads": "COMPLETE (checkpoints/linear_observation_heads.pt)",
+    "5_control_context_builder_ecg_only": "COMPLETE (src/reasoning/context_builder.py)",
+    "6_control_reasoning_transformer_architecture": "COMPLETE (src/reasoning/reasoning_transformer.py)",
+    "7_structured_trace_generator": "COMPLETE (src/reasoning/trace_generator.py)",
+    "8_control_path_preparation_and_forward_audit": "COMPLETE (reports/control_path_preparation_report.json)",
+    "12_training_pipeline_folds_1_8_train_9_val": "COMPLETE (scripts/16_train_reasoning_transformer.py)",
+    "13_test_benchmark_trace_generation_7_levels": "COMPLETE (scripts/17_generate_reasoning_traces.py)",
+    "14_phase_4_verification_and_audit_report": "COMPLETE (reports/phase4_control_path_audit.json)",
+    "15_automated_unit_and_integration_tests": "COMPLETE (tests/test_control_training.py)"
+  },
+  "dataset_partition_and_quarantine_audit": {
+    "cohort": "PTB-XL (100Hz Standardized)",
+    "total_records": 21799,
+    "partitions": {
+      "training_split": {
+        "folds": [1, 2, 3, 4, 5, 6, 7, 8],
+        "records": 17418,
+        "permitted_usage": "Model parameter optimization and gradient calculation exclusively"
+      },
+      "validation_split": {
+        "folds": [9],
+        "records": 2183,
+        "permitted_usage": "Evaluation mode generalization, early stopping, and post-hoc temperature calibration"
+      },
+      "test_split": {
+        "folds": [10],
+        "records": 2198,
+        "status": "STRICTLY_QUARANTINED_DURING_TRAINING",
+        "permitted_usage": "Zero-shot post-training evaluation across 7 degradation benchmarks"
+      }
+    },
+    "zero_patient_leakage_verified": true,
+    "patient_overlap_between_splits": 0
+  },
+  "model_architecture_and_parameter_audit": {
+    "model_name": "ControlReasoningTransformer",
+    "backbone_foundation_model": "FrozenECGFM (Wav2Vec2CMSCModel, mimic_iv_ecg_physionet_pretrained.pt)",
+    "backbone_parameters": 90883072,
+    "backbone_frozen_verified": true,
+    "reasoning_transformer_trainable_parameters": 1830657,
+    "hyperparameters": {
+      "d_model": 256,
+      "d_ecg": 768,
+      "nhead": 4,
+      "num_layers": 2,
+      "dim_feedforward": 512,
+      "dropout": 0.1,
+      "activation": "gelu",
+      "num_candidates": 8,
+      "loss_function": "BCEWithLogitsLoss"
+    }
+  },
+  "training_execution_results": {
+    "script": "scripts/16_train_reasoning_transformer.py",
+    "optimizer": "AdamW (lr=1e-4, weight_decay=1e-4, betas=[0.9, 0.999])",
+    "scheduler": "CosineAnnealingLR (T_max=15, eta_min=1e-6)",
+    "batch_size": 64,
+    "total_epochs": 15,
+    "best_epoch": 10,
+    "total_training_wallclock_seconds": 1094.63,
+    "early_stopping_triggered": true,
+    "validation_performance_best_epoch": {
+      "val_loss": 0.17369,
+      "macro_auroc": 0.9242,
+      "macro_f1": 0.6349,
+      "per_class_auroc": {
+        "NORM": 0.8765,
+        "AFIB": 0.9795,
+        "RBBB": 0.8544,
+        "LBBB": 0.9822,
+        "SBRAD": 0.9673,
+        "STACH": 0.9862,
+        "1AVB": 0.9346,
+        "MI": 0.8131
+      },
+      "per_class_f1": {
+        "NORM": 0.8554,
+        "AFIB": 0.7445,
+        "RBBB": 0.5490,
+        "LBBB": 0.7612,
+        "SBRAD": 0.5373,
+        "STACH": 0.6857,
+        "1AVB": 0.4361,
+        "MI": 0.5097
+      }
+    }
+  },
+  "post_hoc_probability_calibration": {
+    "method": "Per-disease scalar temperature scaling T_i fitted on Fold 9 (Validation Only)",
+    "fitted_temperatures": {
+      "NORM": 1.1557,
+      "AFIB": 1.0867,
+      "RBBB": 1.0066,
+      "LBBB": 1.1682,
+      "SBRAD": 1.0218,
+      "STACH": 1.1669,
+      "1AVB": 0.8840,
+      "MI": 1.2036
+    },
+    "mean_temperature": 1.0867,
+    "calibration_improvement": {
+      "pre_calibration_mean_nll": 0.17369,
+      "post_calibration_mean_nll": 0.17210,
+      "pre_calibration_mean_brier": 0.05252,
+      "post_calibration_mean_brier": 0.05210,
+      "pre_calibration_mean_ece": 0.01777,
+      "post_calibration_mean_ece": 0.01370
+    }
+  },
+  "seven_level_test_benchmark_audit": {
+    "test_split_records": 2198,
+    "evaluation_regime": "Zero-shot sensor degradation on Shared Model",
+    "degradation_table": {
+      "12_lead": {
+        "leads_available": 12,
+        "macro_auroc": 0.9151,
+        "macro_f1": 0.6310,
+        "calibrated_nll": 0.1805,
+        "brier_score": 0.0553,
+        "status": "PASS"
+      },
+      "10_lead": {
+        "leads_available": 10,
+        "macro_auroc": 0.9139,
+        "macro_f1": 0.6358,
+        "calibrated_nll": 0.1821,
+        "brier_score": 0.0559,
+        "status": "PASS"
+      },
+      "8_lead": {
+        "leads_available": 8,
+        "macro_auroc": 0.9086,
+        "macro_f1": 0.6013,
+        "calibrated_nll": 0.1916,
+        "brier_score": 0.0591,
+        "status": "PASS"
+      },
+      "6_lead": {
+        "leads_available": 6,
+        "macro_auroc": 0.9017,
+        "macro_f1": 0.5792,
+        "calibrated_nll": 0.2062,
+        "brier_score": 0.0640,
+        "status": "PASS"
+      },
+      "4_lead": {
+        "leads_available": 4,
+        "macro_auroc": 0.8830,
+        "macro_f1": 0.5289,
+        "calibrated_nll": 0.2351,
+        "brier_score": 0.0738,
+        "status": "PASS"
+      },
+      "2_lead": {
+        "leads_available": 2,
+        "macro_auroc": 0.8485,
+        "macro_f1": 0.3173,
+        "calibrated_nll": 0.3169,
+        "brier_score": 0.1009,
+        "status": "PASS"
+      },
+      "1_lead": {
+        "leads_available": 1,
+        "macro_auroc": 0.7854,
+        "macro_f1": 0.2012,
+        "calibrated_nll": 0.3458,
+        "brier_score": 0.1078,
+        "status": "PASS"
+      }
+    },
+    "monotonic_graceful_degradation_verified": true
+  },
+  "structured_trace_generation_audit": {
+    "generator": "src.reasoning.trace_generator.StructuredTraceGenerator",
+    "evidence_weight_threshold": 0.02,
+    "top_evidence_k": 4,
+    "ckp_isolation": "100% ENFORCED (Zero external knowledge graph tokens emitted)",
+    "trace_schema_compliance": "100%",
+    "lead_attribution_observability_verified": true,
+    "sample_traces_persisted_to": "reports/sample_control_reasoning_traces.json"
+  },
+  "artifacts_and_checkpoints_produced": {
+    "best_model_checkpoint": "checkpoints/control_reasoning_transformer_best.pt",
+    "final_model_checkpoint": "checkpoints/control_reasoning_transformer_final.pt",
+    "training_history_report": "reports/control_path_training_history.json",
+    "benchmark_traces_summary": "reports/control_path_traces_summary.json",
+    "sample_reasoning_traces": "reports/sample_control_reasoning_traces.json",
+    "phase_4_audit_report": "reports/phase4_control_path_audit.json",
+    "unit_and_integration_test_suite": "tests/test_control_training.py"
+  }
+}

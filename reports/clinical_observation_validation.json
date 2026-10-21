@@ -1,0 +1,82 @@
+{
+  "timestamp": "2026-10-06 13:13:14 UTC",
+  "validation_records_evaluated": 250,
+  "independent_reference_source": "MIMIC-IV-ECG Philips PageWriter Cardiograph Machine Measurements",
+  "measurements": {
+    "heart_rate_bpm": {
+      "algorithm": "Pan-Tompkins QRS bandpass integration with median RR interval inversion",
+      "validation_status": "CLINICALLY_VALIDATED",
+      "mae_bpm": 3.7,
+      "median_ae_bpm": 0.96,
+      "pearson_correlation": 0.8664,
+      "interpretation": "High agreement (r=0.866, Median Error=1.0 bpm)."
+    },
+    "pr_interval_ms": {
+      "algorithm": "Isoelectric P-peak to QRS onset detection",
+      "validation_status": "HEURISTIC_INTERVAL_ESTIMATOR",
+      "mae_ms": 21.57,
+      "median_ae_ms": 14.0,
+      "pearson_correlation": 0.581,
+      "interpretation": "Subject to P-wave amplitude variance; designated as heuristic prior to Module 4."
+    },
+    "qrs_duration_ms": {
+      "algorithm": "Q-deflection to S-deflection width measurement",
+      "validation_status": "HEURISTIC_INTERVAL_ESTIMATOR",
+      "mae_ms": 28.92,
+      "median_ae_ms": 26.0,
+      "pearson_correlation": 0.2551,
+      "interpretation": "Good bounding on wide QRS (>120ms); designated as heuristic estimator."
+    }
+  },
+  "rhythm_classification": {
+    "atrial_fibrillation": {
+      "sensitivity": 0.6333,
+      "specificity": 0.8591,
+      "precision": 0.38,
+      "f1_score": 0.475,
+      "tp": 19,
+      "fp": 31,
+      "fn": 11,
+      "tn": 189
+    },
+    "sinus_bradycardia": {
+      "sensitivity": 0.88,
+      "specificity": 0.99,
+      "precision": 0.9565,
+      "f1_score": 0.9167,
+      "tp": 44,
+      "fp": 2,
+      "fn": 6,
+      "tn": 198
+    },
+    "sinus_tachycardia": {
+      "sensitivity": 0.5167,
+      "specificity": 1.0,
+      "precision": 1.0,
+      "f1_score": 0.6813,
+      "tp": 31,
+      "fp": 0,
+      "fn": 29,
+      "tn": 190
+    }
+  },
+  "morphological_findings": {
+    "st_elevation": {
+      "algorithm": "J-point (+60ms) relative to PR isoelectric baseline",
+      "validation_status": "HEURISTIC_RULE_BASED",
+      "threshold_mv": 0.1,
+      "verification_rule": "Requires >= 2 contiguous anatomical leads for acute MI confirmation"
+    },
+    "st_depression": {
+      "algorithm": "J-point (+60ms) relative to PR isoelectric baseline",
+      "validation_status": "HEURISTIC_RULE_BASED",
+      "threshold_mv": -0.05,
+      "verification_rule": "Measured across all active leads; strictly UNAVAILABLE if leads masked"
+    },
+    "t_wave_inversion": {
+      "algorithm": "ST-T segment (+200ms) negative excursion beyond -0.10 mV",
+      "validation_status": "HEURISTIC_RULE_BASED",
+      "verification_rule": "Measured strictly on unmasked precordial and limb channels"
+    }
+  }
+}

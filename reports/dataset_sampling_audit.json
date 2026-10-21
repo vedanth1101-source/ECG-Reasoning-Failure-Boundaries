@@ -1,0 +1,70 @@
+{
+  "audit_version": "1.0",
+  "fixed_benchmark_diseases": [
+    "Normal ECG",
+    "Atrial Fibrillation (AFib)",
+    "Right Bundle Branch Block (RBBB)",
+    "Left Bundle Branch Block (LBBB)",
+    "Sinus Bradycardia",
+    "Sinus Tachycardia",
+    "First Degree AV Block",
+    "Myocardial Infarction (MI)"
+  ],
+  "disease_encoding_format": "multi_hot_binary_vector (8 dimensions)",
+  "cohort_definitions": {
+    "ptb_xl": {
+      "full_dataset_name": "PTB-XL v1.0.3 Electrocardiography Dataset",
+      "total_records": 21799,
+      "unique_patients": 18869,
+      "split_strategy": "Stratified 10-fold patient-level disjoint split (folds 1-8 train, 9 val, 10 test)",
+      "sampling_procedure": "Full clinical cohort utilized without artificial downsampling",
+      "disease_label_distribution": {
+        "single_label_records": 14719,
+        "single_label_percentage": 67.52,
+        "multi_label_records": 2456,
+        "multi_label_percentage": 11.27,
+        "other_or_unmapped_records": 4624,
+        "other_percentage": 21.21
+      },
+      "disease_prevalence": {
+        "Normal ECG": 9514,
+        "Atrial Fibrillation (AFib)": 1514,
+        "Right Bundle Branch Block (RBBB)": 541,
+        "Left Bundle Branch Block (LBBB)": 536,
+        "Sinus Bradycardia": 637,
+        "Sinus Tachycardia": 826,
+        "First Degree AV Block": 793,
+        "Myocardial Infarction (MI)": 5467
+      },
+      "co_occurrence_matrix": [
+        [9514, 37, 0, 0, 353, 236, 38, 1],
+        [37, 1514, 92, 71, 0, 0, 9, 605],
+        [0, 92, 541, 0, 10, 22, 72, 286],
+        [0, 71, 0, 536, 11, 31, 93, 38],
+        [353, 0, 10, 11, 637, 0, 26, 108],
+        [236, 0, 22, 31, 0, 826, 54, 296],
+        [38, 9, 72, 93, 26, 54, 793, 369],
+        [1, 605, 286, 38, 108, 296, 369, 5467]
+      ]
+    },
+    "chapman_shaoxing": {
+      "full_dataset_name": "Chapman University and Shaoxing People's Hospital 12-lead ECG Database (PhysioNet/CinC 2020)",
+      "total_source_records": 10249,
+      "valid_records_in_cohort": 10158,
+      "excluded_records": 91,
+      "exclusion_criteria": "Corrupted header metadata, missing MAT payload channels, or non-finite sampling rates",
+      "patient_uniqueness": "10,158 distinct hospital admissions / patient recordings",
+      "sampling_procedure": "Full quality-filtered multi-disease cohort"
+    },
+    "mimic_iv_ecg_subset": {
+      "full_dataset_name": "MIMIC-IV-ECG Diagnostic Electrocardiogram Database v1.0",
+      "total_available_pool": 800035,
+      "total_unique_subjects": 161352,
+      "selected_benchmark_subset_size": 5000,
+      "unique_patients_in_subset": 5000,
+      "sampling_procedure": "Stratified balanced sampling across benchmark diagnostic classes (~625 records per target class) with strict 1:1 patient uniqueness constraint (zero duplicate subject_id)",
+      "sampling_seed": 42,
+      "distinction_note": "The 5,000-record cohort is strictly an external validation benchmark subset and MUST NOT be described as the full MIMIC-IV-ECG database."
+    }
+  }
+}

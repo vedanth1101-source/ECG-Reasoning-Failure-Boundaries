@@ -1,0 +1,93 @@
+{
+  "module": "Module 1 (Dataset Standardization, Eight-Label Harmonization, and Stratified 70:10:20 Splitting)",
+  "freeze_status": "FROZEN",
+  "freeze_timestamp_utc": "2026-10-12 12:22:51 UTC",
+  "random_seed": 42,
+  "n_splits": 10,
+  "record_accounting": {
+    "catalog_universe": 37046,
+    "catalog_missing_chapman_files": 89,
+    "usable_paired_inventory": 36957,
+    "p5_quality_control_failures": 69,
+    "eligible_modeling_records": 36888,
+    "physical_files_on_disk": 36888
+  },
+  "split_counts": {
+    "train": 25825,
+    "validation": 3688,
+    "test": 7375
+  },
+  "source_counts": {
+    "PTB-XL": 21797,
+    "Chapman-Shaoxing": 10142,
+    "MIMIC-IV-ECG": 4949
+  },
+  "signal_specification": {
+    "shape": [
+      12,
+      1000
+    ],
+    "sampling_rate_hz": 100.0,
+    "duration_seconds": 10.0,
+    "dtype": "float32",
+    "units": "mV",
+    "canonical_lead_order": [
+      "I",
+      "II",
+      "III",
+      "aVR",
+      "aVL",
+      "aVF",
+      "V1",
+      "V2",
+      "V3",
+      "V4",
+      "V5",
+      "V6"
+    ]
+  },
+  "duplicate_signal_audit": {
+    "total_records_scanned": 36888,
+    "unique_signal_hashes": 36875,
+    "ptbxl_duplicate_signals": 0,
+    "mimic_duplicate_signals": 0,
+    "cross_dataset_duplicate_signals": 0,
+    "chapman_cross_split_duplicate_pairs": 9,
+    "chapman_within_split_duplicate_pairs": 4,
+    "status": "CHECKED_AND_DOCUMENTED",
+    "root_cause": "Chapman-Shaoxing lacks native patient identifiers (patient_id = record_id fallback); 13 identical signal recordings exist in the raw Chapman dataset under different record IDs."
+  },
+  "target_diseases": [
+    "NORM",
+    "AFIB",
+    "RBBB",
+    "LBBB",
+    "SBRAD",
+    "STACH",
+    "1AVB",
+    "MI"
+  ],
+  "prevalence_observed_pct": {
+    "NORM": 30.5888,
+    "AFIB": 10.8109,
+    "RBBB": 4.8866,
+    "LBBB": 3.8733,
+    "SBRAD": 16.8559,
+    "STACH": 9.8309,
+    "1AVB": 4.4461,
+    "MI": 18.092
+  },
+  "artifact_paths": {
+    "split_manifest": "runs/module1_v2/splits/split_manifest.csv",
+    "split_summary": "runs/module1_v2/splits/split_summary.json",
+    "dataset_root": "runs/module1_v2/dataset",
+    "checksum_manifest": "runs/module1_v2/checksums_module1_manifest.sha256",
+    "checksum_manifest_sha256": "47bb4547d8a39f4a5ec1697f59dfe0a104b79811642c39115d73579fed09301c",
+    "per_file_audit_csv": "runs/module1_v2/reports/per_file_processing_audit.csv",
+    "per_file_audit_md": "runs/module1_v2/reports/per_file_processing_audit.md",
+    "preprocessing_verification_md": "runs/module1_v2/reports/preprocessing_verification.md",
+    "final_freeze_report_md": "runs/module1_v2/reports/module1_final_freeze_report.md",
+    "module2_handoff_md": "runs/module1_v2/reports/module2_handoff.md"
+  },
+  "immutability_declaration": "All signals, labels, observation masks, split assignments, and manifests are permanently frozen. Do not alter or overwrite during subsequent modules."
+}

@@ -1,0 +1,17 @@
+source_cohort,split,record_count,split_pct_within_cohort,unique_patient_clusters,patient_grouping_key
+PTB-XL,train,15260,70.01,13253,patient_id
+PTB-XL,validation,2179,10.0,1885,patient_id
+PTB-XL,test,4358,19.99,3729,patient_id
+PTB-XL,Total Cohort,21797,100.0,18867,patient_id
+Chapman-Shaoxing,train,7100,70.01,7100,record_id fallback
+Chapman-Shaoxing,validation,1014,10.0,1014,record_id fallback
+Chapman-Shaoxing,test,2028,19.99,2028,record_id fallback
+Chapman-Shaoxing,Total Cohort,10142,100.0,10142,record_id fallback
+MIMIC-IV-ECG,train,3465,70.01,3465,subject_id
+MIMIC-IV-ECG,validation,495,10.0,495,subject_id
+MIMIC-IV-ECG,test,989,19.98,989,subject_id
+MIMIC-IV-ECG,Total Cohort,4949,100.0,4949,subject_id
+Pooled Dataset Universe,train,25825,70.01,23818,Patient-Group Key
+Pooled Dataset Universe,validation,3688,10.0,3394,Patient-Group Key
+Pooled Dataset Universe,test,7375,19.99,6746,Patient-Group Key
+Pooled Dataset Universe,Grand Total,36888,100.0,33958,Patient-Group Key

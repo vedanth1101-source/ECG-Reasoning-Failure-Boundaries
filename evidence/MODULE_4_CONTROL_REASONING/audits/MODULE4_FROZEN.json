@@ -1,0 +1,606 @@
+{
+  "module": "Module 4 (Perception-Augmented Reasoning Pipeline: Multi-Lead Control Reasoning Transformer)",
+  "project_title": "Reasoning Failure Boundaries in ECG Foundation Models Under Progressive Physiological Information Loss",
+  "freeze_status": "FROZEN_VALIDATED",
+  "freeze_timestamp_utc": "2026-10-15 06:54:40 UTC",
+  "preregistration": {
+    "protocol_document": "reports/module4_evaluation_protocol.md",
+    "protocol_version": "2.0 (Post-Stage 0 Methodological Revision)",
+    "phase_specification": "PROJECT_PHASES_SPECIFICATION.md",
+    "evidence_observability_config": "reports/evidence_observability_config.json",
+    "protocol_integrity": {
+      "protocol_document": {
+        "path": "reports/module4_evaluation_protocol.md",
+        "sha256": "8efb59fd89106eef93f0b468934ba4b2b1f16bbc8255e3952359e37518486766",
+        "status": "VERIFIED_PRESENT"
+      },
+      "phase_specification": {
+        "path": "PROJECT_PHASES_SPECIFICATION.md",
+        "sha256": "f1d1797e0657455431ecc510190a1625c02bce21149c6dccc4d487ee0460f92a",
+        "status": "VERIFIED_PRESENT"
+      },
+      "evidence_observability_config": {
+        "path": "reports/evidence_observability_config.json",
+        "sha256": "11c5c45528a0000872552238c58e1ca4d509472c11748d61a90450594752e288",
+        "status": "VERIFIED_PRESENT"
+      },
+      "training_config": {
+        "path": "configs/control_path_training_config.json",
+        "sha256": "f10728f52f11f5d7658fa9514f1bf52fa09ec6a8ddb7ca2f5ca065f9b19facf0",
+        "status": "VERIFIED_PRESENT"
+      },
+      "lead_configurations": {
+        "path": "configs/lead_configurations.json",
+        "sha256": "ac342522ad8dc7d63ad4d9fe1e9cbb60b7cd683d419b0002d2f428464cf08389",
+        "status": "VERIFIED_PRESENT"
+      },
+      "benchmark_candidates": {
+        "path": "configs/benchmark_candidates.json",
+        "sha256": "3a1044479cdc5ca7e8e820e679028ed7d8f0253c66af14db816293b09e2322c5",
+        "status": "VERIFIED_PRESENT"
+      }
+    },
+    "ratified_decisions": {
+      "U-01": "First Failure Configuration primary boundary with transition pair and last passing configuration",
+      "U-02": "Dual reporting of ordinal step gap and physical lead-count gap with explicit sign conventions",
+      "U-03": "Micro-aggregation primary grounding summary and macro-aggregation sensitivity analysis",
+      "U-04": "Strict contiguous-lead requirement for Myocardial Infarction without heuristic relaxation"
+    }
+  },
+  "source_code_integrity": {
+    "training_script": {
+      "path": "scripts/16_train_reasoning_transformer.py",
+      "sha256": "689914dafdae722796ef3f6f7ae9d463352ea5be435b0aa2be73c56eb6b11103",
+      "status": "VERIFIED_PRESENT"
+    },
+    "model_architecture": {
+      "path": "src/reasoning/reasoning_transformer.py",
+      "sha256": "45a2b91b67cfc9651a9c0c4eebbba6a0ae2e7ebec00d965430113fe8fefe0050",
+      "status": "VERIFIED_PRESENT"
+    },
+    "context_builder": {
+      "path": "src/reasoning/context_builder.py",
+      "sha256": "d1fe0aa9fa1b8ddcb731a22083c7034d85a33a6598028f76f4da55da00cfe050",
+      "status": "VERIFIED_PRESENT"
+    },
+    "dataset_loader": {
+      "path": "src/reasoning/dataset.py",
+      "sha256": "f23ad39e7f78a54233149e921d5a4b8b93420e63c34f88ab825886a0151efd0f",
+      "status": "VERIFIED_PRESENT"
+    },
+    "partition_manager": {
+      "path": "src/reasoning/multi_cohort_loader.py",
+      "sha256": "b70e0de585b9867b3389ad57b3222583665dca44abcf8073d01374a517508404",
+      "status": "VERIFIED_PRESENT"
+    },
+    "freeze_contract": {
+      "path": "src/reasoning/freeze_contract.py",
+      "sha256": "373f5bcbd55988c5aaca3040e5d5cd52d3365e739707a360f7a8ffa5061736ab",
+      "status": "VERIFIED_PRESENT"
+    },
+    "observation_extractor": {
+      "path": "src/observations/clinical_extractor.py",
+      "sha256": "110be30cf8123035a8e8b9bfdf8053413daaac01b86885f2ecf13993b993cfbd",
+      "status": "VERIFIED_PRESENT"
+    }
+  },
+  "random_seeds": {
+    "configured_seeds": [
+      42,
+      1337,
+      2024
+    ],
+    "primary_seed": 42,
+    "seed_roles": {
+      "42": "primary_model_selection_and_preregistered_evaluation",
+      "1337": "variance_reporting_and_robustness_verification",
+      "2024": "variance_reporting_and_robustness_verification"
+    },
+    "isolation_enforcement": "INDEPENDENT_RNG_MODEL_OPTIMIZER_STATE"
+  },
+  "parent_module_freeze_integrity": {
+    "module1_frozen_json": {
+      "path": "runs/module1_v2/MODULE1_FROZEN.json",
+      "expected_sha256": "4666370e83408c734d19582d99e0e13f76bb44c60c1bea376843637d4fcf0e76",
+      "actual_sha256": "4666370e83408c734d19582d99e0e13f76bb44c60c1bea376843637d4fcf0e76",
+      "status": "VERIFIED_MATCH"
+    },
+    "module1_manifest": {
+      "path": "runs/module1_v2/splits/split_manifest.csv",
+      "expected_sha256": "1dcb3ca0c4c5ce9df64a2ea604439ffa717a4da7a65eaf7c13804be91157c8fa",
+      "actual_sha256": "1dcb3ca0c4c5ce9df64a2ea604439ffa717a4da7a65eaf7c13804be91157c8fa",
+      "status": "VERIFIED_MATCH"
+    },
+    "module2_frozen_json": {
+      "path": "runs/module2_v1/MODULE2_FROZEN.json",
+      "expected_sha256": "b267ad3a95f6ac14a2f8b13095444b979d82eadee8fdb01bd492f137034fd5a6",
+      "actual_sha256": "b267ad3a95f6ac14a2f8b13095444b979d82eadee8fdb01bd492f137034fd5a6",
+      "status": "VERIFIED_MATCH"
+    },
+    "module3_frozen_json": {
+      "path": "runs/module3_v1/MODULE3_FROZEN.json",
+      "expected_sha256": "dfc90481b200f4b229d74dd761f6e0a42174f4a94c280967a04c4207a13ade79",
+      "actual_sha256": "dfc90481b200f4b229d74dd761f6e0a42174f4a94c280967a04c4207a13ade79",
+      "status": "VERIFIED_MATCH"
+    },
+    "module4_manifest": {
+      "path": "runs/module4_v3/splits/split_manifest.csv",
+      "expected_sha256": "b2547e9c7457a8c21267dd53f141a7b1155f7d49fa4374badb3f09c30c431253",
+      "actual_sha256": "b2547e9c7457a8c21267dd53f141a7b1155f7d49fa4374badb3f09c30c431253",
+      "status": "VERIFIED_MATCH"
+    }
+  },
+  "perception_backbone": {
+    "model_name": "FrozenECGFM",
+    "architecture": "wav2vec2_cmsc",
+    "checkpoint_path": "checkpoints/ecg_fm/mimic_iv_ecg_physionet_pretrained.pt",
+    "checkpoint_sha256": "4d0142bcb485eb9f0c7845e0c19ff3463f6ae9d0e458eab69136efe90ceb9b7e",
+    "frozen_parameters": 90883072,
+    "trainable_parameters": 0,
+    "requires_grad": false,
+    "output_dimension": 768
+  },
+  "model_architecture": {
+    "model_class": "ControlReasoningTransformer",
+    "trainable_parameters": 1830657,
+    "d_model": 256,
+    "d_ecg": 768,
+    "nhead": 4,
+    "num_layers": 2,
+    "dim_feedforward": 512,
+    "dropout": 0.1,
+    "activation": "gelu",
+    "num_candidates": 8,
+    "ckp_tokens_allowed": 0,
+    "loss_function": "MaskedBCEWithLogitsLoss(reduction='none', normalized_by_observed_targets)"
+  },
+  "candidate_disease_space": {
+    "candidate_count": 8,
+    "acronyms": [
+      "NORM",
+      "AFIB",
+      "RBBB",
+      "LBBB",
+      "SBRAD",
+      "STACH",
+      "1AVB",
+      "MI"
+    ],
+    "modality": "multi_hot_multi_label",
+    "unobserved_label_handling": "EXPLICIT_BINARY_OBSERVATION_MASK"
+  },
+  "lead_configurations": {
+    "count": 7,
+    "configurations": [
+      "12-lead",
+      "10-lead",
+      "8-lead",
+      "6-lead",
+      "4-lead",
+      "2-lead",
+      "1-lead"
+    ],
+    "reference_file": "configs/lead_configurations.json",
+    "evaluation_regime": "SEPARATE_EVALUATION_ACROSS_7_LEVELS"
+  },
+  "workload_and_split_accounting": {
+    "manifest_source": "runs/module4_v3/splits/split_manifest.csv",
+    "total_canonical_records": 36888,
+    "splits": {
+      "train": {
+        "records": 25825,
+        "unique_patients": 23818,
+        "views_per_record": 7,
+        "total_examples_per_epoch": 180775
+      },
+      "validation": {
+        "records": 3688,
+        "unique_patients": 3394,
+        "evaluations_per_configuration": 3688,
+        "total_evaluations_across_7_configurations": 25816
+      },
+      "test": {
+        "records": 7375,
+        "unique_patients": 6746,
+        "status": "QUARANTINED_ZERO_TOUCH",
+        "labels_redacted": true
+      }
+    },
+    "source_cohorts": {
+      "PTB-XL": 21797,
+      "Chapman-Shaoxing": 10142,
+      "MIMIC-IV-ECG": 4949
+    },
+    "multi_configuration_policy": "CARTESIAN_ALL_CONFIGURATIONS",
+    "class_or_dataset_balancing": "NONE_AUTHORIZED"
+  },
+  "checkpoints_by_seed": {
+    "42": {
+      "seed": 42,
+      "role": "primary",
+      "best_checkpoint_path": "runs\\module4_v3\\checkpoints\\control_reasoning_best_seed42.pt",
+      "best_checkpoint_sha256": "2920c76884e4a432b69326f1d943cb4495e6e55305f508fe3acab3d9e9067d93",
+      "final_checkpoint_path": "runs\\module4_v3\\checkpoints\\control_reasoning_final_seed42.pt",
+      "final_checkpoint_sha256": "bd66e57bbd44d7f88c4465eebef21c6264ff2b1a0b5932652282a211c7c72dd9",
+      "best_epoch": 3,
+      "best_val_loss": 0.15925,
+      "temperatures": [
+        1.1882,
+        1.2602,
+        1.1437,
+        1.082,
+        1.0944,
+        1.1085,
+        1.1647,
+        1.1284
+      ],
+      "calibration_metrics": {
+        "candidate_acronyms": [
+          "NORM",
+          "AFIB",
+          "RBBB",
+          "LBBB",
+          "SBRAD",
+          "STACH",
+          "1AVB",
+          "MI"
+        ],
+        "temperatures": [
+          1.1882,
+          1.2602,
+          1.1437,
+          1.082,
+          1.0944,
+          1.1085,
+          1.1647,
+          1.1284
+        ],
+        "mean_temperature": 1.1463,
+        "pre_calibration": {
+          "mean_nll": 0.15769,
+          "mean_brier": 0.04741,
+          "mean_ece": 0.01498,
+          "per_class_nll": {
+            "NORM": 0.33996,
+            "AFIB": 0.11988,
+            "RBBB": 0.09045,
+            "LBBB": 0.05445,
+            "SBRAD": 0.13661,
+            "STACH": 0.0496,
+            "1AVB": 0.10599,
+            "MI": 0.36461
+          },
+          "per_class_brier": {
+            "NORM": 0.10675,
+            "AFIB": 0.03543,
+            "RBBB": 0.02225,
+            "LBBB": 0.01415,
+            "SBRAD": 0.04108,
+            "STACH": 0.01434,
+            "1AVB": 0.03118,
+            "MI": 0.11406
+          },
+          "per_class_ece": {
+            "NORM": 0.02157,
+            "AFIB": 0.01502,
+            "RBBB": 0.00779,
+            "LBBB": 0.00555,
+            "SBRAD": 0.02245,
+            "STACH": 0.00503,
+            "1AVB": 0.00971,
+            "MI": 0.0327
+          }
+        },
+        "post_calibration": {
+          "mean_nll": 0.15586,
+          "mean_brier": 0.04713,
+          "mean_ece": 0.01043,
+          "per_class_nll": {
+            "NORM": 0.33612,
+            "AFIB": 0.11573,
+            "RBBB": 0.08879,
+            "LBBB": 0.05409,
+            "SBRAD": 0.13605,
+            "STACH": 0.04914,
+            "1AVB": 0.10447,
+            "MI": 0.36246
+          },
+          "per_class_brier": {
+            "NORM": 0.1062,
+            "AFIB": 0.03464,
+            "RBBB": 0.02212,
+            "LBBB": 0.0141,
+            "SBRAD": 0.04107,
+            "STACH": 0.01421,
+            "1AVB": 0.03103,
+            "MI": 0.11363
+          },
+          "per_class_ece": {
+            "NORM": 0.00589,
+            "AFIB": 0.007,
+            "RBBB": 0.00317,
+            "LBBB": 0.0042,
+            "SBRAD": 0.02289,
+            "STACH": 0.0025,
+            "1AVB": 0.00523,
+            "MI": 0.03253
+          }
+        }
+      }
+    },
+    "1337": {
+      "seed": 1337,
+      "role": "variance",
+      "best_checkpoint_path": "runs\\module4_v3\\checkpoints\\control_reasoning_best_seed1337.pt",
+      "best_checkpoint_sha256": "d38088e1af53f5068ed98e77801aa725c724df2b96032be9bcc65c31072a97c2",
+      "final_checkpoint_path": "runs\\module4_v3\\checkpoints\\control_reasoning_final_seed1337.pt",
+      "final_checkpoint_sha256": "726d84ad4e4008e1a0b908e2db36ce51485ad224c02ffcab50e8230d336d5885",
+      "best_epoch": 3,
+      "best_val_loss": 0.15669,
+      "temperatures": [
+        1.1734,
+        1.1339,
+        1.1224,
+        1.0328,
+        1.1979,
+        1.0692,
+        1.1391,
+        1.1771
+      ],
+      "calibration_metrics": {
+        "candidate_acronyms": [
+          "NORM",
+          "AFIB",
+          "RBBB",
+          "LBBB",
+          "SBRAD",
+          "STACH",
+          "1AVB",
+          "MI"
+        ],
+        "temperatures": [
+          1.1734,
+          1.1339,
+          1.1224,
+          1.0328,
+          1.1979,
+          1.0692,
+          1.1391,
+          1.1771
+        ],
+        "mean_temperature": 1.1307,
+        "pre_calibration": {
+          "mean_nll": 0.1551,
+          "mean_brier": 0.04637,
+          "mean_ece": 0.01193,
+          "per_class_nll": {
+            "NORM": 0.3411,
+            "AFIB": 0.11392,
+            "RBBB": 0.08904,
+            "LBBB": 0.05241,
+            "SBRAD": 0.13133,
+            "STACH": 0.04458,
+            "1AVB": 0.10886,
+            "MI": 0.35953
+          },
+          "per_class_brier": {
+            "NORM": 0.1077,
+            "AFIB": 0.03371,
+            "RBBB": 0.02231,
+            "LBBB": 0.01342,
+            "SBRAD": 0.03868,
+            "STACH": 0.01256,
+            "1AVB": 0.03223,
+            "MI": 0.11039
+          },
+          "per_class_ece": {
+            "NORM": 0.02488,
+            "AFIB": 0.00915,
+            "RBBB": 0.00881,
+            "LBBB": 0.00317,
+            "SBRAD": 0.00841,
+            "STACH": 0.00381,
+            "1AVB": 0.01254,
+            "MI": 0.02469
+          }
+        },
+        "post_calibration": {
+          "mean_nll": 0.15346,
+          "mean_brier": 0.04618,
+          "mean_ece": 0.00764,
+          "per_class_nll": {
+            "NORM": 0.33799,
+            "AFIB": 0.11278,
+            "RBBB": 0.08787,
+            "LBBB": 0.05235,
+            "SBRAD": 0.12905,
+            "STACH": 0.04439,
+            "1AVB": 0.10777,
+            "MI": 0.3555
+          },
+          "per_class_brier": {
+            "NORM": 0.10731,
+            "AFIB": 0.03349,
+            "RBBB": 0.02221,
+            "LBBB": 0.0134,
+            "SBRAD": 0.03854,
+            "STACH": 0.01252,
+            "1AVB": 0.03214,
+            "MI": 0.10985
+          },
+          "per_class_ece": {
+            "NORM": 0.01811,
+            "AFIB": 0.00463,
+            "RBBB": 0.00644,
+            "LBBB": 0.00227,
+            "SBRAD": 0.00372,
+            "STACH": 0.00319,
+            "1AVB": 0.00983,
+            "MI": 0.01294
+          }
+        }
+      }
+    },
+    "2024": {
+      "seed": 2024,
+      "role": "variance",
+      "best_checkpoint_path": "runs\\module4_v3\\checkpoints\\control_reasoning_best_seed2024.pt",
+      "best_checkpoint_sha256": "fd0620125742bacd16947948ceb2f8ef1744e11db32e54b15da556b0a0ff3f6d",
+      "final_checkpoint_path": "runs\\module4_v3\\checkpoints\\control_reasoning_final_seed2024.pt",
+      "final_checkpoint_sha256": "198641594e6fdbfc5eb6ed291b9c7552ed3d453778bbe7ec069c5358f721678e",
+      "best_epoch": 3,
+      "best_val_loss": 0.1595,
+      "temperatures": [
+        1.1525,
+        1.2102,
+        1.0324,
+        0.9315,
+        1.1053,
+        1.154,
+        1.1232,
+        1.0766
+      ],
+      "calibration_metrics": {
+        "candidate_acronyms": [
+          "NORM",
+          "AFIB",
+          "RBBB",
+          "LBBB",
+          "SBRAD",
+          "STACH",
+          "1AVB",
+          "MI"
+        ],
+        "temperatures": [
+          1.1525,
+          1.2102,
+          1.0324,
+          0.9315,
+          1.1053,
+          1.154,
+          1.1232,
+          1.0766
+        ],
+        "mean_temperature": 1.0982,
+        "pre_calibration": {
+          "mean_nll": 0.15793,
+          "mean_brier": 0.04745,
+          "mean_ece": 0.01373,
+          "per_class_nll": {
+            "NORM": 0.34364,
+            "AFIB": 0.11827,
+            "RBBB": 0.091,
+            "LBBB": 0.05382,
+            "SBRAD": 0.12952,
+            "STACH": 0.0553,
+            "1AVB": 0.11424,
+            "MI": 0.35763
+          },
+          "per_class_brier": {
+            "NORM": 0.10847,
+            "AFIB": 0.03443,
+            "RBBB": 0.02245,
+            "LBBB": 0.01392,
+            "SBRAD": 0.0383,
+            "STACH": 0.01621,
+            "1AVB": 0.03471,
+            "MI": 0.11111
+          },
+          "per_class_ece": {
+            "NORM": 0.02818,
+            "AFIB": 0.011,
+            "RBBB": 0.00743,
+            "LBBB": 0.0035,
+            "SBRAD": 0.01485,
+            "STACH": 0.01153,
+            "1AVB": 0.01892,
+            "MI": 0.01445
+          }
+        },
+        "post_calibration": {
+          "mean_nll": 0.15682,
+          "mean_brier": 0.04731,
+          "mean_ece": 0.0118,
+          "per_class_nll": {
+            "NORM": 0.34119,
+            "AFIB": 0.11558,
+            "RBBB": 0.09091,
+            "LBBB": 0.05353,
+            "SBRAD": 0.12885,
+            "STACH": 0.05425,
+            "1AVB": 0.11341,
+            "MI": 0.35686
+          },
+          "per_class_brier": {
+            "NORM": 0.10821,
+            "AFIB": 0.03406,
+            "RBBB": 0.02248,
+            "LBBB": 0.01391,
+            "SBRAD": 0.03834,
+            "STACH": 0.01587,
+            "1AVB": 0.03456,
+            "MI": 0.11107
+          },
+          "per_class_ece": {
+            "NORM": 0.01936,
+            "AFIB": 0.00456,
+            "RBBB": 0.00875,
+            "LBBB": 0.00282,
+            "SBRAD": 0.01323,
+            "STACH": 0.0114,
+            "1AVB": 0.01861,
+            "MI": 0.01568
+          }
+        }
+      }
+    }
+  },
+  "validation_metrics_summary": {
+    "primary_seed": 42,
+    "metrics": {
+      "val_loss": 0.15925,
+      "macro_auroc": 0.9452,
+      "macro_f1": 0.6947,
+      "confidence_intervals": {
+        "macro_auroc_95ci": [
+          0.9434,
+          0.9471
+        ],
+        "macro_f1_95ci": [
+          0.6884,
+          0.7005
+        ],
+        "n_bootstraps": 200
+      },
+      "underpowered_warnings": []
+    },
+    "multi_seed_comparison": {
+      "42": {
+        "val_loss": 0.15925,
+        "macro_auroc": 0.9452,
+        "macro_f1": 0.6947
+      },
+      "1337": {
+        "val_loss": 0.15669,
+        "macro_auroc": 0.9454,
+        "macro_f1": 0.6989
+      },
+      "2024": {
+        "val_loss": 0.1595,
+        "macro_auroc": 0.9441,
+        "macro_f1": 0.701
+      }
+    }
+  },
+  "per_record_validation_outputs": {
+    "42": "runs\\module4_v3\\metrics\\validation_predictions_seed42.csv",
+    "1337": "runs\\module4_v3\\metrics\\validation_predictions_seed1337.csv",
+    "2024": "runs\\module4_v3\\metrics\\validation_predictions_seed2024.csv"
+  },
+  "known_limitations_preserved": [
+    "Chapman-Shaoxing native patient IDs were unavailable; record-ID fallback was used. 13 identical signal recordings exist (9 cross-split pairs, 4 within-train).",
+    "Zero test contamination enforced via fail-closed quarantine: test labels are 100% NaN in split_manifest.csv and guarded by PermissionError in MultiCohortPartitionManager.",
+    "Module 3 foundation model representation drift is non-monotonic due to spatial lead orientation (4-lead retains V1 while 6-lead eliminates all precordial leads).",
+    "The seven lead configurations evaluate progressive channel deprivation and do not represent all possible commercial ECG device montages."
+  ]
+}

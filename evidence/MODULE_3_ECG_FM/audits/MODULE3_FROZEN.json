@@ -1,0 +1,161 @@
+{
+  "module": "Module 3 \u2014 Foundation Model Representation Extraction & Drift Audit",
+  "project_title": "Reasoning Failure Boundaries in ECG Foundation Models Under Progressive Physiological Information Loss",
+  "status": "FROZEN_VALIDATED",
+  "frozen_at_utc": "2026-10-13T05:31:39.289385+00:00",
+  "reference_paper": {
+    "title": "ECG-FM: An Open Electrocardiogram Foundation Model",
+    "authors": [
+      "K. McKeen",
+      "S. Masood",
+      "A. Toma",
+      "B. Rubin",
+      "B. Wang"
+    ],
+    "journal": "JAMIA Open, vol. 8, no. 5, Art. ooaf122, 2025",
+    "doi": "https://doi.org/10.1093/jamiaopen/ooaf122",
+    "official_github": "https://github.com/bowang-lab/ECG-FM/",
+    "official_huggingface": "https://huggingface.co/wanglab/ecg-fm"
+  },
+  "foundation_model_checkpoint": {
+    "candidate_path": "checkpoints/ecg_fm/mimic_iv_ecg_physionet_pretrained.pt",
+    "absolute_path": "E:/ECG/checkpoints/ecg_fm/mimic_iv_ecg_physionet_pretrained.pt",
+    "file_size_bytes": 1090825421,
+    "sha256": "4d0142bcb485eb9f0c7845e0c19ff3463f6ae9d0e458eab69136efe90ceb9b7e",
+    "huggingface_git_lfs_pointer_oid": "4d0142bcb485eb9f0c7845e0c19ff3463f6ae9d0e458eab69136efe90ceb9b7e",
+    "provenance_verdict": "CONFIRMED_OFFICIAL_PRETRAINED_CHECKPOINT",
+    "checkpoint_type": "pretrained_foundation_model"
+  },
+  "model_architecture": {
+    "model_class": "Wav2Vec2CMSCModel",
+    "fairseq_signals_arch": "wav2vec2_cmsc",
+    "total_parameters": 90883072,
+    "trainable_parameters": 0,
+    "frozen_parameters": 90883072,
+    "conv_feature_extractor": {
+      "blocks": 4,
+      "conv_channels": 256,
+      "kernel_sizes": [
+        2,
+        2,
+        2,
+        2
+      ],
+      "strides": [
+        2,
+        2,
+        2,
+        2
+      ],
+      "in_channels": 12
+    },
+    "transformer_encoder": {
+      "layers": 12,
+      "hidden_dimension": 768,
+      "attention_heads": 12,
+      "feed_forward_dimension": 3072
+    },
+    "strict_loading_status": "PASS (0 missing keys, 0 unexpected keys)"
+  },
+  "representation_protocol": {
+    "input_contract": {
+      "shape": "(B, 12, 1000)",
+      "dtype": "float32",
+      "units": "millivolts (mV)",
+      "sampling_rate_hz": 100.0,
+      "duration_seconds": 10.0,
+      "canonical_leads": [
+        "I",
+        "II",
+        "III",
+        "aVR",
+        "aVL",
+        "aVF",
+        "V1",
+        "V2",
+        "V3",
+        "V4",
+        "V5",
+        "V6"
+      ]
+    },
+    "extraction_layer": "contextualized_transformer_encoder (features_only=True)",
+    "temporal_pooling": "mean_pooling_over_time",
+    "output_dimension": 768,
+    "output_dtype": "float32",
+    "torch_eval_mode": true,
+    "requires_grad": false,
+    "deterministic_inference": true
+  },
+  "workload_accounting": {
+    "total_expected": 258216,
+    "total_generated": 258216,
+    "total_validated": 258216,
+    "total_failed": 0,
+    "total_excluded": 0,
+    "eligible_records_per_variant": 36888,
+    "split_distribution_per_variant": {
+      "train": 25825,
+      "validation": 3688,
+      "test": 7375
+    },
+    "variants": [
+      "12-lead",
+      "10-lead",
+      "8-lead",
+      "6-lead",
+      "4-lead",
+      "2-lead",
+      "1-lead"
+    ]
+  },
+  "representation_drift_summary": {
+    "reference_variant": "12-lead",
+    "metrics_computed": [
+      "cosine_similarity",
+      "cosine_distance",
+      "euclidean_l2_distance",
+      "normalized_l2_distance",
+      "reference_norm",
+      "variant_norm",
+      "abs_norm_change",
+      "rel_norm_change",
+      "pairwise_7x7_similarity_matrix"
+    ],
+    "pooled_cosine_similarity_means": {
+      "12-lead": 1.0,
+      "10-lead": 0.998051,
+      "8-lead": 0.997095,
+      "6-lead": 0.877548,
+      "4-lead": 0.904078,
+      "2-lead": 0.876178,
+      "1-lead": 0.814373
+    }
+  },
+  "audit_and_verification": {
+    "independent_audit_verdict": "PASS",
+    "physical_files_audited": 258216,
+    "physical_file_size_uniformity": "3200 bytes (100.0% uniform)",
+    "finiteness_rate": "100.0% finite (0 NaN, 0 Inf)",
+    "zero_or_negative_norms": 0,
+    "failure_log_path": "runs/module3_v1/reports/module3_failure_records.csv",
+    "failure_log_count": 0
+  },
+  "known_limitations_preserved": [
+    "Chapman-Shaoxing native patient IDs were unavailable; record-ID fallback was used. 13 identical signal pairs exist (9 cross-split, 4 within-train).",
+    "MIMIC-IV-ECG diagnostic labels are derived from GE Marquette 12SL automated interpretations.",
+    "Representation drift quantifies latent embedding distance under channel removal; it does not by itself prove clinical reasoning failure or diagnostic misclassification.",
+    "The seven lead configurations are experimental progressive removal configurations, not exhaustive commercial montages."
+  ],
+  "immutable_input_references": {
+    "module1_frozen_json": "runs/module1_v2/MODULE1_FROZEN.json",
+    "module1_manifest_sha256": "47bb4547d8a39f4a5ec1697f59dfe0a104b79811642c39115d73579fed09301c",
+    "module2_frozen_json": "runs/module2_v1/MODULE2_FROZEN.json",
+    "module2_manifest_sha256": "c7c2190198be54fc0ac01e9ceac96d3eb88333c93f74c9fa54bb5767eee47298"
+  },
+  "checksum_manifest": {
+    "path": "runs/module3_v1/checksums_module3_manifest.sha256",
+    "sha256": "dae6b41e756f8bd359f169501604ed403e981c193f5f1a2b4fd7dd38878a23e6",
+    "total_artifacts_hashed": 85
+  }
+}

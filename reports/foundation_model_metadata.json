@@ -1,0 +1,47 @@
+{
+  "foundation_model_name": "ECG-FM",
+  "checkpoint_path": "checkpoints/ecg_fm/mimic_iv_ecg_physionet_pretrained.pt",
+  "source_repository": "BioMedIA / ECG-FM (PhysioNet MIMIC-IV-ECG Pretrained)",
+  "architecture_details": {
+    "model_family": "wav2vec2_cmsc",
+    "encoder_layers": 12,
+    "encoder_attention_heads": 12,
+    "encoder_embed_dim": 768,
+    "encoder_ffn_embed_dim": 3072,
+    "conv_feature_layers": "[(256, 2, 2)] * 4",
+    "conv_feature_downsampling_factor": 16,
+    "total_parameters": 90883072,
+    "trainable_parameters": 0,
+    "native_representation_dimension": 768
+  },
+  "freeze_status": {
+    "is_frozen": true,
+    "requires_grad": false,
+    "trainable_parameters_count": 0,
+    "trainable_adapter_count": 0
+  },
+  "input_contract": {
+    "input_tensor_shape": [12, 1000],
+    "sampling_rate_hz": 100.0,
+    "duration_seconds": 10.0,
+    "channel_count": 12,
+    "lead_ordering": "Canonical Cabrera Sequence (I, II, III, aVR, aVL, aVF, V1, V2, V3, V4, V5, V6)",
+    "voltage_units": "Physical millivolts (mV)",
+    "input_formatting": "src.models.ecg_fm_primary.FrozenECGFM.format_input (deterministic shape enforcement and tensor broadcasting, NOT a trainable neural network)"
+  },
+  "output_contract": {
+    "z_ecg_representation_dimension": 768,
+    "derivation_source": "Output of the 12th Transformer encoder block (features_only=True)",
+    "sequence_shape_before_pooling": ["batch_size", 62, 768],
+    "pooling_method": "Temporal mean-pooling across temporal dimension dim=1",
+    "pooling_location": "src.models.ecg_fm_primary.FrozenECGFM.forward",
+    "projection_head": "NONE (Native pooled representation is used directly as Z_ECG without projection or bottleneck)"
+  },
+  "pretraining_methodology": {
+    "pretraining_task": "wav2vec2_with_cmsc",
+    "masking_exposure_during_pretraining": true,
+    "perturbation_mode": ["random_leads_masking"],
+    "mask_leads_prob": 0.5,
+    "methodological_implication": "ECG-FM was exposed to random lead masking during self-supervised pretraining. Therefore, high representation stability across lead levels is expected; the present research evaluates whether downstream evidence-grounded clinical reasoning remains reliable as physical lead observability decreases."
+  }
+}

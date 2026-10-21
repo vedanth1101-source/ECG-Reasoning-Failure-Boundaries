@@ -1,0 +1,73 @@
+{
+  "contract_name": "Module 4 Reasoning Input Contract",
+  "version": "1.0",
+  "status": "FROZEN_PRE_MODULE_4",
+  "upstream_dependencies": ["Module 1 Preprocessing", "Module 2 Lead Masking", "Module 3 Frozen ECG-FM & Observations"],
+  "foundation_model_immutability": {
+    "model_name": "ECG-FM",
+    "checkpoint": "checkpoints/ecg_fm/mimic_iv_ecg_physionet_pretrained.pt",
+    "parameters_frozen": true,
+    "module_4_gradient_updates_to_ecg_fm": "STRICTLY PROHIBITED (Zero gradient updates permitted to ECG-FM)"
+  },
+  "input_payload_specification": {
+    "1_continuous_latent_representation": {
+      "name": "Z_ECG",
+      "tensor_type": "torch.FloatTensor or np.ndarray",
+      "shape": ["batch_size", 768],
+      "source": "src.models.ecg_fm_primary.FrozenECGFM(masked_ecg)",
+      "description": "Standardized continuous ECG representation pooled directly from the 12th Transformer encoder block of frozen ECG-FM."
+    },
+    "2_structured_clinical_observations": {
+      "name": "O_l",
+      "type": "dict / JSON object",
+      "schema_reference": "src.observations.clinical_extractor.ClinicalObservation.to_dict",
+      "fields": [
+        "rhythm (str)",
+        "heart_rate (int or null)",
+        "pr_interval_ms (int or null)",
+        "qrs_duration_ms (int or null)",
+        "st_elevation (dict: present, leads, amplitude_mm)",
+        "st_depression (dict: present, leads, amplitude_mm)",
+        "t_wave_inversion (dict: present, leads)"
+      ],
+      "observability_invariant": "Masked leads are STRICTLY EXCLUDED from reported leads in st_elevation, st_depression, and t_wave_inversion."
+    },
+    "3_lead_availability_mask": {
+      "name": "lead_avail_mask",
+      "tensor_type": "torch.BoolTensor or np.ndarray (uint8)",
+      "shape": [12],
+      "lead_order": ["I", "II", "III", "aVR", "aVL", "aVF", "V1", "V2", "V3", "V4", "V5", "V6"],
+      "values": "1 for available, 0 for masked"
+    },
+    "4_lead_provenance_metadata": {
+      "name": "lead_provenance",
+      "type": "dict",
+      "source": "src.degradation.lead_masking.LEAD_PROVENANCE",
+      "lead_states": [
+        "observed_measured",
+        "observed_derived",
+        "unavailable_derived",
+        "masked_lead"
+      ],
+      "evidence_grounding_rule": "Derived leads (III, aVR, aVL, aVF) cannot be counted as independent physiological evidence if parent leads (I, II) are masked or already counted."
+    },
+    "5_candidate_disease_space": {
+      "name": "candidate_diseases",
+      "count": 8,
+      "source": "configs/benchmark_candidates.json",
+      "invariance_rule": "Identical 8 candidate classes evaluated in both Control Path and CKP Path."
+    },
+    "6_evidence_schema": {
+      "name": "evidence_schema",
+      "source": "reports/evidence_observability_config.json",
+      "states": ["SUPPORTED", "CONTRADICTED", "UNAVAILABLE"],
+      "rule": "Missing evidence must be marked UNAVAILABLE, never merged with CONTRADICTED or termed hallucination."
+    },
+    "7_clinical_knowledge_pathway": {
+      "name": "ckp_evidence",
+      "applicable_path": "EXPERIMENTAL CKP PATH ONLY",
+      "control_path_presence": "NONE (Control path reasoning operates strictly on Z_ECG + O_l without external knowledge graph embeddings)",
+      "format": "Relational entity-relation triples grounded to SNOMED-CT / ICD-10 diagnostic criteria"
+    }
+  }
+}

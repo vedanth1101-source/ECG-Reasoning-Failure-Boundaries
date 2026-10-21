@@ -1,0 +1,305 @@
+{
+  "schema_version": "2.0",
+  "diagnostic_type": "MODULE_4_AUTHORITATIVE_SPLIT_AUDIT",
+  "split_script_name": "scripts/audit_and_generate_module4_splits.py",
+  "split_script_sha256": "ead9387426270034cbcf9ad2ce2c88c563d904d427fb86ed5979b886e3c42f66",
+  "generation_timestamp_utc": "2026-10-14 07:18:00 UTC",
+  "random_seed": 42,
+  "authoritative_manifest_path": "runs/module4_v3/splits/split_manifest.csv",
+  "manifest_sha256": "b2547e9c7457a8c21267dd53f141a7b1155f7d49fa4374badb3f09c30c431253",
+  "total_eligible_records": 36888,
+  "actual_split_counts": {
+    "train": 25825,
+    "validation": 3688,
+    "test": 7375
+  },
+  "split_percentages": {
+    "train": 70.0092,
+    "validation": 9.9978,
+    "test": 19.993
+  },
+  "per_dataset_counts": {
+    "PTB-XL": {
+      "total": 21797,
+      "train": 15260,
+      "validation": 2179,
+      "test": 4358,
+      "unique_patients": 18867
+    },
+    "Chapman-Shaoxing": {
+      "total": 10142,
+      "train": 7100,
+      "validation": 1014,
+      "test": 2028,
+      "unique_patients": 10142
+    },
+    "MIMIC-IV-ECG": {
+      "total": 4949,
+      "train": 3465,
+      "validation": 495,
+      "test": 989,
+      "unique_patients": 4949
+    }
+  },
+  "per_label_aggregate_diagnostics": {
+    "train": {
+      "NORM": {
+        "positive_count": 7889,
+        "prevalence_pct": 30.55
+      },
+      "AFIB": {
+        "positive_count": 2716,
+        "prevalence_pct": 10.52
+      },
+      "RBBB": {
+        "positive_count": 1177,
+        "prevalence_pct": 4.56
+      },
+      "LBBB": {
+        "positive_count": 963,
+        "prevalence_pct": 3.73
+      },
+      "SBRAD": {
+        "positive_count": 3701,
+        "prevalence_pct": 14.33
+      },
+      "STACH": {
+        "positive_count": 2156,
+        "prevalence_pct": 8.35
+      },
+      "1AVB": {
+        "positive_count": 995,
+        "prevalence_pct": 3.85
+      },
+      "MI": {
+        "positive_count": 4097,
+        "prevalence_pct": 15.86
+      }
+    },
+    "validation": {
+      "NORM": {
+        "positive_count": 1128,
+        "prevalence_pct": 30.59
+      },
+      "AFIB": {
+        "positive_count": 389,
+        "prevalence_pct": 10.55
+      },
+      "RBBB": {
+        "positive_count": 167,
+        "prevalence_pct": 4.53
+      },
+      "LBBB": {
+        "positive_count": 135,
+        "prevalence_pct": 3.66
+      },
+      "SBRAD": {
+        "positive_count": 528,
+        "prevalence_pct": 14.32
+      },
+      "STACH": {
+        "positive_count": 304,
+        "prevalence_pct": 8.24
+      },
+      "1AVB": {
+        "positive_count": 141,
+        "prevalence_pct": 3.82
+      },
+      "MI": {
+        "positive_count": 584,
+        "prevalence_pct": 15.84
+      }
+    },
+    "test": {
+      "NORM": {
+        "positive_count": 2225,
+        "prevalence_pct": 30.17
+      },
+      "AFIB": {
+        "positive_count": 788,
+        "prevalence_pct": 10.68
+      },
+      "RBBB": {
+        "positive_count": 336,
+        "prevalence_pct": 4.56
+      },
+      "LBBB": {
+        "positive_count": 274,
+        "prevalence_pct": 3.72
+      },
+      "SBRAD": {
+        "positive_count": 1056,
+        "prevalence_pct": 14.32
+      },
+      "STACH": {
+        "positive_count": 622,
+        "prevalence_pct": 8.43
+      },
+      "1AVB": {
+        "positive_count": 286,
+        "prevalence_pct": 3.88
+      },
+      "MI": {
+        "positive_count": 1196,
+        "prevalence_pct": 16.22
+      }
+    }
+  },
+  "patient_disjointness_audit": {
+    "train_unique_patients": 23818,
+    "val_unique_patients": 3394,
+    "test_unique_patients": 6746,
+    "train_val_overlap": 0,
+    "train_test_overlap": 0,
+    "val_test_overlap": 0,
+    "zero_patient_leakage_verified": true
+  },
+  "duplicate_record_audit": {
+    "duplicate_record_ids": 0,
+    "record_uniqueness_rate": 1.0
+  },
+  "seven_variant_consistency": {
+    "12-lead": {
+      "total_records": 36888,
+      "train_records": 25825,
+      "validation_records": 3688,
+      "test_records": 7375,
+      "m2_records_match_canonical": true,
+      "m3_records_match_canonical": true,
+      "split_assignment_discrepancies": 0,
+      "missing_records": 0,
+      "fabricated_records": 0
+    },
+    "10-lead": {
+      "total_records": 36888,
+      "train_records": 25825,
+      "validation_records": 3688,
+      "test_records": 7375,
+      "m2_records_match_canonical": true,
+      "m3_records_match_canonical": true,
+      "split_assignment_discrepancies": 0,
+      "missing_records": 0,
+      "fabricated_records": 0
+    },
+    "8-lead": {
+      "total_records": 36888,
+      "train_records": 25825,
+      "validation_records": 3688,
+      "test_records": 7375,
+      "m2_records_match_canonical": true,
+      "m3_records_match_canonical": true,
+      "split_assignment_discrepancies": 0,
+      "missing_records": 0,
+      "fabricated_records": 0
+    },
+    "6-lead": {
+      "total_records": 36888,
+      "train_records": 25825,
+      "validation_records": 3688,
+      "test_records": 7375,
+      "m2_records_match_canonical": true,
+      "m3_records_match_canonical": true,
+      "split_assignment_discrepancies": 0,
+      "missing_records": 0,
+      "fabricated_records": 0
+    },
+    "4-lead": {
+      "total_records": 36888,
+      "train_records": 25825,
+      "validation_records": 3688,
+      "test_records": 7375,
+      "m2_records_match_canonical": true,
+      "m3_records_match_canonical": true,
+      "split_assignment_discrepancies": 0,
+      "missing_records": 0,
+      "fabricated_records": 0
+    },
+    "2-lead": {
+      "total_records": 36888,
+      "train_records": 25825,
+      "validation_records": 3688,
+      "test_records": 7375,
+      "m2_records_match_canonical": true,
+      "m3_records_match_canonical": true,
+      "split_assignment_discrepancies": 0,
+      "missing_records": 0,
+      "fabricated_records": 0
+    },
+    "1-lead": {
+      "total_records": 36888,
+      "train_records": 25825,
+      "validation_records": 3688,
+      "test_records": 7375,
+      "m2_records_match_canonical": true,
+      "m3_records_match_canonical": true,
+      "split_assignment_discrepancies": 0,
+      "missing_records": 0,
+      "fabricated_records": 0
+    }
+  },
+  "test_set_quarantine": {
+    "individual_test_labels_in_manifest": "STRICTLY_REDACTED_NAN",
+    "test_split_programmatic_guards": "PermissionError on allow_test=False in MultiCohortPartitionManager",
+    "test_set_status": "QUARANTINED_UNTIL_STAGE_4"
+  },
+  "operational_decisions_verification": {
+    "G0.1_authoritative_data_binding": "VERIFIED (runs/module2_v1/ and runs/module3_v1/ bound; legacy data/latents deprecated)",
+    "G0.2_observation_extractor_architecture": "ASSERTED (Deterministic ClinicalObservationExtractor on active leads; unobserved leads masked UNAVAILABLE)",
+    "G0.3_test_quarantine_policy": "VERIFIED (Zero test access during Stage 1)",
+    "G0.5_multi_label_bce_loss": "VERIFIED (nn.BCEWithLogitsLoss over 8 independent logits)",
+    "G0.6_destination_artifacts": "VERIFIED (runs/module4_v3/ established as isolated target)"
+  },
+  "mimic_parser_audit_summary": {
+    "eligible_records": 4949,
+    "original_sampling_scheme": "625 records sampled per disease subset (5,000 total)",
+    "qc_exclusions": 51,
+    "machine_parser_source": "data/mimic/machine_measurements.csv report fields",
+    "under_powered_labels": {
+      "1AVB": {
+        "positive_count_in_eligible": 377,
+        "prevalence_pct": 7.62,
+        "unknown_masked_count": 1154,
+        "clinical_cause": "237 records contain 'borderline 1st degree av block' (PR ~195-205 ms) and AFib records lack P waves; strictly masked unknown under defensible clinical criteria."
+      },
+      "NORM": {
+        "positive_count_in_eligible": 521,
+        "prevalence_pct": 10.53,
+        "unknown_masked_count": 0,
+        "clinical_cause": "Requires explicit report phrase 'normal ecg' without co-occurring pathology. 'Sinus rhythm' alone never establishes normality."
+      },
+      "MI": {
+        "positive_count_in_eligible": 597,
+        "prevalence_pct": 12.06,
+        "unknown_masked_count": 1123,
+        "clinical_cause": "Equivocal statements ('possible inferior infarct', 'cannot rule out anterior infarct') strictly masked unknown; only definitive statements assigned MI=1."
+      }
+    },
+    "adequate_powered_labels": {
+      "AFIB": {
+        "positive_count": 619,
+        "prevalence_pct": 12.51
+      },
+      "RBBB": {
+        "positive_count": 693,
+        "prevalence_pct": 14.0
+      },
+      "LBBB": {
+        "positive_count": 630,
+        "prevalence_pct": 12.73
+      },
+      "SBRAD": {
+        "positive_count": 803,
+        "prevalence_pct": 16.23
+      },
+      "STACH": {
+        "positive_count": 709,
+        "prevalence_pct": 14.33
+      }
+    }
+  },
+  "patient_identity_limitations": {
+    "PTB-XL": "source_patient_id explicitly provided (18,867 unique patients across 21,797 records); zero leakage verified.",
+    "Chapman-Shaoxing": "No longitudinal patient identifier provided in source repository; each recording treated as independent subject (10,142 unique subjects); zero leakage across stratified splits.",
+    "MIMIC-IV-ECG": "subject_id provided; exactly 4,949 unique patients in eligible subset (1 recording per subject sampled); zero leakage verified."
+  }
+}

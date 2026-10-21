@@ -1,0 +1,5124 @@
+{
+  "12_lead": [
+    {
+      "record_id": "test_fold10_0000",
+      "path_type": "CONTROL_ECG_ONLY",
+      "top_hypothesis": {
+        "acronym": "NORM",
+        "disease_name": "Normal ECG",
+        "confidence": 0.9315
+      },
+      "posterior_probabilities": {
+        "NORM": 0.9315,
+        "AFIB": 0.0017,
+        "RBBB": 0.0215,
+        "LBBB": 0.0021,
+        "SBRAD": 0.0019,
+        "STACH": 0.002,
+        "1AVB": 0.0004,
+        "MI": 0.0458
+      },
+      "supporting_evidence": [
+        {
+          "token_id": "LEAD_OBS_V2",
+          "attention_weight": 0.0275,
+          "associated_leads": [
+            "V2"
+          ],
+          "is_observable_in_mask": true
+        },
+        {
+          "token_id": "LEAD_OBS_III",
+          "attention_weight": 0.0259,
+          "associated_leads": [
+            "III"
+          ],
+          "is_observable_in_mask": true
+        },
+        {
+          "token_id": "LEAD_OBS_V6",
+          "attention_weight": 0.025,
+          "associated_leads": [
+            "V6"
+          ],
+          "is_observable_in_mask": true
+        },
+        {
+          "token_id": "LEAD_OBS_V1",
+          "attention_weight": 0.0246,
+          "associated_leads": [
+            "V1"
+          ],
+          "is_observable_in_mask": true
+        }
+      ],
+      "contradicting_evidence": [],
+      "uncertainty": 0.0685,
+      "lead_observability": {
+        "active_lead_count": 12,
+        "active_leads": [
+          "I",
+          "II",
+          "III",
+          "aVR",
+          "aVL",
+          "aVF",
+          "V1",
+          "V2",
+          "V3",
+          "V4",
+          "V5",
+          "V6"
+        ],
+        "masked_leads": []
+      }
+    },
+    {
+      "record_id": "test_fold10_0001",
+      "path_type": "CONTROL_ECG_ONLY",
+      "top_hypothesis": {
+        "acronym": "NORM",
+        "disease_name": "Normal ECG",
+        "confidence": 0.8543
+      },
+      "posterior_probabilities": {
+        "NORM": 0.8543,
+        "AFIB": 0.0013,
+        "RBBB": 0.0296,
+        "LBBB": 0.002,
+        "SBRAD": 0.0011,
+        "STACH": 0.0021,
+        "1AVB": 0.0004,
+        "MI": 0.0894
+      },
+      "supporting_evidence": [
+        {
+          "token_id": "LEAD_OBS_V2",
+          "attention_weight": 0.0256,
+          "associated_leads": [
+            "V2"
+          ],
+          "is_observable_in_mask": true
+        },
+        {
+          "token_id": "LEAD_OBS_III",
+          "attention_weight": 0.0254,
+          "associated_leads": [
+            "III"
+          ],
+          "is_observable_in_mask": true
+        },
+        {
+          "token_id": "ECG_CONTINUOUS_FM",
+          "attention_weight": 0.025,
+          "associated_leads": [],
+          "is_observable_in_mask": true
+        },
+        {
+          "token_id": "LEAD_OBS_V6",
+          "attention_weight": 0.0242,
+          "associated_leads": [
+            "V6"
+          ],
+          "is_observable_in_mask": true
+        }
+      ],
+      "contradicting_evidence": [],
+      "uncertainty": 0.1457,
+      "lead_observability": {
+        "active_lead_count": 12,
+        "active_leads": [
+          "I",
+          "II",
+          "III",
+          "aVR",
+          "aVL",
+          "aVF",
+          "V1",
+          "V2",
+          "V3",
+          "V4",
+          "V5",
+          "V6"
+        ],
+        "masked_leads": []
+      }
+    },
+    {
+      "record_id": "test_fold10_0002",
+      "path_type": "CONTROL_ECG_ONLY",
+      "top_hypothesis": {
+        "acronym": "NORM",
+        "disease_name": "Normal ECG",
+        "confidence": 0.7975
+      },
+      "posterior_probabilities": {
+        "NORM": 0.7975,
+        "AFIB": 0.0018,
+        "RBBB": 0.0091,
+        "LBBB": 0.0026,
+        "SBRAD": 0.0011,
+        "STACH": 0.0021,
+        "1AVB": 0.0079,
+        "MI": 0.2023
+      },
+      "supporting_evidence": [
+        {
+          "token_id": "LEAD_OBS_V2",
+          "attention_weight": 0.0268,
+          "associated_leads": [
+            "V2"
+          ],
+          "is_observable_in_mask": true
+        },
+        {
+          "token_id": "LEAD_OBS_III",
+          "attention_weight": 0.0256,
+          "associated_leads": [
+            "III"
+          ],
+          "is_observable_in_mask": true
+        },
+        {
+          "token_id": "LEAD_OBS_V6",
+          "attention_weight": 0.0247,
+          "associated_leads": [
+            "V6"
+          ],
+          "is_observable_in_mask": true
+        },
+        {
+          "token_id": "LEAD_OBS_V1",
+          "attention_weight": 0.0243,
+          "associated_leads": [
+            "V1"
+          ],
+          "is_observable_in_mask": true
+        }
+      ],
+      "contradicting_evidence": [],
+      "uncertainty": 0.2025,
+      "lead_observability": {
+        "active_lead_count": 12,
+        "active_leads": [
+          "I",
+          "II",
+          "III",
+          "aVR",
+          "aVL",
+          "aVF",
+          "V1",
+          "V2",
+          "V3",
+          "V4",
+          "V5",
+          "V6"
+        ],
+        "masked_leads": []
+      }
+    },
+    {
+      "record_id": "test_fold10_0003",
+      "path_type": "CONTROL_ECG_ONLY",
+      "top_hypothesis": {
+        "acronym": "NORM",
+        "disease_name": "Normal ECG",
+        "confidence": 0.9022
+      },
+      "posterior_probabilities": {
+        "NORM": 0.9022,
+        "AFIB": 0.0021,
+        "RBBB": 0.0531,
+        "LBBB": 0.0022,
+        "SBRAD": 0.0024,
+        "STACH": 0.0022,
+        "1AVB": 0.0007,
+        "MI": 0.0512
+      },
+      "supporting_evidence": [
+        {
+          "token_id": "LEAD_OBS_V2",
+          "attention_weight": 0.0273,
+          "associated_leads": [
+            "V2"
+          ],
+          "is_observable_in_mask": true
+        },
+        {
+          "token_id": "ECG_CONTINUOUS_FM",
+          "attention_weight": 0.0264,
+          "associated_leads": [],
+          "is_observable_in_mask": true
+        },
+        {
+          "token_id": "LEAD_OBS_III",
+          "attention_weight": 0.0258,
+          "associated_leads": [
+            "III"
+          ],
+          "is_observable_in_mask": true
+        },
+        {
+          "token_id": "LEAD_OBS_V6",
+          "attention_weight": 0.0247,
+          "associated_leads": [
+            "V6"
+          ],
+          "is_observable_in_mask": true
+        }
+      ],
+      "contradicting_evidence": [],
+      "uncertainty": 0.0978,
+      "lead_observability": {
+        "active_lead_count": 12,
+        "active_leads": [
+          "I",
+          "II",
+          "III",
+          "aVR",
+          "aVL",
+          "aVF",
+          "V1",
+          "V2",
+          "V3",
+          "V4",
+          "V5",
+          "V6"
+        ],
+        "masked_leads": []
+      }
+    },
+    {
+      "record_id": "test_fold10_0004",
+      "path_type": "CONTROL_ECG_ONLY",
+      "top_hypothesis": {
+        "acronym": "NORM",
+        "disease_name": "Normal ECG",
+        "confidence": 0.813
+      },
+      "posterior_probabilities": {
+        "NORM": 0.813,
+        "AFIB": 0.0013,
+        "RBBB": 0.0443,
+        "LBBB": 0.002,
+        "SBRAD": 0.0015,
+        "STACH": 0.002,
+        "1AVB": 0.0004,
+        "MI": 0.1428
+      },
+      "supporting_evidence": [
+        {
+          "token_id": "LEAD_OBS_V2",
+          "attention_weight": 0.0287,
+          "associated_leads": [
+            "V2"
+          ],
+          "is_observable_in_mask": true
+        },
+        {
+          "token_id": "LEAD_OBS_III",
+          "attention_weight": 0.0272,
+          "associated_leads": [
+            "III"
+          ],
+          "is_observable_in_mask": true
+        },
+        {
+          "token_id": "LEAD_OBS_V6",
+          "attention_weight": 0.0256,
+          "associated_leads": [
+            "V6"
+          ],
+          "is_observable_in_mask": true
+        },
+        {
+          "token_id": "LEAD_OBS_V1",
+          "attention_weight": 0.025,
+          "associated_leads": [
+            "V1"
+          ],
+          "is_observable_in_mask": true
+        }
+      ],
+      "contradicting_evidence": [],
+      "uncertainty": 0.187,
+      "lead_observability": {
+        "active_lead_count": 12,
+        "active_leads": [
+          "I",
+          "II",
+          "III",
+          "aVR",
+          "aVL",
+          "aVF",
+          "V1",
+          "V2",
+          "V3",
+          "V4",
+          "V5",
+          "V6"
+        ],
+        "masked_leads": []
+      }
+    },
+    {
+      "record_id": "test_fold10_0005",
+      "path_type": "CONTROL_ECG_ONLY",
+      "top_hypothesis": {
+        "acronym": "NORM",
+        "disease_name": "Normal ECG",
+        "confidence": 0.9407
+      },
+      "posterior_probabilities": {
+        "NORM": 0.9407,
+        "AFIB": 0.0017,
+        "RBBB": 0.0112,
+        "LBBB": 0.0022,
+        "SBRAD": 0.0021,
+        "STACH": 0.0021,
+        "1AVB": 0.0004,
+        "MI": 0.0352
+      },
+      "supporting_evidence": [
+        {
+          "token_id": "LEAD_OBS_V2",
+          "attention_weight": 0.0273,
+          "associated_leads": [
+            "V2"
+          ],
+          "is_observable_in_mask": true
+        },
+        {
+          "token_id": "LEAD_OBS_III",
+          "attention_weight": 0.0253,
+          "associated_leads": [
+            "III"
+          ],
+          "is_observable_in_mask": true
+        },
+        {
+          "token_id": "LEAD_OBS_V6",
+          "attention_weight": 0.0245,
+          "associated_leads": [
+            "V6"
+          ],
+          "is_observable_in_mask": true
+        },
+        {
+          "token_id": "LEAD_OBS_V1",
+          "attention_weight": 0.0241,
+          "associated_leads": [
+            "V1"
+          ],
+          "is_observable_in_mask": true
+        }
+      ],
+      "contradicting_evidence": [],
+      "uncertainty": 0.0593,
+      "lead_observability": {
+        "active_lead_count": 12,
+        "active_leads": [
+          "I",
+          "II",
+          "III",
+          "aVR",
+          "aVL",
+          "aVF",
+          "V1",
+          "V2",
+          "V3",
+          "V4",
+          "V5",
+          "V6"
+        ],
+        "masked_leads": []
+      }
+    },
+    {
+      "record_id": "test_fold10_0006",
+      "path_type": "CONTROL_ECG_ONLY",
+      "top_hypothesis": {
+        "acronym": "NORM",
+        "disease_name": "Normal ECG",
+        "confidence": 0.9145
+      },
+      "posterior_probabilities": {
+        "NORM": 0.9145,
+        "AFIB": 0.0014,
+        "RBBB": 0.0437,
+        "LBBB": 0.002,
+        "SBRAD": 0.0012,
+        "STACH": 0.0021,
+        "1AVB": 0.0004,
+        "MI": 0.0402
+      },
+      "supporting_evidence": [
+        {
+          "token_id": "LEAD_OBS_V2",
+          "attention_weight": 0.0275,
+          "associated_leads": [
+            "V2"
+          ],
+          "is_observable_in_mask": true
+        },
+        {
+          "token_id": "ECG_CONTINUOUS_FM",
+          "attention_weight": 0.0264,
+          "associated_leads": [],
+          "is_observable_in_mask": true
+        },
+        {
+          "token_id": "LEAD_OBS_III",
+          "attention_weight": 0.026,
+          "associated_leads": [
+            "III"
+          ],
+          "is_observable_in_mask": true
+        },
+        {
+          "token_id": "LEAD_OBS_V6",
+          "attention_weight": 0.0247,
+          "associated_leads": [
+            "V6"
+          ],
+          "is_observable_in_mask": true
+        }
+      ],
+      "contradicting_evidence": [],
+      "uncertainty": 0.0855,
+      "lead_observability": {
+        "active_lead_count": 12,
+        "active_leads": [
+          "I",
+          "II",
+          "III",
+          "aVR",
+          "aVL",
+          "aVF",
+          "V1",
+          "V2",
+          "V3",
+          "V4",
+          "V5",
+          "V6"
+        ],
+        "masked_leads": []
+      }
+    },
+    {
+      "record_id": "test_fold10_0007",
+      "path_type": "CONTROL_ECG_ONLY",
+      "top_hypothesis": {
+        "acronym": "NORM",
+        "disease_name": "Normal ECG",
+        "confidence": 0.8999
+      },
+      "posterior_probabilities": {
+        "NORM": 0.8999,
+        "AFIB": 0.0151,
+        "RBBB": 0.07,
+        "LBBB": 0.0029,
+        "SBRAD": 0.657,
+        "STACH": 0.0037,
+        "1AVB": 0.0016,
+        "MI": 0.0481
+      },
+      "supporting_evidence": [
+        {
+          "token_id": "LEAD_OBS_V2",
+          "attention_weight": 0.0277,
+          "associated_leads": [
+            "V2"
+          ],
+          "is_observable_in_mask": true
+        },
+        {
+          "token_id": "LEAD_OBS_III",
+          "attention_weight": 0.0257,
+          "associated_leads": [
+            "III"
+          ],
+          "is_observable_in_mask": true
+        },
+        {
+          "token_id": "LEAD_OBS_aVF",
+          "attention_weight": 0.025,
+          "associated_leads": [
+            "aVF"
+          ],
+          "is_observable_in_mask": true
+        },
+        {
+          "token_id": "LEAD_OBS_V6",
+          "attention_weight": 0.0244,
+          "associated_leads": [
+            "V6"
+          ],
+          "is_observable_in_mask": true
+        }
+      ],
+      "contradicting_evidence": [],
+      "uncertainty": 0.1001,
+      "lead_observability": {
+        "active_lead_count": 12,
+        "active_leads": [
+          "I",
+          "II",
+          "III",
+          "aVR",
+          "aVL",
+          "aVF",
+          "V1",
+          "V2",
+          "V3",
+          "V4",
+          "V5",
+          "V6"
+        ],
+        "masked_leads": []
+      }
+    },
+    {
+      "record_id": "test_fold10_0008",
+      "path_type": "CONTROL_ECG_ONLY",
+      "top_hypothesis": {
+        "acronym": "NORM",
+        "disease_name": "Normal ECG",
+        "confidence": 0.9146
+      },
+      "posterior_probabilities": {
+        "NORM": 0.9146,
+        "AFIB": 0.0015,
+        "RBBB": 0.0198,
+        "LBBB": 0.0021,
+        "SBRAD": 0.0018,
+        "STACH": 0.002,
+        "1AVB": 0.0003,
+        "MI": 0.0357
+      },
+      "supporting_evidence": [
+        {
+          "token_id": "LEAD_OBS_V2",
+          "attention_weight": 0.0253,
+          "associated_leads": [
+            "V2"
+          ],
+          "is_observable_in_mask": true
+        },
+        {
+          "token_id": "ECG_CONTINUOUS_FM",
+          "attention_weight": 0.0244,
+          "associated_leads": [],
+          "is_observable_in_mask": true
+        },
+        {
+          "token_id": "LEAD_OBS_III",
+          "attention_weight": 0.0244,
+          "associated_leads": [
+            "III"
+          ],
+          "is_observable_in_mask": true
+        },
+        {
+          "token_id": "LEAD_OBS_V6",
+          "attention_weight": 0.0235,
+          "associated_leads": [
+            "V6"
+          ],
+          "is_observable_in_mask": true
+        }
+      ],
+      "contradicting_evidence": [],
+      "uncertainty": 0.0854,
+      "lead_observability": {
+        "active_lead_count": 12,
+        "active_leads": [
+          "I",
+          "II",
+          "III",
+          "aVR",
+          "aVL",
+          "aVF",
+          "V1",
+          "V2",
+          "V3",
+          "V4",
+          "V5",
+          "V6"
+        ],
+        "masked_leads": []
+      }
+    },
+    {
+      "record_id": "test_fold10_0009",
+      "path_type": "CONTROL_ECG_ONLY",
+      "top_hypothesis": {
+        "acronym": "NORM",
+        "disease_name": "Normal ECG",
+        "confidence": 0.9118
+      },
+      "posterior_probabilities": {
+        "NORM": 0.9118,
+        "AFIB": 0.0016,
+        "RBBB": 0.1019,
+        "LBBB": 0.0022,
+        "SBRAD": 0.0168,
+        "STACH": 0.0025,
+        "1AVB": 0.0005,
+        "MI": 0.0325
+      },
+      "supporting_evidence": [
+        {
+          "token_id": "LEAD_OBS_V2",
+          "attention_weight": 0.0254,
+          "associated_leads": [
+            "V2"
+          ],
+          "is_observable_in_mask": true
+        },
+        {
+          "token_id": "LEAD_OBS_III",
+          "attention_weight": 0.0249,
+          "associated_leads": [
+            "III"
+          ],
+          "is_observable_in_mask": true
+        },
+        {
+          "token_id": "LEAD_OBS_V6",
+          "attention_weight": 0.0231,
+          "associated_leads": [
+            "V6"
+          ],
+          "is_observable_in_mask": true
+        },
+        {
+          "token_id": "LEAD_OBS_V1",
+          "attention_weight": 0.0229,
+          "associated_leads": [
+            "V1"
+          ],
+          "is_observable_in_mask": true
+        }
+      ],
+      "contradicting_evidence": [],
+      "uncertainty": 0.0882,
+      "lead_observability": {
+        "active_lead_count": 12,
+        "active_leads": [
+          "I",
+          "II",
+          "III",
+          "aVR",
+          "aVL",
+          "aVF",
+          "V1",
+          "V2",
+          "V3",
+          "V4",
+          "V5",
+          "V6"
+        ],
+        "masked_leads": []
+      }
+    }
+  ],
+  "10_lead": [
+    {
+      "record_id": "test_fold10_0000",
+      "path_type": "CONTROL_ECG_ONLY",
+      "top_hypothesis": {
+        "acronym": "NORM",
+        "disease_name": "Normal ECG",
+        "confidence": 0.9206
+      },
+      "posterior_probabilities": {
+        "NORM": 0.9206,
+        "AFIB": 0.0016,
+        "RBBB": 0.0175,
+        "LBBB": 0.0022,
+        "SBRAD": 0.0021,
+        "STACH": 0.002,
+        "1AVB": 0.0004,
+        "MI": 0.0535
+      },
+      "supporting_evidence": [
+        {
+          "token_id": "LEAD_OBS_V2",
+          "attention_weight": 0.0293,
+          "associated_leads": [
+            "V2"
+          ],
+          "is_observable_in_mask": true
+        },
+        {
+          "token_id": "LEAD_OBS_V6",
+          "attention_weight": 0.0268,
+          "associated_leads": [
+            "V6"
+          ],
+          "is_observable_in_mask": true
+        },
+        {
+          "token_id": "LEAD_OBS_V1",
+          "attention_weight": 0.0262,
+          "associated_leads": [
+            "V1"
+          ],
+          "is_observable_in_mask": true
+        },
+        {
+          "token_id": "LEAD_OBS_V5",
+          "attention_weight": 0.0254,
+          "associated_leads": [
+            "V5"
+          ],
+          "is_observable_in_mask": true
+        }
+      ],
+      "contradicting_evidence": [],
+      "uncertainty": 0.0794,
+      "lead_observability": {
+        "active_lead_count": 10,
+        "active_leads": [
+          "I",
+          "II",
+          "aVR",
+          "aVL",
+          "V1",
+          "V2",
+          "V3",
+          "V4",
+          "V5",
+          "V6"
+        ],
+        "masked_leads": [
+          "III",
+          "aVF"
+        ]
+      }
+    },
+    {
+      "record_id": "test_fold10_0001",
+      "path_type": "CONTROL_ECG_ONLY",
+      "top_hypothesis": {
+        "acronym": "NORM",
+        "disease_name": "Normal ECG",
+        "confidence": 0.7922
+      },
+      "posterior_probabilities": {
+        "NORM": 0.7922,
+        "AFIB": 0.0014,
+        "RBBB": 0.0215,
+        "LBBB": 0.0022,
+        "SBRAD": 0.0012,
+        "STACH": 0.0022,
+        "1AVB": 0.0006,
+        "MI": 0.1324
+      },
+      "supporting_evidence": [
+        {
+          "token_id": "LEAD_OBS_V2",
+          "attention_weight": 0.0285,
+          "associated_leads": [
+            "V2"
+          ],
+          "is_observable_in_mask": true
+        },
+        {
+          "token_id": "ECG_CONTINUOUS_FM",
+          "attention_weight": 0.0272,
+          "associated_leads": [],
+          "is_observable_in_mask": true
+        },
+        {
+          "token_id": "LEAD_OBS_V6",
+          "attention_weight": 0.027,
+          "associated_leads": [
+            "V6"
+          ],
+          "is_observable_in_mask": true
+        },
+        {
+          "token_id": "LEAD_OBS_V1",
+          "attention_weight": 0.0263,
+          "associated_leads": [
+            "V1"
+          ],
+          "is_observable_in_mask": true
+        }
+      ],
+      "contradicting_evidence": [],
+      "uncertainty": 0.2078,
+      "lead_observability": {
+        "active_lead_count": 10,
+        "active_leads": [
+          "I",
+          "II",
+          "aVR",
+          "aVL",
+          "V1",
+          "V2",
+          "V3",
+          "V4",
+          "V5",
+          "V6"
+        ],
+        "masked_leads": [
+          "III",
+          "aVF"
+        ]
+      }
+    },
+    {
+      "record_id": "test_fold10_0002",
+      "path_type": "CONTROL_ECG_ONLY",
+      "top_hypothesis": {
+        "acronym": "NORM",
+        "disease_name": "Normal ECG",
+        "confidence": 0.7392
+      },
+      "posterior_probabilities": {
+        "NORM": 0.7392,
+        "AFIB": 0.0021,
+        "RBBB": 0.0116,
+        "LBBB": 0.0031,
+        "SBRAD": 0.0013,
+        "STACH": 0.0022,
+        "1AVB": 0.0406,
+        "MI": 0.2368
+      },
+      "supporting_evidence": [
+        {
+          "token_id": "LEAD_OBS_V2",
+          "attention_weight": 0.0281,
+          "associated_leads": [
+            "V2"
+          ],
+          "is_observable_in_mask": true
+        },
+        {
+          "token_id": "LEAD_OBS_V6",
+          "attention_weight": 0.0259,
+          "associated_leads": [
+            "V6"
+          ],
+          "is_observable_in_mask": true
+        },
+        {
+          "token_id": "LEAD_OBS_V1",
+          "attention_weight": 0.0254,
+          "associated_leads": [
+            "V1"
+          ],
+          "is_observable_in_mask": true
+        },
+        {
+          "token_id": "ECG_CONTINUOUS_FM",
+          "attention_weight": 0.025,
+          "associated_leads": [],
+          "is_observable_in_mask": true
+        }
+      ],
+      "contradicting_evidence": [],
+      "uncertainty": 0.2608,
+      "lead_observability": {
+        "active_lead_count": 10,
+        "active_leads": [
+          "I",
+          "II",
+          "aVR",
+          "aVL",
+          "V1",
+          "V2",
+          "V3",
+          "V4",
+          "V5",
+          "V6"
+        ],
+        "masked_leads": [
+          "III",
+          "aVF"
+        ]
+      }
+    },
+    {
+      "record_id": "test_fold10_0003",
+      "path_type": "CONTROL_ECG_ONLY",
+      "top_hypothesis": {
+        "acronym": "NORM",
+        "disease_name": "Normal ECG",
+        "confidence": 0.875
+      },
+      "posterior_probabilities": {
+        "NORM": 0.875,
+        "AFIB": 0.0024,
+        "RBBB": 0.066,
+        "LBBB": 0.0024,
+        "SBRAD": 0.0028,
+        "STACH": 0.0024,
+        "1AVB": 0.0012,
+        "MI": 0.0562
+      },
+      "supporting_evidence": [
+        {
+          "token_id": "LEAD_OBS_V2",
+          "attention_weight": 0.0288,
+          "associated_leads": [
+            "V2"
+          ],
+          "is_observable_in_mask": true
+        },
+        {
+          "token_id": "ECG_CONTINUOUS_FM",
+          "attention_weight": 0.0277,
+          "associated_leads": [],
+          "is_observable_in_mask": true
+        },
+        {
+          "token_id": "LEAD_OBS_V6",
+          "attention_weight": 0.0261,
+          "associated_leads": [
+            "V6"
+          ],
+          "is_observable_in_mask": true
+        },
+        {
+          "token_id": "LEAD_OBS_V1",
+          "attention_weight": 0.0255,
+          "associated_leads": [
+            "V1"
+          ],
+          "is_observable_in_mask": true
+        }
+      ],
+      "contradicting_evidence": [],
+      "uncertainty": 0.125,
+      "lead_observability": {
+        "active_lead_count": 10,
+        "active_leads": [
+          "I",
+          "II",
+          "aVR",
+          "aVL",
+          "V1",
+          "V2",
+          "V3",
+          "V4",
+          "V5",
+          "V6"
+        ],
+        "masked_leads": [
+          "III",
+          "aVF"
+        ]
+      }
+    },
+    {
+      "record_id": "test_fold10_0004",
+      "path_type": "CONTROL_ECG_ONLY",
+      "top_hypothesis": {
+        "acronym": "NORM",
+        "disease_name": "Normal ECG",
+        "confidence": 0.7788
+      },
+      "posterior_probabilities": {
+        "NORM": 0.7788,
+        "AFIB": 0.0014,
+        "RBBB": 0.0592,
+        "LBBB": 0.002,
+        "SBRAD": 0.0016,
+        "STACH": 0.0021,
+        "1AVB": 0.0006,
+        "MI": 0.1547
+      },
+      "supporting_evidence": [
+        {
+          "token_id": "LEAD_OBS_V2",
+          "attention_weight": 0.0306,
+          "associated_leads": [
+            "V2"
+          ],
+          "is_observable_in_mask": true
+        },
+        {
+          "token_id": "LEAD_OBS_V6",
+          "attention_weight": 0.0274,
+          "associated_leads": [
+            "V6"
+          ],
+          "is_observable_in_mask": true
+        },
+        {
+          "token_id": "LEAD_OBS_V1",
+          "attention_weight": 0.0265,
+          "associated_leads": [
+            "V1"
+          ],
+          "is_observable_in_mask": true
+        },
+        {
+          "token_id": "LEAD_OBS_V5",
+          "attention_weight": 0.0255,
+          "associated_leads": [
+            "V5"
+          ],
+          "is_observable_in_mask": true
+        }
+      ],
+      "contradicting_evidence": [],
+      "uncertainty": 0.2212,
+      "lead_observability": {
+        "active_lead_count": 10,
+        "active_leads": [
+          "I",
+          "II",
+          "aVR",
+          "aVL",
+          "V1",
+          "V2",
+          "V3",
+          "V4",
+          "V5",
+          "V6"
+        ],
+        "masked_leads": [
+          "III",
+          "aVF"
+        ]
+      }
+    },
+    {
+      "record_id": "test_fold10_0005",
+      "path_type": "CONTROL_ECG_ONLY",
+      "top_hypothesis": {
+        "acronym": "NORM",
+        "disease_name": "Normal ECG",
+        "confidence": 0.9342
+      },
+      "posterior_probabilities": {
+        "NORM": 0.9342,
+        "AFIB": 0.0018,
+        "RBBB": 0.0106,
+        "LBBB": 0.0023,
+        "SBRAD": 0.0023,
+        "STACH": 0.0022,
+        "1AVB": 0.0004,
+        "MI": 0.0423
+      },
+      "supporting_evidence": [
+        {
+          "token_id": "LEAD_OBS_V2",
+          "attention_weight": 0.0293,
+          "associated_leads": [
+            "V2"
+          ],
+          "is_observable_in_mask": true
+        },
+        {
+          "token_id": "LEAD_OBS_V6",
+          "attention_weight": 0.0263,
+          "associated_leads": [
+            "V6"
+          ],
+          "is_observable_in_mask": true
+        },
+        {
+          "token_id": "LEAD_OBS_V1",
+          "attention_weight": 0.026,
+          "associated_leads": [
+            "V1"
+          ],
+          "is_observable_in_mask": true
+        },
+        {
+          "token_id": "LEAD_OBS_V5",
+          "attention_weight": 0.0251,
+          "associated_leads": [
+            "V5"
+          ],
+          "is_observable_in_mask": true
+        }
+      ],
+      "contradicting_evidence": [],
+      "uncertainty": 0.0658,
+      "lead_observability": {
+        "active_lead_count": 10,
+        "active_leads": [
+          "I",
+          "II",
+          "aVR",
+          "aVL",
+          "V1",
+          "V2",
+          "V3",
+          "V4",
+          "V5",
+          "V6"
+        ],
+        "masked_leads": [
+          "III",
+          "aVF"
+        ]
+      }
+    },
+    {
+      "record_id": "test_fold10_0006",
+      "path_type": "CONTROL_ECG_ONLY",
+      "top_hypothesis": {
+        "acronym": "NORM",
+        "disease_name": "Normal ECG",
+        "confidence": 0.8872
+      },
+      "posterior_probabilities": {
+        "NORM": 0.8872,
+        "AFIB": 0.0015,
+        "RBBB": 0.0636,
+        "LBBB": 0.0021,
+        "SBRAD": 0.0013,
+        "STACH": 0.0023,
+        "1AVB": 0.0005,
+        "MI": 0.0423
+      },
+      "supporting_evidence": [
+        {
+          "token_id": "LEAD_OBS_V2",
+          "attention_weight": 0.0288,
+          "associated_leads": [
+            "V2"
+          ],
+          "is_observable_in_mask": true
+        },
+        {
+          "token_id": "ECG_CONTINUOUS_FM",
+          "attention_weight": 0.027,
+          "associated_leads": [],
+          "is_observable_in_mask": true
+        },
+        {
+          "token_id": "LEAD_OBS_V6",
+          "attention_weight": 0.026,
+          "associated_leads": [
+            "V6"
+          ],
+          "is_observable_in_mask": true
+        },
+        {
+          "token_id": "LEAD_OBS_V1",
+          "attention_weight": 0.0256,
+          "associated_leads": [
+            "V1"
+          ],
+          "is_observable_in_mask": true
+        }
+      ],
+      "contradicting_evidence": [],
+      "uncertainty": 0.1128,
+      "lead_observability": {
+        "active_lead_count": 10,
+        "active_leads": [
+          "I",
+          "II",
+          "aVR",
+          "aVL",
+          "V1",
+          "V2",
+          "V3",
+          "V4",
+          "V5",
+          "V6"
+        ],
+        "masked_leads": [
+          "III",
+          "aVF"
+        ]
+      }
+    },
+    {
+      "record_id": "test_fold10_0007",
+      "path_type": "CONTROL_ECG_ONLY",
+      "top_hypothesis": {
+        "acronym": "NORM",
+        "disease_name": "Normal ECG",
+        "confidence": 0.8394
+      },
+      "posterior_probabilities": {
+        "NORM": 0.8394,
+        "AFIB": 0.0289,
+        "RBBB": 0.0871,
+        "LBBB": 0.0036,
+        "SBRAD": 0.6471,
+        "STACH": 0.0048,
+        "1AVB": 0.0043,
+        "MI": 0.0606
+      },
+      "supporting_evidence": [
+        {
+          "token_id": "LEAD_OBS_V2",
+          "attention_weight": 0.0289,
+          "associated_leads": [
+            "V2"
+          ],
+          "is_observable_in_mask": true
+        },
+        {
+          "token_id": "LEAD_OBS_V6",
+          "attention_weight": 0.0255,
+          "associated_leads": [
+            "V6"
+          ],
+          "is_observable_in_mask": true
+        },
+        {
+          "token_id": "LEAD_OBS_V1",
+          "attention_weight": 0.0251,
+          "associated_leads": [
+            "V1"
+          ],
+          "is_observable_in_mask": true
+        },
+        {
+          "token_id": "LEAD_OBS_I",
+          "attention_weight": 0.0248,
+          "associated_leads": [
+            "I"
+          ],
+          "is_observable_in_mask": true
+        }
+      ],
+      "contradicting_evidence": [],
+      "uncertainty": 0.1606,
+      "lead_observability": {
+        "active_lead_count": 10,
+        "active_leads": [
+          "I",
+          "II",
+          "aVR",
+          "aVL",
+          "V1",
+          "V2",
+          "V3",
+          "V4",
+          "V5",
+          "V6"
+        ],
+        "masked_leads": [
+          "III",
+          "aVF"
+        ]
+      }
+    },
+    {
+      "record_id": "test_fold10_0008",
+      "path_type": "CONTROL_ECG_ONLY",
+      "top_hypothesis": {
+        "acronym": "NORM",
+        "disease_name": "Normal ECG",
+        "confidence": 0.9089
+      },
+      "posterior_probabilities": {
+        "NORM": 0.9089,
+        "AFIB": 0.0015,
+        "RBBB": 0.0164,
+        "LBBB": 0.0021,
+        "SBRAD": 0.0019,
+        "STACH": 0.002,
+        "1AVB": 0.0003,
+        "MI": 0.0386
+      },
+      "supporting_evidence": [
+        {
+          "token_id": "LEAD_OBS_V2",
+          "attention_weight": 0.0273,
+          "associated_leads": [
+            "V2"
+          ],
+          "is_observable_in_mask": true
+        },
+        {
+          "token_id": "ECG_CONTINUOUS_FM",
+          "attention_weight": 0.0256,
+          "associated_leads": [],
+          "is_observable_in_mask": true
+        },
+        {
+          "token_id": "LEAD_OBS_V6",
+          "attention_weight": 0.0251,
+          "associated_leads": [
+            "V6"
+          ],
+          "is_observable_in_mask": true
+        },
+        {
+          "token_id": "LEAD_OBS_V1",
+          "attention_weight": 0.0246,
+          "associated_leads": [
+            "V1"
+          ],
+          "is_observable_in_mask": true
+        }
+      ],
+      "contradicting_evidence": [],
+      "uncertainty": 0.0911,
+      "lead_observability": {
+        "active_lead_count": 10,
+        "active_leads": [
+          "I",
+          "II",
+          "aVR",
+          "aVL",
+          "V1",
+          "V2",
+          "V3",
+          "V4",
+          "V5",
+          "V6"
+        ],
+        "masked_leads": [
+          "III",
+          "aVF"
+        ]
+      }
+    },
+    {
+      "record_id": "test_fold10_0009",
+      "path_type": "CONTROL_ECG_ONLY",
+      "top_hypothesis": {
+        "acronym": "NORM",
+        "disease_name": "Normal ECG",
+        "confidence": 0.8854
+      },
+      "posterior_probabilities": {
+        "NORM": 0.8854,
+        "AFIB": 0.0017,
+        "RBBB": 0.1185,
+        "LBBB": 0.0023,
+        "SBRAD": 0.0401,
+        "STACH": 0.0029,
+        "1AVB": 0.0007,
+        "MI": 0.0353
+      },
+      "supporting_evidence": [
+        {
+          "token_id": "LEAD_OBS_V2",
+          "attention_weight": 0.0271,
+          "associated_leads": [
+            "V2"
+          ],
+          "is_observable_in_mask": true
+        },
+        {
+          "token_id": "LEAD_OBS_V6",
+          "attention_weight": 0.0248,
+          "associated_leads": [
+            "V6"
+          ],
+          "is_observable_in_mask": true
+        },
+        {
+          "token_id": "LEAD_OBS_V1",
+          "attention_weight": 0.0245,
+          "associated_leads": [
+            "V1"
+          ],
+          "is_observable_in_mask": true
+        },
+        {
+          "token_id": "ECG_CONTINUOUS_FM",
+          "attention_weight": 0.024,
+          "associated_leads": [],
+          "is_observable_in_mask": true
+        }
+      ],
+      "contradicting_evidence": [],
+      "uncertainty": 0.1146,
+      "lead_observability": {
+        "active_lead_count": 10,
+        "active_leads": [
+          "I",
+          "II",
+          "aVR",
+          "aVL",
+          "V1",
+          "V2",
+          "V3",
+          "V4",
+          "V5",
+          "V6"
+        ],
+        "masked_leads": [
+          "III",
+          "aVF"
+        ]
+      }
+    }
+  ],
+  "8_lead": [
+    {
+      "record_id": "test_fold10_0000",
+      "path_type": "CONTROL_ECG_ONLY",
+      "top_hypothesis": {
+        "acronym": "NORM",
+        "disease_name": "Normal ECG",
+        "confidence": 0.8914
+      },
+      "posterior_probabilities": {
+        "NORM": 0.8914,
+        "AFIB": 0.0017,
+        "RBBB": 0.0139,
+        "LBBB": 0.0024,
+        "SBRAD": 0.0027,
+        "STACH": 0.0021,
+        "1AVB": 0.0007,
+        "MI": 0.066
+      },
+      "supporting_evidence": [
+        {
+          "token_id": "LEAD_OBS_V2",
+          "attention_weight": 0.03,
+          "associated_leads": [
+            "V2"
+          ],
+          "is_observable_in_mask": true
+        },
+        {
+          "token_id": "LEAD_OBS_V6",
+          "attention_weight": 0.0283,
+          "associated_leads": [
+            "V6"
+          ],
+          "is_observable_in_mask": true
+        },
+        {
+          "token_id": "LEAD_OBS_V1",
+          "attention_weight": 0.0274,
+          "associated_leads": [
+            "V1"
+          ],
+          "is_observable_in_mask": true
+        },
+        {
+          "token_id": "LEAD_OBS_V5",
+          "attention_weight": 0.0264,
+          "associated_leads": [
+            "V5"
+          ],
+          "is_observable_in_mask": true
+        }
+      ],
+      "contradicting_evidence": [],
+      "uncertainty": 0.1086,
+      "lead_observability": {
+        "active_lead_count": 8,
+        "active_leads": [
+          "I",
+          "II",
+          "V1",
+          "V2",
+          "V3",
+          "V4",
+          "V5",
+          "V6"
+        ],
+        "masked_leads": [
+          "III",
+          "aVR",
+          "aVL",
+          "aVF"
+        ]
+      }
+    },
+    {
+      "record_id": "test_fold10_0001",
+      "path_type": "CONTROL_ECG_ONLY",
+      "top_hypothesis": {
+        "acronym": "NORM",
+        "disease_name": "Normal ECG",
+        "confidence": 0.6676
+      },
+      "posterior_probabilities": {
+        "NORM": 0.6676,
+        "AFIB": 0.0018,
+        "RBBB": 0.0257,
+        "LBBB": 0.0036,
+        "SBRAD": 0.0017,
+        "STACH": 0.0024,
+        "1AVB": 0.0028,
+        "MI": 0.2845
+      },
+      "supporting_evidence": [
+        {
+          "token_id": "LEAD_OBS_V2",
+          "attention_weight": 0.0303,
+          "associated_leads": [
+            "V2"
+          ],
+          "is_observable_in_mask": true
+        },
+        {
+          "token_id": "ECG_CONTINUOUS_FM",
+          "attention_weight": 0.0285,
+          "associated_leads": [],
+          "is_observable_in_mask": true
+        },
+        {
+          "token_id": "LEAD_OBS_V6",
+          "attention_weight": 0.0285,
+          "associated_leads": [
+            "V6"
+          ],
+          "is_observable_in_mask": true
+        },
+        {
+          "token_id": "LEAD_OBS_V1",
+          "attention_weight": 0.0275,
+          "associated_leads": [
+            "V1"
+          ],
+          "is_observable_in_mask": true
+        }
+      ],
+      "contradicting_evidence": [],
+      "uncertainty": 0.3324,
+      "lead_observability": {
+        "active_lead_count": 8,
+        "active_leads": [
+          "I",
+          "II",
+          "V1",
+          "V2",
+          "V3",
+          "V4",
+          "V5",
+          "V6"
+        ],
+        "masked_leads": [
+          "III",
+          "aVR",
+          "aVL",
+          "aVF"
+        ]
+      }
+    },
+    {
+      "record_id": "test_fold10_0002",
+      "path_type": "CONTROL_ECG_ONLY",
+      "top_hypothesis": {
+        "acronym": "NORM",
+        "disease_name": "Normal ECG",
+        "confidence": 0.6417
+      },
+      "posterior_probabilities": {
+        "NORM": 0.6417,
+        "AFIB": 0.0021,
+        "RBBB": 0.0088,
+        "LBBB": 0.0046,
+        "SBRAD": 0.002,
+        "STACH": 0.0024,
+        "1AVB": 0.0192,
+        "MI": 0.2902
+      },
+      "supporting_evidence": [
+        {
+          "token_id": "LEAD_OBS_V2",
+          "attention_weight": 0.0297,
+          "associated_leads": [
+            "V2"
+          ],
+          "is_observable_in_mask": true
+        },
+        {
+          "token_id": "LEAD_OBS_V6",
+          "attention_weight": 0.0276,
+          "associated_leads": [
+            "V6"
+          ],
+          "is_observable_in_mask": true
+        },
+        {
+          "token_id": "LEAD_OBS_V1",
+          "attention_weight": 0.027,
+          "associated_leads": [
+            "V1"
+          ],
+          "is_observable_in_mask": true
+        },
+        {
+          "token_id": "LEAD_OBS_V5",
+          "attention_weight": 0.026,
+          "associated_leads": [
+            "V5"
+          ],
+          "is_observable_in_mask": true
+        }
+      ],
+      "contradicting_evidence": [],
+      "uncertainty": 0.3583,
+      "lead_observability": {
+        "active_lead_count": 8,
+        "active_leads": [
+          "I",
+          "II",
+          "V1",
+          "V2",
+          "V3",
+          "V4",
+          "V5",
+          "V6"
+        ],
+        "masked_leads": [
+          "III",
+          "aVR",
+          "aVL",
+          "aVF"
+        ]
+      }
+    },
+    {
+      "record_id": "test_fold10_0003",
+      "path_type": "CONTROL_ECG_ONLY",
+      "top_hypothesis": {
+        "acronym": "NORM",
+        "disease_name": "Normal ECG",
+        "confidence": 0.8526
+      },
+      "posterior_probabilities": {
+        "NORM": 0.8526,
+        "AFIB": 0.003,
+        "RBBB": 0.0469,
+        "LBBB": 0.0027,
+        "SBRAD": 0.0057,
+        "STACH": 0.0026,
+        "1AVB": 0.0021,
+        "MI": 0.075
+      },
+      "supporting_evidence": [
+        {
+          "token_id": "LEAD_OBS_V2",
+          "attention_weight": 0.0313,
+          "associated_leads": [
+            "V2"
+          ],
+          "is_observable_in_mask": true
+        },
+        {
+          "token_id": "ECG_CONTINUOUS_FM",
+          "attention_weight": 0.0299,
+          "associated_leads": [],
+          "is_observable_in_mask": true
+        },
+        {
+          "token_id": "LEAD_OBS_V6",
+          "attention_weight": 0.0287,
+          "associated_leads": [
+            "V6"
+          ],
+          "is_observable_in_mask": true
+        },
+        {
+          "token_id": "LEAD_OBS_V1",
+          "attention_weight": 0.0277,
+          "associated_leads": [
+            "V1"
+          ],
+          "is_observable_in_mask": true
+        }
+      ],
+      "contradicting_evidence": [],
+      "uncertainty": 0.1474,
+      "lead_observability": {
+        "active_lead_count": 8,
+        "active_leads": [
+          "I",
+          "II",
+          "V1",
+          "V2",
+          "V3",
+          "V4",
+          "V5",
+          "V6"
+        ],
+        "masked_leads": [
+          "III",
+          "aVR",
+          "aVL",
+          "aVF"
+        ]
+      }
+    },
+    {
+      "record_id": "test_fold10_0004",
+      "path_type": "CONTROL_ECG_ONLY",
+      "top_hypothesis": {
+        "acronym": "NORM",
+        "disease_name": "Normal ECG",
+        "confidence": 0.759
+      },
+      "posterior_probabilities": {
+        "NORM": 0.759,
+        "AFIB": 0.0015,
+        "RBBB": 0.052,
+        "LBBB": 0.0021,
+        "SBRAD": 0.0016,
+        "STACH": 0.0021,
+        "1AVB": 0.0009,
+        "MI": 0.1469
+      },
+      "supporting_evidence": [
+        {
+          "token_id": "LEAD_OBS_V2",
+          "attention_weight": 0.0324,
+          "associated_leads": [
+            "V2"
+          ],
+          "is_observable_in_mask": true
+        },
+        {
+          "token_id": "LEAD_OBS_V6",
+          "attention_weight": 0.0295,
+          "associated_leads": [
+            "V6"
+          ],
+          "is_observable_in_mask": true
+        },
+        {
+          "token_id": "LEAD_OBS_V1",
+          "attention_weight": 0.0283,
+          "associated_leads": [
+            "V1"
+          ],
+          "is_observable_in_mask": true
+        },
+        {
+          "token_id": "LEAD_OBS_V5",
+          "attention_weight": 0.0274,
+          "associated_leads": [
+            "V5"
+          ],
+          "is_observable_in_mask": true
+        }
+      ],
+      "contradicting_evidence": [],
+      "uncertainty": 0.241,
+      "lead_observability": {
+        "active_lead_count": 8,
+        "active_leads": [
+          "I",
+          "II",
+          "V1",
+          "V2",
+          "V3",
+          "V4",
+          "V5",
+          "V6"
+        ],
+        "masked_leads": [
+          "III",
+          "aVR",
+          "aVL",
+          "aVF"
+        ]
+      }
+    },
+    {
+      "record_id": "test_fold10_0005",
+      "path_type": "CONTROL_ECG_ONLY",
+      "top_hypothesis": {
+        "acronym": "NORM",
+        "disease_name": "Normal ECG",
+        "confidence": 0.9144
+      },
+      "posterior_probabilities": {
+        "NORM": 0.9144,
+        "AFIB": 0.002,
+        "RBBB": 0.0089,
+        "LBBB": 0.0025,
+        "SBRAD": 0.0029,
+        "STACH": 0.0024,
+        "1AVB": 0.0005,
+        "MI": 0.0531
+      },
+      "supporting_evidence": [
+        {
+          "token_id": "LEAD_OBS_V2",
+          "attention_weight": 0.0325,
+          "associated_leads": [
+            "V2"
+          ],
+          "is_observable_in_mask": true
+        },
+        {
+          "token_id": "LEAD_OBS_V6",
+          "attention_weight": 0.0296,
+          "associated_leads": [
+            "V6"
+          ],
+          "is_observable_in_mask": true
+        },
+        {
+          "token_id": "LEAD_OBS_V1",
+          "attention_weight": 0.0291,
+          "associated_leads": [
+            "V1"
+          ],
+          "is_observable_in_mask": true
+        },
+        {
+          "token_id": "LEAD_OBS_V5",
+          "attention_weight": 0.0277,
+          "associated_leads": [
+            "V5"
+          ],
+          "is_observable_in_mask": true
+        }
+      ],
+      "contradicting_evidence": [],
+      "uncertainty": 0.0856,
+      "lead_observability": {
+        "active_lead_count": 8,
+        "active_leads": [
+          "I",
+          "II",
+          "V1",
+          "V2",
+          "V3",
+          "V4",
+          "V5",
+          "V6"
+        ],
+        "masked_leads": [
+          "III",
+          "aVR",
+          "aVL",
+          "aVF"
+        ]
+      }
+    },
+    {
+      "record_id": "test_fold10_0006",
+      "path_type": "CONTROL_ECG_ONLY",
+      "top_hypothesis": {
+        "acronym": "NORM",
+        "disease_name": "Normal ECG",
+        "confidence": 0.8375
+      },
+      "posterior_probabilities": {
+        "NORM": 0.8375,
+        "AFIB": 0.0016,
+        "RBBB": 0.0621,
+        "LBBB": 0.0022,
+        "SBRAD": 0.0015,
+        "STACH": 0.0025,
+        "1AVB": 0.0007,
+        "MI": 0.0577
+      },
+      "supporting_evidence": [
+        {
+          "token_id": "LEAD_OBS_V2",
+          "attention_weight": 0.0317,
+          "associated_leads": [
+            "V2"
+          ],
+          "is_observable_in_mask": true
+        },
+        {
+          "token_id": "ECG_CONTINUOUS_FM",
+          "attention_weight": 0.03,
+          "associated_leads": [],
+          "is_observable_in_mask": true
+        },
+        {
+          "token_id": "LEAD_OBS_V6",
+          "attention_weight": 0.0288,
+          "associated_leads": [
+            "V6"
+          ],
+          "is_observable_in_mask": true
+        },
+        {
+          "token_id": "LEAD_OBS_V1",
+          "attention_weight": 0.028,
+          "associated_leads": [
+            "V1"
+          ],
+          "is_observable_in_mask": true
+        }
+      ],
+      "contradicting_evidence": [],
+      "uncertainty": 0.1625,
+      "lead_observability": {
+        "active_lead_count": 8,
+        "active_leads": [
+          "I",
+          "II",
+          "V1",
+          "V2",
+          "V3",
+          "V4",
+          "V5",
+          "V6"
+        ],
+        "masked_leads": [
+          "III",
+          "aVR",
+          "aVL",
+          "aVF"
+        ]
+      }
+    },
+    {
+      "record_id": "test_fold10_0007",
+      "path_type": "CONTROL_ECG_ONLY",
+      "top_hypothesis": {
+        "acronym": "NORM",
+        "disease_name": "Normal ECG",
+        "confidence": 0.717
+      },
+      "posterior_probabilities": {
+        "NORM": 0.717,
+        "AFIB": 0.0464,
+        "RBBB": 0.0863,
+        "LBBB": 0.005,
+        "SBRAD": 0.6571,
+        "STACH": 0.006,
+        "1AVB": 0.0137,
+        "MI": 0.0829
+      },
+      "supporting_evidence": [
+        {
+          "token_id": "LEAD_OBS_V2",
+          "attention_weight": 0.0293,
+          "associated_leads": [
+            "V2"
+          ],
+          "is_observable_in_mask": true
+        },
+        {
+          "token_id": "LEAD_OBS_V6",
+          "attention_weight": 0.0263,
+          "associated_leads": [
+            "V6"
+          ],
+          "is_observable_in_mask": true
+        },
+        {
+          "token_id": "LEAD_OBS_V1",
+          "attention_weight": 0.0257,
+          "associated_leads": [
+            "V1"
+          ],
+          "is_observable_in_mask": true
+        },
+        {
+          "token_id": "LEAD_OBS_V4",
+          "attention_weight": 0.0253,
+          "associated_leads": [
+            "V4"
+          ],
+          "is_observable_in_mask": true
+        }
+      ],
+      "contradicting_evidence": [],
+      "uncertainty": 0.283,
+      "lead_observability": {
+        "active_lead_count": 8,
+        "active_leads": [
+          "I",
+          "II",
+          "V1",
+          "V2",
+          "V3",
+          "V4",
+          "V5",
+          "V6"
+        ],
+        "masked_leads": [
+          "III",
+          "aVR",
+          "aVL",
+          "aVF"
+        ]
+      }
+    },
+    {
+      "record_id": "test_fold10_0008",
+      "path_type": "CONTROL_ECG_ONLY",
+      "top_hypothesis": {
+        "acronym": "NORM",
+        "disease_name": "Normal ECG",
+        "confidence": 0.8803
+      },
+      "posterior_probabilities": {
+        "NORM": 0.8803,
+        "AFIB": 0.0016,
+        "RBBB": 0.0151,
+        "LBBB": 0.0023,
+        "SBRAD": 0.0022,
+        "STACH": 0.0022,
+        "1AVB": 0.0004,
+        "MI": 0.0491
+      },
+      "supporting_evidence": [
+        {
+          "token_id": "LEAD_OBS_V2",
+          "attention_weight": 0.0288,
+          "associated_leads": [
+            "V2"
+          ],
+          "is_observable_in_mask": true
+        },
+        {
+          "token_id": "LEAD_OBS_V6",
+          "attention_weight": 0.0266,
+          "associated_leads": [
+            "V6"
+          ],
+          "is_observable_in_mask": true
+        },
+        {
+          "token_id": "ECG_CONTINUOUS_FM",
+          "attention_weight": 0.0261,
+          "associated_leads": [],
+          "is_observable_in_mask": true
+        },
+        {
+          "token_id": "LEAD_OBS_V1",
+          "attention_weight": 0.0258,
+          "associated_leads": [
+            "V1"
+          ],
+          "is_observable_in_mask": true
+        }
+      ],
+      "contradicting_evidence": [],
+      "uncertainty": 0.1197,
+      "lead_observability": {
+        "active_lead_count": 8,
+        "active_leads": [
+          "I",
+          "II",
+          "V1",
+          "V2",
+          "V3",
+          "V4",
+          "V5",
+          "V6"
+        ],
+        "masked_leads": [
+          "III",
+          "aVR",
+          "aVL",
+          "aVF"
+        ]
+      }
+    },
+    {
+      "record_id": "test_fold10_0009",
+      "path_type": "CONTROL_ECG_ONLY",
+      "top_hypothesis": {
+        "acronym": "NORM",
+        "disease_name": "Normal ECG",
+        "confidence": 0.8765
+      },
+      "posterior_probabilities": {
+        "NORM": 0.8765,
+        "AFIB": 0.0017,
+        "RBBB": 0.0728,
+        "LBBB": 0.0023,
+        "SBRAD": 0.0586,
+        "STACH": 0.0027,
+        "1AVB": 0.0006,
+        "MI": 0.0389
+      },
+      "supporting_evidence": [
+        {
+          "token_id": "LEAD_OBS_V2",
+          "attention_weight": 0.03,
+          "associated_leads": [
+            "V2"
+          ],
+          "is_observable_in_mask": true
+        },
+        {
+          "token_id": "LEAD_OBS_V6",
+          "attention_weight": 0.0274,
+          "associated_leads": [
+            "V6"
+          ],
+          "is_observable_in_mask": true
+        },
+        {
+          "token_id": "LEAD_OBS_V1",
+          "attention_weight": 0.0268,
+          "associated_leads": [
+            "V1"
+          ],
+          "is_observable_in_mask": true
+        },
+        {
+          "token_id": "LEAD_OBS_V4",
+          "attention_weight": 0.0261,
+          "associated_leads": [
+            "V4"
+          ],
+          "is_observable_in_mask": true
+        }
+      ],
+      "contradicting_evidence": [],
+      "uncertainty": 0.1235,
+      "lead_observability": {
+        "active_lead_count": 8,
+        "active_leads": [
+          "I",
+          "II",
+          "V1",
+          "V2",
+          "V3",
+          "V4",
+          "V5",
+          "V6"
+        ],
+        "masked_leads": [
+          "III",
+          "aVR",
+          "aVL",
+          "aVF"
+        ]
+      }
+    }
+  ],
+  "6_lead": [
+    {
+      "record_id": "test_fold10_0000",
+      "path_type": "CONTROL_ECG_ONLY",
+      "top_hypothesis": {
+        "acronym": "NORM",
+        "disease_name": "Normal ECG",
+        "confidence": 0.7635
+      },
+      "posterior_probabilities": {
+        "NORM": 0.7635,
+        "AFIB": 0.0022,
+        "RBBB": 0.0567,
+        "LBBB": 0.0025,
+        "SBRAD": 0.0035,
+        "STACH": 0.0024,
+        "1AVB": 0.0025,
+        "MI": 0.0901
+      },
+      "supporting_evidence": [
+        {
+          "token_id": "LEAD_OBS_V2",
+          "attention_weight": 0.0335,
+          "associated_leads": [
+            "V2"
+          ],
+          "is_observable_in_mask": true
+        },
+        {
+          "token_id": "LEAD_OBS_V6",
+          "attention_weight": 0.0308,
+          "associated_leads": [
+            "V6"
+          ],
+          "is_observable_in_mask": true
+        },
+        {
+          "token_id": "LEAD_OBS_V1",
+          "attention_weight": 0.0299,
+          "associated_leads": [
+            "V1"
+          ],
+          "is_observable_in_mask": true
+        },
+        {
+          "token_id": "LEAD_OBS_V5",
+          "attention_weight": 0.0287,
+          "associated_leads": [
+            "V5"
+          ],
+          "is_observable_in_mask": true
+        }
+      ],
+      "contradicting_evidence": [],
+      "uncertainty": 0.2365,
+      "lead_observability": {
+        "active_lead_count": 6,
+        "active_leads": [
+          "I",
+          "II",
+          "V1",
+          "V2",
+          "V5",
+          "V6"
+        ],
+        "masked_leads": [
+          "III",
+          "aVR",
+          "aVL",
+          "aVF",
+          "V3",
+          "V4"
+        ]
+      }
+    },
+    {
+      "record_id": "test_fold10_0001",
+      "path_type": "CONTROL_ECG_ONLY",
+      "top_hypothesis": {
+        "acronym": "MI",
+        "disease_name": "Myocardial Infarction",
+        "confidence": 0.6637
+      },
+      "posterior_probabilities": {
+        "NORM": 0.2537,
+        "AFIB": 0.0047,
+        "RBBB": 0.0455,
+        "LBBB": 0.0042,
+        "SBRAD": 0.0023,
+        "STACH": 0.0026,
+        "1AVB": 0.0314,
+        "MI": 0.6637
+      },
+      "supporting_evidence": [
+        {
+          "token_id": "T_INV_V6",
+          "attention_weight": 0.0227,
+          "associated_leads": [
+            "V6"
+          ],
+          "is_observable_in_mask": true
+        },
+        {
+          "token_id": "T_INV_V5",
+          "attention_weight": 0.0227,
+          "associated_leads": [
+            "V5"
+          ],
+          "is_observable_in_mask": true
+        },
+        {
+          "token_id": "T_INV_V4",
+          "attention_weight": 0.0227,
+          "associated_leads": [
+            "V4"
+          ],
+          "is_observable_in_mask": false
+        },
+        {
+          "token_id": "T_INV_V3",
+          "attention_weight": 0.0227,
+          "associated_leads": [
+            "V3"
+          ],
+          "is_observable_in_mask": false
+        }
+      ],
+      "contradicting_evidence": [],
+      "uncertainty": 0.3363,
+      "lead_observability": {
+        "active_lead_count": 6,
+        "active_leads": [
+          "I",
+          "II",
+          "V1",
+          "V2",
+          "V5",
+          "V6"
+        ],
+        "masked_leads": [
+          "III",
+          "aVR",
+          "aVL",
+          "aVF",
+          "V3",
+          "V4"
+        ]
+      }
+    },
+    {
+      "record_id": "test_fold10_0002",
+      "path_type": "CONTROL_ECG_ONLY",
+      "top_hypothesis": {
+        "acronym": "MI",
+        "disease_name": "Myocardial Infarction",
+        "confidence": 0.455
+      },
+      "posterior_probabilities": {
+        "NORM": 0.3644,
+        "AFIB": 0.0041,
+        "RBBB": 0.0196,
+        "LBBB": 0.019,
+        "SBRAD": 0.0043,
+        "STACH": 0.003,
+        "1AVB": 0.1703,
+        "MI": 0.455
+      },
+      "supporting_evidence": [
+        {
+          "token_id": "T_INV_V6",
+          "attention_weight": 0.0219,
+          "associated_leads": [
+            "V6"
+          ],
+          "is_observable_in_mask": true
+        },
+        {
+          "token_id": "T_INV_V5",
+          "attention_weight": 0.0219,
+          "associated_leads": [
+            "V5"
+          ],
+          "is_observable_in_mask": true
+        },
+        {
+          "token_id": "T_INV_V4",
+          "attention_weight": 0.0219,
+          "associated_leads": [
+            "V4"
+          ],
+          "is_observable_in_mask": false
+        },
+        {
+          "token_id": "T_INV_V3",
+          "attention_weight": 0.0219,
+          "associated_leads": [
+            "V3"
+          ],
+          "is_observable_in_mask": false
+        }
+      ],
+      "contradicting_evidence": [],
+      "uncertainty": 0.545,
+      "lead_observability": {
+        "active_lead_count": 6,
+        "active_leads": [
+          "I",
+          "II",
+          "V1",
+          "V2",
+          "V5",
+          "V6"
+        ],
+        "masked_leads": [
+          "III",
+          "aVR",
+          "aVL",
+          "aVF",
+          "V3",
+          "V4"
+        ]
+      }
+    },
+    {
+      "record_id": "test_fold10_0003",
+      "path_type": "CONTROL_ECG_ONLY",
+      "top_hypothesis": {
+        "acronym": "NORM",
+        "disease_name": "Normal ECG",
+        "confidence": 0.7888
+      },
+      "posterior_probabilities": {
+        "NORM": 0.7888,
+        "AFIB": 0.0031,
+        "RBBB": 0.0498,
+        "LBBB": 0.0036,
+        "SBRAD": 0.0052,
+        "STACH": 0.0028,
+        "1AVB": 0.0065,
+        "MI": 0.1322
+      },
+      "supporting_evidence": [
+        {
+          "token_id": "LEAD_OBS_V2",
+          "attention_weight": 0.0337,
+          "associated_leads": [
+            "V2"
+          ],
+          "is_observable_in_mask": true
+        },
+        {
+          "token_id": "LEAD_OBS_V6",
+          "attention_weight": 0.0313,
+          "associated_leads": [
+            "V6"
+          ],
+          "is_observable_in_mask": true
+        },
+        {
+          "token_id": "ECG_CONTINUOUS_FM",
+          "attention_weight": 0.0311,
+          "associated_leads": [],
+          "is_observable_in_mask": true
+        },
+        {
+          "token_id": "LEAD_OBS_V1",
+          "attention_weight": 0.0303,
+          "associated_leads": [
+            "V1"
+          ],
+          "is_observable_in_mask": true
+        }
+      ],
+      "contradicting_evidence": [],
+      "uncertainty": 0.2112,
+      "lead_observability": {
+        "active_lead_count": 6,
+        "active_leads": [
+          "I",
+          "II",
+          "V1",
+          "V2",
+          "V5",
+          "V6"
+        ],
+        "masked_leads": [
+          "III",
+          "aVR",
+          "aVL",
+          "aVF",
+          "V3",
+          "V4"
+        ]
+      }
+    },
+    {
+      "record_id": "test_fold10_0004",
+      "path_type": "CONTROL_ECG_ONLY",
+      "top_hypothesis": {
+        "acronym": "MI",
+        "disease_name": "Myocardial Infarction",
+        "confidence": 0.4366
+      },
+      "posterior_probabilities": {
+        "NORM": 0.3725,
+        "AFIB": 0.0027,
+        "RBBB": 0.183,
+        "LBBB": 0.0026,
+        "SBRAD": 0.0023,
+        "STACH": 0.0026,
+        "1AVB": 0.0116,
+        "MI": 0.4366
+      },
+      "supporting_evidence": [
+        {
+          "token_id": "T_INV_V6",
+          "attention_weight": 0.0226,
+          "associated_leads": [
+            "V6"
+          ],
+          "is_observable_in_mask": true
+        },
+        {
+          "token_id": "T_INV_V5",
+          "attention_weight": 0.0226,
+          "associated_leads": [
+            "V5"
+          ],
+          "is_observable_in_mask": true
+        },
+        {
+          "token_id": "T_INV_V4",
+          "attention_weight": 0.0226,
+          "associated_leads": [
+            "V4"
+          ],
+          "is_observable_in_mask": false
+        },
+        {
+          "token_id": "T_INV_V3",
+          "attention_weight": 0.0226,
+          "associated_leads": [
+            "V3"
+          ],
+          "is_observable_in_mask": false
+        }
+      ],
+      "contradicting_evidence": [],
+      "uncertainty": 0.5634,
+      "lead_observability": {
+        "active_lead_count": 6,
+        "active_leads": [
+          "I",
+          "II",
+          "V1",
+          "V2",
+          "V5",
+          "V6"
+        ],
+        "masked_leads": [
+          "III",
+          "aVR",
+          "aVL",
+          "aVF",
+          "V3",
+          "V4"
+        ]
+      }
+    },
+    {
+      "record_id": "test_fold10_0005",
+      "path_type": "CONTROL_ECG_ONLY",
+      "top_hypothesis": {
+        "acronym": "NORM",
+        "disease_name": "Normal ECG",
+        "confidence": 0.8993
+      },
+      "posterior_probabilities": {
+        "NORM": 0.8993,
+        "AFIB": 0.0021,
+        "RBBB": 0.0098,
+        "LBBB": 0.0027,
+        "SBRAD": 0.0032,
+        "STACH": 0.0026,
+        "1AVB": 0.0006,
+        "MI": 0.0552
+      },
+      "supporting_evidence": [
+        {
+          "token_id": "LEAD_OBS_V2",
+          "attention_weight": 0.0346,
+          "associated_leads": [
+            "V2"
+          ],
+          "is_observable_in_mask": true
+        },
+        {
+          "token_id": "LEAD_OBS_V6",
+          "attention_weight": 0.0318,
+          "associated_leads": [
+            "V6"
+          ],
+          "is_observable_in_mask": true
+        },
+        {
+          "token_id": "LEAD_OBS_V1",
+          "attention_weight": 0.0313,
+          "associated_leads": [
+            "V1"
+          ],
+          "is_observable_in_mask": true
+        },
+        {
+          "token_id": "LEAD_OBS_V5",
+          "attention_weight": 0.0295,
+          "associated_leads": [
+            "V5"
+          ],
+          "is_observable_in_mask": true
+        }
+      ],
+      "contradicting_evidence": [],
+      "uncertainty": 0.1007,
+      "lead_observability": {
+        "active_lead_count": 6,
+        "active_leads": [
+          "I",
+          "II",
+          "V1",
+          "V2",
+          "V5",
+          "V6"
+        ],
+        "masked_leads": [
+          "III",
+          "aVR",
+          "aVL",
+          "aVF",
+          "V3",
+          "V4"
+        ]
+      }
+    },
+    {
+      "record_id": "test_fold10_0006",
+      "path_type": "CONTROL_ECG_ONLY",
+      "top_hypothesis": {
+        "acronym": "NORM",
+        "disease_name": "Normal ECG",
+        "confidence": 0.783
+      },
+      "posterior_probabilities": {
+        "NORM": 0.783,
+        "AFIB": 0.0021,
+        "RBBB": 0.0601,
+        "LBBB": 0.0031,
+        "SBRAD": 0.0024,
+        "STACH": 0.0029,
+        "1AVB": 0.0016,
+        "MI": 0.0858
+      },
+      "supporting_evidence": [
+        {
+          "token_id": "LEAD_OBS_V2",
+          "attention_weight": 0.0327,
+          "associated_leads": [
+            "V2"
+          ],
+          "is_observable_in_mask": true
+        },
+        {
+          "token_id": "LEAD_OBS_V6",
+          "attention_weight": 0.0303,
+          "associated_leads": [
+            "V6"
+          ],
+          "is_observable_in_mask": true
+        },
+        {
+          "token_id": "LEAD_OBS_V1",
+          "attention_weight": 0.0296,
+          "associated_leads": [
+            "V1"
+          ],
+          "is_observable_in_mask": true
+        },
+        {
+          "token_id": "ECG_CONTINUOUS_FM",
+          "attention_weight": 0.0292,
+          "associated_leads": [],
+          "is_observable_in_mask": true
+        }
+      ],
+      "contradicting_evidence": [],
+      "uncertainty": 0.217,
+      "lead_observability": {
+        "active_lead_count": 6,
+        "active_leads": [
+          "I",
+          "II",
+          "V1",
+          "V2",
+          "V5",
+          "V6"
+        ],
+        "masked_leads": [
+          "III",
+          "aVR",
+          "aVL",
+          "aVF",
+          "V3",
+          "V4"
+        ]
+      }
+    },
+    {
+      "record_id": "test_fold10_0007",
+      "path_type": "CONTROL_ECG_ONLY",
+      "top_hypothesis": {
+        "acronym": "NORM",
+        "disease_name": "Normal ECG",
+        "confidence": 0.6072
+      },
+      "posterior_probabilities": {
+        "NORM": 0.6072,
+        "AFIB": 0.0956,
+        "RBBB": 0.1032,
+        "LBBB": 0.0137,
+        "SBRAD": 0.5388,
+        "STACH": 0.0102,
+        "1AVB": 0.0418,
+        "MI": 0.1018
+      },
+      "supporting_evidence": [
+        {
+          "token_id": "LEAD_OBS_V2",
+          "attention_weight": 0.03,
+          "associated_leads": [
+            "V2"
+          ],
+          "is_observable_in_mask": true
+        },
+        {
+          "token_id": "LEAD_OBS_V6",
+          "attention_weight": 0.0271,
+          "associated_leads": [
+            "V6"
+          ],
+          "is_observable_in_mask": true
+        },
+        {
+          "token_id": "LEAD_OBS_V1",
+          "attention_weight": 0.0264,
+          "associated_leads": [
+            "V1"
+          ],
+          "is_observable_in_mask": true
+        },
+        {
+          "token_id": "LEAD_OBS_I",
+          "attention_weight": 0.026,
+          "associated_leads": [
+            "I"
+          ],
+          "is_observable_in_mask": true
+        }
+      ],
+      "contradicting_evidence": [],
+      "uncertainty": 0.3928,
+      "lead_observability": {
+        "active_lead_count": 6,
+        "active_leads": [
+          "I",
+          "II",
+          "V1",
+          "V2",
+          "V5",
+          "V6"
+        ],
+        "masked_leads": [
+          "III",
+          "aVR",
+          "aVL",
+          "aVF",
+          "V3",
+          "V4"
+        ]
+      }
+    },
+    {
+      "record_id": "test_fold10_0008",
+      "path_type": "CONTROL_ECG_ONLY",
+      "top_hypothesis": {
+        "acronym": "NORM",
+        "disease_name": "Normal ECG",
+        "confidence": 0.7312
+      },
+      "posterior_probabilities": {
+        "NORM": 0.7312,
+        "AFIB": 0.0026,
+        "RBBB": 0.0662,
+        "LBBB": 0.0025,
+        "SBRAD": 0.0038,
+        "STACH": 0.0028,
+        "1AVB": 0.0008,
+        "MI": 0.0838
+      },
+      "supporting_evidence": [
+        {
+          "token_id": "LEAD_OBS_V2",
+          "attention_weight": 0.0318,
+          "associated_leads": [
+            "V2"
+          ],
+          "is_observable_in_mask": true
+        },
+        {
+          "token_id": "LEAD_OBS_V6",
+          "attention_weight": 0.0284,
+          "associated_leads": [
+            "V6"
+          ],
+          "is_observable_in_mask": true
+        },
+        {
+          "token_id": "LEAD_OBS_V1",
+          "attention_weight": 0.0278,
+          "associated_leads": [
+            "V1"
+          ],
+          "is_observable_in_mask": true
+        },
+        {
+          "token_id": "ECG_CONTINUOUS_FM",
+          "attention_weight": 0.0275,
+          "associated_leads": [],
+          "is_observable_in_mask": true
+        }
+      ],
+      "contradicting_evidence": [],
+      "uncertainty": 0.2688,
+      "lead_observability": {
+        "active_lead_count": 6,
+        "active_leads": [
+          "I",
+          "II",
+          "V1",
+          "V2",
+          "V5",
+          "V6"
+        ],
+        "masked_leads": [
+          "III",
+          "aVR",
+          "aVL",
+          "aVF",
+          "V3",
+          "V4"
+        ]
+      }
+    },
+    {
+      "record_id": "test_fold10_0009",
+      "path_type": "CONTROL_ECG_ONLY",
+      "top_hypothesis": {
+        "acronym": "NORM",
+        "disease_name": "Normal ECG",
+        "confidence": 0.7772
+      },
+      "posterior_probabilities": {
+        "NORM": 0.7772,
+        "AFIB": 0.0026,
+        "RBBB": 0.1098,
+        "LBBB": 0.0034,
+        "SBRAD": 0.0882,
+        "STACH": 0.0042,
+        "1AVB": 0.0018,
+        "MI": 0.0705
+      },
+      "supporting_evidence": [
+        {
+          "token_id": "LEAD_OBS_V2",
+          "attention_weight": 0.0309,
+          "associated_leads": [
+            "V2"
+          ],
+          "is_observable_in_mask": true
+        },
+        {
+          "token_id": "LEAD_OBS_V6",
+          "attention_weight": 0.0282,
+          "associated_leads": [
+            "V6"
+          ],
+          "is_observable_in_mask": true
+        },
+        {
+          "token_id": "LEAD_OBS_V1",
+          "attention_weight": 0.0276,
+          "associated_leads": [
+            "V1"
+          ],
+          "is_observable_in_mask": true
+        },
+        {
+          "token_id": "LEAD_OBS_I",
+          "attention_weight": 0.0263,
+          "associated_leads": [
+            "I"
+          ],
+          "is_observable_in_mask": true
+        }
+      ],
+      "contradicting_evidence": [],
+      "uncertainty": 0.2228,
+      "lead_observability": {
+        "active_lead_count": 6,
+        "active_leads": [
+          "I",
+          "II",
+          "V1",
+          "V2",
+          "V5",
+          "V6"
+        ],
+        "masked_leads": [
+          "III",
+          "aVR",
+          "aVL",
+          "aVF",
+          "V3",
+          "V4"
+        ]
+      }
+    }
+  ],
+  "4_lead": [
+    {
+      "record_id": "test_fold10_0000",
+      "path_type": "CONTROL_ECG_ONLY",
+      "top_hypothesis": {
+        "acronym": "NORM",
+        "disease_name": "Normal ECG",
+        "confidence": 0.651
+      },
+      "posterior_probabilities": {
+        "NORM": 0.651,
+        "AFIB": 0.0042,
+        "RBBB": 0.0472,
+        "LBBB": 0.0038,
+        "SBRAD": 0.0077,
+        "STACH": 0.0028,
+        "1AVB": 0.0144,
+        "MI": 0.1355
+      },
+      "supporting_evidence": [
+        {
+          "token_id": "LEAD_OBS_V1",
+          "attention_weight": 0.0328,
+          "associated_leads": [
+            "V1"
+          ],
+          "is_observable_in_mask": true
+        },
+        {
+          "token_id": "LEAD_OBS_V5",
+          "attention_weight": 0.0311,
+          "associated_leads": [
+            "V5"
+          ],
+          "is_observable_in_mask": true
+        },
+        {
+          "token_id": "LEAD_OBS_I",
+          "attention_weight": 0.0306,
+          "associated_leads": [
+            "I"
+          ],
+          "is_observable_in_mask": true
+        },
+        {
+          "token_id": "LEAD_OBS_II",
+          "attention_weight": 0.0271,
+          "associated_leads": [
+            "II"
+          ],
+          "is_observable_in_mask": true
+        }
+      ],
+      "contradicting_evidence": [],
+      "uncertainty": 0.349,
+      "lead_observability": {
+        "active_lead_count": 4,
+        "active_leads": [
+          "I",
+          "II",
+          "V1",
+          "V5"
+        ],
+        "masked_leads": [
+          "III",
+          "aVR",
+          "aVL",
+          "aVF",
+          "V2",
+          "V3",
+          "V4",
+          "V6"
+        ]
+      }
+    },
+    {
+      "record_id": "test_fold10_0001",
+      "path_type": "CONTROL_ECG_ONLY",
+      "top_hypothesis": {
+        "acronym": "MI",
+        "disease_name": "Myocardial Infarction",
+        "confidence": 0.6694
+      },
+      "posterior_probabilities": {
+        "NORM": 0.2456,
+        "AFIB": 0.0027,
+        "RBBB": 0.0848,
+        "LBBB": 0.008,
+        "SBRAD": 0.0037,
+        "STACH": 0.0032,
+        "1AVB": 0.0314,
+        "MI": 0.6694
+      },
+      "supporting_evidence": [
+        {
+          "token_id": "T_INV_V6",
+          "attention_weight": 0.0221,
+          "associated_leads": [
+            "V6"
+          ],
+          "is_observable_in_mask": false
+        },
+        {
+          "token_id": "T_INV_V5",
+          "attention_weight": 0.0221,
+          "associated_leads": [
+            "V5"
+          ],
+          "is_observable_in_mask": true
+        },
+        {
+          "token_id": "T_INV_V4",
+          "attention_weight": 0.0221,
+          "associated_leads": [
+            "V4"
+          ],
+          "is_observable_in_mask": false
+        },
+        {
+          "token_id": "T_INV_V3",
+          "attention_weight": 0.0221,
+          "associated_leads": [
+            "V3"
+          ],
+          "is_observable_in_mask": false
+        }
+      ],
+      "contradicting_evidence": [],
+      "uncertainty": 0.3306,
+      "lead_observability": {
+        "active_lead_count": 4,
+        "active_leads": [
+          "I",
+          "II",
+          "V1",
+          "V5"
+        ],
+        "masked_leads": [
+          "III",
+          "aVR",
+          "aVL",
+          "aVF",
+          "V2",
+          "V3",
+          "V4",
+          "V6"
+        ]
+      }
+    },
+    {
+      "record_id": "test_fold10_0002",
+      "path_type": "CONTROL_ECG_ONLY",
+      "top_hypothesis": {
+        "acronym": "NORM",
+        "disease_name": "Normal ECG",
+        "confidence": 0.4497
+      },
+      "posterior_probabilities": {
+        "NORM": 0.4497,
+        "AFIB": 0.0076,
+        "RBBB": 0.0399,
+        "LBBB": 0.0174,
+        "SBRAD": 0.0096,
+        "STACH": 0.0042,
+        "1AVB": 0.1849,
+        "MI": 0.3129
+      },
+      "supporting_evidence": [
+        {
+          "token_id": "LEAD_OBS_V1",
+          "attention_weight": 0.0302,
+          "associated_leads": [
+            "V1"
+          ],
+          "is_observable_in_mask": true
+        },
+        {
+          "token_id": "LEAD_OBS_V5",
+          "attention_weight": 0.0289,
+          "associated_leads": [
+            "V5"
+          ],
+          "is_observable_in_mask": true
+        },
+        {
+          "token_id": "LEAD_OBS_I",
+          "attention_weight": 0.0285,
+          "associated_leads": [
+            "I"
+          ],
+          "is_observable_in_mask": true
+        },
+        {
+          "token_id": "ECG_CONTINUOUS_FM",
+          "attention_weight": 0.0263,
+          "associated_leads": [],
+          "is_observable_in_mask": true
+        }
+      ],
+      "contradicting_evidence": [],
+      "uncertainty": 0.5503,
+      "lead_observability": {
+        "active_lead_count": 4,
+        "active_leads": [
+          "I",
+          "II",
+          "V1",
+          "V5"
+        ],
+        "masked_leads": [
+          "III",
+          "aVR",
+          "aVL",
+          "aVF",
+          "V2",
+          "V3",
+          "V4",
+          "V6"
+        ]
+      }
+    },
+    {
+      "record_id": "test_fold10_0003",
+      "path_type": "CONTROL_ECG_ONLY",
+      "top_hypothesis": {
+        "acronym": "NORM",
+        "disease_name": "Normal ECG",
+        "confidence": 0.6458
+      },
+      "posterior_probabilities": {
+        "NORM": 0.6458,
+        "AFIB": 0.0109,
+        "RBBB": 0.0622,
+        "LBBB": 0.0087,
+        "SBRAD": 0.016,
+        "STACH": 0.0048,
+        "1AVB": 0.0838,
+        "MI": 0.2394
+      },
+      "supporting_evidence": [
+        {
+          "token_id": "LEAD_OBS_V1",
+          "attention_weight": 0.0345,
+          "associated_leads": [
+            "V1"
+          ],
+          "is_observable_in_mask": true
+        },
+        {
+          "token_id": "ECG_CONTINUOUS_FM",
+          "attention_weight": 0.0332,
+          "associated_leads": [],
+          "is_observable_in_mask": true
+        },
+        {
+          "token_id": "LEAD_OBS_V5",
+          "attention_weight": 0.0329,
+          "associated_leads": [
+            "V5"
+          ],
+          "is_observable_in_mask": true
+        },
+        {
+          "token_id": "LEAD_OBS_I",
+          "attention_weight": 0.0323,
+          "associated_leads": [
+            "I"
+          ],
+          "is_observable_in_mask": true
+        }
+      ],
+      "contradicting_evidence": [],
+      "uncertainty": 0.3542,
+      "lead_observability": {
+        "active_lead_count": 4,
+        "active_leads": [
+          "I",
+          "II",
+          "V1",
+          "V5"
+        ],
+        "masked_leads": [
+          "III",
+          "aVR",
+          "aVL",
+          "aVF",
+          "V2",
+          "V3",
+          "V4",
+          "V6"
+        ]
+      }
+    },
+    {
+      "record_id": "test_fold10_0004",
+      "path_type": "CONTROL_ECG_ONLY",
+      "top_hypothesis": {
+        "acronym": "MI",
+        "disease_name": "Myocardial Infarction",
+        "confidence": 0.62
+      },
+      "posterior_probabilities": {
+        "NORM": 0.2258,
+        "AFIB": 0.0052,
+        "RBBB": 0.2245,
+        "LBBB": 0.0043,
+        "SBRAD": 0.0039,
+        "STACH": 0.0033,
+        "1AVB": 0.0244,
+        "MI": 0.62
+      },
+      "supporting_evidence": [
+        {
+          "token_id": "T_INV_V6",
+          "attention_weight": 0.0222,
+          "associated_leads": [
+            "V6"
+          ],
+          "is_observable_in_mask": false
+        },
+        {
+          "token_id": "T_INV_V5",
+          "attention_weight": 0.0222,
+          "associated_leads": [
+            "V5"
+          ],
+          "is_observable_in_mask": true
+        },
+        {
+          "token_id": "T_INV_V4",
+          "attention_weight": 0.0222,
+          "associated_leads": [
+            "V4"
+          ],
+          "is_observable_in_mask": false
+        },
+        {
+          "token_id": "T_INV_V3",
+          "attention_weight": 0.0222,
+          "associated_leads": [
+            "V3"
+          ],
+          "is_observable_in_mask": false
+        }
+      ],
+      "contradicting_evidence": [],
+      "uncertainty": 0.38,
+      "lead_observability": {
+        "active_lead_count": 4,
+        "active_leads": [
+          "I",
+          "II",
+          "V1",
+          "V5"
+        ],
+        "masked_leads": [
+          "III",
+          "aVR",
+          "aVL",
+          "aVF",
+          "V2",
+          "V3",
+          "V4",
+          "V6"
+        ]
+      }
+    },
+    {
+      "record_id": "test_fold10_0005",
+      "path_type": "CONTROL_ECG_ONLY",
+      "top_hypothesis": {
+        "acronym": "NORM",
+        "disease_name": "Normal ECG",
+        "confidence": 0.8117
+      },
+      "posterior_probabilities": {
+        "NORM": 0.8117,
+        "AFIB": 0.0039,
+        "RBBB": 0.0199,
+        "LBBB": 0.0038,
+        "SBRAD": 0.0067,
+        "STACH": 0.0037,
+        "1AVB": 0.0016,
+        "MI": 0.0587
+      },
+      "supporting_evidence": [
+        {
+          "token_id": "LEAD_OBS_V1",
+          "attention_weight": 0.0337,
+          "associated_leads": [
+            "V1"
+          ],
+          "is_observable_in_mask": true
+        },
+        {
+          "token_id": "LEAD_OBS_V5",
+          "attention_weight": 0.0319,
+          "associated_leads": [
+            "V5"
+          ],
+          "is_observable_in_mask": true
+        },
+        {
+          "token_id": "LEAD_OBS_I",
+          "attention_weight": 0.0312,
+          "associated_leads": [
+            "I"
+          ],
+          "is_observable_in_mask": true
+        },
+        {
+          "token_id": "LEAD_OBS_II",
+          "attention_weight": 0.0277,
+          "associated_leads": [
+            "II"
+          ],
+          "is_observable_in_mask": true
+        }
+      ],
+      "contradicting_evidence": [],
+      "uncertainty": 0.1883,
+      "lead_observability": {
+        "active_lead_count": 4,
+        "active_leads": [
+          "I",
+          "II",
+          "V1",
+          "V5"
+        ],
+        "masked_leads": [
+          "III",
+          "aVR",
+          "aVL",
+          "aVF",
+          "V2",
+          "V3",
+          "V4",
+          "V6"
+        ]
+      }
+    },
+    {
+      "record_id": "test_fold10_0006",
+      "path_type": "CONTROL_ECG_ONLY",
+      "top_hypothesis": {
+        "acronym": "NORM",
+        "disease_name": "Normal ECG",
+        "confidence": 0.6393
+      },
+      "posterior_probabilities": {
+        "NORM": 0.6393,
+        "AFIB": 0.0034,
+        "RBBB": 0.0796,
+        "LBBB": 0.0045,
+        "SBRAD": 0.004,
+        "STACH": 0.0042,
+        "1AVB": 0.004,
+        "MI": 0.0965
+      },
+      "supporting_evidence": [
+        {
+          "token_id": "ECG_CONTINUOUS_FM",
+          "attention_weight": 0.0328,
+          "associated_leads": [],
+          "is_observable_in_mask": true
+        },
+        {
+          "token_id": "LEAD_OBS_V1",
+          "attention_weight": 0.0327,
+          "associated_leads": [
+            "V1"
+          ],
+          "is_observable_in_mask": true
+        },
+        {
+          "token_id": "LEAD_OBS_V5",
+          "attention_weight": 0.0311,
+          "associated_leads": [
+            "V5"
+          ],
+          "is_observable_in_mask": true
+        },
+        {
+          "token_id": "LEAD_OBS_I",
+          "attention_weight": 0.0307,
+          "associated_leads": [
+            "I"
+          ],
+          "is_observable_in_mask": true
+        }
+      ],
+      "contradicting_evidence": [],
+      "uncertainty": 0.3607,
+      "lead_observability": {
+        "active_lead_count": 4,
+        "active_leads": [
+          "I",
+          "II",
+          "V1",
+          "V5"
+        ],
+        "masked_leads": [
+          "III",
+          "aVR",
+          "aVL",
+          "aVF",
+          "V2",
+          "V3",
+          "V4",
+          "V6"
+        ]
+      }
+    },
+    {
+      "record_id": "test_fold10_0007",
+      "path_type": "CONTROL_ECG_ONLY",
+      "top_hypothesis": {
+        "acronym": "NORM",
+        "disease_name": "Normal ECG",
+        "confidence": 0.2776
+      },
+      "posterior_probabilities": {
+        "NORM": 0.2776,
+        "AFIB": 0.0975,
+        "RBBB": 0.1454,
+        "LBBB": 0.1353,
+        "SBRAD": 0.139,
+        "STACH": 0.0713,
+        "1AVB": 0.1869,
+        "MI": 0.2247
+      },
+      "supporting_evidence": [
+        {
+          "token_id": "ECG_CONTINUOUS_FM",
+          "attention_weight": 0.0263,
+          "associated_leads": [],
+          "is_observable_in_mask": true
+        },
+        {
+          "token_id": "LEAD_OBS_V1",
+          "attention_weight": 0.0257,
+          "associated_leads": [
+            "V1"
+          ],
+          "is_observable_in_mask": true
+        },
+        {
+          "token_id": "LEAD_OBS_I",
+          "attention_weight": 0.025,
+          "associated_leads": [
+            "I"
+          ],
+          "is_observable_in_mask": true
+        },
+        {
+          "token_id": "LEAD_OBS_V5",
+          "attention_weight": 0.025,
+          "associated_leads": [
+            "V5"
+          ],
+          "is_observable_in_mask": true
+        }
+      ],
+      "contradicting_evidence": [],
+      "uncertainty": 0.7224,
+      "lead_observability": {
+        "active_lead_count": 4,
+        "active_leads": [
+          "I",
+          "II",
+          "V1",
+          "V5"
+        ],
+        "masked_leads": [
+          "III",
+          "aVR",
+          "aVL",
+          "aVF",
+          "V2",
+          "V3",
+          "V4",
+          "V6"
+        ]
+      }
+    },
+    {
+      "record_id": "test_fold10_0008",
+      "path_type": "CONTROL_ECG_ONLY",
+      "top_hypothesis": {
+        "acronym": "NORM",
+        "disease_name": "Normal ECG",
+        "confidence": 0.7428
+      },
+      "posterior_probabilities": {
+        "NORM": 0.7428,
+        "AFIB": 0.0032,
+        "RBBB": 0.0402,
+        "LBBB": 0.0032,
+        "SBRAD": 0.0056,
+        "STACH": 0.0031,
+        "1AVB": 0.0019,
+        "MI": 0.0824
+      },
+      "supporting_evidence": [
+        {
+          "token_id": "LEAD_OBS_V1",
+          "attention_weight": 0.0318,
+          "associated_leads": [
+            "V1"
+          ],
+          "is_observable_in_mask": true
+        },
+        {
+          "token_id": "LEAD_OBS_V5",
+          "attention_weight": 0.0303,
+          "associated_leads": [
+            "V5"
+          ],
+          "is_observable_in_mask": true
+        },
+        {
+          "token_id": "LEAD_OBS_I",
+          "attention_weight": 0.0296,
+          "associated_leads": [
+            "I"
+          ],
+          "is_observable_in_mask": true
+        },
+        {
+          "token_id": "ECG_CONTINUOUS_FM",
+          "attention_weight": 0.0284,
+          "associated_leads": [],
+          "is_observable_in_mask": true
+        }
+      ],
+      "contradicting_evidence": [],
+      "uncertainty": 0.2572,
+      "lead_observability": {
+        "active_lead_count": 4,
+        "active_leads": [
+          "I",
+          "II",
+          "V1",
+          "V5"
+        ],
+        "masked_leads": [
+          "III",
+          "aVR",
+          "aVL",
+          "aVF",
+          "V2",
+          "V3",
+          "V4",
+          "V6"
+        ]
+      }
+    },
+    {
+      "record_id": "test_fold10_0009",
+      "path_type": "CONTROL_ECG_ONLY",
+      "top_hypothesis": {
+        "acronym": "NORM",
+        "disease_name": "Normal ECG",
+        "confidence": 0.6241
+      },
+      "posterior_probabilities": {
+        "NORM": 0.6241,
+        "AFIB": 0.005,
+        "RBBB": 0.1135,
+        "LBBB": 0.0071,
+        "SBRAD": 0.0622,
+        "STACH": 0.0078,
+        "1AVB": 0.0104,
+        "MI": 0.1087
+      },
+      "supporting_evidence": [
+        {
+          "token_id": "LEAD_OBS_V1",
+          "attention_weight": 0.03,
+          "associated_leads": [
+            "V1"
+          ],
+          "is_observable_in_mask": true
+        },
+        {
+          "token_id": "LEAD_OBS_I",
+          "attention_weight": 0.0284,
+          "associated_leads": [
+            "I"
+          ],
+          "is_observable_in_mask": true
+        },
+        {
+          "token_id": "LEAD_OBS_V5",
+          "attention_weight": 0.0284,
+          "associated_leads": [
+            "V5"
+          ],
+          "is_observable_in_mask": true
+        },
+        {
+          "token_id": "ECG_CONTINUOUS_FM",
+          "attention_weight": 0.0271,
+          "associated_leads": [],
+          "is_observable_in_mask": true
+        }
+      ],
+      "contradicting_evidence": [],
+      "uncertainty": 0.3759,
+      "lead_observability": {
+        "active_lead_count": 4,
+        "active_leads": [
+          "I",
+          "II",
+          "V1",
+          "V5"
+        ],
+        "masked_leads": [
+          "III",
+          "aVR",
+          "aVL",
+          "aVF",
+          "V2",
+          "V3",
+          "V4",
+          "V6"
+        ]
+      }
+    }
+  ],
+  "2_lead": [
+    {
+      "record_id": "test_fold10_0000",
+      "path_type": "CONTROL_ECG_ONLY",
+      "top_hypothesis": {
+        "acronym": "RBBB",
+        "disease_name": "Right Bundle Branch Block",
+        "confidence": 0.3864
+      },
+      "posterior_probabilities": {
+        "NORM": 0.1831,
+        "AFIB": 0.0157,
+        "RBBB": 0.3864,
+        "LBBB": 0.0304,
+        "SBRAD": 0.0521,
+        "STACH": 0.0088,
+        "1AVB": 0.0887,
+        "MI": 0.3485
+      },
+      "supporting_evidence": [
+        {
+          "token_id": "LEAD_OBS_V1",
+          "attention_weight": 0.0612,
+          "associated_leads": [
+            "V1"
+          ],
+          "is_observable_in_mask": true
+        },
+        {
+          "token_id": "LEAD_OBS_II",
+          "attention_weight": 0.053,
+          "associated_leads": [
+            "II"
+          ],
+          "is_observable_in_mask": true
+        },
+        {
+          "token_id": "LEAD_OBS_V5",
+          "attention_weight": 0.0267,
+          "associated_leads": [
+            "V5"
+          ],
+          "is_observable_in_mask": false
+        },
+        {
+          "token_id": "LEAD_OBS_V3",
+          "attention_weight": 0.0262,
+          "associated_leads": [
+            "V3"
+          ],
+          "is_observable_in_mask": false
+        }
+      ],
+      "contradicting_evidence": [],
+      "uncertainty": 0.6136,
+      "lead_observability": {
+        "active_lead_count": 2,
+        "active_leads": [
+          "II",
+          "V1"
+        ],
+        "masked_leads": [
+          "I",
+          "III",
+          "aVR",
+          "aVL",
+          "aVF",
+          "V2",
+          "V3",
+          "V4",
+          "V5",
+          "V6"
+        ]
+      }
+    },
+    {
+      "record_id": "test_fold10_0001",
+      "path_type": "CONTROL_ECG_ONLY",
+      "top_hypothesis": {
+        "acronym": "MI",
+        "disease_name": "Myocardial Infarction",
+        "confidence": 0.7658
+      },
+      "posterior_probabilities": {
+        "NORM": 0.1561,
+        "AFIB": 0.0046,
+        "RBBB": 0.0627,
+        "LBBB": 0.0209,
+        "SBRAD": 0.0112,
+        "STACH": 0.0051,
+        "1AVB": 0.0795,
+        "MI": 0.7658
+      },
+      "supporting_evidence": [
+        {
+          "token_id": "T_INV_V6",
+          "attention_weight": 0.0219,
+          "associated_leads": [
+            "V6"
+          ],
+          "is_observable_in_mask": false
+        },
+        {
+          "token_id": "T_INV_V5",
+          "attention_weight": 0.0219,
+          "associated_leads": [
+            "V5"
+          ],
+          "is_observable_in_mask": false
+        },
+        {
+          "token_id": "T_INV_V4",
+          "attention_weight": 0.0219,
+          "associated_leads": [
+            "V4"
+          ],
+          "is_observable_in_mask": false
+        },
+        {
+          "token_id": "T_INV_V3",
+          "attention_weight": 0.0219,
+          "associated_leads": [
+            "V3"
+          ],
+          "is_observable_in_mask": false
+        }
+      ],
+      "contradicting_evidence": [],
+      "uncertainty": 0.2342,
+      "lead_observability": {
+        "active_lead_count": 2,
+        "active_leads": [
+          "II",
+          "V1"
+        ],
+        "masked_leads": [
+          "I",
+          "III",
+          "aVR",
+          "aVL",
+          "aVF",
+          "V2",
+          "V3",
+          "V4",
+          "V5",
+          "V6"
+        ]
+      }
+    },
+    {
+      "record_id": "test_fold10_0002",
+      "path_type": "CONTROL_ECG_ONLY",
+      "top_hypothesis": {
+        "acronym": "MI",
+        "disease_name": "Myocardial Infarction",
+        "confidence": 0.6391
+      },
+      "posterior_probabilities": {
+        "NORM": 0.2251,
+        "AFIB": 0.0283,
+        "RBBB": 0.2719,
+        "LBBB": 0.0805,
+        "SBRAD": 0.0627,
+        "STACH": 0.0126,
+        "1AVB": 0.3665,
+        "MI": 0.6391
+      },
+      "supporting_evidence": [
+        {
+          "token_id": "T_INV_V6",
+          "attention_weight": 0.0217,
+          "associated_leads": [
+            "V6"
+          ],
+          "is_observable_in_mask": false
+        },
+        {
+          "token_id": "T_INV_V5",
+          "attention_weight": 0.0217,
+          "associated_leads": [
+            "V5"
+          ],
+          "is_observable_in_mask": false
+        },
+        {
+          "token_id": "T_INV_V4",
+          "attention_weight": 0.0217,
+          "associated_leads": [
+            "V4"
+          ],
+          "is_observable_in_mask": false
+        },
+        {
+          "token_id": "T_INV_V3",
+          "attention_weight": 0.0217,
+          "associated_leads": [
+            "V3"
+          ],
+          "is_observable_in_mask": false
+        }
+      ],
+      "contradicting_evidence": [],
+      "uncertainty": 0.3609,
+      "lead_observability": {
+        "active_lead_count": 2,
+        "active_leads": [
+          "II",
+          "V1"
+        ],
+        "masked_leads": [
+          "I",
+          "III",
+          "aVR",
+          "aVL",
+          "aVF",
+          "V2",
+          "V3",
+          "V4",
+          "V5",
+          "V6"
+        ]
+      }
+    },
+    {
+      "record_id": "test_fold10_0003",
+      "path_type": "CONTROL_ECG_ONLY",
+      "top_hypothesis": {
+        "acronym": "NORM",
+        "disease_name": "Normal ECG",
+        "confidence": 0.3367
+      },
+      "posterior_probabilities": {
+        "NORM": 0.3367,
+        "AFIB": 0.0125,
+        "RBBB": 0.1564,
+        "LBBB": 0.0237,
+        "SBRAD": 0.0263,
+        "STACH": 0.009,
+        "1AVB": 0.094,
+        "MI": 0.2748
+      },
+      "supporting_evidence": [
+        {
+          "token_id": "LEAD_OBS_V1",
+          "attention_weight": 0.0351,
+          "associated_leads": [
+            "V1"
+          ],
+          "is_observable_in_mask": true
+        },
+        {
+          "token_id": "LEAD_OBS_II",
+          "attention_weight": 0.0289,
+          "associated_leads": [
+            "II"
+          ],
+          "is_observable_in_mask": true
+        },
+        {
+          "token_id": "ECG_CONTINUOUS_FM",
+          "attention_weight": 0.0229,
+          "associated_leads": [],
+          "is_observable_in_mask": true
+        },
+        {
+          "token_id": "LEAD_OBS_V2",
+          "attention_weight": 0.0227,
+          "associated_leads": [
+            "V2"
+          ],
+          "is_observable_in_mask": false
+        }
+      ],
+      "contradicting_evidence": [],
+      "uncertainty": 0.6633,
+      "lead_observability": {
+        "active_lead_count": 2,
+        "active_leads": [
+          "II",
+          "V1"
+        ],
+        "masked_leads": [
+          "I",
+          "III",
+          "aVR",
+          "aVL",
+          "aVF",
+          "V2",
+          "V3",
+          "V4",
+          "V5",
+          "V6"
+        ]
+      }
+    },
+    {
+      "record_id": "test_fold10_0004",
+      "path_type": "CONTROL_ECG_ONLY",
+      "top_hypothesis": {
+        "acronym": "MI",
+        "disease_name": "Myocardial Infarction",
+        "confidence": 0.4321
+      },
+      "posterior_probabilities": {
+        "NORM": 0.3317,
+        "AFIB": 0.0154,
+        "RBBB": 0.2585,
+        "LBBB": 0.0148,
+        "SBRAD": 0.02,
+        "STACH": 0.0091,
+        "1AVB": 0.0849,
+        "MI": 0.4321
+      },
+      "supporting_evidence": [
+        {
+          "token_id": "T_INV_V6",
+          "attention_weight": 0.0217,
+          "associated_leads": [
+            "V6"
+          ],
+          "is_observable_in_mask": false
+        },
+        {
+          "token_id": "T_INV_V5",
+          "attention_weight": 0.0217,
+          "associated_leads": [
+            "V5"
+          ],
+          "is_observable_in_mask": false
+        },
+        {
+          "token_id": "T_INV_V4",
+          "attention_weight": 0.0217,
+          "associated_leads": [
+            "V4"
+          ],
+          "is_observable_in_mask": false
+        },
+        {
+          "token_id": "T_INV_V3",
+          "attention_weight": 0.0217,
+          "associated_leads": [
+            "V3"
+          ],
+          "is_observable_in_mask": false
+        }
+      ],
+      "contradicting_evidence": [],
+      "uncertainty": 0.5679,
+      "lead_observability": {
+        "active_lead_count": 2,
+        "active_leads": [
+          "II",
+          "V1"
+        ],
+        "masked_leads": [
+          "I",
+          "III",
+          "aVR",
+          "aVL",
+          "aVF",
+          "V2",
+          "V3",
+          "V4",
+          "V5",
+          "V6"
+        ]
+      }
+    },
+    {
+      "record_id": "test_fold10_0005",
+      "path_type": "CONTROL_ECG_ONLY",
+      "top_hypothesis": {
+        "acronym": "MI",
+        "disease_name": "Myocardial Infarction",
+        "confidence": 0.321
+      },
+      "posterior_probabilities": {
+        "NORM": 0.1802,
+        "AFIB": 0.0795,
+        "RBBB": 0.2333,
+        "LBBB": 0.1475,
+        "SBRAD": 0.087,
+        "STACH": 0.0294,
+        "1AVB": 0.2532,
+        "MI": 0.321
+      },
+      "supporting_evidence": [
+        {
+          "token_id": "T_INV_V6",
+          "attention_weight": 0.0213,
+          "associated_leads": [
+            "V6"
+          ],
+          "is_observable_in_mask": false
+        },
+        {
+          "token_id": "T_INV_V5",
+          "attention_weight": 0.0213,
+          "associated_leads": [
+            "V5"
+          ],
+          "is_observable_in_mask": false
+        },
+        {
+          "token_id": "T_INV_V4",
+          "attention_weight": 0.0213,
+          "associated_leads": [
+            "V4"
+          ],
+          "is_observable_in_mask": false
+        },
+        {
+          "token_id": "T_INV_V3",
+          "attention_weight": 0.0213,
+          "associated_leads": [
+            "V3"
+          ],
+          "is_observable_in_mask": false
+        }
+      ],
+      "contradicting_evidence": [],
+      "uncertainty": 0.679,
+      "lead_observability": {
+        "active_lead_count": 2,
+        "active_leads": [
+          "II",
+          "V1"
+        ],
+        "masked_leads": [
+          "I",
+          "III",
+          "aVR",
+          "aVL",
+          "aVF",
+          "V2",
+          "V3",
+          "V4",
+          "V5",
+          "V6"
+        ]
+      }
+    },
+    {
+      "record_id": "test_fold10_0006",
+      "path_type": "CONTROL_ECG_ONLY",
+      "top_hypothesis": {
+        "acronym": "MI",
+        "disease_name": "Myocardial Infarction",
+        "confidence": 0.2461
+      },
+      "posterior_probabilities": {
+        "NORM": 0.2202,
+        "AFIB": 0.0085,
+        "RBBB": 0.2048,
+        "LBBB": 0.0373,
+        "SBRAD": 0.0121,
+        "STACH": 0.01,
+        "1AVB": 0.0639,
+        "MI": 0.2461
+      },
+      "supporting_evidence": [
+        {
+          "token_id": "T_INV_V6",
+          "attention_weight": 0.0215,
+          "associated_leads": [
+            "V6"
+          ],
+          "is_observable_in_mask": false
+        },
+        {
+          "token_id": "T_INV_V5",
+          "attention_weight": 0.0215,
+          "associated_leads": [
+            "V5"
+          ],
+          "is_observable_in_mask": false
+        },
+        {
+          "token_id": "T_INV_V4",
+          "attention_weight": 0.0215,
+          "associated_leads": [
+            "V4"
+          ],
+          "is_observable_in_mask": false
+        },
+        {
+          "token_id": "T_INV_V3",
+          "attention_weight": 0.0215,
+          "associated_leads": [
+            "V3"
+          ],
+          "is_observable_in_mask": false
+        }
+      ],
+      "contradicting_evidence": [],
+      "uncertainty": 0.7539,
+      "lead_observability": {
+        "active_lead_count": 2,
+        "active_leads": [
+          "II",
+          "V1"
+        ],
+        "masked_leads": [
+          "I",
+          "III",
+          "aVR",
+          "aVL",
+          "aVF",
+          "V2",
+          "V3",
+          "V4",
+          "V5",
+          "V6"
+        ]
+      }
+    },
+    {
+      "record_id": "test_fold10_0007",
+      "path_type": "CONTROL_ECG_ONLY",
+      "top_hypothesis": {
+        "acronym": "RBBB",
+        "disease_name": "Right Bundle Branch Block",
+        "confidence": 0.2475
+      },
+      "posterior_probabilities": {
+        "NORM": 0.2223,
+        "AFIB": 0.0658,
+        "RBBB": 0.2475,
+        "LBBB": 0.1702,
+        "SBRAD": 0.14,
+        "STACH": 0.1467,
+        "1AVB": 0.1855,
+        "MI": 0.2307
+      },
+      "supporting_evidence": [
+        {
+          "token_id": "LEAD_OBS_V1",
+          "attention_weight": 0.0502,
+          "associated_leads": [
+            "V1"
+          ],
+          "is_observable_in_mask": true
+        },
+        {
+          "token_id": "LEAD_OBS_II",
+          "attention_weight": 0.0437,
+          "associated_leads": [
+            "II"
+          ],
+          "is_observable_in_mask": true
+        },
+        {
+          "token_id": "LEAD_OBS_V3",
+          "attention_weight": 0.0251,
+          "associated_leads": [
+            "V3"
+          ],
+          "is_observable_in_mask": false
+        },
+        {
+          "token_id": "LEAD_OBS_V5",
+          "attention_weight": 0.0251,
+          "associated_leads": [
+            "V5"
+          ],
+          "is_observable_in_mask": false
+        }
+      ],
+      "contradicting_evidence": [],
+      "uncertainty": 0.7525,
+      "lead_observability": {
+        "active_lead_count": 2,
+        "active_leads": [
+          "II",
+          "V1"
+        ],
+        "masked_leads": [
+          "I",
+          "III",
+          "aVR",
+          "aVL",
+          "aVF",
+          "V2",
+          "V3",
+          "V4",
+          "V5",
+          "V6"
+        ]
+      }
+    },
+    {
+      "record_id": "test_fold10_0008",
+      "path_type": "CONTROL_ECG_ONLY",
+      "top_hypothesis": {
+        "acronym": "NORM",
+        "disease_name": "Normal ECG",
+        "confidence": 0.4214
+      },
+      "posterior_probabilities": {
+        "NORM": 0.4214,
+        "AFIB": 0.0148,
+        "RBBB": 0.0935,
+        "LBBB": 0.0264,
+        "SBRAD": 0.0482,
+        "STACH": 0.0119,
+        "1AVB": 0.0775,
+        "MI": 0.1865
+      },
+      "supporting_evidence": [
+        {
+          "token_id": "LEAD_OBS_V1",
+          "attention_weight": 0.034,
+          "associated_leads": [
+            "V1"
+          ],
+          "is_observable_in_mask": true
+        },
+        {
+          "token_id": "LEAD_OBS_II",
+          "attention_weight": 0.0282,
+          "associated_leads": [
+            "II"
+          ],
+          "is_observable_in_mask": true
+        },
+        {
+          "token_id": "ST_DEP_II",
+          "attention_weight": 0.0267,
+          "associated_leads": [
+            "II"
+          ],
+          "is_observable_in_mask": true
+        },
+        {
+          "token_id": "ECG_CONTINUOUS_FM",
+          "attention_weight": 0.025,
+          "associated_leads": [],
+          "is_observable_in_mask": true
+        }
+      ],
+      "contradicting_evidence": [],
+      "uncertainty": 0.5786,
+      "lead_observability": {
+        "active_lead_count": 2,
+        "active_leads": [
+          "II",
+          "V1"
+        ],
+        "masked_leads": [
+          "I",
+          "III",
+          "aVR",
+          "aVL",
+          "aVF",
+          "V2",
+          "V3",
+          "V4",
+          "V5",
+          "V6"
+        ]
+      }
+    },
+    {
+      "record_id": "test_fold10_0009",
+      "path_type": "CONTROL_ECG_ONLY",
+      "top_hypothesis": {
+        "acronym": "NORM",
+        "disease_name": "Normal ECG",
+        "confidence": 0.3461
+      },
+      "posterior_probabilities": {
+        "NORM": 0.3461,
+        "AFIB": 0.0222,
+        "RBBB": 0.1401,
+        "LBBB": 0.0827,
+        "SBRAD": 0.1966,
+        "STACH": 0.0464,
+        "1AVB": 0.1245,
+        "MI": 0.2252
+      },
+      "supporting_evidence": [
+        {
+          "token_id": "LEAD_OBS_V1",
+          "attention_weight": 0.0316,
+          "associated_leads": [
+            "V1"
+          ],
+          "is_observable_in_mask": true
+        },
+        {
+          "token_id": "LEAD_OBS_II",
+          "attention_weight": 0.0262,
+          "associated_leads": [
+            "II"
+          ],
+          "is_observable_in_mask": true
+        },
+        {
+          "token_id": "ST_DEP_II",
+          "attention_weight": 0.0262,
+          "associated_leads": [
+            "II"
+          ],
+          "is_observable_in_mask": true
+        },
+        {
+          "token_id": "ECG_CONTINUOUS_FM",
+          "attention_weight": 0.024,
+          "associated_leads": [],
+          "is_observable_in_mask": true
+        }
+      ],
+      "contradicting_evidence": [],
+      "uncertainty": 0.6539,
+      "lead_observability": {
+        "active_lead_count": 2,
+        "active_leads": [
+          "II",
+          "V1"
+        ],
+        "masked_leads": [
+          "I",
+          "III",
+          "aVR",
+          "aVL",
+          "aVF",
+          "V2",
+          "V3",
+          "V4",
+          "V5",
+          "V6"
+        ]
+      }
+    }
+  ],
+  "1_lead": [
+    {
+      "record_id": "test_fold10_0000",
+      "path_type": "CONTROL_ECG_ONLY",
+      "top_hypothesis": {
+        "acronym": "MI",
+        "disease_name": "Myocardial Infarction",
+        "confidence": 0.4433
+      },
+      "posterior_probabilities": {
+        "NORM": 0.1717,
+        "AFIB": 0.0374,
+        "RBBB": 0.4015,
+        "LBBB": 0.0949,
+        "SBRAD": 0.0765,
+        "STACH": 0.0225,
+        "1AVB": 0.1963,
+        "MI": 0.4433
+      },
+      "supporting_evidence": [
+        {
+          "token_id": "T_INV_V6",
+          "attention_weight": 0.0216,
+          "associated_leads": [
+            "V6"
+          ],
+          "is_observable_in_mask": false
+        },
+        {
+          "token_id": "T_INV_V5",
+          "attention_weight": 0.0216,
+          "associated_leads": [
+            "V5"
+          ],
+          "is_observable_in_mask": false
+        },
+        {
+          "token_id": "T_INV_V4",
+          "attention_weight": 0.0216,
+          "associated_leads": [
+            "V4"
+          ],
+          "is_observable_in_mask": false
+        },
+        {
+          "token_id": "T_INV_V3",
+          "attention_weight": 0.0216,
+          "associated_leads": [
+            "V3"
+          ],
+          "is_observable_in_mask": false
+        }
+      ],
+      "contradicting_evidence": [],
+      "uncertainty": 0.5567,
+      "lead_observability": {
+        "active_lead_count": 1,
+        "active_leads": [
+          "II"
+        ],
+        "masked_leads": [
+          "I",
+          "III",
+          "aVR",
+          "aVL",
+          "aVF",
+          "V1",
+          "V2",
+          "V3",
+          "V4",
+          "V5",
+          "V6"
+        ]
+      }
+    },
+    {
+      "record_id": "test_fold10_0001",
+      "path_type": "CONTROL_ECG_ONLY",
+      "top_hypothesis": {
+        "acronym": "MI",
+        "disease_name": "Myocardial Infarction",
+        "confidence": 0.5705
+      },
+      "posterior_probabilities": {
+        "NORM": 0.2704,
+        "AFIB": 0.0149,
+        "RBBB": 0.161,
+        "LBBB": 0.1055,
+        "SBRAD": 0.0658,
+        "STACH": 0.0135,
+        "1AVB": 0.2958,
+        "MI": 0.5705
+      },
+      "supporting_evidence": [
+        {
+          "token_id": "T_INV_V6",
+          "attention_weight": 0.0219,
+          "associated_leads": [
+            "V6"
+          ],
+          "is_observable_in_mask": false
+        },
+        {
+          "token_id": "T_INV_V5",
+          "attention_weight": 0.0219,
+          "associated_leads": [
+            "V5"
+          ],
+          "is_observable_in_mask": false
+        },
+        {
+          "token_id": "T_INV_V4",
+          "attention_weight": 0.0219,
+          "associated_leads": [
+            "V4"
+          ],
+          "is_observable_in_mask": false
+        },
+        {
+          "token_id": "T_INV_V3",
+          "attention_weight": 0.0219,
+          "associated_leads": [
+            "V3"
+          ],
+          "is_observable_in_mask": false
+        }
+      ],
+      "contradicting_evidence": [],
+      "uncertainty": 0.4295,
+      "lead_observability": {
+        "active_lead_count": 1,
+        "active_leads": [
+          "II"
+        ],
+        "masked_leads": [
+          "I",
+          "III",
+          "aVR",
+          "aVL",
+          "aVF",
+          "V1",
+          "V2",
+          "V3",
+          "V4",
+          "V5",
+          "V6"
+        ]
+      }
+    },
+    {
+      "record_id": "test_fold10_0002",
+      "path_type": "CONTROL_ECG_ONLY",
+      "top_hypothesis": {
+        "acronym": "MI",
+        "disease_name": "Myocardial Infarction",
+        "confidence": 0.4168
+      },
+      "posterior_probabilities": {
+        "NORM": 0.1271,
+        "AFIB": 0.0342,
+        "RBBB": 0.3008,
+        "LBBB": 0.1278,
+        "SBRAD": 0.0478,
+        "STACH": 0.0217,
+        "1AVB": 0.2568,
+        "MI": 0.4168
+      },
+      "supporting_evidence": [
+        {
+          "token_id": "T_INV_V6",
+          "attention_weight": 0.0215,
+          "associated_leads": [
+            "V6"
+          ],
+          "is_observable_in_mask": false
+        },
+        {
+          "token_id": "T_INV_V5",
+          "attention_weight": 0.0215,
+          "associated_leads": [
+            "V5"
+          ],
+          "is_observable_in_mask": false
+        },
+        {
+          "token_id": "T_INV_V4",
+          "attention_weight": 0.0215,
+          "associated_leads": [
+            "V4"
+          ],
+          "is_observable_in_mask": false
+        },
+        {
+          "token_id": "T_INV_V3",
+          "attention_weight": 0.0215,
+          "associated_leads": [
+            "V3"
+          ],
+          "is_observable_in_mask": false
+        }
+      ],
+      "contradicting_evidence": [],
+      "uncertainty": 0.5832,
+      "lead_observability": {
+        "active_lead_count": 1,
+        "active_leads": [
+          "II"
+        ],
+        "masked_leads": [
+          "I",
+          "III",
+          "aVR",
+          "aVL",
+          "aVF",
+          "V1",
+          "V2",
+          "V3",
+          "V4",
+          "V5",
+          "V6"
+        ]
+      }
+    },
+    {
+      "record_id": "test_fold10_0003",
+      "path_type": "CONTROL_ECG_ONLY",
+      "top_hypothesis": {
+        "acronym": "NORM",
+        "disease_name": "Normal ECG",
+        "confidence": 0.3262
+      },
+      "posterior_probabilities": {
+        "NORM": 0.3262,
+        "AFIB": 0.0184,
+        "RBBB": 0.1388,
+        "LBBB": 0.0582,
+        "SBRAD": 0.0398,
+        "STACH": 0.0171,
+        "1AVB": 0.0761,
+        "MI": 0.2151
+      },
+      "supporting_evidence": [
+        {
+          "token_id": "LEAD_OBS_II",
+          "attention_weight": 0.0296,
+          "associated_leads": [
+            "II"
+          ],
+          "is_observable_in_mask": true
+        },
+        {
+          "token_id": "ECG_CONTINUOUS_FM",
+          "attention_weight": 0.0256,
+          "associated_leads": [],
+          "is_observable_in_mask": true
+        },
+        {
+          "token_id": "LEAD_OBS_V2",
+          "attention_weight": 0.023,
+          "associated_leads": [
+            "V2"
+          ],
+          "is_observable_in_mask": false
+        },
+        {
+          "token_id": "LEAD_OBS_III",
+          "attention_weight": 0.0228,
+          "associated_leads": [
+            "III"
+          ],
+          "is_observable_in_mask": false
+        }
+      ],
+      "contradicting_evidence": [],
+      "uncertainty": 0.6738,
+      "lead_observability": {
+        "active_lead_count": 1,
+        "active_leads": [
+          "II"
+        ],
+        "masked_leads": [
+          "I",
+          "III",
+          "aVR",
+          "aVL",
+          "aVF",
+          "V1",
+          "V2",
+          "V3",
+          "V4",
+          "V5",
+          "V6"
+        ]
+      }
+    },
+    {
+      "record_id": "test_fold10_0004",
+      "path_type": "CONTROL_ECG_ONLY",
+      "top_hypothesis": {
+        "acronym": "NORM",
+        "disease_name": "Normal ECG",
+        "confidence": 0.2777
+      },
+      "posterior_probabilities": {
+        "NORM": 0.2777,
+        "AFIB": 0.0109,
+        "RBBB": 0.2393,
+        "LBBB": 0.0343,
+        "SBRAD": 0.0288,
+        "STACH": 0.0142,
+        "1AVB": 0.0479,
+        "MI": 0.2365
+      },
+      "supporting_evidence": [
+        {
+          "token_id": "LEAD_OBS_II",
+          "attention_weight": 0.0295,
+          "associated_leads": [
+            "II"
+          ],
+          "is_observable_in_mask": true
+        },
+        {
+          "token_id": "ST_DEP_II",
+          "attention_weight": 0.0271,
+          "associated_leads": [
+            "II"
+          ],
+          "is_observable_in_mask": true
+        },
+        {
+          "token_id": "ECG_CONTINUOUS_FM",
+          "attention_weight": 0.0262,
+          "associated_leads": [],
+          "is_observable_in_mask": true
+        },
+        {
+          "token_id": "LEAD_OBS_V2",
+          "attention_weight": 0.022,
+          "associated_leads": [
+            "V2"
+          ],
+          "is_observable_in_mask": false
+        }
+      ],
+      "contradicting_evidence": [],
+      "uncertainty": 0.7223,
+      "lead_observability": {
+        "active_lead_count": 1,
+        "active_leads": [
+          "II"
+        ],
+        "masked_leads": [
+          "I",
+          "III",
+          "aVR",
+          "aVL",
+          "aVF",
+          "V1",
+          "V2",
+          "V3",
+          "V4",
+          "V5",
+          "V6"
+        ]
+      }
+    },
+    {
+      "record_id": "test_fold10_0005",
+      "path_type": "CONTROL_ECG_ONLY",
+      "top_hypothesis": {
+        "acronym": "MI",
+        "disease_name": "Myocardial Infarction",
+        "confidence": 0.3839
+      },
+      "posterior_probabilities": {
+        "NORM": 0.189,
+        "AFIB": 0.0555,
+        "RBBB": 0.2544,
+        "LBBB": 0.1908,
+        "SBRAD": 0.1484,
+        "STACH": 0.0451,
+        "1AVB": 0.2247,
+        "MI": 0.3839
+      },
+      "supporting_evidence": [
+        {
+          "token_id": "T_INV_V6",
+          "attention_weight": 0.0216,
+          "associated_leads": [
+            "V6"
+          ],
+          "is_observable_in_mask": false
+        },
+        {
+          "token_id": "T_INV_V5",
+          "attention_weight": 0.0216,
+          "associated_leads": [
+            "V5"
+          ],
+          "is_observable_in_mask": false
+        },
+        {
+          "token_id": "T_INV_V4",
+          "attention_weight": 0.0216,
+          "associated_leads": [
+            "V4"
+          ],
+          "is_observable_in_mask": false
+        },
+        {
+          "token_id": "T_INV_V3",
+          "attention_weight": 0.0216,
+          "associated_leads": [
+            "V3"
+          ],
+          "is_observable_in_mask": false
+        }
+      ],
+      "contradicting_evidence": [],
+      "uncertainty": 0.6161,
+      "lead_observability": {
+        "active_lead_count": 1,
+        "active_leads": [
+          "II"
+        ],
+        "masked_leads": [
+          "I",
+          "III",
+          "aVR",
+          "aVL",
+          "aVF",
+          "V1",
+          "V2",
+          "V3",
+          "V4",
+          "V5",
+          "V6"
+        ]
+      }
+    },
+    {
+      "record_id": "test_fold10_0006",
+      "path_type": "CONTROL_ECG_ONLY",
+      "top_hypothesis": {
+        "acronym": "NORM",
+        "disease_name": "Normal ECG",
+        "confidence": 0.3125
+      },
+      "posterior_probabilities": {
+        "NORM": 0.3125,
+        "AFIB": 0.015,
+        "RBBB": 0.1123,
+        "LBBB": 0.0749,
+        "SBRAD": 0.0254,
+        "STACH": 0.0198,
+        "1AVB": 0.0747,
+        "MI": 0.2022
+      },
+      "supporting_evidence": [
+        {
+          "token_id": "LEAD_OBS_II",
+          "attention_weight": 0.0275,
+          "associated_leads": [
+            "II"
+          ],
+          "is_observable_in_mask": true
+        },
+        {
+          "token_id": "ECG_CONTINUOUS_FM",
+          "attention_weight": 0.0263,
+          "associated_leads": [],
+          "is_observable_in_mask": true
+        },
+        {
+          "token_id": "LEAD_OBS_V2",
+          "attention_weight": 0.0225,
+          "associated_leads": [
+            "V2"
+          ],
+          "is_observable_in_mask": false
+        },
+        {
+          "token_id": "LEAD_OBS_III",
+          "attention_weight": 0.0221,
+          "associated_leads": [
+            "III"
+          ],
+          "is_observable_in_mask": false
+        }
+      ],
+      "contradicting_evidence": [],
+      "uncertainty": 0.6875,
+      "lead_observability": {
+        "active_lead_count": 1,
+        "active_leads": [
+          "II"
+        ],
+        "masked_leads": [
+          "I",
+          "III",
+          "aVR",
+          "aVL",
+          "aVF",
+          "V1",
+          "V2",
+          "V3",
+          "V4",
+          "V5",
+          "V6"
+        ]
+      }
+    },
+    {
+      "record_id": "test_fold10_0007",
+      "path_type": "CONTROL_ECG_ONLY",
+      "top_hypothesis": {
+        "acronym": "MI",
+        "disease_name": "Myocardial Infarction",
+        "confidence": 0.2456
+      },
+      "posterior_probabilities": {
+        "NORM": 0.2293,
+        "AFIB": 0.0833,
+        "RBBB": 0.2252,
+        "LBBB": 0.2212,
+        "SBRAD": 0.171,
+        "STACH": 0.1507,
+        "1AVB": 0.2326,
+        "MI": 0.2456
+      },
+      "supporting_evidence": [
+        {
+          "token_id": "T_INV_V6",
+          "attention_weight": 0.0212,
+          "associated_leads": [
+            "V6"
+          ],
+          "is_observable_in_mask": false
+        },
+        {
+          "token_id": "T_INV_V5",
+          "attention_weight": 0.0212,
+          "associated_leads": [
+            "V5"
+          ],
+          "is_observable_in_mask": false
+        },
+        {
+          "token_id": "T_INV_V4",
+          "attention_weight": 0.0212,
+          "associated_leads": [
+            "V4"
+          ],
+          "is_observable_in_mask": false
+        },
+        {
+          "token_id": "T_INV_V3",
+          "attention_weight": 0.0212,
+          "associated_leads": [
+            "V3"
+          ],
+          "is_observable_in_mask": false
+        }
+      ],
+      "contradicting_evidence": [],
+      "uncertainty": 0.7544,
+      "lead_observability": {
+        "active_lead_count": 1,
+        "active_leads": [
+          "II"
+        ],
+        "masked_leads": [
+          "I",
+          "III",
+          "aVR",
+          "aVL",
+          "aVF",
+          "V1",
+          "V2",
+          "V3",
+          "V4",
+          "V5",
+          "V6"
+        ]
+      }
+    },
+    {
+      "record_id": "test_fold10_0008",
+      "path_type": "CONTROL_ECG_ONLY",
+      "top_hypothesis": {
+        "acronym": "NORM",
+        "disease_name": "Normal ECG",
+        "confidence": 0.2842
+      },
+      "posterior_probabilities": {
+        "NORM": 0.2842,
+        "AFIB": 0.0292,
+        "RBBB": 0.1693,
+        "LBBB": 0.1171,
+        "SBRAD": 0.0849,
+        "STACH": 0.039,
+        "1AVB": 0.1403,
+        "MI": 0.2243
+      },
+      "supporting_evidence": [
+        {
+          "token_id": "LEAD_OBS_II",
+          "attention_weight": 0.0279,
+          "associated_leads": [
+            "II"
+          ],
+          "is_observable_in_mask": true
+        },
+        {
+          "token_id": "ST_DEP_II",
+          "attention_weight": 0.027,
+          "associated_leads": [
+            "II"
+          ],
+          "is_observable_in_mask": true
+        },
+        {
+          "token_id": "ECG_CONTINUOUS_FM",
+          "attention_weight": 0.0245,
+          "associated_leads": [],
+          "is_observable_in_mask": true
+        },
+        {
+          "token_id": "LEAD_OBS_V2",
+          "attention_weight": 0.0222,
+          "associated_leads": [
+            "V2"
+          ],
+          "is_observable_in_mask": false
+        }
+      ],
+      "contradicting_evidence": [],
+      "uncertainty": 0.7158,
+      "lead_observability": {
+        "active_lead_count": 1,
+        "active_leads": [
+          "II"
+        ],
+        "masked_leads": [
+          "I",
+          "III",
+          "aVR",
+          "aVL",
+          "aVF",
+          "V1",
+          "V2",
+          "V3",
+          "V4",
+          "V5",
+          "V6"
+        ]
+      }
+    },
+    {
+      "record_id": "test_fold10_0009",
+      "path_type": "CONTROL_ECG_ONLY",
+      "top_hypothesis": {
+        "acronym": "NORM",
+        "disease_name": "Normal ECG",
+        "confidence": 0.3067
+      },
+      "posterior_probabilities": {
+        "NORM": 0.3067,
+        "AFIB": 0.0284,
+        "RBBB": 0.1689,
+        "LBBB": 0.1249,
+        "SBRAD": 0.1763,
+        "STACH": 0.0625,
+        "1AVB": 0.1254,
+        "MI": 0.2382
+      },
+      "supporting_evidence": [
+        {
+          "token_id": "LEAD_OBS_II",
+          "attention_weight": 0.0274,
+          "associated_leads": [
+            "II"
+          ],
+          "is_observable_in_mask": true
+        },
+        {
+          "token_id": "ST_DEP_II",
+          "attention_weight": 0.0267,
+          "associated_leads": [
+            "II"
+          ],
+          "is_observable_in_mask": true
+        },
+        {
+          "token_id": "ECG_CONTINUOUS_FM",
+          "attention_weight": 0.0249,
+          "associated_leads": [],
+          "is_observable_in_mask": true
+        },
+        {
+          "token_id": "LEAD_OBS_V2",
+          "attention_weight": 0.0221,
+          "associated_leads": [
+            "V2"
+          ],
+          "is_observable_in_mask": false
+        }
+      ],
+      "contradicting_evidence": [],
+      "uncertainty": 0.6933,
+      "lead_observability": {
+        "active_lead_count": 1,
+        "active_leads": [
+          "II"
+        ],
+        "masked_leads": [
+          "I",
+          "III",
+          "aVR",
+          "aVL",
+          "aVF",
+          "V1",
+          "V2",
+          "V3",
+          "V4",
+          "V5",
+          "V6"
+        ]
+      }
+    }
+  ]
+}

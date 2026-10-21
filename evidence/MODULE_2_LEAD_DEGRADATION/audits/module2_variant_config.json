@@ -1,0 +1,594 @@
+{
+  "module": "Module 2 (Progressive ECG Lead Masking and Availability-Mask Generation)",
+  "generation_timestamp_utc": "2026-10-12 13:45:50 UTC",
+  "source_module1_path": "runs/module1_v2",
+  "target_module2_path": "runs/module2_v1",
+  "canonical_lead_order": [
+    "I",
+    "II",
+    "III",
+    "aVR",
+    "aVL",
+    "aVF",
+    "V1",
+    "V2",
+    "V3",
+    "V4",
+    "V5",
+    "V6"
+  ],
+  "canonical_lead_indices": {
+    "I": 0,
+    "II": 1,
+    "III": 2,
+    "aVR": 3,
+    "aVL": 4,
+    "aVF": 5,
+    "V1": 6,
+    "V2": 7,
+    "V3": 8,
+    "V4": 9,
+    "V5": 10,
+    "V6": 11
+  },
+  "masking_formula": "X_masked[l, t] = X[l, t] * m[l] (l in 0..11, t in 0..999)",
+  "tensor_contract": {
+    "shape": [
+      12,
+      1000
+    ],
+    "dtype": "float32",
+    "units": "mV",
+    "sampling_rate_hz": 100.0,
+    "duration_seconds": 10.0
+  },
+  "target_diseases": [
+    "NORM",
+    "AFIB",
+    "RBBB",
+    "LBBB",
+    "SBRAD",
+    "STACH",
+    "1AVB",
+    "MI"
+  ],
+  "total_records_per_variant": 36888,
+  "split_counts": {
+    "train": 25825,
+    "validation": 3688,
+    "test": 7375
+  },
+  "total_physical_arrays_across_all_variants": 258216,
+  "variants": {
+    "12-lead": {
+      "variant_name": "12-lead",
+      "n_available_leads": 12,
+      "available_leads": [
+        "I",
+        "II",
+        "III",
+        "aVR",
+        "aVL",
+        "aVF",
+        "V1",
+        "V2",
+        "V3",
+        "V4",
+        "V5",
+        "V6"
+      ],
+      "unavailable_leads": [],
+      "available_indices": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11
+      ],
+      "unavailable_indices": [],
+      "canonical_lead_order": [
+        "I",
+        "II",
+        "III",
+        "aVR",
+        "aVL",
+        "aVF",
+        "V1",
+        "V2",
+        "V3",
+        "V4",
+        "V5",
+        "V6"
+      ],
+      "lead_availability_vector": [
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true
+      ],
+      "masking_formula": "X_masked[l, t] = X[l, t] * m[l]",
+      "clinical_rationale": "Standard clinical 12-lead diagnostic electrocardiogram providing full frontal and horizontal plane vector coverage. Serves as unmasked baseline.",
+      "tensor_contract": {
+        "shape": [
+          12,
+          1000
+        ],
+        "dtype": "float32",
+        "units": "mV",
+        "sampling_rate_hz": 100.0,
+        "duration_seconds": 10.0
+      }
+    },
+    "10-lead": {
+      "variant_name": "10-lead",
+      "n_available_leads": 10,
+      "available_leads": [
+        "I",
+        "II",
+        "aVR",
+        "aVL",
+        "V1",
+        "V2",
+        "V3",
+        "V4",
+        "V5",
+        "V6"
+      ],
+      "unavailable_leads": [
+        "III",
+        "aVF"
+      ],
+      "available_indices": [
+        0,
+        1,
+        3,
+        4,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11
+      ],
+      "unavailable_indices": [
+        2,
+        5
+      ],
+      "canonical_lead_order": [
+        "I",
+        "II",
+        "III",
+        "aVR",
+        "aVL",
+        "aVF",
+        "V1",
+        "V2",
+        "V3",
+        "V4",
+        "V5",
+        "V6"
+      ],
+      "lead_availability_vector": [
+        true,
+        true,
+        false,
+        true,
+        true,
+        false,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true
+      ],
+      "masking_formula": "X_masked[l, t] = X[l, t] * m[l]",
+      "clinical_rationale": "Reduced frontal-plane acquisition omitting leads III and aVF, which in classical electrocardiography can be derived via Einthoven's and Goldberger's equations. Here no reconstruction is performed; unavailable leads remain exactly zeroed.",
+      "tensor_contract": {
+        "shape": [
+          12,
+          1000
+        ],
+        "dtype": "float32",
+        "units": "mV",
+        "sampling_rate_hz": 100.0,
+        "duration_seconds": 10.0
+      }
+    },
+    "8-lead": {
+      "variant_name": "8-lead",
+      "n_available_leads": 8,
+      "available_leads": [
+        "I",
+        "II",
+        "V1",
+        "V2",
+        "V3",
+        "V4",
+        "V5",
+        "V6"
+      ],
+      "unavailable_leads": [
+        "III",
+        "aVR",
+        "aVL",
+        "aVF"
+      ],
+      "available_indices": [
+        0,
+        1,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11
+      ],
+      "unavailable_indices": [
+        2,
+        3,
+        4,
+        5
+      ],
+      "canonical_lead_order": [
+        "I",
+        "II",
+        "III",
+        "aVR",
+        "aVL",
+        "aVF",
+        "V1",
+        "V2",
+        "V3",
+        "V4",
+        "V5",
+        "V6"
+      ],
+      "lead_availability_vector": [
+        true,
+        true,
+        false,
+        false,
+        false,
+        false,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true
+      ],
+      "masking_formula": "X_masked[l, t] = X[l, t] * m[l]",
+      "clinical_rationale": "Standard eight independent acquisition channels (Einthoven limb leads I and II, plus precordial leads V1-V6) commonly captured by digital ECG hardware. Augmented leads and lead III are omitted without reconstruction.",
+      "tensor_contract": {
+        "shape": [
+          12,
+          1000
+        ],
+        "dtype": "float32",
+        "units": "mV",
+        "sampling_rate_hz": 100.0,
+        "duration_seconds": 10.0
+      }
+    },
+    "6-lead": {
+      "variant_name": "6-lead",
+      "n_available_leads": 6,
+      "available_leads": [
+        "I",
+        "II",
+        "III",
+        "aVR",
+        "aVL",
+        "aVF"
+      ],
+      "unavailable_leads": [
+        "V1",
+        "V2",
+        "V3",
+        "V4",
+        "V5",
+        "V6"
+      ],
+      "available_indices": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5
+      ],
+      "unavailable_indices": [
+        6,
+        7,
+        8,
+        9,
+        10,
+        11
+      ],
+      "canonical_lead_order": [
+        "I",
+        "II",
+        "III",
+        "aVR",
+        "aVL",
+        "aVF",
+        "V1",
+        "V2",
+        "V3",
+        "V4",
+        "V5",
+        "V6"
+      ],
+      "lead_availability_vector": [
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false
+      ],
+      "masking_formula": "X_masked[l, t] = X[l, t] * m[l]",
+      "clinical_rationale": "Limb-leads-only electrocardiogram (frontal plane vectoring). Models portable or ambulatory devices, emergency limb-clamp triage, or situations where chest electrodes cannot be placed.",
+      "tensor_contract": {
+        "shape": [
+          12,
+          1000
+        ],
+        "dtype": "float32",
+        "units": "mV",
+        "sampling_rate_hz": 100.0,
+        "duration_seconds": 10.0
+      }
+    },
+    "4-lead": {
+      "variant_name": "4-lead",
+      "n_available_leads": 4,
+      "available_leads": [
+        "I",
+        "II",
+        "III",
+        "V1"
+      ],
+      "unavailable_leads": [
+        "aVR",
+        "aVL",
+        "aVF",
+        "V2",
+        "V3",
+        "V4",
+        "V5",
+        "V6"
+      ],
+      "available_indices": [
+        0,
+        1,
+        2,
+        6
+      ],
+      "unavailable_indices": [
+        3,
+        4,
+        5,
+        7,
+        8,
+        9,
+        10,
+        11
+      ],
+      "canonical_lead_order": [
+        "I",
+        "II",
+        "III",
+        "aVR",
+        "aVL",
+        "aVF",
+        "V1",
+        "V2",
+        "V3",
+        "V4",
+        "V5",
+        "V6"
+      ],
+      "lead_availability_vector": [
+        true,
+        true,
+        true,
+        false,
+        false,
+        false,
+        true,
+        false,
+        false,
+        false,
+        false,
+        false
+      ],
+      "masking_formula": "X_masked[l, t] = X[l, t] * m[l]",
+      "clinical_rationale": "Four-cable continuous bedside / telemetry monitoring montage (leads I, II, III for frontal rhythm/vector, plus exploratory chest lead V1 for P-wave morphology and bundle branch block differentiation).",
+      "tensor_contract": {
+        "shape": [
+          12,
+          1000
+        ],
+        "dtype": "float32",
+        "units": "mV",
+        "sampling_rate_hz": 100.0,
+        "duration_seconds": 10.0
+      }
+    },
+    "2-lead": {
+      "variant_name": "2-lead",
+      "n_available_leads": 2,
+      "available_leads": [
+        "II",
+        "V1"
+      ],
+      "unavailable_leads": [
+        "I",
+        "III",
+        "aVR",
+        "aVL",
+        "aVF",
+        "V2",
+        "V3",
+        "V4",
+        "V5",
+        "V6"
+      ],
+      "available_indices": [
+        1,
+        6
+      ],
+      "unavailable_indices": [
+        0,
+        2,
+        3,
+        4,
+        5,
+        7,
+        8,
+        9,
+        10,
+        11
+      ],
+      "canonical_lead_order": [
+        "I",
+        "II",
+        "III",
+        "aVR",
+        "aVL",
+        "aVF",
+        "V1",
+        "V2",
+        "V3",
+        "V4",
+        "V5",
+        "V6"
+      ],
+      "lead_availability_vector": [
+        false,
+        true,
+        false,
+        false,
+        false,
+        false,
+        true,
+        false,
+        false,
+        false,
+        false,
+        false
+      ],
+      "masking_formula": "X_masked[l, t] = X[l, t] * m[l]",
+      "clinical_rationale": "Dual-channel telemetry monitoring montage. Lead II optimizes rhythm and inferior axis visibility; Lead V1 provides anterior/septal vectoring for QRS morphology.",
+      "tensor_contract": {
+        "shape": [
+          12,
+          1000
+        ],
+        "dtype": "float32",
+        "units": "mV",
+        "sampling_rate_hz": 100.0,
+        "duration_seconds": 10.0
+      }
+    },
+    "1-lead": {
+      "variant_name": "1-lead",
+      "n_available_leads": 1,
+      "available_leads": [
+        "II"
+      ],
+      "unavailable_leads": [
+        "I",
+        "III",
+        "aVR",
+        "aVL",
+        "aVF",
+        "V1",
+        "V2",
+        "V3",
+        "V4",
+        "V5",
+        "V6"
+      ],
+      "available_indices": [
+        1
+      ],
+      "unavailable_indices": [
+        0,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11
+      ],
+      "canonical_lead_order": [
+        "I",
+        "II",
+        "III",
+        "aVR",
+        "aVL",
+        "aVF",
+        "V1",
+        "V2",
+        "V3",
+        "V4",
+        "V5",
+        "V6"
+      ],
+      "lead_availability_vector": [
+        false,
+        true,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false
+      ],
+      "masking_formula": "X_masked[l, t] = X[l, t] * m[l]",
+      "clinical_rationale": "Single-lead rhythm strip (Lead II). Corresponds to single-channel rhythm monitors, emergency defibrillator pad view, and consumer single-lead wearable patches.",
+      "tensor_contract": {
+        "shape": [
+          12,
+          1000
+        ],
+        "dtype": "float32",
+        "units": "mV",
+        "sampling_rate_hz": 100.0,
+        "duration_seconds": 10.0
+      }
+    }
+  }
+}

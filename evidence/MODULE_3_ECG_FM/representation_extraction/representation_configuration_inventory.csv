@@ -1,0 +1,8 @@
+lead_configuration,expected_embeddings,generated_embeddings,finite_values_pct,uniform_file_size_bytes,embedding_dimension,dtype,mean_vector_norm,mean_cosine_similarity_to_12lead,cosine_drift_from_baseline
+12-lead,36888,36888,100.0,3200,768,float32,14.887,1.0,0.0
+10-lead,36888,36888,100.0,3200,768,float32,14.872,0.998051,0.001949
+8-lead,36888,36888,100.0,3200,768,float32,14.846,0.997095,0.002905
+6-lead,36888,36888,100.0,3200,768,float32,13.914,0.877548,0.122452
+4-lead,36888,36888,100.0,3200,768,float32,14.12,0.904078,0.095922
+2-lead,36888,36888,100.0,3200,768,float32,13.842,0.876178,0.123822
+1-lead,36888,36888,100.0,3200,768,float32,13.125,0.814373,0.185627

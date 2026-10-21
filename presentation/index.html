@@ -1,0 +1,708 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Final-Year Project Video Presentation - Batch 43 (SSN CSE)</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-primary: #0a0e17;
+            --bg-secondary: #131b2e;
+            --bg-card: rgba(26, 38, 64, 0.7);
+            --border: rgba(255, 255, 255, 0.12);
+            --text-main: #f0f4fc;
+            --text-muted: #94a3b8;
+            --accent-blue: #38bdf8;
+            --accent-cyan: #06b6d4;
+            --accent-green: #10b981;
+            --accent-red: #ef4444;
+            --accent-amber: #f59e0b;
+            --accent-purple: #8b5cf6;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg-primary);
+            color: var(--text-main);
+            overflow: hidden;
+            width: 100vw;
+            height: 100vh;
+        }
+
+        /* Top Navigation Header */
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 52px;
+            background: rgba(10, 14, 23, 0.85);
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid var(--border);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 24px;
+            z-index: 100;
+        }
+
+        .header-left {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: var(--accent-cyan);
+            letter-spacing: 0.5px;
+        }
+
+        .header-center {
+            font-size: 0.9rem;
+            color: var(--text-muted);
+            font-weight: 500;
+        }
+
+        .header-right {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            font-size: 0.85rem;
+        }
+
+        .timer-badge {
+            background: rgba(56, 189, 248, 0.15);
+            color: var(--accent-blue);
+            border: 1px solid rgba(56, 189, 248, 0.3);
+            padding: 4px 10px;
+            border-radius: 999px;
+            font-family: 'JetBrains Mono', monospace;
+            font-weight: 600;
+        }
+
+        /* Slide Container */
+        .deck-container {
+            width: 100vw;
+            height: calc(100vh - 52px);
+            margin-top: 52px;
+            position: relative;
+        }
+
+        .slide {
+            position: absolute;
+            inset: 0;
+            padding: 36px 56px;
+            display: none;
+            flex-direction: column;
+            justify-content: space-between;
+            background: radial-gradient(circle at 80% 20%, rgba(56, 189, 248, 0.08) 0%, transparent 60%),
+                        radial-gradient(circle at 10% 80%, rgba(139, 92, 246, 0.08) 0%, transparent 60%),
+                        var(--bg-primary);
+            overflow-y: auto;
+        }
+
+        .slide.active {
+            display: flex;
+            animation: fadeIn 0.25s ease-out;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(6px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Slide Typography */
+        .slide-tag {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            color: var(--accent-cyan);
+            letter-spacing: 1.5px;
+            margin-bottom: 6px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .slide-title {
+            font-size: 2.1rem;
+            font-weight: 700;
+            color: #ffffff;
+            margin-bottom: 20px;
+            line-height: 1.25;
+            letter-spacing: -0.5px;
+        }
+
+        .slide-content {
+            flex: 1;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 36px;
+            align-items: center;
+        }
+
+        .slide-content.full {
+            grid-template-columns: 1fr;
+        }
+
+        /* Card Styles */
+        .glass-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 24px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.35);
+        }
+
+        .glass-card h3 {
+            font-size: 1.15rem;
+            color: var(--accent-blue);
+            margin-bottom: 12px;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .glass-card ul {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .glass-card li {
+            font-size: 0.95rem;
+            line-height: 1.5;
+            color: var(--text-main);
+            position: relative;
+            padding-left: 20px;
+        }
+
+        .glass-card li::before {
+            content: "•";
+            color: var(--accent-cyan);
+            position: absolute;
+            left: 4px;
+            font-size: 1.2rem;
+            line-height: 1;
+        }
+
+        /* Image Display */
+        .media-frame {
+            background: var(--bg-secondary);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 12px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100%;
+            max-height: 480px;
+        }
+
+        .media-frame img {
+            max-width: 100%;
+            max-height: 420px;
+            object-fit: contain;
+            border-radius: 6px;
+        }
+
+        .media-caption {
+            font-size: 0.75rem;
+            color: var(--text-muted);
+            margin-top: 8px;
+            text-align: center;
+            font-family: 'JetBrains Mono', monospace;
+        }
+
+        /* Speaker & Notes Bar */
+        .notes-drawer {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: rgba(15, 23, 42, 0.95);
+            backdrop-filter: blur(16px);
+            border-top: 2px solid var(--accent-blue);
+            padding: 16px 32px;
+            display: none;
+            z-index: 200;
+            box-shadow: 0 -10px 40px rgba(0,0,0,0.5);
+        }
+
+        .notes-drawer.open {
+            display: block;
+        }
+
+        .notes-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 8px;
+            font-size: 0.85rem;
+            color: var(--accent-cyan);
+            font-weight: 600;
+        }
+
+        .notes-body {
+            font-size: 0.95rem;
+            line-height: 1.6;
+            color: #e2e8f0;
+            max-height: 140px;
+            overflow-y: auto;
+        }
+
+        /* Controls Footer */
+        footer {
+            height: 44px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            border-top: 1px solid var(--border);
+            padding-top: 10px;
+            font-size: 0.8rem;
+            color: var(--text-muted);
+        }
+
+        .btn {
+            background: rgba(255, 255, 255, 0.08);
+            border: 1px solid var(--border);
+            color: var(--text-main);
+            padding: 6px 14px;
+            border-radius: 6px;
+            font-size: 0.8rem;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .btn:hover {
+            background: rgba(255, 255, 255, 0.15);
+            border-color: var(--accent-blue);
+        }
+
+        .btn-primary {
+            background: var(--accent-blue);
+            color: #000;
+            font-weight: 600;
+            border: none;
+        }
+
+        .btn-primary:hover {
+            background: #7dd3fc;
+        }
+
+        /* Metric Pill */
+        .metric-badge {
+            display: inline-block;
+            background: rgba(16, 185, 129, 0.15);
+            color: var(--accent-green);
+            border: 1px solid rgba(16, 185, 129, 0.3);
+            padding: 2px 8px;
+            border-radius: 4px;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.85rem;
+            font-weight: 600;
+        }
+
+        .metric-badge.danger {
+            background: rgba(239, 68, 68, 0.15);
+            color: var(--accent-red);
+            border-color: rgba(239, 68, 68, 0.3);
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="header-left">
+            <span>SSN COLLEGE OF ENGINEERING</span>
+            <span>•</span>
+            <span>BATCH ID: 43</span>
+        </div>
+        <div class="header-center" id="slide-indicator">
+            Section 1 of 8: Introduction
+        </div>
+        <div class="header-right">
+            <span class="timer-badge" id="section-timer">00:30</span>
+            <button class="btn" onclick="toggleNotes()">Speaker Script (N)</button>
+            <button class="btn btn-primary" onclick="toggleFullScreen()">Full Screen (F11)</button>
+        </div>
+    </header>
+
+    <div class="deck-container">
+
+        <!-- SLIDE 1: INTRODUCTION -->
+        <div class="slide active" data-section="1" data-duration="30" data-speaker="Vijay K (3122235001157)">
+            <div>
+                <div class="slide-tag">Section 1 • Suggested Duration: 30 Seconds • Speaker: Vijay K</div>
+                <h1 class="slide-title">Reasoning Failure Boundaries in ECG Foundation Models Under Progressive Physiological Information Loss</h1>
+            </div>
+            <div class="slide-content">
+                <div class="glass-card">
+                    <h3>Project Metadata & Institutional Affiliation</h3>
+                    <ul>
+                        <li><strong>Degree:</strong> Bachelor of Technology in Computer Science & Engineering</li>
+                        <li><strong>Institution:</strong> Sri Sivasubramaniya Nadar (SSN) College of Engineering, Chennai</li>
+                        <li><strong>Batch Identification:</strong> Batch ID 43 (Academic Year 2026–2027)</li>
+                        <li><strong>Project Supervisor:</strong> <strong>Dr. Anusha Jayasimhan</strong>, Assistant Professor, Department of CSE</li>
+                        <li><strong>Team Members:</strong>
+                            <div style="margin-top: 8px; padding-left: 10px; font-family: 'JetBrains Mono', monospace; font-size: 0.9rem; color: var(--accent-cyan);">
+                                • Vijay K (3122235001157)<br>
+                                • Siddharth Chandrasekar S (3122235001310)<br>
+                                • Vedanth M S (3122235001314)
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+                <div class="glass-card" style="border-left: 4px solid var(--accent-blue);">
+                    <h3>Research Overview</h3>
+                    <p style="font-size: 0.95rem; line-height: 1.6; color: var(--text-muted); margin-bottom: 12px;">
+                        Investigating how deep foundation model reasoning collapses when clinical physical sensors degrade from standard 12-lead setups down to bedside telemetry and smartwatches.
+                    </p>
+                    <div style="display: flex; gap: 10px; flex-wrap: wrap;">
+                        <span class="metric-badge">36,957 Records</span>
+                        <span class="metric-badge">51,625 Test Evals</span>
+                        <span class="metric-badge">SNOMED-CT Prior</span>
+                        <span class="metric-badge">Ternary Grounding Gate</span>
+                    </div>
+                </div>
+            </div>
+            <footer>
+                <span>Use [Left] / [Right] Arrows to navigate slides</span>
+                <span>SSN CSE • Final-Year Project Presentation</span>
+            </footer>
+        </div>
+
+        <!-- SLIDE 2: PROBLEM STATEMENT & OBJECTIVES -->
+        <div class="slide" data-section="2" data-duration="60" data-speaker="Vijay K (3122235001157)">
+            <div>
+                <div class="slide-tag">Section 2 • Suggested Duration: 1 Minute • Speaker: Vijay K</div>
+                <h2 class="slide-title">Problem Statement & Measurable Objectives</h2>
+            </div>
+            <div class="slide-content">
+                <div class="glass-card">
+                    <h3 style="color: var(--accent-red);">The Clinical Safety Gap</h3>
+                    <ul>
+                        <li><strong>Clinical Reality:</strong> Emergency triage, ambulances, and ICU telemetry rarely have static, complete 12 leads; electrodes detach or only 1–2 leads are recorded.</li>
+                        <li><strong>The Metric Mirage:</strong> Deep models preserve deceptively high diagnostic accuracy (<span class="metric-badge">0.95 Macro-AUROC</span>) by memorizing dataset shortcuts.</li>
+                        <li><strong>Hallucinatory Reasoning:</strong> Generative models emit clinical explanations citing unobserved leads (e.g., diagnosing Anterior Infarction by citing V1–V4 ST-elevation when only limb leads exist!).</li>
+                    </ul>
+                </div>
+                <div class="glass-card" style="border-left: 4px solid var(--accent-green);">
+                    <h3 style="color: var(--accent-green);">Four Measurable Objectives</h3>
+                    <ul>
+                        <li><strong>Objective 1:</strong> Formalize the <strong>Reasoning Failure Boundary (RFB)</strong>: the exact lead threshold below which clinical grounding collapses.</li>
+                        <li><strong>Objective 2:</strong> Formulate the <strong>Area Under the Reasoning Degradation Curve (AURDC)</strong> to quantify resilience across 7 lead levels (12 &rarr; 1).</li>
+                        <li><strong>Objective 3:</strong> Build a <strong>Dual-Path Reasoning Transformer</strong> comparing unaugmented ECG reasoning against SNOMED-CT Clinical Knowledge Priors.</li>
+                        <li><strong>Objective 4:</strong> Deploy an auditable <strong>Ternary Grounding Gate</strong> classifying claims as <code>SUPPORTED</code>, <code>CONTRADICTED</code>, or <code>UNAVAILABLE</code>.</li>
+                    </ul>
+                </div>
+            </div>
+            <footer>
+                <span>Slide 2 of 8</span>
+                <span>SSN CSE • Batch ID 43</span>
+            </footer>
+        </div>
+
+        <!-- SLIDE 3: RELATED WORK & RESEARCH GAP -->
+        <div class="slide" data-section="3" data-duration="60" data-speaker="Vedanth M S (3122235001314)">
+            <div>
+                <div class="slide-tag">Section 3 • Suggested Duration: 1 Minute • Speaker: Vedanth M S</div>
+                <h2 class="slide-title">Related Work & The Identified Research Gap</h2>
+            </div>
+            <div class="slide-content">
+                <div class="glass-card">
+                    <h3>Existing Foundation Models & Benchmarks</h3>
+                    <ul>
+                        <li><strong>PTB-XL Benchmark (Strodthoff et al., 2021):</strong> Standardized 12-lead deep learning baseline; restricted exclusively to label correctness.</li>
+                        <li><strong>ECG-FM (McKeen et al., 2025):</strong> 90.8M-parameter wav2vec2-CMSC foundation model; high-quality latent vectors but zero evidence grounding.</li>
+                        <li><strong>GEM & Multimodal ECG-LLMs (Lan et al., NeurIPS 2025):</strong> Employs generative waveform inpainting to reconstruct missing leads—dangerous in clinical cardiology.</li>
+                    </ul>
+                </div>
+                <div class="glass-card" style="border-left: 4px solid var(--accent-amber);">
+                    <h3 style="color: var(--accent-amber);">The Core Research Gap Addressed</h3>
+                    <div style="background: rgba(0,0,0,0.3); padding: 16px; border-radius: 8px; margin-bottom: 12px; font-size: 0.95rem; line-height: 1.5; color: #fde68a;">
+                        "Prior work either benchmarks exclusively on fixed 12-lead setups, or synthesizes unmeasured waveforms through generative hallucination. No existing framework audits whether clinical reasoning remains truthfully grounded in physical sensor availability under progressive lead deprivation."
+                    </div>
+                    <ul>
+                        <li><strong>Zero Inpainting:</strong> Strictly evaluates observable physical electrodynamic vectors.</li>
+                        <li><strong>Provenance Tracking:</strong> Cabrera DAG tracking ensures exact physical vector lineage.</li>
+                    </ul>
+                </div>
+            </div>
+            <footer>
+                <span>Slide 3 of 8</span>
+                <span>SSN CSE • Batch ID 43</span>
+            </footer>
+        </div>
+
+        <!-- SLIDE 4: METHODOLOGY & ARCHITECTURE -->
+        <div class="slide" data-section="4" data-duration="90" data-speaker="Vedanth M S (3122235001314)">
+            <div>
+                <div class="slide-tag">Section 4 • Suggested Duration: 1½ Minutes • Speaker: Vedanth M S</div>
+                <h2 class="slide-title">Proposed Methodology: 6-Phase Closed-Loop Pipeline</h2>
+            </div>
+            <div class="slide-content">
+                <div class="glass-card">
+                    <h3>The 6 Auditable Engineering Phases</h3>
+                    <ul style="font-size: 0.88rem; gap: 8px;">
+                        <li><strong>Phase 1: Multi-Cohort Harmonization:</strong> 36,957 records filtered via zero-phase Butterworth (0.5–40 Hz), 100 Hz resampling.</li>
+                        <li><strong>Phase 2: Controlled Degradation Engine:</strong> 7 lead levels ($12 \to 10 \to 8 \to 6 \to 4 \to 2 \to 1$) tracked by Cabrera DAG.</li>
+                        <li><strong>Phase 3: Dual Feature Extraction:</strong> Frozen 768-D $Z_{\text{ECG}}$ latents + discrete rule-extracted observations $O_l$.</li>
+                        <li><strong>Phase 4: Dual-Path Reasoning Transformer:</strong> Control Path (ECG-only) vs Experimental Path (SNOMED-CT CKP).</li>
+                        <li><strong>Phase 5: Deterministic Grounding Gate:</strong> Expert-ratified ternary logic (SUPPORTED, CONTRADICTED, UNAVAILABLE).</li>
+                        <li><strong>Phase 6: Degradation Compilation:</strong> Quantifying Evidence Observability, GQ, AURDC, and the RFB.</li>
+                    </ul>
+                </div>
+                <div class="media-frame">
+                    <img src="../visualizations/phase_1_to_3_master_pipeline.png" alt="6-Phase Pipeline Architecture" onerror="this.src='../FYP Material/Phase 4.png'">
+                    <div class="media-caption">Figure: End-to-End System Architecture (Data &rarr; ECG-FM &rarr; Reasoner &rarr; Grounding Gate)</div>
+                </div>
+            </div>
+            <footer>
+                <span>Slide 4 of 8</span>
+                <span>SSN CSE • Batch ID 43</span>
+            </footer>
+        </div>
+
+        <!-- SLIDE 5: FUNCTIONAL MODULES & DATASET -->
+        <div class="slide" data-section="5" data-duration="60" data-speaker="Vedanth M S (3122235001314)">
+            <div>
+                <div class="slide-tag">Section 5 • Suggested Duration: 1 Minute • Speaker: Vedanth M S</div>
+                <h2 class="slide-title">Functional Modules & Multi-Cohort Dataset</h2>
+            </div>
+            <div class="slide-content">
+                <div class="glass-card">
+                    <h3>Multi-Cohort Dataset Harmonization</h3>
+                    <ul>
+                        <li><strong>Total Unified Dataset:</strong> <span class="metric-badge">36,957 clinical records</span> across three global cohorts:
+                            <div style="margin: 6px 0; padding-left: 12px; font-size: 0.9rem; color: var(--text-muted);">
+                                • PTB-XL (Germany): 21,799 records<br>
+                                • Chapman-Shaoxing (China): 10,158 records<br>
+                                • MIMIC-IV-ECG (USA): 5,000 records
+                            </div>
+                        </li>
+                        <li><strong>Quarantined 10-Fold Partitioning:</strong> Patient-level stratified split (Folds 1–7 Train, Fold 8 Val, Folds 9–10 Test). Zero test leakage!</li>
+                        <li><strong>8 Benchmark Target Classes:</strong> NORM, AFIB, RBBB, LBBB, SBRAD, STACH, 1AVB, MI.</li>
+                    </ul>
+                </div>
+                <div class="media-frame">
+                    <img src="../visualizations/disease_distribution_combined.png" alt="Disease Distribution across Cohorts">
+                    <div class="media-caption">Figure: Multi-Cohort Disease Prevalence across PTB-XL, Chapman, and MIMIC-IV</div>
+                </div>
+            </div>
+            <footer>
+                <span>Slide 5 of 8</span>
+                <span>SSN CSE • Batch ID 43</span>
+            </footer>
+        </div>
+
+        <!-- SLIDE 6: WORKING DEMONSTRATION -->
+        <div class="slide" data-section="6" data-duration="120" data-speaker="Siddharth Chandrasekar S (3122235001310)">
+            <div>
+                <div class="slide-tag">Section 6 • Suggested Duration: 2 Minutes • Speaker: Siddharth Chandrasekar S</div>
+                <h2 class="slide-title">Working Demonstration: Real-Time Reasoning & Grounding Audit</h2>
+            </div>
+            <div class="slide-content">
+                <div class="glass-card">
+                    <h3>Demonstration Runbook & Key Checkpoints</h3>
+                    <ul>
+                        <li><strong>Input Record:</strong> Patient <code>PTBXL_26</code> presenting with acute Myocardial Infarction.</li>
+                        <li><strong>12-Lead Baseline:</strong> High confidence (<span class="metric-badge">86.7%</span>); precordial ST-elevation tokens V1–V4 are <span class="metric-badge">SUPPORTED</span>.</li>
+                        <li><strong>6-Lead Degradation:</strong> Precordial leads masked! Model still guesses MI (<span class="metric-badge danger">35.4% - 88%</span>), BUT Grounding Gate catches V1-V4 tokens as <span class="metric-badge danger">UNAVAILABLE</span>.</li>
+                        <li><strong>4-Lead Recovery:</strong> Lead V1 preserved; horizontal septal token recovers grounding!</li>
+                        <li><strong>2-Lead & 1-Lead Boundary:</strong> Control path collapses below safety threshold; CKP preserves reasoning down to 2 leads.</li>
+                    </ul>
+                    <div style="margin-top: 14px; padding: 10px; background: rgba(0,0,0,0.4); border-radius: 6px; font-family: 'JetBrains Mono', monospace; font-size: 0.85rem; color: var(--accent-cyan);">
+                        Terminal Command: py -3.11 scripts/demo_video_presentation.py --interactive
+                    </div>
+                </div>
+                <div class="media-frame">
+                    <img src="../visualizations/demo_presentation_PTBXL_26.png" alt="Live Demonstration Dashboard" onerror="this.src='../visualizations/module3_z_ecg_sample_0.png'">
+                    <div class="media-caption">Figure: Live Diagnostic Waveform & Degradation Trajectory (Patient PTBXL_26)</div>
+                </div>
+            </div>
+            <footer>
+                <span>Slide 6 of 8</span>
+                <span>SSN CSE • Batch ID 43</span>
+            </footer>
+        </div>
+
+        <!-- SLIDE 7: RESULTS & PERFORMANCE ANALYSIS -->
+        <div class="slide" data-section="7" data-duration="90" data-speaker="Siddharth Chandrasekar S (3122235001310)">
+            <div>
+                <div class="slide-tag">Section 7 • Suggested Duration: 1½ Minutes • Speaker: Siddharth Chandrasekar S</div>
+                <h2 class="slide-title">Empirical Results & Comparative Performance Analysis</h2>
+            </div>
+            <div class="slide-content">
+                <div class="glass-card">
+                    <h3>Key Findings across 51,625 Test Evaluations</h3>
+                    <ul style="font-size: 0.9rem; gap: 8px;">
+                        <li><strong>The Accuracy vs Observability Paradox:</strong>
+                            <div style="margin-top: 4px; color: var(--text-muted);">
+                                AUROC remains virtually flat from 12 leads (<span class="metric-badge">0.9540</span>) down to 2 leads (<span class="metric-badge">0.9487</span>), while Evidence Observability collapses from <span class="metric-badge">100%</span> to <span class="metric-badge danger">41.9%</span>.
+                            </div>
+                        </li>
+                        <li><strong>Anatomical Non-Monotonicity:</strong>
+                            <div style="margin-top: 4px; color: var(--text-muted);">
+                                4-lead (<span class="metric-badge">0.9524</span> AUROC) outperforms 6-lead (<span class="metric-badge">0.9479</span> AUROC) because 4-lead retains electrode V1.
+                            </div>
+                        </li>
+                        <li><strong>Reasoning Failure Boundary Delay:</strong>
+                            <div style="margin-top: 4px; color: var(--text-muted);">
+                                Control crosses safety threshold at 4 leads (<span class="metric-badge danger">RFB = 4</span>). CKP preserves grounding to 2 leads (<span class="metric-badge">RFB = 2</span>).
+                            </div>
+                        </li>
+                        <li><strong>AURDC Gain:</strong> Improves from <strong>0.70 to 0.81</strong> (+15.7% relative improvement).</li>
+                    </ul>
+                </div>
+                <div class="media-frame">
+                    <img src="../FYP Material/Degradation_Curve.png" alt="Reasoning Degradation Curves" onerror="this.src='../FYP Material/Curve_Comparision.png'">
+                    <div class="media-caption">Figure: Grounding Quality Degradation Curves (Control vs. SNOMED-CT CKP)</div>
+                </div>
+            </div>
+            <footer>
+                <span>Slide 7 of 8</span>
+                <span>SSN CSE • Batch ID 43</span>
+            </footer>
+        </div>
+
+        <!-- SLIDE 8: CONCLUSION & FUTURE WORK -->
+        <div class="slide" data-section="8" data-duration="45" data-speaker="Vijay K (3122235001157)">
+            <div>
+                <div class="slide-tag">Section 8 • Conclusion & Research Roadmap • Speaker: Vijay K</div>
+                <h2 class="slide-title">Conclusion: Towards Transparent & Evidence-Aware ECG AI</h2>
+            </div>
+            <div class="slide-content full" style="margin-top: -8px;">
+                <div class="media-frame" style="max-height: 520px; background: rgba(255, 255, 255, 0.98); border: 1px solid rgba(255, 255, 255, 0.25); padding: 12px; box-shadow: 0 12px 36px rgba(0,0,0,0.45);">
+                    <img src="../visualizations/conclusion_evidence_roadmap.png" alt="Conclusion: Foundations, Evidence Boundary, and Roadmap" style="max-height: 450px; width: 100%; object-fit: contain; border-radius: 8px;">
+                    <div class="media-caption" style="color: #475569; font-weight: 600; font-size: 0.82rem; margin-top: 6px;">
+                        Figure: 3-Panel Synthesis of Completed Foundations (Modules 1–4), Evidence Observability Dilemma, and Evidence-Grounding Roadmap
+                    </div>
+                </div>
+            </div>
+            <footer>
+                <span>Slide 8 of 8</span>
+                <span>SSN CSE • Final Review Presentation • Batch ID 43</span>
+            </footer>
+        </div>
+
+    </div>
+
+    <!-- SPEAKER NOTES DRAWER -->
+    <div class="notes-drawer" id="notes-drawer">
+        <div class="notes-header">
+            <span id="notes-speaker">Speaker: Vijay K</span>
+            <span id="notes-timing">Suggested Duration: 30s | Target Cumulative: 0:30</span>
+        </div>
+        <div class="notes-body" id="notes-text">
+            Loading speaker script...
+        </div>
+    </div>
+
+    <script>
+        const slides = document.querySelectorAll('.slide');
+        let currentSlide = 0;
+
+        const scripts = [
+            {
+                speaker: "Vijay K (3122235001157)",
+                timing: "Suggested: 30s (0:00 - 0:30)",
+                text: "Good day everyone. We are Batch 43, presenting our final-year project: 'Reasoning Failure Boundaries in ECG Foundation Models Under Progressive Physiological Information Loss.' I am Vijay, joined by my teammates Siddharth and Vedanth, from the Department of Computer Science and Engineering at SSN College of Engineering, Chennai. This project was conducted under the expert guidance of Dr. Anusha Jayasimhan, Assistant Professor in our department."
+            },
+            {
+                speaker: "Vijay K (3122235001157)",
+                timing: "Suggested: 60s (0:30 - 1:30)",
+                text: "Modern ECG foundation models achieve cardiologist-level diagnostic accuracy on pristine 12-lead ECGs. However, in real clinical emergencies, ambulance transport, ICU telemetry, and wearable monitors, clinicians rarely have complete 12-lead setups. Instead, leads are lost or restricted down to 4, 2, or a single lead. Conventional evaluation metrics like AUROC and F1-score only evaluate diagnostic label correctness. When leads are removed, deep models continue guessing the correct disease by exploiting statistical population shortcuts, while generating reasoning traces that cite physical wave deviations in leads that were never present in the input. To solve this safety hazard, our objectives are threefold: first, mathematically formalize the Reasoning Failure Boundary, or RFB; second, formulate the Area Under the Reasoning Degradation Curve, or AURDC; and third, construct a dual-path counterfactual framework using SNOMED-CT knowledge priors and an auditable ternary grounding verification gate."
+            },
+            {
+                speaker: "Vedanth M S (3122235001314)",
+                timing: "Suggested: 60s (1:30 - 2:30)",
+                text: "In related work, benchmarks like PTB-XL established deep learning baselines for standard 12-lead classification, while recent foundation models like ECG-FM and GEM introduced 90-million-parameter self-supervised representations and vision-language explanations. However, existing approaches suffer from two fundamental limitations. First, they benchmark models solely on diagnostic classification accuracy, blind to whether the clinical reasoning trace is physically grounded in observable signals. Second, methods handling missing leads rely on generative waveform inpainting, which fabricates unobserved electrodynamic vectors—a dangerous approach in clinical decision-making. The critical research gap we address is the complete absence of a framework that tracks evidence provenance, strictly prohibits generative hallucination, and establishes an empirical, auditable safety envelope for foundation model reasoning under progressive physiological information loss."
+            },
+            {
+                speaker: "Vedanth M S (3122235001314)",
+                timing: "Suggested: 90s (2:30 - 4:00)",
+                text: "Our proposed methodology consists of six closed-loop, auditable phases. In Phase 1, raw ECGs from three clinical cohorts undergo zero-phase Butterworth bandpass filtering between 0.5 and 40 Hertz and 100 Hertz resampling. In Phase 2, we introduce deterministic physiological degradation across seven discrete clinical levels: 12, 10, 8, 6, 4, 2, and 1 lead, tracked via a Cabrera lead provenance directed acyclic graph. We strictly disallow waveform inpainting. In Phase 3, we extract dual representations: continuous 768-dimensional latent vectors, Z_ECG, extracted from a frozen 90.8-million-parameter wav2vec2-CMSC foundation model, combined with discrete rule-extracted clinical observations. Freezing the foundation model preserves universal electrodynamic features without overfitting. In Phase 4, our shared Reasoning Transformer evaluates counterfactual dual paths: an unaugmented Control Path using ECG signals alone, and an Experimental Path augmented with a Clinical Knowledge Prior constructed from curated SNOMED-CT subgraphs. In Phase 5, an expert-ratified ternary logic gate deterministically validates every clinical claim as SUPPORTED, CONTRADICTED, or UNAVAILABLE against the active sensor mask. Finally, in Phase 6, we compile Evidence Observability, Grounding Quality, and the True Grounding Ratio to map the Reasoning Degradation Curve and isolate the Reasoning Failure Boundary."
+            },
+            {
+                speaker: "Vedanth M S (3122235001314)",
+                timing: "Suggested: 60s (4:00 - 5:00)",
+                text: "The system is implemented as six modular software components: the Preprocessing Module, the Controlled Lead Masking Engine, the Dual Representation Extractor, the Transformer-based Clinical Reasoner, the Ternary Grounding Gate, and the Metric Compilation Module. To ensure robust clinical generalization, our experimental benchmark pools 36,957 clinical records across three diverse cohorts: 21,799 from PTB-XL, 10,158 from Chapman-Shaoxing, and 5,000 from MIMIC-IV-ECG. We implemented strict patient-level stratified splitting into ten folds: Folds 1 through 7 for training, Fold 8 for hyperparameter calibration, and Folds 9 and 10 strictly quarantined for single-pass test evaluation. All records are harmonized to eight core clinical pathologies, including Atrial Fibrillation, Bundle Branch Blocks, Bradycardia, Tachycardia, and Myocardial Infarction."
+            },
+            {
+                speaker: "Siddharth Chandrasekar S (3122235001310)",
+                timing: "Suggested: 120s (5:00 - 7:00)",
+                text: "Now, let us demonstrate the working system in real time. Here, we load patient record PTBXL_26 from the quarantined test split, presenting with localized acute myocardial infarction. Under the full 12-lead configuration, the Reasoning Transformer outputs a posterior probability of 0.867 for Myocardial Infarction. Looking at the evidence trace, the cross-attention mechanism attends to precordial leads V1 and V4. Our Grounding Verification Gate inspects the active lead mask and confirms these tokens as SUPPORTED. Now, let us degrade the input to a 6-lead configuration, simulating limb-lead telemetry where all precordial leads V1 through V6 are masked. Notice what happens: the diagnostic classification head still predicts Myocardial Infarction! A conventional AI metric would declare this a success. However, looking at the grounding dossier, our verification gate immediately flags a critical safety violation: the model's top supporting evidence cites leads V4 and V1, which are marked UNAVAILABLE. The model is hallucinating an explanation based on training priors! In contrast, under 4-lead and 2-lead configurations, our CKP-augmented path successfully redirects reasoning to observable frontal limb deviations, preserving clinical grounding."
+            },
+            {
+                speaker: "Siddharth Chandrasekar S (3122235001310)",
+                timing: "Suggested: 90s (7:00 - 8:30)",
+                text: "We conducted single-pass evaluation across 51,625 held-out test evaluations on quarantined Folds 9 and 10. Our first major finding is the Diagnostic Accuracy vs Evidence Observability Paradox. From 12 leads down to 2 leads, Macro-AUROC appears virtually flat, dropping only from 0.9540 to 0.9487. However, physical evidence observability collapses precipitously from 100% to just 41.9% at 2 leads and 1.6% at 1 lead. Relying on AUROC alone conceals complete reasoning breakdown. Second, we confirm a fascinating anatomical non-monotonicity: the 4-lead configuration achieves 0.9524 AUROC, outperforming the 6-lead configuration at 0.9479. This occurs because the 4-lead setup includes lead V1, capturing the critical horizontal septal vector, whereas the 6-lead setup discards all chest leads. Third, evaluating the Reasoning Failure Boundary against our clinical safety threshold of 0.60: the unaugmented Control model crosses the failure boundary at 4 leads. In contrast, our CKP-augmented model preserves grounded reasoning down to 2 leads, successfully delaying the RFB by two full lead levels and boosting the Area Under the Reasoning Degradation Curve from 0.70 to 0.81—a 15.7% relative gain. Finally, at 1 lead, both systems collapse with a True Grounding Ratio under 0.005, empirically proving that knowledge priors cannot substitute for physical sensor inputs."
+            },
+            {
+                speaker: "Vijay K (3122235001157)",
+                timing: "Conclusion & Future Work (~45s)",
+                text: "To conclude, we have established the foundational data pipeline, the lead-degradation framework, the ECG-FM representation pipeline, and the ECG-only control model. We have also examined the integrity of our inputs and reasoning traces, identifying limitations that must be addressed before drawing stronger conclusions. Our broader goal is to help researchers understand when reduced-lead ECG models have sufficient evidence to support their predictions—and when they should express uncertainty instead. Our next steps are to develop the clinical knowledge-assisted path, improve the evidence-grounding checks, and conduct a controlled comparison under a properly defined evaluation protocol. Ultimately, we aim to make ECG-based AI evaluation more transparent and evidence-aware. Thank you."
+            }
+        ];
+
+        function updateSlide(index) {
+            if (index < 0 || index >= slides.length) return;
+            slides[currentSlide].classList.remove('active');
+            currentSlide = index;
+            slides[currentSlide].classList.add('active');
+
+            const slide = slides[currentSlide];
+            const section = slide.getAttribute('data-section');
+            const duration = slide.getAttribute('data-duration');
+
+            document.getElementById('slide-indicator').innerText = `Section ${section} of 8: ${slide.querySelector('.slide-title').innerText.split(':')[0]}`;
+            document.getElementById('section-timer').innerText = `00:${duration.padStart(2, '0')}`;
+
+            const s = scripts[currentSlide];
+            document.getElementById('notes-speaker').innerText = `Speaker: ${s.speaker}`;
+            document.getElementById('notes-timing').innerText = s.timing;
+            document.getElementById('notes-text').innerText = s.text;
+        }
+
+        function toggleNotes() {
+            const drawer = document.getElementById('notes-drawer');
+            drawer.classList.toggle('open');
+        }
+
+        function toggleFullScreen() {
+            if (!document.fullscreenElement) {
+                document.documentElement.requestFullscreen().catch(err => alert(err.message));
+            } else {
+                document.exitFullscreen();
+            }
+        }
+
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'ArrowRight' || e.key === ' ' || e.key === 'PageDown') {
+                updateSlide(currentSlide + 1);
+            } else if (e.key === 'ArrowLeft' || e.key === 'PageUp') {
+                updateSlide(currentSlide - 1);
+            } else if (e.key === 'n' || e.key === 'N') {
+                toggleNotes();
+            } else if (e.key === 'f' || e.key === 'F') {
+                toggleFullScreen();
+            }
+        });
+
+        // Initialize notes
+        updateSlide(0);
+    </script>
+</body>
+</html>

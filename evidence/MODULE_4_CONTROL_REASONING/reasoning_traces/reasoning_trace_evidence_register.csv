@@ -1,0 +1,8 @@
+lead_configuration,evaluated_records,traces_generated,traces_failed,original_reported_contradictions,original_reported_contradiction_rate_pct,reconciled_physiological_contradictions,reconciled_physiological_contradiction_rate_pct,lead_unavailability_traces,unobservable_tokens_queried,consistent_traces_count,insufficient_evidence_traces_count,epistemic_verdict
+12-lead,3688,3688,0,42,1.14,42,1.14,0,0,989,2657,Low contradiction rate (~1.1%) grounded in complete 12-lead observable criteria
+10-lead,3688,3688,0,37,1.0,37,1.0,0,2245,953,2698,Physiological contradiction flat (1.0%); attention queries masked III/aVF without falsification
+8-lead,3688,3688,0,38,1.03,38,1.03,0,2366,879,2771,Physiological contradiction flat (1.0%); attention queries masked augmented leads
+6-lead,3688,3688,0,289,7.84,43,1.17,246,2814,848,2551,Spike from 43 to 289 caused by 246 RBBB/LBBB traces lacking V1 labeled as contradictions; true HR contradiction is 43 (1.17%)
+4-lead,3688,3688,0,43,1.17,43,1.17,0,2655,896,2749,Physiological contradictions strictly identical to 6-lead (43 vs 43); apparent drop was an artifact of V1 presence reclassifying RBBB/LBBB to Insufficient
+2-lead,3688,3688,0,697,18.9,45,1.22,652,2743,914,2077,Spike from 45 to 697 caused by 652 MI traces lacking contiguous pair; true HR contradiction is 45 (1.22%)
+1-lead,3688,3688,0,836,22.67,54,1.46,782,2730,935,1917,Spike from 54 to 836 caused by 782 MI/RBBB/LBBB traces lacking diagnostic leads; true HR contradiction is 54 (1.46%)

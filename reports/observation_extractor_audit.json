@@ -1,0 +1,106 @@
+{
+  "report_name": "Module 4 Part 1 Linear Observation Extractor Audit",
+  "timestamp": "2026-10-09 10:44:11 UTC",
+  "status": "VALIDATION_GATE_1_PASSED",
+  "dataset_allocation": {
+    "training_samples_evaluated": 1000,
+    "validation_samples_evaluated": 300,
+    "ecosystem_total_records": 36957,
+    "zero_patient_leakage": true
+  },
+  "equations_implemented": {
+    "4.6": "z^(f)_l = W_f Z_l + b_f for f in {rhythm, rate, PR, QRS, ST}",
+    "4.7": "y^(f)_l = argmax softmax(z^(f)_l)"
+  },
+  "validation_metrics": {
+    "accuracy_rhythm": 0.85,
+    "accuracy_rate": 0.84,
+    "accuracy_pr": 0.8767,
+    "accuracy_qrs": 1.0,
+    "accuracy_st_leads": 0.6431,
+    "schema_vocabulary_adherence_percent": 100.0,
+    "masked_leads_leakage_rate": 0.0
+  },
+  "sample_sanitized_finding": {
+    "rhythm": {
+      "value": "Sinus rhythm",
+      "derived_leads": [
+        "I",
+        "II",
+        "III",
+        "aVR",
+        "aVL",
+        "aVF",
+        "V1",
+        "V2",
+        "V3",
+        "V4",
+        "V5",
+        "V6"
+      ]
+    },
+    "rate": {
+      "category": "Normal Rate (60-100 bpm)",
+      "derived_leads": [
+        "II",
+        "V1"
+      ]
+    },
+    "PR": {
+      "category": "Normal (120-200 ms)",
+      "derived_leads": [
+        "II",
+        "V1"
+      ]
+    },
+    "QRS": {
+      "category": "Normal (<120 ms)",
+      "derived_leads": [
+        "V1",
+        "V6"
+      ]
+    },
+    "ST": {
+      "elevation_present": false,
+      "elevation_leads": [],
+      "depression_present": true,
+      "depression_leads": [
+        "II",
+        "V6"
+      ],
+      "lead_states": {
+        "I": "ST_Isoelectric",
+        "II": "ST_Depression",
+        "III": "ST_Isoelectric",
+        "aVR": "ST_Isoelectric",
+        "aVL": "ST_Isoelectric",
+        "aVF": "ST_Isoelectric",
+        "V1": "ST_Isoelectric",
+        "V2": "ST_Isoelectric",
+        "V3": "ST_Isoelectric",
+        "V4": "ST_Isoelectric",
+        "V5": "ST_Isoelectric",
+        "V6": "ST_Depression"
+      }
+    },
+    "lead_attribution": {
+      "active_leads": [
+        "I",
+        "II",
+        "III",
+        "V1",
+        "V2",
+        "V3",
+        "V4",
+        "V5",
+        "V6",
+        "aVF",
+        "aVL",
+        "aVR"
+      ],
+      "masked_leads": [],
+      "observability_preserved": true
+    },
+    "schema_version": "v1.0_strict_clinical_taxonomy"
+  }
+}

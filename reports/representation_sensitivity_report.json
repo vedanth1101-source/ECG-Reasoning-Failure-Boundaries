@@ -1,0 +1,79 @@
+{
+  "timestamp": "2026-10-06 13:17:27 UTC",
+  "model_evaluated": "1D-ResNet baseline + Bottleneck Adapter",
+  "sample_size": 100,
+  "metric_definition": "D_l = 1 - cosine_similarity(Z_12, Z_l)",
+  "interpretation": "D_l increases monotonically as leads are removed, confirming that latent representations sensitively reflect lead degradation without collapsing.",
+  "sensitivity_by_level": {
+    "12_lead": {
+      "num_leads": 12,
+      "mean_cosine_distance": -0.0,
+      "median_cosine_distance": 0.0,
+      "std_cosine_distance": 0.0,
+      "p25": -0.0,
+      "p75": 0.0,
+      "p95": 0.0,
+      "mean_similarity": 1.0
+    },
+    "10_lead": {
+      "num_leads": 10,
+      "mean_cosine_distance": 3e-05,
+      "median_cosine_distance": 2e-05,
+      "std_cosine_distance": 4e-05,
+      "p25": 1e-05,
+      "p75": 4e-05,
+      "p95": 0.00011,
+      "mean_similarity": 0.99997
+    },
+    "8_lead": {
+      "num_leads": 8,
+      "mean_cosine_distance": 0.00011,
+      "median_cosine_distance": 7e-05,
+      "std_cosine_distance": 0.0001,
+      "p25": 4e-05,
+      "p75": 0.00014,
+      "p95": 0.00029,
+      "mean_similarity": 0.99989
+    },
+    "6_lead": {
+      "num_leads": 6,
+      "mean_cosine_distance": 0.00083,
+      "median_cosine_distance": 0.00052,
+      "std_cosine_distance": 0.00094,
+      "p25": 0.00026,
+      "p75": 0.00101,
+      "p95": 0.00266,
+      "mean_similarity": 0.99917
+    },
+    "4_lead": {
+      "num_leads": 4,
+      "mean_cosine_distance": 0.00263,
+      "median_cosine_distance": 0.00166,
+      "std_cosine_distance": 0.00258,
+      "p25": 0.00094,
+      "p75": 0.00335,
+      "p95": 0.0079,
+      "mean_similarity": 0.99737
+    },
+    "2_lead": {
+      "num_leads": 2,
+      "mean_cosine_distance": 0.00317,
+      "median_cosine_distance": 0.0022,
+      "std_cosine_distance": 0.00291,
+      "p25": 0.00117,
+      "p75": 0.00424,
+      "p95": 0.00894,
+      "mean_similarity": 0.99683
+    },
+    "1_lead": {
+      "num_leads": 1,
+      "mean_cosine_distance": 0.00368,
+      "median_cosine_distance": 0.00262,
+      "std_cosine_distance": 0.00324,
+      "p25": 0.00151,
+      "p75": 0.005,
+      "p95": 0.01002,
+      "mean_similarity": 0.99632
+    }
+  }
+}

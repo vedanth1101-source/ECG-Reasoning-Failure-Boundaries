@@ -1,0 +1,108 @@
+{
+  "report_name": "Phase 4 Control Path Preparation Audit",
+  "timestamp": "2026-10-10 06:11:08 UTC",
+  "status": "CONTROL_PATH_PREPARATION_VERIFIED",
+  "path_type": "CONTROL_ECG_ONLY",
+  "ckp_status": "EXCLUDED_BY_DESIGN",
+  "upstream_readiness": {
+    "frozen_ecg_fm": "E:\\ECG\\checkpoints\\ecg_fm\\mimic_iv_ecg_physionet_pretrained.pt",
+    "observation_splits_verified": 9,
+    "test_benchmark_levels_verified": 7,
+    "candidate_disease_count": 8,
+    "candidate_acronyms": [
+      "NORM",
+      "AFIB",
+      "RBBB",
+      "LBBB",
+      "SBRAD",
+      "STACH",
+      "1AVB",
+      "MI"
+    ]
+  },
+  "model_architecture": {
+    "name": "ControlReasoningTransformer",
+    "d_model": 256,
+    "d_ecg": 768,
+    "total_parameters": 1830657,
+    "trainable_parameters": 1830657,
+    "score_head_output": "multi_label_sigmoid (8 candidates)",
+    "attention_head_output": "cross_attention_matrix (8, 51)"
+  },
+  "verification_metrics": {
+    "samples_verified": 5,
+    "fm_extraction_seconds": 0.207,
+    "transformer_inference_seconds": 0.0091,
+    "ckp_rejection_test": "PASS",
+    "trace_generation_test": "PASS"
+  },
+  "sample_trace_preview": {
+    "record_id": "val_rec_0000",
+    "path_type": "CONTROL_ECG_ONLY",
+    "top_hypothesis": {
+      "acronym": "NORM",
+      "disease_name": "Normal ECG",
+      "confidence": 0.5743
+    },
+    "posterior_probabilities": {
+      "NORM": 0.5743,
+      "AFIB": 0.5354,
+      "RBBB": 0.4733,
+      "LBBB": 0.5486,
+      "SBRAD": 0.564,
+      "STACH": 0.5611,
+      "1AVB": 0.5648,
+      "MI": 0.5547
+    },
+    "supporting_evidence": [
+      {
+        "token_id": "ECG_CONTINUOUS_FM",
+        "attention_weight": 0.0203,
+        "associated_leads": [],
+        "is_observable_in_mask": true
+      },
+      {
+        "token_id": "LEAD_OBS_V1",
+        "attention_weight": 0.0201,
+        "associated_leads": [
+          "V1"
+        ],
+        "is_observable_in_mask": true
+      },
+      {
+        "token_id": "LEAD_OBS_V5",
+        "attention_weight": 0.02,
+        "associated_leads": [
+          "V5"
+        ],
+        "is_observable_in_mask": true
+      },
+      {
+        "token_id": "INTERVAL_METRICS",
+        "attention_weight": 0.02,
+        "associated_leads": [],
+        "is_observable_in_mask": true
+      }
+    ],
+    "contradicting_evidence": [],
+    "uncertainty": 0.4257,
+    "lead_observability": {
+      "active_lead_count": 12,
+      "active_leads": [
+        "I",
+        "II",
+        "III",
+        "aVR",
+        "aVL",
+        "aVF",
+        "V1",
+        "V2",
+        "V3",
+        "V4",
+        "V5",
+        "V6"
+      ],
+      "masked_leads": []
+    }
+  }
+}

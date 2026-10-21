@@ -1,0 +1,17 @@
+{
+  "best_val_auc": 0.7628283482705697,
+  "history": [
+    {
+      "epoch": 1,
+      "train_loss": 0.367,
+      "val_loss": 0.3057,
+      "val_macro_auc": 0.7628,
+      "val_macro_f1": 0.0984,
+      "lr": 0.000905
+    }
+  ],
+  "epochs": 5,
+  "device": "cpu",
+  "total_params": 4860296,
+  "trainable_params": 4860296
+}

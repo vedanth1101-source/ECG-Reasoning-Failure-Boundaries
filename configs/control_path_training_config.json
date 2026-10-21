@@ -1,0 +1,174 @@
+{
+  "schema_version": "2.0",
+  "config_name": "CONTROL_PATH_TRAINING_CONFIGURATION",
+  "timestamp": "2026-10-14",
+  "pipeline_stage": "MODULE_4_STAGE_1_PRETRAINING_GATE",
+  "gate_status": "GATE_0_PASSED_STAGE_1_READY",
+  "dataset_splits_and_manifests": {
+    "manifest_source": "runs/module4_v3/splits/split_manifest.csv",
+    "master_freeze_contract": "runs/module1_v2/MODULE1_FROZEN.json",
+    "total_records": 36888,
+    "partition_distribution": {
+      "training_split": {
+        "definition": "split == 'train' (strat_fold in [1, 2, 3, 4, 5, 6, 7])",
+        "record_count": 25825,
+        "percentage": 70.01,
+        "unique_patients": 23818,
+        "permitted_usage": "EXCLUSIVELY for model parameter optimization, gradient computation, and loss minimization."
+      },
+      "validation_split": {
+        "definition": "split == 'validation' (strat_fold == 8)",
+        "record_count": 3688,
+        "percentage": 10.00,
+        "unique_patients": 3394,
+        "permitted_usage": "EXCLUSIVELY for evaluation mode generalization checks, early stopping, checkpoint selection, and post-hoc temperature calibration. ZERO gradient contributions."
+      },
+      "test_split": {
+        "definition": "split == 'test' (strat_fold in [9, 10])",
+        "record_count": 7375,
+        "percentage": 19.99,
+        "unique_patients": 6746,
+        "status": "STRICTLY_QUARANTINED",
+        "permitted_usage": "STRICTLY PROHIBITED FROM ACCESS until Stage 4 evaluation. Zero access during training, validation, model selection, or temperature calibration."
+      }
+    },
+    "patient_leakage_audit": {
+      "train_val_leakage": 0,
+      "train_test_leakage": 0,
+      "val_test_leakage": 0,
+      "zero_leakage_verified": true
+    }
+  },
+  "upstream_module_bindings": {
+    "active_split_manifest": "runs/module4_v3/splits/split_manifest.csv",
+    "frozen_module1_manifest": "runs/module1_v2/splits/split_manifest.csv",
+    "module2_masked_leads": "runs/module2_v1/masked_leads/",
+    "module2_total_arrays": 258216,
+    "module3_representations": "runs/module3_v1/representations/",
+    "module3_total_vectors": 258216,
+    "lead_configurations": "configs/lead_configurations.json"
+  },
+  "candidate_disease_space": {
+    "candidate_count": 8,
+    "acronyms": ["NORM", "AFIB", "RBBB", "LBBB", "SBRAD", "STACH", "1AVB", "MI"],
+    "modality": "multi_hot_multi_label",
+    "contract_reference": "configs/benchmark_candidates.json"
+  },
+  "model_components": {
+    "perception_backbone": {
+      "model_name": "FrozenECGFM",
+      "architecture": "wav2vec2_cmsc",
+      "checkpoint": "checkpoints/ecg_fm/mimic_iv_ecg_physionet_pretrained.pt",
+      "checkpoint_sha256": "4d0142bcb485eb9f0c7845e0c19ff3463f6ae9d0e458eab69136efe90ceb9b7e",
+      "parameters": 90883072,
+      "is_trainable": false,
+      "requires_grad": false,
+      "output_dimension": 768
+    },
+    "observation_extractor": {
+      "type": "Deterministic_AHA_ACC_Rules",
+      "source_module": "src/observations/clinical_extractor.py",
+      "extractor_class": "ClinicalObservationExtractor",
+      "supervision": "Deterministic signal processing on active leads; unobserved leads strictly masked as UNAVAILABLE"
+    },
+    "reasoning_transformer": {
+      "model_name": "ControlReasoningTransformer",
+      "d_model": 256,
+      "d_ecg": 768,
+      "nhead": 4,
+      "num_layers": 2,
+      "dim_feedforward": 512,
+      "dropout": 0.1,
+      "activation": "gelu",
+      "is_trainable": true,
+      "trainable_parameters": 1830657,
+      "ckp_tokens_allowed": 0
+    }
+  },
+  "loss_and_optimization": {
+    "loss_function": "MaskedBCEWithLogitsLoss",
+    "loss_formulation": "Element-wise BCEWithLogitsLoss(reduction='none') masked by 8-target binary observation mask, normalized by count of observed targets with safe zero-observation handling",
+    "specification_conflict_status": "RESOLVED_IN_SPEC_AND_CODE (Multi-label BCEWithLogitsLoss ratified in PROJECT_PHASES_SPECIFICATION.md and reports/module4_evaluation_protocol.md)",
+    "optimizer": "AdamW",
+    "learning_rate": 0.0001,
+    "weight_decay": 0.0001,
+    "betas": [0.9, 0.999],
+    "batch_size": 32,
+    "max_epochs": 20,
+    "lr_scheduler": {
+      "type": "cosine_with_warmup",
+      "warmup_epochs": 2
+    },
+    "random_seed": 42,
+    "seeds": [42, 1337, 2024],
+    "primary_seed": 42,
+    "seed_roles": {
+      "42": "primary_model_selection_and_preregistered_evaluation",
+      "1337": "variance_reporting_and_robustness_verification",
+      "2024": "variance_reporting_and_robustness_verification"
+    }
+  },
+  "destination_artifacts": {
+    "target_directory": "runs/module4_v3/",
+    "checkpoint_dir": "runs/module4_v3/checkpoints",
+    "best_checkpoint_path": "runs/module4_v3/checkpoints/control_reasoning_best_seed42.pt",
+    "final_checkpoint_path": "runs/module4_v3/checkpoints/control_reasoning_final_seed42.pt",
+    "best_checkpoint_template": "runs/module4_v3/checkpoints/control_reasoning_best_seed{seed}.pt",
+    "final_checkpoint_template": "runs/module4_v3/checkpoints/control_reasoning_final_seed{seed}.pt",
+    "legacy_alias_checkpoint": "runs/module4_v3/checkpoints/control_reasoning_transformer_best.pt",
+    "metrics_dir": "runs/module4_v3/metrics",
+    "traces_dir": "runs/module4_v3/traces",
+    "history_file": "runs/module4_v3/metrics/control_training_history_seed42.json",
+    "history_file_template": "runs/module4_v3/metrics/control_training_history_seed{seed}.json",
+    "validation_predictions_template": "runs/module4_v3/metrics/validation_predictions_seed{seed}.csv",
+    "multi_seed_summary_file": "runs/module4_v3/metrics/multi_seed_variance_summary.json",
+    "freeze_contract_path": "runs/module4_v3/MODULE4_FROZEN.json"
+  },
+  "checkpointing_and_generalization": {
+    "early_stopping_metric": "val_binary_cross_entropy_loss",
+    "patience": 5,
+    "min_delta": 0.0005
+  },
+  "lead_degradation_handling": {
+    "topology": "SHARED_MODEL_ONLY",
+    "per_lead_models_permitted": false,
+    "training_regime": "TRAIN_ON_ALL_7_CONFIGURATIONS",
+    "sampling_policy": "CARTESIAN_ALL_CONFIGURATIONS",
+    "evaluation_regime": "SEPARATE_EVALUATION_ACROSS_7_LEVELS",
+    "lead_levels": [12, 10, 8, 6, 4, 2, 1],
+    "lead_configurations": [
+      "12-lead",
+      "10-lead",
+      "8-lead",
+      "6-lead",
+      "4-lead",
+      "2-lead",
+      "1-lead"
+    ],
+    "lead_configurations_reference": "configs/lead_configurations.json",
+    "records_per_configuration": {
+      "train": 25825,
+      "validation": 3688,
+      "test": 7375
+    },
+    "total_examples_per_epoch": {
+      "train": 180775,
+      "validation_per_variant": 3688,
+      "validation_total": 25816
+    },
+    "class_or_dataset_balancing": "NONE_AUTHORIZED"
+  },
+  "probability_calibration_protocol": {
+    "fitted_split": "validation_only (Fold 8, 3688 records)",
+    "calibration_method": "per_disease_temperature_scaling",
+    "parameter_count": 8,
+    "initial_temperatures": [1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0],
+    "optimizer": "Brent scalar minimization per class",
+    "evaluation_metrics": [
+      "binary_nll_per_class",
+      "brier_score_per_class",
+      "expected_calibration_error_10bins",
+      "reliability_diagrams"
+    ]
+  }
+}

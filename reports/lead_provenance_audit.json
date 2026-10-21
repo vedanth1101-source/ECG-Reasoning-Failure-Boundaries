@@ -1,0 +1,121 @@
+{
+  "audit_version": "1.0",
+  "provenance_standard": "Einthoven-Goldberger Electrocardiographic Network Geometry",
+  "lead_metadata": {
+    "I": {
+      "lead_name": "I",
+      "source_type": "measured",
+      "parent_leads": [],
+      "derivation_formula": null,
+      "independent_observation": true,
+      "anatomical_plane": "frontal",
+      "electrode_positions": ["LA", "RA"]
+    },
+    "II": {
+      "lead_name": "II",
+      "source_type": "measured",
+      "parent_leads": [],
+      "derivation_formula": null,
+      "independent_observation": true,
+      "anatomical_plane": "frontal",
+      "electrode_positions": ["LL", "RA"]
+    },
+    "III": {
+      "lead_name": "III",
+      "source_type": "derived",
+      "parent_leads": ["I", "II"],
+      "derivation_formula": "III = II - I",
+      "independent_observation": false,
+      "anatomical_plane": "frontal",
+      "electrode_positions": ["LL", "LA"]
+    },
+    "aVR": {
+      "lead_name": "aVR",
+      "source_type": "derived",
+      "parent_leads": ["I", "II"],
+      "derivation_formula": "aVR = -(I + II) / 2",
+      "independent_observation": false,
+      "anatomical_plane": "frontal",
+      "electrode_positions": ["RA", "(LA+LL)/2"]
+    },
+    "aVL": {
+      "lead_name": "aVL",
+      "source_type": "derived",
+      "parent_leads": ["I", "II"],
+      "derivation_formula": "aVL = I - II / 2",
+      "independent_observation": false,
+      "anatomical_plane": "frontal",
+      "electrode_positions": ["LA", "(RA+LL)/2"]
+    },
+    "aVF": {
+      "lead_name": "aVF",
+      "source_type": "derived",
+      "parent_leads": ["I", "II"],
+      "derivation_formula": "aVF = II - I / 2",
+      "independent_observation": false,
+      "anatomical_plane": "frontal",
+      "electrode_positions": ["LL", "(RA+LA)/2"]
+    },
+    "V1": {
+      "lead_name": "V1",
+      "source_type": "measured",
+      "parent_leads": [],
+      "derivation_formula": null,
+      "independent_observation": true,
+      "anatomical_plane": "horizontal",
+      "electrode_positions": ["4th ICS right sternal border"]
+    },
+    "V2": {
+      "lead_name": "V2",
+      "source_type": "measured",
+      "parent_leads": [],
+      "derivation_formula": null,
+      "independent_observation": true,
+      "anatomical_plane": "horizontal",
+      "electrode_positions": ["4th ICS left sternal border"]
+    },
+    "V3": {
+      "lead_name": "V3",
+      "source_type": "measured",
+      "parent_leads": [],
+      "derivation_formula": null,
+      "independent_observation": true,
+      "anatomical_plane": "horizontal",
+      "electrode_positions": ["midway between V2 and V4"]
+    },
+    "V4": {
+      "lead_name": "V4",
+      "source_type": "measured",
+      "parent_leads": [],
+      "derivation_formula": null,
+      "independent_observation": true,
+      "anatomical_plane": "horizontal",
+      "electrode_positions": ["5th ICS midclavicular line"]
+    },
+    "V5": {
+      "lead_name": "V5",
+      "source_type": "measured",
+      "parent_leads": [],
+      "derivation_formula": null,
+      "independent_observation": true,
+      "anatomical_plane": "horizontal",
+      "electrode_positions": ["5th ICS anterior axillary line"]
+    },
+    "V6": {
+      "lead_name": "V6",
+      "source_type": "measured",
+      "parent_leads": [],
+      "derivation_formula": null,
+      "independent_observation": true,
+      "anatomical_plane": "horizontal",
+      "electrode_positions": ["5th ICS midaxillary line"]
+    }
+  },
+  "observability_states": [
+    "observed_measured",
+    "observed_derived",
+    "unavailable_derived",
+    "masked_lead"
+  ],
+  "reasoning_evidence_rule": "In Module 4/5 clinical evidence grounding, derived leads (III, aVR, aVL, aVF) MUST NOT be counted as independent physiological evidence if parent leads (I, II) are unavailable or already counted in evidence tallies."
+}

@@ -1,0 +1,64 @@
+{
+  "timestamp": "2026-10-06 13:09:01 UTC",
+  "clamp_threshold_mv": [
+    -15.0,
+    15.0
+  ],
+  "rationale": "Safety rail guard to eliminate hardware saturation spikes and non-physiological amplifier rail clipping. Surface ECG potentials rarely exceed 3-5 mV.",
+  "cohorts": {
+    "ptbxl": {
+      "name": "PTB-XL",
+      "total_records": 21799,
+      "total_samples": 261588000,
+      "affected_records": 1,
+      "affected_records_pct": 0.004587,
+      "affected_samples": 1,
+      "affected_samples_pct": 3.8e-07,
+      "max_amplitude_observed_mv": 15.005,
+      "post_clamp_max_mv": 15.0,
+      "leads_affected": {
+        "6": 1
+      },
+      "clinical_classification": "corrupted_or_saturated_recordings"
+    },
+    "chapman": {
+      "name": "Chapman-Shaoxing",
+      "total_records": 10158,
+      "total_samples": 121896000,
+      "affected_records": 1,
+      "affected_records_pct": 0.009844,
+      "affected_samples": 1,
+      "affected_samples_pct": 8.2e-07,
+      "max_amplitude_observed_mv": 15.05,
+      "post_clamp_max_mv": 15.0,
+      "leads_affected": {
+        "9": 1
+      },
+      "clinical_classification": "corrupted_or_saturated_recordings"
+    },
+    "mimic": {
+      "name": "MIMIC-IV-ECG",
+      "total_records": 5000,
+      "total_samples": 60000000,
+      "affected_records": 1,
+      "affected_records_pct": 0.02,
+      "affected_samples": 4,
+      "affected_samples_pct": 6.67e-06,
+      "max_amplitude_observed_mv": 17.512,
+      "post_clamp_max_mv": 15.0,
+      "leads_affected": {
+        "9": 4
+      },
+      "clinical_classification": "corrupted_or_saturated_recordings"
+    }
+  },
+  "summary": {
+    "total_records_screened": 36957,
+    "total_samples_screened": 443484000,
+    "total_affected_records": 3,
+    "total_affected_records_pct": 0.008118,
+    "total_affected_samples": 6,
+    "total_affected_samples_pct": 1.35e-06,
+    "recommendation": "Retain clamp at +/-15.0 mV. The clamp activates on exactly 3 out of 36,957 records (0.0081%), exclusively targeting hardware amplifier rail saturation spikes (>15 mV). No genuine clinical or physiological P-QRS-T waveforms are altered."
+  }
+}

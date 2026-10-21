@@ -1,0 +1,147 @@
+{
+  "schema_version": "1.0",
+  "state_definitions": {
+    "SUPPORTED": "Required leads are observable, signal quality criteria are met, and the clinical diagnostic criteria are positively identified.",
+    "CONTRADICTED": "Required leads are observable, signal quality criteria are met, but the specific diagnostic criteria are explicitly refuted or absent where expected.",
+    "UNAVAILABLE": "Required leads are masked, signal quality is inadequate (saturation/flatline), or required parent leads of a derived lead are missing."
+  },
+  "claims": {
+    "CLAIM_NORMAL_ECG": {
+      "claim_id": "CLAIM_NORMAL_ECG",
+      "disease": "Normal ECG",
+      "required_leads": ["I", "II", "V1", "V2", "V3", "V4", "V5", "V6"],
+      "min_available_leads": 8,
+      "signal_quality_requirement": {
+        "max_noise_power_ratio": 0.25,
+        "no_saturation_spikes": true
+      },
+      "measurement_requirement": [
+        "heart_rate in range [60, 100]",
+        "pr_interval_ms in range [120, 200]",
+        "qrs_duration_ms < 120",
+        "st_elevation.present == false",
+        "st_depression.present == false",
+        "t_wave_inversion.present == false"
+      ],
+      "verification_rule": "heart_rate >= 60 and heart_rate <= 100 and pr_interval_ms >= 120 and pr_interval_ms <= 200 and qrs_duration_ms < 120 and not st_elevation and not st_depression and not t_wave_inversion",
+      "unavailable_condition": "active_lead_count < 8 or any(l not in active_leads for l in ['II', 'V1'])",
+      "contradiction_condition": "any(abnormality_detected) or heart_rate < 60 or heart_rate > 100 or qrs_duration_ms >= 120"
+    },
+    "CLAIM_AFIB": {
+      "claim_id": "CLAIM_AFIB",
+      "disease": "Atrial Fibrillation (AFib)",
+      "required_leads": ["II", "V1"],
+      "min_available_leads": 1,
+      "signal_quality_requirement": {
+        "max_noise_power_ratio": 0.30,
+        "r_peak_detection_confidence": 0.80
+      },
+      "measurement_requirement": [
+        "rr_interval_coefficient_of_variation > 0.20",
+        "absence of discrete organized P waves"
+      ],
+      "verification_rule": "rr_cv > 0.20 and 'II' in active_leads or 'V1' in active_leads",
+      "unavailable_condition": "'II' not in active_leads and 'V1' not in active_leads",
+      "contradiction_condition": "rr_cv <= 0.12 and regular_sinus_p_waves_present"
+    },
+    "CLAIM_RBBB": {
+      "claim_id": "CLAIM_RBBB",
+      "disease": "Right Bundle Branch Block (RBBB)",
+      "required_leads": ["V1", "V6"],
+      "min_available_leads": 2,
+      "signal_quality_requirement": {
+        "no_saturation_spikes": true
+      },
+      "measurement_requirement": [
+        "qrs_duration_ms >= 120",
+        "rsR_pattern_in_V1 or wide_slurred_S_in_V6"
+      ],
+      "verification_rule": "qrs_duration_ms >= 120 and ('V1' in active_leads and 'V6' in active_leads)",
+      "unavailable_condition": "'V1' not in active_leads or 'V6' not in active_leads",
+      "contradiction_condition": "qrs_duration_ms < 100 or narrow_r_wave_without_rsR_in_V1"
+    },
+    "CLAIM_LBBB": {
+      "claim_id": "CLAIM_LBBB",
+      "disease": "Left Bundle Branch Block (LBBB)",
+      "required_leads": ["I", "V1", "V6"],
+      "min_available_leads": 2,
+      "signal_quality_requirement": {
+        "no_saturation_spikes": true
+      },
+      "measurement_requirement": [
+        "qrs_duration_ms >= 120",
+        "broad_monophasic_R_in_I_and_V6",
+        "absence_of_Q_waves_in_I_and_V6",
+        "broad_QS_or_rS_in_V1"
+      ],
+      "verification_rule": "qrs_duration_ms >= 120 and (('I' in active_leads or 'V6' in active_leads) and 'V1' in active_leads)",
+      "unavailable_condition": "'V1' not in active_leads and 'V6' not in active_leads",
+      "contradiction_condition": "qrs_duration_ms < 100 or normal_septal_q_waves_in_I_and_V6"
+    },
+    "CLAIM_SINUS_BRADYCARDIA": {
+      "claim_id": "CLAIM_SINUS_BRADYCARDIA",
+      "disease": "Sinus Bradycardia",
+      "required_leads": ["II"],
+      "min_available_leads": 1,
+      "signal_quality_requirement": {
+        "r_peak_detection_confidence": 0.85
+      },
+      "measurement_requirement": [
+        "heart_rate < 60",
+        "regular_sinus_p_waves_present"
+      ],
+      "verification_rule": "heart_rate is not None and heart_rate < 60 and 'II' in active_leads",
+      "unavailable_condition": "'II' not in active_leads and 'V1' not in active_leads and 'I' not in active_leads",
+      "contradiction_condition": "heart_rate >= 60"
+    },
+    "CLAIM_SINUS_TACHYCARDIA": {
+      "claim_id": "CLAIM_SINUS_TACHYCARDIA",
+      "disease": "Sinus Tachycardia",
+      "required_leads": ["II"],
+      "min_available_leads": 1,
+      "signal_quality_requirement": {
+        "r_peak_detection_confidence": 0.85
+      },
+      "measurement_requirement": [
+        "heart_rate > 100",
+        "regular_sinus_p_waves_present"
+      ],
+      "verification_rule": "heart_rate is not None and heart_rate > 100 and 'II' in active_leads",
+      "unavailable_condition": "'II' not in active_leads and 'V1' not in active_leads and 'I' not in active_leads",
+      "contradiction_condition": "heart_rate <= 100"
+    },
+    "CLAIM_FIRST_DEGREE_AV_BLOCK": {
+      "claim_id": "CLAIM_FIRST_DEGREE_AV_BLOCK",
+      "disease": "First Degree AV Block",
+      "required_leads": ["II"],
+      "min_available_leads": 1,
+      "signal_quality_requirement": {
+        "p_wave_detectable": true
+      },
+      "measurement_requirement": [
+        "pr_interval_ms > 200",
+        "1_to_1_AV_conduction"
+      ],
+      "verification_rule": "pr_interval_ms is not None and pr_interval_ms > 200 and 'II' in active_leads",
+      "unavailable_condition": "'II' not in active_leads and 'V1' not in active_leads",
+      "contradiction_condition": "pr_interval_ms is not None and pr_interval_ms <= 200"
+    },
+    "CLAIM_MYOCARDIAL_INFARCTION": {
+      "claim_id": "CLAIM_MYOCARDIAL_INFARCTION",
+      "disease": "Myocardial Infarction (MI)",
+      "required_leads": ["V1", "V2", "V3", "V4", "II", "III", "aVF", "I", "aVL"],
+      "min_available_leads": 2,
+      "signal_quality_requirement": {
+        "baseline_wander_suppressed": true,
+        "isoelectric_stability": true
+      },
+      "measurement_requirement": [
+        "st_elevation >= 0.10 mV (1 mm) in >= 2 contiguous anatomical leads",
+        "or pathological Q waves (duration >= 40 ms or amplitude >= 25% of R wave)"
+      ],
+      "verification_rule": "st_elevation.present and len(st_elevation.leads) >= 2 in contiguous territory",
+      "unavailable_condition": "no contiguous lead pairs active in any anatomical territory (Inferior: [II, III, aVF], Anterior: [V3, V4], Septal: [V1, V2], Lateral: [I, aVL, V5, V6])",
+      "contradiction_condition": "all contiguous leads active but st_deviation < 0.05 mV and no pathological Q waves"
+    }
+  }
+}

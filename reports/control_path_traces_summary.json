@@ -1,0 +1,734 @@
+{
+  "report_name": "Phase 4 Control Path 7-Level Benchmark & Trace Audit",
+  "timestamp": "2026-10-10 07:12:03 UTC",
+  "status": "CONTROL_PATH_TRACE_EVALUATION_COMPLETE",
+  "checkpoint_evaluated": "E:\\ECG\\checkpoints\\control_reasoning_transformer_best.pt",
+  "calibration_applied": {
+    "fitted_split": "Fold 9 (Validation Only)",
+    "temperatures": {
+      "NORM": 1.1557,
+      "AFIB": 1.0867,
+      "RBBB": 1.0066,
+      "LBBB": 1.1682,
+      "SBRAD": 1.0218,
+      "STACH": 1.1669,
+      "1AVB": 0.884,
+      "MI": 1.2036
+    }
+  },
+  "degradation_trajectory": {
+    "12_lead": {
+      "lead_count": 12,
+      "macro_auroc": 0.9151,
+      "macro_f1": 0.631,
+      "calibrated_nll": 0.1805,
+      "brier_score": 0.0553,
+      "per_class_auroc": {
+        "NORM": 0.8469,
+        "AFIB": 0.9693,
+        "RBBB": 0.861,
+        "LBBB": 0.9869,
+        "SBRAD": 0.9385,
+        "STACH": 0.9856,
+        "1AVB": 0.9428,
+        "MI": 0.7894
+      },
+      "per_class_f1": {
+        "NORM": 0.835,
+        "AFIB": 0.7509,
+        "RBBB": 0.552,
+        "LBBB": 0.7705,
+        "SBRAD": 0.5556,
+        "STACH": 0.7294,
+        "1AVB": 0.3916,
+        "MI": 0.4626
+      },
+      "inference_time_seconds": 3.65,
+      "sample_trace_preview": {
+        "record_id": "test_fold10_0000",
+        "path_type": "CONTROL_ECG_ONLY",
+        "top_hypothesis": {
+          "acronym": "NORM",
+          "disease_name": "Normal ECG",
+          "confidence": 0.9315
+        },
+        "posterior_probabilities": {
+          "NORM": 0.9315,
+          "AFIB": 0.0017,
+          "RBBB": 0.0215,
+          "LBBB": 0.0021,
+          "SBRAD": 0.0019,
+          "STACH": 0.002,
+          "1AVB": 0.0004,
+          "MI": 0.0458
+        },
+        "supporting_evidence": [
+          {
+            "token_id": "LEAD_OBS_V2",
+            "attention_weight": 0.0275,
+            "associated_leads": [
+              "V2"
+            ],
+            "is_observable_in_mask": true
+          },
+          {
+            "token_id": "LEAD_OBS_III",
+            "attention_weight": 0.0259,
+            "associated_leads": [
+              "III"
+            ],
+            "is_observable_in_mask": true
+          },
+          {
+            "token_id": "LEAD_OBS_V6",
+            "attention_weight": 0.025,
+            "associated_leads": [
+              "V6"
+            ],
+            "is_observable_in_mask": true
+          },
+          {
+            "token_id": "LEAD_OBS_V1",
+            "attention_weight": 0.0246,
+            "associated_leads": [
+              "V1"
+            ],
+            "is_observable_in_mask": true
+          }
+        ],
+        "contradicting_evidence": [],
+        "uncertainty": 0.0685,
+        "lead_observability": {
+          "active_lead_count": 12,
+          "active_leads": [
+            "I",
+            "II",
+            "III",
+            "aVR",
+            "aVL",
+            "aVF",
+            "V1",
+            "V2",
+            "V3",
+            "V4",
+            "V5",
+            "V6"
+          ],
+          "masked_leads": []
+        }
+      }
+    },
+    "10_lead": {
+      "lead_count": 10,
+      "macro_auroc": 0.9139,
+      "macro_f1": 0.6358,
+      "calibrated_nll": 0.1821,
+      "brier_score": 0.0559,
+      "per_class_auroc": {
+        "NORM": 0.8432,
+        "AFIB": 0.9688,
+        "RBBB": 0.8595,
+        "LBBB": 0.9859,
+        "SBRAD": 0.934,
+        "STACH": 0.9867,
+        "1AVB": 0.9444,
+        "MI": 0.7888
+      },
+      "per_class_f1": {
+        "NORM": 0.834,
+        "AFIB": 0.7358,
+        "RBBB": 0.5581,
+        "LBBB": 0.7869,
+        "SBRAD": 0.544,
+        "STACH": 0.7456,
+        "1AVB": 0.4125,
+        "MI": 0.4695
+      },
+      "inference_time_seconds": 2.1,
+      "sample_trace_preview": {
+        "record_id": "test_fold10_0000",
+        "path_type": "CONTROL_ECG_ONLY",
+        "top_hypothesis": {
+          "acronym": "NORM",
+          "disease_name": "Normal ECG",
+          "confidence": 0.9206
+        },
+        "posterior_probabilities": {
+          "NORM": 0.9206,
+          "AFIB": 0.0016,
+          "RBBB": 0.0175,
+          "LBBB": 0.0022,
+          "SBRAD": 0.0021,
+          "STACH": 0.002,
+          "1AVB": 0.0004,
+          "MI": 0.0535
+        },
+        "supporting_evidence": [
+          {
+            "token_id": "LEAD_OBS_V2",
+            "attention_weight": 0.0293,
+            "associated_leads": [
+              "V2"
+            ],
+            "is_observable_in_mask": true
+          },
+          {
+            "token_id": "LEAD_OBS_V6",
+            "attention_weight": 0.0268,
+            "associated_leads": [
+              "V6"
+            ],
+            "is_observable_in_mask": true
+          },
+          {
+            "token_id": "LEAD_OBS_V1",
+            "attention_weight": 0.0262,
+            "associated_leads": [
+              "V1"
+            ],
+            "is_observable_in_mask": true
+          },
+          {
+            "token_id": "LEAD_OBS_V5",
+            "attention_weight": 0.0254,
+            "associated_leads": [
+              "V5"
+            ],
+            "is_observable_in_mask": true
+          }
+        ],
+        "contradicting_evidence": [],
+        "uncertainty": 0.0794,
+        "lead_observability": {
+          "active_lead_count": 10,
+          "active_leads": [
+            "I",
+            "II",
+            "aVR",
+            "aVL",
+            "V1",
+            "V2",
+            "V3",
+            "V4",
+            "V5",
+            "V6"
+          ],
+          "masked_leads": [
+            "III",
+            "aVF"
+          ]
+        }
+      }
+    },
+    "8_lead": {
+      "lead_count": 8,
+      "macro_auroc": 0.9086,
+      "macro_f1": 0.6013,
+      "calibrated_nll": 0.1916,
+      "brier_score": 0.0591,
+      "per_class_auroc": {
+        "NORM": 0.8348,
+        "AFIB": 0.9666,
+        "RBBB": 0.8608,
+        "LBBB": 0.9819,
+        "SBRAD": 0.9293,
+        "STACH": 0.9864,
+        "1AVB": 0.9394,
+        "MI": 0.7696
+      },
+      "per_class_f1": {
+        "NORM": 0.8152,
+        "AFIB": 0.7244,
+        "RBBB": 0.4915,
+        "LBBB": 0.7183,
+        "SBRAD": 0.5039,
+        "STACH": 0.7073,
+        "1AVB": 0.386,
+        "MI": 0.4639
+      },
+      "inference_time_seconds": 2.24,
+      "sample_trace_preview": {
+        "record_id": "test_fold10_0000",
+        "path_type": "CONTROL_ECG_ONLY",
+        "top_hypothesis": {
+          "acronym": "NORM",
+          "disease_name": "Normal ECG",
+          "confidence": 0.8914
+        },
+        "posterior_probabilities": {
+          "NORM": 0.8914,
+          "AFIB": 0.0017,
+          "RBBB": 0.0139,
+          "LBBB": 0.0024,
+          "SBRAD": 0.0027,
+          "STACH": 0.0021,
+          "1AVB": 0.0007,
+          "MI": 0.066
+        },
+        "supporting_evidence": [
+          {
+            "token_id": "LEAD_OBS_V2",
+            "attention_weight": 0.03,
+            "associated_leads": [
+              "V2"
+            ],
+            "is_observable_in_mask": true
+          },
+          {
+            "token_id": "LEAD_OBS_V6",
+            "attention_weight": 0.0283,
+            "associated_leads": [
+              "V6"
+            ],
+            "is_observable_in_mask": true
+          },
+          {
+            "token_id": "LEAD_OBS_V1",
+            "attention_weight": 0.0274,
+            "associated_leads": [
+              "V1"
+            ],
+            "is_observable_in_mask": true
+          },
+          {
+            "token_id": "LEAD_OBS_V5",
+            "attention_weight": 0.0264,
+            "associated_leads": [
+              "V5"
+            ],
+            "is_observable_in_mask": true
+          }
+        ],
+        "contradicting_evidence": [],
+        "uncertainty": 0.1086,
+        "lead_observability": {
+          "active_lead_count": 8,
+          "active_leads": [
+            "I",
+            "II",
+            "V1",
+            "V2",
+            "V3",
+            "V4",
+            "V5",
+            "V6"
+          ],
+          "masked_leads": [
+            "III",
+            "aVR",
+            "aVL",
+            "aVF"
+          ]
+        }
+      }
+    },
+    "6_lead": {
+      "lead_count": 6,
+      "macro_auroc": 0.9017,
+      "macro_f1": 0.5792,
+      "calibrated_nll": 0.2062,
+      "brier_score": 0.064,
+      "per_class_auroc": {
+        "NORM": 0.8184,
+        "AFIB": 0.9651,
+        "RBBB": 0.8433,
+        "LBBB": 0.9781,
+        "SBRAD": 0.9311,
+        "STACH": 0.9861,
+        "1AVB": 0.9318,
+        "MI": 0.76
+      },
+      "per_class_f1": {
+        "NORM": 0.7654,
+        "AFIB": 0.7217,
+        "RBBB": 0.4211,
+        "LBBB": 0.7211,
+        "SBRAD": 0.5344,
+        "STACH": 0.6579,
+        "1AVB": 0.3537,
+        "MI": 0.4582
+      },
+      "inference_time_seconds": 1.95,
+      "sample_trace_preview": {
+        "record_id": "test_fold10_0000",
+        "path_type": "CONTROL_ECG_ONLY",
+        "top_hypothesis": {
+          "acronym": "NORM",
+          "disease_name": "Normal ECG",
+          "confidence": 0.7635
+        },
+        "posterior_probabilities": {
+          "NORM": 0.7635,
+          "AFIB": 0.0022,
+          "RBBB": 0.0567,
+          "LBBB": 0.0025,
+          "SBRAD": 0.0035,
+          "STACH": 0.0024,
+          "1AVB": 0.0025,
+          "MI": 0.0901
+        },
+        "supporting_evidence": [
+          {
+            "token_id": "LEAD_OBS_V2",
+            "attention_weight": 0.0335,
+            "associated_leads": [
+              "V2"
+            ],
+            "is_observable_in_mask": true
+          },
+          {
+            "token_id": "LEAD_OBS_V6",
+            "attention_weight": 0.0308,
+            "associated_leads": [
+              "V6"
+            ],
+            "is_observable_in_mask": true
+          },
+          {
+            "token_id": "LEAD_OBS_V1",
+            "attention_weight": 0.0299,
+            "associated_leads": [
+              "V1"
+            ],
+            "is_observable_in_mask": true
+          },
+          {
+            "token_id": "LEAD_OBS_V5",
+            "attention_weight": 0.0287,
+            "associated_leads": [
+              "V5"
+            ],
+            "is_observable_in_mask": true
+          }
+        ],
+        "contradicting_evidence": [],
+        "uncertainty": 0.2365,
+        "lead_observability": {
+          "active_lead_count": 6,
+          "active_leads": [
+            "I",
+            "II",
+            "V1",
+            "V2",
+            "V5",
+            "V6"
+          ],
+          "masked_leads": [
+            "III",
+            "aVR",
+            "aVL",
+            "aVF",
+            "V3",
+            "V4"
+          ]
+        }
+      }
+    },
+    "4_lead": {
+      "lead_count": 4,
+      "macro_auroc": 0.883,
+      "macro_f1": 0.5289,
+      "calibrated_nll": 0.2351,
+      "brier_score": 0.0738,
+      "per_class_auroc": {
+        "NORM": 0.7854,
+        "AFIB": 0.9524,
+        "RBBB": 0.7906,
+        "LBBB": 0.9678,
+        "SBRAD": 0.928,
+        "STACH": 0.9875,
+        "1AVB": 0.9168,
+        "MI": 0.7352
+      },
+      "per_class_f1": {
+        "NORM": 0.6271,
+        "AFIB": 0.6523,
+        "RBBB": 0.3288,
+        "LBBB": 0.6667,
+        "SBRAD": 0.42,
+        "STACH": 0.732,
+        "1AVB": 0.3351,
+        "MI": 0.4689
+      },
+      "inference_time_seconds": 1.99,
+      "sample_trace_preview": {
+        "record_id": "test_fold10_0000",
+        "path_type": "CONTROL_ECG_ONLY",
+        "top_hypothesis": {
+          "acronym": "NORM",
+          "disease_name": "Normal ECG",
+          "confidence": 0.651
+        },
+        "posterior_probabilities": {
+          "NORM": 0.651,
+          "AFIB": 0.0042,
+          "RBBB": 0.0472,
+          "LBBB": 0.0038,
+          "SBRAD": 0.0077,
+          "STACH": 0.0028,
+          "1AVB": 0.0144,
+          "MI": 0.1355
+        },
+        "supporting_evidence": [
+          {
+            "token_id": "LEAD_OBS_V1",
+            "attention_weight": 0.0328,
+            "associated_leads": [
+              "V1"
+            ],
+            "is_observable_in_mask": true
+          },
+          {
+            "token_id": "LEAD_OBS_V5",
+            "attention_weight": 0.0311,
+            "associated_leads": [
+              "V5"
+            ],
+            "is_observable_in_mask": true
+          },
+          {
+            "token_id": "LEAD_OBS_I",
+            "attention_weight": 0.0306,
+            "associated_leads": [
+              "I"
+            ],
+            "is_observable_in_mask": true
+          },
+          {
+            "token_id": "LEAD_OBS_II",
+            "attention_weight": 0.0271,
+            "associated_leads": [
+              "II"
+            ],
+            "is_observable_in_mask": true
+          }
+        ],
+        "contradicting_evidence": [],
+        "uncertainty": 0.349,
+        "lead_observability": {
+          "active_lead_count": 4,
+          "active_leads": [
+            "I",
+            "II",
+            "V1",
+            "V5"
+          ],
+          "masked_leads": [
+            "III",
+            "aVR",
+            "aVL",
+            "aVF",
+            "V2",
+            "V3",
+            "V4",
+            "V6"
+          ]
+        }
+      }
+    },
+    "2_lead": {
+      "lead_count": 2,
+      "macro_auroc": 0.8485,
+      "macro_f1": 0.3173,
+      "calibrated_nll": 0.3169,
+      "brier_score": 0.1009,
+      "per_class_auroc": {
+        "NORM": 0.7171,
+        "AFIB": 0.9294,
+        "RBBB": 0.7841,
+        "LBBB": 0.9291,
+        "SBRAD": 0.9085,
+        "STACH": 0.9809,
+        "1AVB": 0.8641,
+        "MI": 0.6751
+      },
+      "per_class_f1": {
+        "NORM": 0.0522,
+        "AFIB": 0.3383,
+        "RBBB": 0.2917,
+        "LBBB": 0.4912,
+        "SBRAD": 0.15,
+        "STACH": 0.6187,
+        "1AVB": 0.1718,
+        "MI": 0.4242
+      },
+      "inference_time_seconds": 2.05,
+      "sample_trace_preview": {
+        "record_id": "test_fold10_0000",
+        "path_type": "CONTROL_ECG_ONLY",
+        "top_hypothesis": {
+          "acronym": "RBBB",
+          "disease_name": "Right Bundle Branch Block",
+          "confidence": 0.3864
+        },
+        "posterior_probabilities": {
+          "NORM": 0.1831,
+          "AFIB": 0.0157,
+          "RBBB": 0.3864,
+          "LBBB": 0.0304,
+          "SBRAD": 0.0521,
+          "STACH": 0.0088,
+          "1AVB": 0.0887,
+          "MI": 0.3485
+        },
+        "supporting_evidence": [
+          {
+            "token_id": "LEAD_OBS_V1",
+            "attention_weight": 0.0612,
+            "associated_leads": [
+              "V1"
+            ],
+            "is_observable_in_mask": true
+          },
+          {
+            "token_id": "LEAD_OBS_II",
+            "attention_weight": 0.053,
+            "associated_leads": [
+              "II"
+            ],
+            "is_observable_in_mask": true
+          },
+          {
+            "token_id": "LEAD_OBS_V5",
+            "attention_weight": 0.0267,
+            "associated_leads": [
+              "V5"
+            ],
+            "is_observable_in_mask": false
+          },
+          {
+            "token_id": "LEAD_OBS_V3",
+            "attention_weight": 0.0262,
+            "associated_leads": [
+              "V3"
+            ],
+            "is_observable_in_mask": false
+          }
+        ],
+        "contradicting_evidence": [],
+        "uncertainty": 0.6136,
+        "lead_observability": {
+          "active_lead_count": 2,
+          "active_leads": [
+            "II",
+            "V1"
+          ],
+          "masked_leads": [
+            "I",
+            "III",
+            "aVR",
+            "aVL",
+            "aVF",
+            "V2",
+            "V3",
+            "V4",
+            "V5",
+            "V6"
+          ]
+        }
+      }
+    },
+    "1_lead": {
+      "lead_count": 1,
+      "macro_auroc": 0.7854,
+      "macro_f1": 0.2012,
+      "calibrated_nll": 0.3458,
+      "brier_score": 0.1078,
+      "per_class_auroc": {
+        "NORM": 0.677,
+        "AFIB": 0.857,
+        "RBBB": 0.5811,
+        "LBBB": 0.7962,
+        "SBRAD": 0.8835,
+        "STACH": 0.9632,
+        "1AVB": 0.8386,
+        "MI": 0.6868
+      },
+      "per_class_f1": {
+        "NORM": 0.0709,
+        "AFIB": 0.113,
+        "RBBB": 0.011,
+        "LBBB": 0.2051,
+        "SBRAD": 0.0286,
+        "STACH": 0.5203,
+        "1AVB": 0.2295,
+        "MI": 0.4313
+      },
+      "inference_time_seconds": 1.98,
+      "sample_trace_preview": {
+        "record_id": "test_fold10_0000",
+        "path_type": "CONTROL_ECG_ONLY",
+        "top_hypothesis": {
+          "acronym": "MI",
+          "disease_name": "Myocardial Infarction",
+          "confidence": 0.4433
+        },
+        "posterior_probabilities": {
+          "NORM": 0.1717,
+          "AFIB": 0.0374,
+          "RBBB": 0.4015,
+          "LBBB": 0.0949,
+          "SBRAD": 0.0765,
+          "STACH": 0.0225,
+          "1AVB": 0.1963,
+          "MI": 0.4433
+        },
+        "supporting_evidence": [
+          {
+            "token_id": "T_INV_V6",
+            "attention_weight": 0.0216,
+            "associated_leads": [
+              "V6"
+            ],
+            "is_observable_in_mask": false
+          },
+          {
+            "token_id": "T_INV_V5",
+            "attention_weight": 0.0216,
+            "associated_leads": [
+              "V5"
+            ],
+            "is_observable_in_mask": false
+          },
+          {
+            "token_id": "T_INV_V4",
+            "attention_weight": 0.0216,
+            "associated_leads": [
+              "V4"
+            ],
+            "is_observable_in_mask": false
+          },
+          {
+            "token_id": "T_INV_V3",
+            "attention_weight": 0.0216,
+            "associated_leads": [
+              "V3"
+            ],
+            "is_observable_in_mask": false
+          }
+        ],
+        "contradicting_evidence": [],
+        "uncertainty": 0.5567,
+        "lead_observability": {
+          "active_lead_count": 1,
+          "active_leads": [
+            "II"
+          ],
+          "masked_leads": [
+            "I",
+            "III",
+            "aVR",
+            "aVL",
+            "aVF",
+            "V1",
+            "V2",
+            "V3",
+            "V4",
+            "V5",
+            "V6"
+          ]
+        }
+      }
+    }
+  }
+}

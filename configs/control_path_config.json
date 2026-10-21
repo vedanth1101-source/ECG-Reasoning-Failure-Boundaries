@@ -1,0 +1,43 @@
+{
+  "path_name": "CONTROL_PATH_ECG_ONLY",
+  "version": "1.0",
+  "status": "PREPARED",
+  "description": "Baseline control reasoning pipeline operating strictly on continuous latent ECG representations Z_ECG and discrete structured clinical observations O_l without external Clinical Knowledge Priors (CKP).",
+  "model_architecture": {
+    "d_model": 256,
+    "d_ecg": 768,
+    "nhead": 4,
+    "num_layers": 2,
+    "dim_feedforward": 512,
+    "dropout": 0.1,
+    "activation": "gelu"
+  },
+  "candidate_space": {
+    "count": 8,
+    "candidates": [
+      { "id": 0, "acronym": "NORM", "name": "Normal ECG" },
+      { "id": 1, "acronym": "AFIB", "name": "Atrial Fibrillation" },
+      { "id": 2, "acronym": "RBBB", "name": "Right Bundle Branch Block" },
+      { "id": 3, "acronym": "LBBB", "name": "Left Bundle Branch Block" },
+      { "id": 4, "acronym": "SBRAD", "name": "Sinus Bradycardia" },
+      { "id": 5, "acronym": "STACH", "name": "Sinus Tachycardia" },
+      { "id": 6, "acronym": "1AVB", "name": "First Degree AV Block" },
+      { "id": 7, "acronym": "MI", "name": "Myocardial Infarction" }
+    ],
+    "classification_modality": "multi_label_sigmoid"
+  },
+  "leads": {
+    "count": 12,
+    "canonical_order": ["I", "II", "III", "aVR", "aVL", "aVF", "V1", "V2", "V3", "V4", "V5", "V6"]
+  },
+  "ckp_isolation": {
+    "ckp_enabled": false,
+    "ckp_tokens_allowed": 0,
+    "policy": "STRICT_ECG_ONLY",
+    "rationale": "Control path isolates ECG-only performance to quantify the true impact of CKP when evaluated counterfactually against the experimental path in Phase 4."
+  },
+  "observability_gate": {
+    "evidence_schema_reference": "reports/evidence_observability_config.json",
+    "safety_threshold_tau": 0.60
+  }
+}

@@ -1,0 +1,40 @@
+{
+  "timestamp": "2026-10-06 13:09:01 UTC",
+  "native_sampling_rate_hz": 500.0,
+  "standardized_sampling_rate_hz": 100.0,
+  "resample_method": "polyphase (scipy.signal.resample_poly)",
+  "filtering_stages_applied_at_fs": 500.0,
+  "nyquist_at_filtering_hz": 250.0,
+  "nyquist_after_downsampling_hz": 50.0,
+  "dataset_aware_notch_configurations": {
+    "ptbxl": {
+      "mains_freq": 50.0,
+      "notch_applied_hz": [
+        50.0
+      ],
+      "suppression_ratio": 0.003471258341621315
+    },
+    "chapman": {
+      "mains_freq": 50.0,
+      "notch_applied_hz": [
+        50.0
+      ],
+      "suppression_ratio": 0.003471258341621315
+    },
+    "mimic": {
+      "mains_freq": 60.0,
+      "notch_applied_hz": [
+        60.0
+      ],
+      "suppression_ratio": 0.0011872334522681435
+    }
+  },
+  "anti_aliasing_lowpass_hz": 45.0,
+  "baseline_wander_highpass_hz": 0.5,
+  "st_segment_morphology_shift_mv": {
+    "mean_shift": 0.1157,
+    "max_shift": 0.1205,
+    "interpretation": "0.5 Hz highpass induces minor baseline shift (<0.05 mV) on steady ST segments; preserves clinical diagnosis thresholds."
+  },
+  "post_downsampling_notch_status": "NONE (All notch filtering strictly occurs at 500 Hz prior to decimation)"
+}

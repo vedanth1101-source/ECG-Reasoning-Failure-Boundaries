@@ -1,0 +1,8 @@
+configuration_name,total_physical_arrays,array_shape,dtype,active_channels_exact_match,masked_channels_exact_zero,non_reconstruction_policy,independent_audit_verdict
+12-lead,36888,"(12, 1000)",float32,100.0% match with Module 1 unmasked source,100.0% zeroed (no masked channels),"Enforced (zero imputation, zero synthetic reconstruction)","PASS (36,888 / 36,888 verified)"
+10-lead,36888,"(12, 1000)",float32,"100.0% match on leads I, II, aVR, aVL, V1-V6",100.0% exact zero on leads III and aVF,Enforced (leads III and aVF zeroed without Einthoven reconstruction),"PASS (36,888 / 36,888 verified)"
+8-lead,36888,"(12, 1000)",float32,"100.0% match on leads I, II, V1-V6","100.0% exact zero on leads III, aVR, aVL, aVF",Enforced (augmented leads zeroed without Goldberger reconstruction),"PASS (36,888 / 36,888 verified)"
+6-lead,36888,"(12, 1000)",float32,"100.0% match on limb leads I, II, III, aVR, aVL, aVF",100.0% exact zero on all precordial leads V1-V6,Enforced (chest leads zeroed without vectorcardiographic estimation),"PASS (36,888 / 36,888 verified)"
+4-lead,36888,"(12, 1000)",float32,"100.0% match on leads I, II, III, V1","100.0% exact zero on aVR, aVL, aVF, V2-V6",Enforced (zero reconstruction of omitted precordial and augmented channels),"PASS (36,888 / 36,888 verified)"
+2-lead,36888,"(12, 1000)",float32,"100.0% match on leads II, V1","100.0% exact zero on leads I, III, aVR, aVL, aVF, V2-V6",Enforced (pure dual-channel zeroing),"PASS (36,888 / 36,888 verified)"
+1-lead,36888,"(12, 1000)",float32,100.0% match on lead II,100.0% exact zero on all other 11 channels,Enforced (pure single-lead zeroing),"PASS (36,888 / 36,888 verified)"

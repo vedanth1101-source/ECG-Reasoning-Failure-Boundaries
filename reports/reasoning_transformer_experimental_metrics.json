@@ -1,0 +1,24 @@
+{
+  "timestamp": "2026-10-10 05:41:35 UTC",
+  "mode": "experimental",
+  "dataset": "ptbxl",
+  "train_samples": 500,
+  "val_samples": 150,
+  "best_metrics": {
+    "epoch": 4,
+    "train_loss": 0.6423,
+    "val_loss": 0.6615,
+    "val_macro_auc": 0.7493,
+    "val_micro_f1": 0.4568
+  },
+  "candidates": [
+    "NORM",
+    "AFIB",
+    "RBBB",
+    "LBBB",
+    "SBRAD",
+    "STACH",
+    "1AVB",
+    "MI"
+  ]
+}

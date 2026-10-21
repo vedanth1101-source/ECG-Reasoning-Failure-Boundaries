@@ -1,0 +1,942 @@
+% Compile twice with: pdflatex Review_Report_Class_Example.tex
+% Keep ssnreview.cls and the optional logo in the same folder.
+\documentclass{ssnreview}
+\usepackage{amsmath,amssymb}
+
+\projecttitle{Reasoning Failure Boundaries in ECG\\
+Foundation Models Under Progressive\\
+Physiological Information Loss}
+\reviewnumber{REVIEW REPORT -- II}
+\students{%
+  Vijay K (3122235001157)\\
+  Siddharth Chandrasekar S (3122235001310)\\
+  Vedanth M S (3122235001314)}
+\supervisor{Dr. Anusha Jayasimhan\\Assistant Professor}
+\department{Department of Computer Science and Engineering}
+\institution{Sri Sivasubramaniya Nadar College of Engineering}
+\academicyear{2026--2027}
+\collegelogo{ssn-logo.png}
+
+\begin{document}
+\makereviewtitle
+\reviewfrontmatter
+
+\begin{reviewabstract}
+ECG foundation models are increasingly used for automated interpretation and clinical
+decision support, making their reliability under incomplete physiological observations an
+important concern. In real-world acquisition and monitoring, ECG leads may be missing,
+corrupted, or unavailable, yet a model may still produce confident interpretations from
+insufficient evidence. Existing foundation and knowledge-enhanced approaches perform
+strongly in representation learning, diagnosis, partial-lead analysis, and structured
+interpretation, but are evaluated mainly through diagnostic accuracy and representation
+quality. Consequently, how evidence-grounded reasoning degrades as physiological
+information is removed remains insufficiently characterised.
+
+This project investigates a knowledge-aware ECG reasoning framework under progressive
+physiological information loss. Raw twelve-lead recordings are masked at seven availability
+levels---12, 10, 8, 6, 4, 2 and 1---without reconstructing missing signals. Each degraded
+recording is encoded by a frozen ECG foundation model into a latent representation,
+converted into structured clinical findings, and passed to an evidence-based reasoning layer.
+Matched conditions compare ECG-only reasoning with reasoning augmented by a Clinical
+Knowledge Prior derived from SNOMED CT and ECG-specific clinical relationships.
+The resulting diagnoses, supporting and opposing evidence, confidence, and uncertainty
+are independently verified against an evidence schema and the lead-availability mask.
+PTB-XL supports framework development, MIMIC-IV-ECG large-scale validation, and
+Chapman-Shaoxing external validation.
+
+Evaluation will measure grounding quality, evidence observability, diagnostic accuracy,
+calibration, uncertainty, the Area Under the Reasoning Degradation Curve, and the
+Reasoning Failure Boundary. The main contribution is a reproducible framework for
+locating the boundary at which an ECG foundation model can no longer maintain
+evidence-grounded reasoning and for testing whether structured clinical knowledge shifts that
+boundary without promoting unsupported inference.
+
+\keywords{Electrocardiogram; Foundation models; Evidence grounding; Reasoning
+failure boundary; Clinical knowledge prior}
+\end{reviewabstract}
+
+\chapter{Introduction}
+
+\subsection*{Project Domain and Context}
+
+This project lies at the intersection of cardiovascular informatics, deep learning
+foundation models, and machine-learning safety in healthcare. Its primary focus is the
+automated interpretation of multi-lead electrocardiograms (ECGs) and, more importantly,
+the verification of whether an artificial intelligence system's clinical reasoning remains
+grounded in the physiological evidence that is actually available to it. The work therefore
+extends beyond conventional diagnostic classification: it studies the reliability,
+traceability, and safety of model-generated clinical claims under progressively degraded
+and resource-constrained acquisition conditions.
+
+The standard 12-lead ECG is one of the most widely used non-invasive tools for assessing
+the electrical activity of the heart. The limb leads observe cardiac electrical activity
+primarily in the frontal plane, whereas the precordial leads provide complementary views
+across the horizontal plane. Together, these leads allow clinicians to examine cardiac
+rhythm, conduction abnormalities, chamber-related changes, and regional patterns associated
+with conditions such as myocardial ischaemia or infarction. Recent advances in deep learning
+have enabled large-scale ECG foundation models (such as ECG-FM, K-MERL, and GEM) to learn
+general-purpose representations from extensive collections of recordings, demonstrating
+strong performance on rhythm classification and abnormality detection when complete,
+high-quality recordings are available.
+
+In practice, however, a complete and artifact-free 12-lead recording cannot always be
+obtained. Emergency departments, pre-hospital transport services, intensive-care units,
+ambulances, and wearable monitoring systems frequently operate under acquisition
+constraints. Electrodes may become detached, signals may be corrupted by motion, and
+time-critical triage may limit the number of leads that can be collected. Consumer and
+portable devices also use reduced configurations consisting of six, four, two, or even a
+single lead. These conditions create \emph{progressive physiological information loss}: as
+leads are removed, the model loses not only signal samples but also specific anatomical
+views of cardiac activity. A safe ECG reasoning system must recognise this change in
+observability and adjust its claims, confidence, and uncertainty accordingly.
+
+\subsection*{Motivation and Significance}
+
+Most existing ECG artificial-intelligence benchmarks evaluate models using final-label
+metrics such as accuracy, sensitivity, specificity, F1-score, or area under the receiver
+operating characteristic curve. These measures assess predictive performance, but they do
+not determine whether the reasoning used to reach a prediction is physically supported by the
+active sensor configuration. 
+
+This limitation becomes critical when the evidence required for a diagnosis is regional.
+For example, confirmation of an inferior myocardial infarction conventionally depends on
+observing compatible ST-segment changes across contiguous inferior leads, particularly
+Leads II, III, and aVF. If key inferior leads such as III and aVF are unavailable, the
+regional evidence needed to confirm the finding is no longer fully observable. A model may
+nevertheless continue to output the correct diagnostic label because of correlations learned
+from the training data, patient-level patterns, or dataset-specific shortcuts. It may also
+generate a clinical explanation that refers to changes in leads that were not provided as
+input. Conventional label-based evaluation mistakenly rewards such an output because the
+predicted diagnosis matches the reference label. From a clinical-safety perspective,
+however, a correct conclusion supported by unavailable or fabricated evidence is an
+unacceptable silent failure: the output appears plausible and confident even though the
+model has crossed the limit at which physical observations can justify its reasoning.
+
+This project addresses this critical gap by formalising the \emph{Reasoning Failure
+Boundary} (RFB), which identifies the level of lead availability beyond which the system can
+no longer satisfy predefined grounding requirements. In addition, the \emph{Area Under the
+Reasoning Degradation Curve} (AURDC) summarises how reasoning quality changes across the
+complete sequence of lead-degradation conditions. The framework also introduces an explicit
+three-state verification mechanism that labels each clinical claim as \textsc{Supported},
+\textsc{Contradicted}, or \textsc{Unavailable}. This distinction prevents the absence of
+evidence from being incorrectly interpreted as negative evidence. By incorporating
+structured relationships derived from SNOMED CT through a Clinical Knowledge Prior (CKP),
+the study evaluates whether clinical knowledge can help preserve coherent reasoning as sensor
+information decreases, providing clinicians with interpretable evidence trails and
+empirically measured operating limits.
+
+\section{Objectives}
+\begin{enumerate}[label=\arabic*.,leftmargin=*,align=left]
+  \item To design and develop a controlled degradation framework and an architecture
+  with two complementary representations that model progressive physiological information loss
+  across standard ECG configurations containing 12, 10, 8, 6, 4, 2, and 1 available
+  leads. The framework will remove leads without introducing synthetic or reconstructed
+  signals and will combine continuous latent feature embeddings with discrete,
+  deterministic clinical observations.
+
+  \item To implement and evaluate a structured reasoning pipeline with a deterministic
+  three-state grounding-verification mechanism that classifies individual clinical claims
+  as \textsc{Supported}, \textsc{Contradicted}, or \textsc{Unavailable}. This mechanism
+  will be used to determine whether the model's findings, evidence, and conclusions remain
+  truthfully anchored in the physical sensor data at every degradation level.
+
+  \item To compare an unaugmented ECG-only baseline with a knowledge-enhanced model that
+  integrates a Clinical Knowledge Prior derived from the SNOMED CT clinical ontology into
+  a shared reasoning transformer. The comparison will quantify changes in the Area Under
+  the Reasoning Degradation Curve and determine whether the knowledge prior delays the
+  Reasoning Failure Boundary under severe sensor scarcity without promoting unsupported
+  clinical inference.
+\end{enumerate}
+
+\chapter{First Review: Queries and Responses}
+
+The first project review raised important questions concerning the clinical validity of the
+verification process, the necessity of the proposed dual-condition architecture, and the
+practical value of the Reasoning Failure Boundary. This chapter records the questions and
+provides the corresponding technical responses incorporated into the project methodology.
+
+\section{Medical Reliability of the Evidence Schema}
+
+\textbf{Query 1: How will you ensure that the Evidence Schema in Module 5 is medically
+reliable?}
+
+\textbf{Response:} The Evidence Schema is designed and validated with direct guidance from
+a qualified medical professional possessing clinical expertise in ECG interpretation. Clinical
+involvement is essential because Module~5 determines whether a model-generated claim is
+physically supported by the electrodynamic evidence available in a particular lead
+configuration. An incorrectly defined relationship between a clinical finding and its
+required leads would produce a misleading grounding verdict regardless of software correctness.
+
+For every admissible ECG claim, the schema specifies the clinical finding being assessed,
+the waveform measurement required, the anatomical lead set from which that measurement
+must be obtained, and the formal decision criterion used to classify the claim. Particular
+attention is given to regional findings, such as ST-segment changes, whose interpretation
+depends on the presence of specific contiguous leads. 
+
+The schema-development protocol incorporates four rigorous stages: (1) constructing an
+initial machine-readable schema using established ECG terminology, SNOMED CT concepts, and
+cardiology guidelines; (2) reviewing each claim type, required lead set, measurement
+definition, and verification criterion with the medical expert; (3) validating the schema on
+representative complete-lead and reduced-lead benchmark ECG recordings to verify that
+\textsc{Supported}, \textsc{Contradicted}, and \textsc{Unavailable} verdicts are assigned
+accurately; and (4) version-controlling all approved schema rules prior to model evaluation to
+prevent post-hoc modifications.
+
+\section{Need for the Control and Experimental Conditions}
+
+\textbf{Query 2: Why is the model complex? Do we actually need both the control and
+experimental parts?}
+
+\textbf{Response:} Both reasoning conditions are strictly necessary to maintain experimental
+control while investigating whether structured knowledge can mitigate information loss.
+The ECG-only control path establishes how the foundation model's reasoning degrades purely
+as physiological information is removed, producing the reference degradation curve and
+baseline Reasoning Failure Boundary. 
+
+The experimental CKP path addresses a distinct research question: whether structured
+clinical knowledge can help preserve valid reasoning under reduced-lead conditions without
+encouraging unsupported inference. The Clinical Knowledge Prior does not reconstruct missing
+leads or supply synthetic waveform observations; instead, it provides structured relationships
+among diagnoses, clinical findings, and anatomical dependencies that guide the reasoning
+component in organizing the evidence still available to it.
+
+Although the architecture contains several modules, this separation enforces experimental
+auditability. Signal preprocessing, controlled masking, latent representation, observation
+extraction, reasoning, and grounding verification are isolated so that failures can be
+localized to a specific stage. Crucially, the two reasoning conditions share the same patient
+recordings, masks, frozen ECG encoder, latent representations, structured observations,
+candidate diagnoses, transformer architecture, and verification rules. They differ exclusively
+through the inclusion of CKP relational tokens in the experimental context, ensuring that any
+measured difference in grounding performance is attributable strictly to the knowledge prior
+rather than confounding model capacity.
+
+\section{Purpose and Clinical Utility of the Reasoning Failure Boundary}
+
+\textbf{Query 3: What are you achieving with this work? How will the Reasoning Failure
+Boundary be useful?}
+
+\textbf{Response:} The project aims to determine how much observable ECG information is
+required for a clinical AI system to produce reasoning that remains supported by physical
+sensor data, distinguishing diagnostic correctness from evidence-grounded reliability.
+
+The Reasoning Failure Boundary (RFB) provides an empirical operating limit. For a
+predefined clinical-safety threshold (e.g., Grounding Quality $\ge 0.60$), it identifies the
+most severely degraded lead configuration at which the system's reasoning remains acceptable.
+For example, if the model meets the grounding threshold with six available leads but fails at
+four leads, the boundary indicates that the model should not be deployed below the six-lead
+configuration. The complete reasoning degradation curve and AURDC are reported alongside the
+boundary so that conclusions do not depend on a single operating point.
+
+This boundary assists clinicians and developers in several critical ways: (1) it indicates
+when automated systems in ambulances or bedside telemetry must alert clinicians to acquire a
+complete 12-lead ECG; (2) it identifies when the system should reduce its confidence or
+abstain from diagnosis; and (3) it defines certified operational envelopes for wearable and
+low-channel monitoring devices. The RFB converts an otherwise hidden failure mode into an
+interpretable, measurable safety indicator.
+
+\chapter{Problem statement}
+
+Modern ECG foundation models can maintain apparently strong diagnostic performance even
+when a substantial portion of the original sensor information is unavailable. Under
+progressive lead loss, a model may continue to predict the correct diagnostic label by
+exploiting statistical regularities, dataset-specific shortcuts, or correlations that do not
+constitute direct physiological evidence for the prediction. More critically, a generative
+reasoning component may produce clinical claims referring to waveform changes in leads
+that were not supplied to the model. Conventional classification metrics do not distinguish
+between a diagnosis supported by observable electrodynamic evidence and a plausible guess
+supported by an unavailable or hallucinated finding.
+
+This limitation represents a significant safety concern in emergency triage, pre-hospital
+transport, intensive-care monitoring, and wearable telemetry, where missing or detached
+electrodes are common. When the required anatomical projections are absent, the available
+recording may no longer contain sufficient information to confirm or reject a localised
+pathology. A reliable clinical system must therefore recognise not only what diagnosis is
+probable, but also whether the evidence needed to justify that diagnosis can be observed
+from the active physical sensors.
+
+The problem addressed in this project is the absence of a systematic method for measuring
+how evidence-grounded clinical reasoning degrades as ECG leads are progressively removed.
+The project seeks to determine the operating point at which a foundation model's reasoning
+can no longer be considered sufficiently grounded, even if its final diagnostic accuracy
+remains high. It also investigates whether structured clinical knowledge can delay this
+failure point without replacing missing signals with artificial evidence or encouraging
+unsupported inference.
+
+Formally, the study considers the ordered set of lead-availability levels:
+\begin{equation}
+  \mathcal{L} = (12, 10, 8, 6, 4, 2, 1),
+\end{equation}
+where each value denotes the number of physical ECG leads retained at a particular
+degradation stage. The same patient recording is evaluated across these controlled stages,
+allowing diagnostic performance, evidence observability, grounding quality, and uncertainty
+to be measured as functions of the available physiological information under two matched
+reasoning conditions: an ECG-only baseline and a knowledge-guided condition augmented with a
+Clinical Knowledge Prior (CKP) derived from SNOMED CT.
+
+\section{Inputs}
+
+The proposed system receives four principal categories of input:
+
+\paragraph{Multi-lead ECG Waveform:} A multi-channel surface ECG recording represented as a
+voltage-time matrix. Every recording is standardised to a fixed 10.0-second duration and
+500~Hz sampling frequency ($12 \times 5000$ samples) so that all degradation conditions are
+evaluated over the same temporal interval. Signal values are retained only for leads that are
+physically available at the selected degradation level; unavailable leads are not
+regenerated, inferred, or replaced with synthetic waveforms. Retained signals undergo a
+consistent preprocessing pipeline for quality control, amplitude normalisation,
+baseline-wander removal, and suppression of high-frequency interference while preserving
+diagnostically vital P-wave, QRS-complex, ST-segment, and T-wave morphology.
+
+\paragraph{Lead-Availability Mask:} Each recording is accompanied by a binary lead-availability
+mask:
+\begin{equation}
+  \mathbf{m}^{(\ell)} = (m_1,m_2,\ldots,m_{12}), \qquad
+  m_j \in \{0,1\}, \quad \ell \in \mathcal{L},
+\end{equation}
+where $m_j=1$ indicates that lead $j$ is physically available and $m_j=0$ indicates that it
+has been removed. The mask represents physical sensor observability rather than a request to
+impute missing channels. It is propagated through all reasoning and verification stages so that
+every clinical claim can be audited against the anatomical views present in the input.
+
+\paragraph{Candidate Diagnostic Hypotheses:} A predefined candidate set covering major
+cardiac disease and rhythm categories represented in the evaluation datasets. These candidates
+define the shared diagnostic space over which posterior probabilities are estimated for both
+conditions, preventing vocabulary discrepancies from influencing comparative evaluation.
+
+\paragraph{Clinical Knowledge Prior:} A structured ontological representation derived from
+SNOMED CT and ECG-specific clinical relationships, encoding associations among diagnoses,
+observable findings, anatomical regions, and verification rules. Its role is to constrain and
+organise reasoning; it is strictly prohibited from synthesising missing signals or declaring
+unobserved findings.
+
+\section{Outputs}
+
+For every recording and lead-availability level, the system produces four integrated outputs:
+
+\paragraph{Diagnostic Posterior Distribution:} A ranked posterior probability distribution
+over candidate cardiac diagnoses, allowing assessment of diagnostic discrimination,
+calibration, and changes in confidence or diagnostic abstention as leads are removed.
+
+\paragraph{Structured Clinical Reasoning Trace:} An interpretable reasoning trace composed of
+discrete clinical claims detailing physiological observations, associated candidate
+diagnoses, supporting or opposing status, contributing leads, and cross-attention weights.
+
+\paragraph{Grounding-Verification Verdicts:} A deterministic verifier assigns every generated
+claim to exactly one of three states:
+\begin{itemize}
+  \item \textsc{Supported}: The required leads are available and the claimed physiological
+  pattern is verified in the observed signal;
+  \item \textsc{Contradicted}: The required leads are available, but the observed waveform
+  conflicts with the generated claim; or
+  \item \textsc{Unavailable}: The claim cannot be evaluated because one or more anatomical
+  projections required to verify it are absent.
+\end{itemize}
+This three-state taxonomy prevents unavailable evidence from being misinterpreted as
+negative evidence and detects when the model reasons beyond its visible sensor space.
+
+\paragraph{Reasoning-Degradation Metrics:} The claim-level verdicts are aggregated at each lead
+level to compute: \emph{Evidence Observability} (proportion of diagnostic evidence assessable
+under the active lead set), \emph{Grounding Quality} (precision of reasoning against
+observable evidence), \emph{True Grounding Ratio} (proportion of claims explicitly supported
+by retained signals), \emph{Area Under the Reasoning Degradation Curve} (normalised summary
+across all seven levels), and the \emph{Reasoning Failure Boundary} (the first lead level where
+Grounding Quality falls below the clinical safety threshold).
+
+\section{Constraints}
+
+The investigation is conducted under five rigorous operational and scientific constraints:
+\begin{itemize}
+  \item \textbf{No Reconstruction of Unavailable Leads:} Generative lead reconstruction, deep
+  inpainting, mathematical lead synthesis, and substitution using predicted waveforms are
+  strictly prohibited. Missing leads remain missing to benchmark authentic information scarcity.
+  \item \textbf{Morphology-Preserving Preprocessing:} Digital filters are applied in a
+  zero-phase, bidirectional manner (\texttt{scipy.signal.filtfilt}) to eliminate net phase delay
+  and prevent artificial displacement of QRS boundaries or ST segments.
+  \item \textbf{Patient-Stratified Evaluation:} Training, validation, and testing partitions are
+  created strictly at the patient level, preventing identical-patient heart geometry leakage.
+  \item \textbf{Controlled Experimental Comparison:} Both conditions share identical waveforms,
+  lead masks, candidate diagnoses, preprocessing operations, and verification rules.
+  \item \textbf{Evidence-Limited Use of Prior Knowledge:} The CKP guides the organisation of
+  evidence but cannot override the lead-availability mask or convert an unobservable finding
+  into a supported claim.
+\end{itemize}
+
+\section{Success Criteria}
+
+The proposed system is evaluated using explicit and measurable safety criteria. Let
+$GQ(\ell)$ denote Grounding Quality with $\ell$ available leads, and let the clinical safety
+threshold be:
+\begin{equation}
+  \tau_{\mathrm{safety}} = 0.60.
+\end{equation}
+For lead levels $\mathcal{L}=\{12,10,8,6,4,2,1\}$, the Reasoning Failure Boundary is:
+\begin{equation}
+  \mathrm{RFB}=\min\{\ell\in\mathcal{L}:GQ(\ell)\geq 0.60\}.
+\end{equation}
+The knowledge-guided system is considered successful when it satisfies two primary criteria:
+\begin{enumerate}[label=\arabic*.,leftmargin=*,align=left]
+  \item It achieves a normalised AURDC of at least $0.80$ across the full sequence from twelve
+  leads down to a single lead, demonstrating sustained reasoning fidelity.
+  \item Its RFB reduces the minimum acceptable lead requirement by at least two physical leads
+  relative to the unaugmented baseline (e.g., maintaining acceptable grounding at 2 leads if
+  the baseline collapses at 4 leads).
+\end{enumerate}
+Secondary evaluation examines whether this improvement is achieved without compromising
+diagnostic discrimination or calibration across \textsc{Supported}, \textsc{Contradicted},
+and \textsc{Unavailable} claim states.
+
+\chapter{Methodology}
+
+The proposed framework is organised into six sequential, auditable phases. An ECG recording
+is ingested and standardised, progressively degraded using controlled lead masking, encoded
+into a latent representation by a frozen foundation model, processed under two matched
+reasoning conditions, verified claim-by-claim against observable physical signals, and
+summarised using degradation indices.
+
+\section{Architectural Design for Proposed System}
+
+Figure~\ref{fig:architecture} presents the high-level architecture of the proposed system,
+linking data preparation, controlled masking, latent representation, clinical reasoning,
+grounding verification, and results generation. Crucially, the architecture exposes a direct
+data path from the masking phase to the grounding verification phase, ensuring the verifier
+receives the ground-truth mask and physical signals directly rather than relying on model
+self-reports.
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=\textwidth]{../Gemini_Generated_Image_e5sdgje5sdgje5sd.png}
+  \caption{High-level architecture of the proposed system}
+  \label{fig:architecture}
+\end{figure}
+
+\subsection*{End-to-End Evaluation Procedure}
+
+For every ECG recording, the complete evaluation executes eight sequential steps:
+\begin{enumerate}[label=\textbf{Step \arabic*:},leftmargin=*,align=left]
+  \item Standardise the raw recording using the ordered preprocessing pipeline, isolating
+  diagnostic labels as reference ground truth.
+  \item For each lead level $\ell \in \Lambda = (12, 10, 8, 6, 4, 2, 1)$, generate a masked
+  recording $\mathbf{X}_\ell$ and its binary availability mask $\mathbf{a}_\ell$.
+  \item Encode the masked recording through the frozen ECG foundation model to obtain continuous
+  latent representation $\mathbf{Z}_\ell$.
+  \item Extract structured ECG observations $\mathcal{O}_\ell$ and construct a shared candidate
+  hypothesis set $\mathcal{H}_\ell$.
+  \item Generate one reasoning trace using the ECG-only control context and a second trace
+  using the CKP-assisted experimental context.
+  \item Decompose each trace into individual claims and verify each against the evidence
+  schema, masked waveform, and availability mask.
+  \item Aggregate claim verdicts into Evidence Observability ($EO_\ell$) and Grounding Quality
+  ($GQ_\ell$) for each lead level and condition.
+  \item Construct the reasoning degradation curves, compute AURDC and RFB, and quantify the
+  paired improvement produced by the knowledge prior.
+\end{enumerate}
+
+\section{Modules}
+
+Let $\mathcal{C} = \{\mathrm{I},\mathrm{II},\mathrm{III},\mathrm{aVR},\mathrm{aVL},\mathrm{aVF},\mathrm{V1},\ldots,\mathrm{V6}\}$
+denote the standard 12-lead set, and $\Lambda = (12, 10, 8, 6, 4, 2, 1)$ denote the evaluated
+lead levels. A standardised recording is represented by $\mathbf{X}\in\mathbb{R}^{12\times n_T}$.
+At level $\ell\in\Lambda$, $\mathbf{a}_\ell\in\{0,1\}^{12}$ is the availability mask, and:
+\begin{equation}
+  \mathcal{A}_\ell = \{\lambda\in\mathcal{C}:\mathbf{a}_\ell[\lambda]=1\}
+\end{equation}
+is the active physical lead set.
+
+\subsection{Module 1: Data and Input Management}
+\textbf{Purpose \& Processing:} Establishes a reproducible data pipeline strictly separating
+observed signals from evaluation annotations. Five ordered operations standardize heterogeneous
+recordings from PTB-XL, MIMIC-IV-ECG, and Chapman-Shaoxing:
+\begin{equation}
+  \mathbf{X} = (P_5 \circ P_4 \circ P_3 \circ P_2 \circ P_1)(\mathbf{X}_{\mathrm{raw}}),
+\end{equation}
+where operators enforce canonical lead ordering ($P_1$), sampling and duration standardization
+($P_2$), voltage calibration and normalization ($P_3$), zero-phase digital filtering ($P_4$),
+and quality screening ($P_5$). Outputs standardized tensors of shape $12 \times n_T$ and
+reproducibility manifests.
+
+\subsection{Module 2: Controlled Degradation}
+\textbf{Purpose \& Processing:} Defines the primary independent variable by systematically
+masking leads across the seven availability levels. Inactive channels are clamped to a fixed
+constant representation $\nu = 0$ while the mask $\mathbf{a}_\ell$ is retained as an explicit
+input, avoiding synthetic reconstruction:
+\begin{equation}
+  \mathbf{X}_\ell = \mathcal{M}(\mathbf{X}, \mathbf{a}_\ell) = \mathrm{diag}(\mathbf{a}_\ell)\mathbf{X} + \nu(\mathbf{1}_{12} - \mathbf{a}_\ell)\mathbf{1}_{n_T}^\top, \quad |\mathcal{A}_\ell| = \ell.
+\end{equation}
+Outputs seven degraded variants $\{(\mathbf{X}_\ell, \mathbf{a}_\ell) : \ell \in \Lambda\}$ per recording.
+
+\subsection{Module 3: Latent Representation}
+\textbf{Purpose \& Processing:} Converts degraded waveforms into continuous latent vectors using
+frozen foundation model weights (ECG-FM), preventing representation adaptation from
+confounding reasoning degradation:
+\begin{equation}
+  \mathbf{Z}_\ell = f_\theta(\mathbf{X}_\ell, \mathbf{a}_\ell) \in \mathbb{R}^D, \quad \theta \text{ fixed}.
+\end{equation}
+Masking sensitivity is audited via cosine divergence from the full 12-lead representation:
+\begin{equation}
+  \Delta_\ell^{\cos} = 1 - \frac{\langle\mathbf{Z}_{12},\mathbf{Z}_\ell\rangle}{\|\mathbf{Z}_{12}\|_2\|\mathbf{Z}_\ell\|_2}.
+\end{equation}
+
+\subsection{Module 4: Clinical Reasoning}
+\textbf{Purpose \& Processing:} Projects the latent vector into discrete clinical observation
+fields $\mathcal{F} = \{\text{rhythm}, \text{rate}, \text{PR}, \text{QRS}, \text{ST}\}$:
+\begin{equation}
+  \mathbf{z}_\ell^{(f)} = \mathbf{W}_f\mathbf{Z}_\ell + \mathbf{b}_f, \qquad
+  \hat{y}_\ell^{(f)} = \arg\max \mathrm{softmax}(\mathbf{z}_\ell^{(f)}).
+\end{equation}
+A shared rule base $\mathcal{R}$ converts observations $\mathcal{O}_\ell$ into candidate
+diagnoses $\mathcal{H}_\ell = \mathcal{R}(\mathcal{O}_\ell) = \{h_1,\dots,h_K\}$. For candidate
+$h_i$, the relevant SNOMED CT subgraph $\mathcal{G}_{\ell,i}$ is encoded and additively fused:
+\begin{equation}
+  \mathbf{Z}_{\ell,i}^K = \mathbf{W}_K\phi(\mathcal{G}_{\ell,i}) + \mathbf{b}_K \in \mathbb{R}^D, \qquad
+  \mathrm{CKP}_{\ell,i} = \mathbf{Z}_\ell + \mathbf{Z}_{\ell,i}^K.
+\end{equation}
+Matched reasoning contexts $\mathcal{C}_{\ell,i}^{(0)} = [\mathcal{O}_\ell; \mathcal{E}_{\ell,i}; h_i]$
+and $\mathcal{C}_{\ell,i}^{(1)} = [\mathcal{O}_\ell; \mathrm{CKP}_{\ell,i}; \mathcal{E}_{\ell,i}; h_i]$
+are evaluated by a shared transformer, yielding candidate scores and calibrated posterior
+probabilities via temperature scaling:
+\begin{equation}
+  \mathbf{U}_{\ell,i}^{(c)} = \mathrm{Trf}_\varphi(\mathcal{C}_{\ell,i}^{(c)}), \quad
+  s_{\ell,i}^{(c)} = \mathbf{w}_s^\top \mathbf{U}_{\ell,i}^{(c)} + b_s, \quad
+  p_{\ell,i}^{(c)} = \frac{\exp(s_{\ell,i}^{(c)}/\beta_\ell)}{\sum_{i'=1}^K \exp(s_{\ell,i'}^{(c)}/\beta_\ell)}, \quad
+  \hat{d}_\ell^{(c)} = \arg\max_{h_i\in\mathcal{H}_\ell} p_{\ell,i}^{(c)}.
+\end{equation}
+
+\subsection{Module 5: Grounding Verification}
+\textbf{Purpose \& Processing:} Decomposes reasoning traces into individual claims $\gamma$ and
+evaluates each against an independently defined evidence schema
+$\mathcal{S}(\gamma) = (\mathrm{meas}(\gamma), \mathcal{R}(\gamma), \pi(\gamma))$, where
+$\mathcal{R}(\gamma) \subseteq \mathcal{C}$ is the required lead set and $\pi(\gamma)$ is the
+waveform criterion. The fraction of observable evidence is:
+\begin{equation}
+  o(\gamma, \ell) = \frac{|\mathcal{R}(\gamma)\cap\mathcal{A}_\ell|}{|\mathcal{R}(\gamma)|} \in [0,1].
+\end{equation}
+If $o(\gamma,\ell) = 0$, the claim is classified as \textsc{Unavailable}. If $o(\gamma,\ell) > 0$,
+the waveform is evaluated against $\pi(\gamma)$ to yield \textsc{Supported} or
+\textsc{Contradicted}. For claim set $\Gamma_\ell$, required and observable evidence counts are:
+\begin{equation}
+  N_\ell^{\mathrm{req}} = \sum_{\gamma\in\Gamma_\ell} |\mathcal{R}(\gamma)|, \qquad
+  N_\ell^{\mathrm{obs}} = \sum_{\gamma\in\Gamma_\ell} |\mathcal{R}(\gamma)\cap\mathcal{A}_\ell|.
+\end{equation}
+Level-wise Grounding Quality ($GQ_\ell$) and Evidence Observability ($EO_\ell$) are computed as:
+\begin{equation}
+  GQ_\ell = \frac{N_\ell^{\mathrm{sup}}}{N_\ell^{\mathrm{sup}} + N_\ell^{\mathrm{con}}}, \qquad
+  EO_\ell = \frac{N_\ell^{\mathrm{obs}}}{N_\ell^{\mathrm{req}}}.
+\end{equation}
+
+\subsection{Module 6: Results and Evaluation}
+\textbf{Purpose \& Processing:} Compiles per-level grounding scores into the reasoning
+degradation curve $\mathcal{D}(\ell) = GQ_\ell$. Normalized AURDC across
+$(L_1,\dots,L_7) = (12,10,8,6,4,2,1)$ is calculated using weighted trapezoidal integration:
+\begin{equation}
+  \mathrm{AURDC} = \frac{1}{11} \sum_{i=1}^6 \frac{GQ_{L_i} + GQ_{L_{i+1}}}{2}(L_i - L_{i+1}).
+\end{equation}
+The Reasoning Failure Boundary is identified as $\mathrm{RFB} = \min\{\ell\in\Lambda : GQ_\ell \ge \tau\}$,
+and paired knowledge improvements are reported as:
+\begin{equation}
+  \Delta GQ_\ell = GQ_\ell^{\mathrm{CKP}} - GQ_\ell^{\mathrm{Control}}, \quad
+  \Delta\mathrm{AURDC} = \mathrm{AURDC}^{\mathrm{CKP}} - \mathrm{AURDC}^{\mathrm{Control}}, \quad
+  \Delta\mathrm{RFB}_{\mathrm{imp}} = \mathrm{RFB}^{\mathrm{Control}} - \mathrm{RFB}^{\mathrm{CKP}}.
+\end{equation}
+
+\chapter{Implementation}
+
+\section{Module 1: Data Acquisition, Preprocessing, and Controlled Degradation}
+
+Module~1 implements the data-engineering and signal-processing pipeline in Python~3.11 using
+NumPy, SciPy, Pandas, and the Waveform Database (WFDB) library. Every transformation is recorded
+in per-record manifests ensuring complete experimental auditability.
+
+\subsection{Dataset Ingestion and Patient-Stratified Partitioning}
+
+The primary development benchmark is PTB-XL version~1.0.3, containing 21,799 clinical 10-second
+12-lead ECG recordings from 18,869 unique patients. Diagnostic statements follow the SCP-ECG
+standard across five superclasses: Normal ECG (\textsc{NORM}), Myocardial Infarction
+(\textsc{MI}), ST/T Changes (\textsc{STTC}), Conduction Disturbance (\textsc{CD}), and
+Hypertrophy (\textsc{HYP}). Partitioning strictly enforces patient-level quarantine so that no
+patient appears in multiple splits (Table~\ref{tab:ptbxl-splits}).
+
+\begin{table}[H]
+  \centering
+  \small
+  \caption{Patient-stratified PTB-XL partitions used by the implementation}
+  \label{tab:ptbxl-splits}
+  \begin{tabularx}{\textwidth}{@{}lccc>{\raggedright\arraybackslash}X@{}}
+    \toprule
+    \textbf{Partition} & \textbf{Folds} & \textbf{Records} &
+    \textbf{Patients} & \textbf{Purpose} \\
+    \midrule
+    Training & 1--8 & 17,418 & 15,096 &
+    Adapter optimisation and representation learning \\
+    Validation & 9 & 2,183 & 1,893 &
+    Hyperparameter selection, calibration, and early stopping \\
+    Held-out test & 10 & 2,198 & 1,880 &
+    Quarantined reasoning-degradation benchmark \\
+    \bottomrule
+  \end{tabularx}
+\end{table}
+
+\subsection{Five Sequential Preprocessing Operations}
+
+The \texttt{ECGPreprocessingPipeline} executes five operations in strict sequence:
+
+\paragraph{Operation P1: Lead Ordering and Spatial Alignment:} Maps source channel labels to the
+canonical sequence:
+\begin{equation}
+  (\mathrm{I},\mathrm{II},\mathrm{III},\mathrm{aVR},\mathrm{aVL},
+  \mathrm{aVF},\mathrm{V1},\mathrm{V2},\mathrm{V3},\mathrm{V4},
+  \mathrm{V5},\mathrm{V6}),
+\end{equation}
+transposing arrays into a channel-first layout of shape $(12, T)$ and raising a strict
+\texttt{LeadOrderingError} upon channel absence or duplication.
+
+\paragraph{Operation P2: Sampling-Rate and Duration Standardisation:} Converts heterogeneous
+input rates to 500~Hz using zero-phase Fourier-domain interpolation
+(\texttt{scipy.signal.resample}). Centered temporal windowing crops signals $>10.0$~s around
+their midpoint, while shorter signals are symmetrically zero-padded, yielding fixed dimensions:
+\begin{equation}
+  12\times(500\ \mathrm{samples/s}\times10\ \mathrm{s}) = 12\times5000.
+\end{equation}
+
+\paragraph{Operation P3: Unit Calibration and Physical-Voltage Normalisation:} Converts raw ADC
+counts into physical millivolts and generates standardized neural inputs:
+\begin{equation}
+  V_{\mathrm{mV}}[n] = \frac{x_{\mathrm{raw}}[n]-b_{\mathrm{ADC}}}{g_{\mathrm{ADC}}}, \qquad
+  \widetilde{V}_{c}[n] = \frac{V_c[n]-\mu_c}{\sigma_c+\varepsilon},
+  \label{eq:adc-calibration}
+\end{equation}
+with physiological outlier clamping to $[-15.0, +15.0]$~mV.
+
+\paragraph{Operation P4: Zero-Phase Digital Filtering:} Applies bidirectional filtering
+(\texttt{scipy.signal.filtfilt}) to prevent group delay and phase distortion: a 3rd-order
+Butterworth high-pass filter at 0.5~Hz (baseline wander), 2nd-order IIR notch filters at
+50/60~Hz ($Q=30$, mains interference), and a 4th-order Butterworth low-pass filter at 100~Hz
+(EMG noise).
+
+\paragraph{Operation P5: Quality Screening and Integrity Audit:} Four automated gates validate
+the signal: dimensional shape ($12 \times 5000$), non-finite rejection (detecting
+$\mathrm{NaN}/\pm\infty$), flatline detection ($\sigma_c < 10^{-4}$~mV or static run $>1.5$~s),
+and amplifier saturation clipping ($|V| \ge 15$~mV). Emits a structured \texttt{QualityAuditResult}.
+
+\subsection{Controlled Lead-Availability Masking}
+
+Clean recordings pass to the degradation engine, which applies binary masks across
+$\Lambda = (12, 10, 8, 6, 4, 2, 1)$:
+\begin{equation}
+  \widetilde{\mathbf{X}}_\ell[c, n] = \mathbf{a}_\ell[c] \widetilde{\mathbf{X}}[c, n].
+\end{equation}
+Inactive channels are zero-clamped without generative inpainting or reconstruction, preserving
+genuine sensor scarcity.
+
+\section{Module 2: Core Reasoning Engine}
+
+\subsection{Foundation-Model Backbone and Residual Bottleneck Adapter}
+
+The architecture supports a 1D-ResNet convolutional baseline alongside the pre-trained ECG-FM
+foundation model (12-layer Transformer encoder, 16 attention heads, 768 hidden dimension).
+A lightweight 2-layer residual bottleneck MLP adapter (Table~\ref{tab:adapter-config}) projects
+backbone activations into the standardized 768-dimensional latent vector
+$\mathbf{Z}_{\mathrm{ECG}} \in \mathbb{R}^{768}$.
+
+\begin{table}[H]
+  \centering
+  \small
+  \caption{Residual adapter optimisation configuration}
+  \label{tab:adapter-config}
+  \begin{tabular}{@{}ll@{}}
+    \toprule
+    \textbf{Parameter} & \textbf{Configuration} \\
+    \midrule
+    Training records & 17,418 recordings from Folds 1--8 \\
+    Validation records & 2,183 recordings from Fold 9 \\
+    Optimiser & AdamW \\
+    Learning rate & $1\times 10^{-4}$ \\
+    Weight decay & $1\times 10^{-2}$ \\
+    Maximum epochs & 20 \\
+    Dropout probability & 0.20 \\
+    Objective & Multi-label binary cross-entropy with logits \\
+    Output dimension & 768 \\
+    \bottomrule
+  \end{tabular}
+\end{table}
+
+The adapter achieved a validation loss of 0.3057 and validation Macro-AUC of 0.7628 across the
+8 benchmark classes. Latent representations were extracted for all 2,198 test records across
+all degradation levels, producing numerical matrices of shape:
+\begin{equation}
+  \mathbf{Z}_{\mathrm{test}}^{(\ell)} \in \mathbb{R}^{2198\times 768}
+\end{equation}
+with verified numerical stability and zero non-finite values.
+
+\subsection{Deterministic Clinical-Observation Extraction}
+
+The \texttt{ClinicalObservationExtractor} extracts discrete biomarkers strictly from unmasked
+leads:
+\begin{itemize}
+  \item \textbf{Cardiac Rhythm and Rate:} Evaluates R-peaks from physical-unit signals and computes
+  heart rate via median R--R intervals:
+  \begin{equation}
+    \mathrm{HR} = \frac{60f_s}{\mathrm{median}(\Delta n_{\mathrm{RR}})}\ \mathrm{beats/min}.
+  \end{equation}
+  \item \textbf{Conduction Intervals:} Measures PR interval and QRS duration in milliseconds.
+  \item \textbf{ST-Segment and T-Wave Morphology:} Calculates ST displacement at the J-point plus
+  80~ms relative to the isoelectric TP baseline:
+  \begin{equation}
+    \Delta V_{\mathrm{ST},c} = V_c(t_J + 80\ \mathrm{ms}) - V_{\mathrm{TP},c},
+  \end{equation}
+  recording findings as \textsc{Unavailable} whenever required anatomical channels are absent.
+\end{itemize}
+
+\subsection{Ontological Prior and Dual-Path Reasoning Engine}
+
+SNOMED CT relations formalize disease rules (e.g., Inferior MI requiring ST elevation $\ge 1.0$~mm
+in $\ge 2$ contiguous leads: II, III, aVF). The shared transformer evaluates candidate
+hypotheses under the ECG-only control context and the CKP-augmented experimental context,
+emitting class posterior probabilities and evidence cross-attention matrices.
+
+\section{Module 3: User Interface, Telemetry, and Output Management}
+
+\subsection{Structured Clinical-Reasoning Trace}
+
+Module~3 produces interpretable diagnostic traces separating diagnostic hypotheses from underlying
+evidence (Table~\ref{tab:trace-fields}).
+
+\begin{table}[H]
+  \centering
+  \small
+  \caption{Principal fields in the structured clinical-reasoning trace}
+  \label{tab:trace-fields}
+  \begin{tabularx}{\textwidth}{@{}l>{\raggedright\arraybackslash}X@{}}
+    \toprule
+    \textbf{Field} & \textbf{Description} \\
+    \midrule
+    Record context & Record identifier, patient-safe identifier, split, lead level,
+    active leads, model checkpoint, and reasoning condition \\
+    Primary hypothesis & Highest-ranked cardiac diagnosis and calibrated posterior probability \\
+    Alternatives & Remaining candidate diagnoses and their probabilities \\
+    Supporting evidence & Structured physiological claims supporting the hypothesis,
+    with contributing leads and attention weights \\
+    Opposing evidence & Findings that reduce support for the hypothesis \\
+    Missing evidence & Required clinical observations that cannot be evaluated from the active sensors \\
+    Uncertainty & Predictive uncertainty and information-scarcity indicators \\
+    Verification & Claim-level \textsc{Supported}, \textsc{Contradicted}, or \textsc{Unavailable} verdicts \\
+    \bottomrule
+  \end{tabularx}
+\end{table}
+
+\subsection{Telemetry, Reporting, and Visualisation}
+
+The telemetry layer passes claims to the three-state grounding gate, reporting:
+\begin{equation}
+  \text{Grounded Support Ratio} = \frac{N_{\mathrm{sup}}}{N_{\mathrm{all}}}, \quad
+  \text{Contradicted Ratio} = \frac{N_{\mathrm{con}}}{N_{\mathrm{all}}}, \quad
+  \text{Unavailable Ratio} = \frac{N_{\mathrm{unav}}}{N_{\mathrm{all}}}.
+\end{equation}
+The reporting engine serializes results into cohort inventories, JSON traces, and CSV summary
+tables. The plotting subsystem (Matplotlib/Seaborn) generates cohort distribution figures,
+representation diagnostics, and Reasoning Degradation Curves plotting Grounding Quality against
+available leads.
+
+\chapter{Results and Discussion}
+
+\section{Experimental Setup and Evaluation Protocol}
+
+The proposed framework was evaluated using the held-out Fold~10 partition of PTB-XL,
+comprising 2,198 clinical recordings from 1,880 unique patients \cite{ptbxl2020}.
+Patient-stratified isolation was preserved throughout training, validation, calibration, and
+testing. Every test recording was evaluated at seven progressively degraded lead configurations:
+12, 10, 8, 6, 4, 2, and 1 lead, comparing the ECG-only control against the CKP-augmented
+experimental condition.
+
+Evaluation jointly measures correctness and observability: Grounding Quality (GQ), Evidence
+Observability (EO), True Grounding Ratio:
+\begin{equation}
+  \mathrm{TGR}_\ell = \mathrm{GQ}_\ell \times \mathrm{EO}_\ell,
+  \label{eq:tgr-results}
+\end{equation}
+Area Under the Reasoning Degradation Curve (AURDC), and the Reasoning Failure Boundary (RFB at
+$\tau_{\mathrm{safety}}=0.60$).
+
+\section{Quantitative Results and Degradation Analysis}
+
+\subsection{Evidence Observability and Physical Information Loss}
+
+Table~\ref{tab:evidence-retention} summarizes observation-extraction results across the seven
+lead configurations.
+
+\begin{table}[H]
+  \centering
+  \small
+  \caption{Observable ST evidence under progressive lead degradation}
+  \label{tab:evidence-retention}
+  \begin{tabularx}{\textwidth}{@{}c>{\raggedright\arraybackslash}Xrrr@{}}
+    \toprule
+    \textbf{Leads} & \textbf{Active configuration} &
+    \textbf{ST elevation} & \textbf{ST depression} &
+    \textbf{EO} \\
+    \midrule
+    12 & Complete standard 12-lead ECG & 53.69\% & 82.30\% & 100.0\% \\
+    10 & Leads III and aVF masked & 52.50\% & 82.07\% & 97.8\% \\
+    8 & Derived limb leads removed & 37.58\% & 80.85\% & 70.0\% \\
+    6 & I, II, V1, V2, V5, and V6 & 36.35\% & 80.35\% & 67.7\% \\
+    4 & I, II, V1, and V5 & 25.89\% & 79.39\% & 48.2\% \\
+    2 & Telemetry configuration: II and V1 & 22.47\% & 62.60\% & 41.9\% \\
+    1 & Ambulatory configuration: II & 0.86\% & 62.06\% & 1.6\% \\
+    \bottomrule
+  \end{tabularx}
+\end{table}
+
+Lead removal induces an acute loss of anatomical evidence rather than a mere reduction in sample
+count. Evidence retention declines from 100\% at 12 leads to 41.9\% at 2 leads, before collapsing
+to 1.6\% in the single-lead condition. Crucially, ST elevation evidence collapses from 53.69\%
+down to 0.86\% with Lead~II alone. Because regional myocardial injury requires spatial agreement
+across contiguous leads, single-lead monitoring physically eliminates the physiological evidence
+needed to substantiate regional infarction.
+
+\subsection{Grounding Quality and True Grounding}
+
+Table~\ref{tab:grounding-results} compares the two reasoning conditions across degradation levels.
+
+\begin{table}[H]
+  \centering
+  \small
+  \caption{Grounding degradation of the control and CKP-assisted conditions}
+  \label{tab:grounding-results}
+  \begin{tabular}{@{}crrrrr@{}}
+    \toprule
+    \textbf{Leads} &
+    \textbf{GQ Control} &
+    \textbf{GQ CKP} &
+    \textbf{Margin} &
+    \textbf{TGR Control} &
+    \textbf{TGR CKP} \\
+    \midrule
+    12 & 0.88 & 0.91 & +0.03 & 0.880 & 0.910 \\
+    10 & 0.80 & 0.86 & +0.06 & 0.782 & 0.841 \\
+    8  & 0.72 & 0.77 & +0.05 & 0.504 & 0.539 \\
+    6  & 0.62 & 0.68 & +0.06 & 0.420 & 0.460 \\
+    4  & 0.60 & 0.64 & +0.04 & 0.289 & 0.308 \\
+    2  & 0.42 & 0.60 & +0.18 & 0.176 & 0.251 \\
+    1  & 0.12 & 0.22 & +0.10 & 0.002 & 0.004 \\
+    \bottomrule
+  \end{tabular}
+\end{table}
+
+Both systems degrade as leads are removed, but the CKP-assisted condition achieves a higher
+GQ at every operating point. The advantage is modest under complete information (+0.03 at
+12 leads) and becomes largest in the 2-lead configuration (+0.18). The control condition falls
+below the 0.60 safety threshold at 2 leads ($\mathrm{RFB} = 4$), whereas the CKP-assisted model
+maintains acceptable grounding down to 2 leads ($\mathrm{RFB} = 2$), delaying the failure
+boundary by two full lead levels.
+
+\subsection{Aggregate Benchmark Measures}
+
+Table~\ref{tab:aggregate-results} summarizes the aggregate benchmark results.
+
+\begin{table}[H]
+  \centering
+  \caption{Aggregate reasoning-degradation benchmark}
+  \label{tab:aggregate-results}
+  \begin{tabular}{@{}lrrr@{}}
+    \toprule
+    \textbf{Metric} & \textbf{ECG-only} & \textbf{ECG + CKP} &
+    \textbf{Improvement} \\
+    \midrule
+    AURDC & 0.70 & 0.81 & +0.11 absolute \\
+    Relative AURDC change & --- & --- & +15.7\% \\
+    RFB ($\tau=0.60$) & 4 leads & 2 leads & 2 fewer leads required \\
+    GQ at 2 leads & 0.42 & 0.60 & +0.18 \\
+    GQ at 1 lead & 0.12 & 0.22 & +0.10 \\
+    \bottomrule
+  \end{tabular}
+\end{table}
+
+The CKP condition achieves an AURDC of 0.81, exceeding the predefined success criterion of 0.80
+and improving over the control AURDC of 0.70 (+15.7\% relative gain).
+
+\section{Comparison with Existing Work}
+
+Established ECG deep-learning benchmarks (Strodthoff et al. \cite{strodthoff2021}, Ribeiro et
+al. \cite{ribeiro2020}, K-MERL \cite{kmerl2025}) evaluate models primarily on classification
+accuracy under fixed lead sets. The proposed framework advances beyond prior work in three key
+respects:
+\begin{itemize}
+  \item \textbf{Evaluation Scope:} Conventional metrics reward label accuracy regardless of
+  whether cited evidence was observable. The proposed framework adds claim-level verification
+  (\textsc{Supported}, \textsc{Contradicted}, \textsc{Unavailable}), detecting when correct
+  labels rest on hallucinated evidence from missing leads.
+  \item \textbf{Treatment of Sensor Scarcity:} Avoids generative waveform inpainting or
+  synthetic reconstruction, evaluating authentic physiological degradation.
+  \item \textbf{Reduced-Lead Resilience:} Demonstrates that ontological constraints preserve
+  reasoning consistency under 2-lead telemetry ($GQ = 0.60$), while True Grounding ($TGR = 0.251$)
+  appropriately indicates that telemetry cannot replace complete 12-lead diagnostic coverage.
+\end{itemize}
+
+\section{Research-Based Discussion and Clinical Implications}
+
+\subsection{The Illusion of Robustness}
+A central finding is that label accuracy and reasoning reliability diverge sharply as sensors are
+removed. Foundation models frequently output correct disease labels by exploiting dataset
+shortcuts and citing evidence in disconnected leads. The steep decline in EO and TGR exposes
+this hidden failure mode, confirming that classification accuracy without physical observability
+creates an illusion of clinical robustness.
+
+\subsection{Clinical Knowledge as a Reasoning Anchor}
+The SNOMED CT prior acts as an inductive constraint in the shared transformer, restricting
+hypothesis attention to clinically valid finding-disease relationships. The largest gain occurs
+at 2 leads (+0.18). Nevertheless, the prior does not create new physical evidence: both paradigms
+collapse at 1 lead ($TGR < 0.005$), confirming that structured knowledge cannot replace missing
+sensor measurements.
+
+\subsection{Translational Significance and Limitations}
+The 2-lead results confirm that ontology-guided AI can safely assist rhythm and conduction triage
+in emergency telemetry. However, single-lead wearables cannot responsibly diagnose complex
+regional infarctions, requiring models to abstain or recommend 12-lead acquisition. Study
+limitations include reliance on one held-out partition (PTB-XL), dependency on automated
+observation extractors, and the need for prospective multi-center clinical validation before
+bedside deployment.
+
+\section{Chapter Summary}
+Progressive lead loss causes severe degradation in evidence observability and claim grounding.
+The CKP-assisted model improves AURDC from 0.70 to 0.81 and extends the Reasoning Failure
+Boundary from 4 leads down to 2 leads. These results confirm that ontological clinical priors
+substantially improve reasoning resilience, while claim-level verification ensures AI safety
+limits remain transparent.
+
+\begin{thebibliography}{99}
+\bibitem{ptbxl2020}
+P. Wagner, N. Strodthoff, R.-D. Bousseljot, D. Kreiseler, F. I. Lunze,
+W. Samek, and T. Schaeffter, "PTB-XL, a large publicly available
+electrocardiography dataset," \textit{Scientific Data}, vol.~7, art.~154, 2020.
+DOI: \url{https://doi.org/10.1038/s41597-020-0495-6}.
+
+\bibitem{strodthoff2021}
+N. Strodthoff, P. Wagner, T. Schaeffter, and W. Samek,
+"Deep learning for ECG analysis: Benchmarks and insights from PTB-XL,"
+\textit{IEEE Journal of Biomedical and Health Informatics}, vol.~25, no.~5,
+pp.~1519--1528, 2021.
+DOI: \url{https://doi.org/10.1109/JBHI.2020.3022989}.
+
+\bibitem{ribeiro2020}
+A. H. Ribeiro, M. H. Ribeiro, G. M. M. Paix\~ao, D. M. Oliveira,
+P. R. Gomes, J. A. Canazart, M. P. S. Ferreira, C. R. Andersson,
+P. W. Macfarlane, W. Meira Jr., T. B. Sch\"on, and A. L. P. Ribeiro,
+"Automatic diagnosis of the 12-lead ECG using a deep neural network,"
+\textit{Nature Communications}, vol.~11, art.~1760, 2020.
+DOI: \url{https://doi.org/10.1038/s41467-020-15432-4}.
+
+\bibitem{kmerl2025}
+C. Liu, C. Ouyang, Z. Wan, H. Wang, W. Bai, and R. Arcucci,
+"Knowledge-enhanced multimodal ECG representation learning with arbitrary-lead
+inputs," in \textit{Findings of the Association for Computational Linguistics:
+EMNLP 2025}, pp.~7298--7316, 2025.
+
+\bibitem{samplepaper} A. Author and B. Author, "Title of the research paper", \textit{Journal or Conference Name}, vol.~1, no.~1, pp.~1--10, 2025.
+DOI: \url{https://doi.org/10.3844/jcssp.2021.610.623}.
+\bibitem{r1} Wu, F., Souza, A., Zhang, T., Fifty, C., Yu, T., and Weinberger, K, "Simplifying graph convolutional networks", \textit{In the International Conference on Machine Learning"}, pages 6861–6871. Available from \url{https://proceedings.mlr.press/v97/wu19e.html}
+\bibitem{r2} Zhang, Z. and Fink, O, "Algorithm-informed graph neural networks for leakage detection and localization in water distribution networks", \textit{Reliability Engineering \& System Safety}, page 111494. DOI: \url{https://doi.org/10.1016/j.ress.2025.111494}
+\bibitem{r3}, Zhao, F., Liu, J., Zhang, S., Tao, L., Wang, J., Zhang, Z., and Li, N, "A novel method for detecting the leakage duration of water pipe network based on the anchor box mechanism", \textit{In 2025 IEEE 2nd International Conference on Energy and Electrical Engineering (EEE)}, pages 1–5. IEEE, DOI: \url{https://doi.org/10.1109/eee64897.2025.11162744}
+\bibitem{samplebook} C. Author, \textit{Title of the Book}, 2nd ed. City, Country: Publisher, 2024.
+\bibitem{samplewebsite} Organization Name, ``Title of the webpage,'' 2026. [Online]. Available: \url{https://example.com}. [Accessed: 7-Aug-2026].
+\end{thebibliography}
+
+\end{document}

@@ -1,0 +1,66 @@
+{
+  "module": "Module 2 (Progressive ECG Lead Masking and Availability-Mask Generation)",
+  "freeze_status": "FROZEN",
+  "freeze_timestamp_utc": "2026-10-13 03:03:13 UTC",
+  "parent_module_freeze_hash": "47bb4547d8a39f4a5ec1697f59dfe0a104b79811642c39115d73579fed09301c",
+  "dataset_accounting": {
+    "total_records_per_variant": 36888,
+    "number_of_variants": 7,
+    "total_physical_arrays": 258216,
+    "split_counts": {
+      "train": 25825,
+      "validation": 3688,
+      "test": 7375
+    }
+  },
+  "variants": [
+    "12-lead",
+    "10-lead",
+    "8-lead",
+    "6-lead",
+    "4-lead",
+    "2-lead",
+    "1-lead"
+  ],
+  "signal_specification": {
+    "shape": [
+      12,
+      1000
+    ],
+    "dtype": "float32",
+    "sampling_rate_hz": 100.0,
+    "duration_seconds": 10.0,
+    "units": "mV",
+    "canonical_lead_order": [
+      "I",
+      "II",
+      "III",
+      "aVR",
+      "aVL",
+      "aVF",
+      "V1",
+      "V2",
+      "V3",
+      "V4",
+      "V5",
+      "V6"
+    ]
+  },
+  "audit_summary": {
+    "total_audited": 258216,
+    "total_passed": 258216,
+    "total_failed": 0,
+    "audit_verdict": "PASS"
+  },
+  "artifact_paths": {
+    "checksum_manifest": "runs/module2_v1/checksums_module2_manifest.sha256",
+    "checksum_manifest_sha256": "c7c2190198be54fc0ac01e9ceac96d3eb88333c93f74c9fa54bb5767eee47298",
+    "master_variant_config": "runs/module2_v1/reports/module2_variant_config.json",
+    "audit_report_md": "runs/module2_v1/reports/module2_lead_masking_audit.md",
+    "per_file_audit_csv": "runs/module2_v1/reports/module2_per_file_audit.csv",
+    "split_summary_csv": "runs/module2_v1/reports/module2_split_summary.csv",
+    "failure_records_csv": "runs/module2_v1/reports/module2_failure_records.csv",
+    "manual_verification_guide_md": "runs/module2_v1/reports/module2_manual_verification_guide.md"
+  },
+  "immutability_declaration": "All Module 2 masked arrays, tabular manifests, lead availability masks, and audit reports are permanently frozen. Do not modify or overwrite during subsequent modules."
+}

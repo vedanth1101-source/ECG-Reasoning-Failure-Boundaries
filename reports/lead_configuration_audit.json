@@ -1,0 +1,69 @@
+{
+  "audit_version": "2.0_rigorous_conservative",
+  "audit_timestamp": "2026-10-06 14:40:00 UTC",
+  "primary_levels": [12, 10, 8, 6, 4, 2, 1],
+  "authoritative_config_path": "configs/lead_configurations.json",
+  "classification_taxonomy": [
+    "device-supported",
+    "clinically-motivated",
+    "clinically-motivated simulated"
+  ],
+  "classification_rule": "Classify as 'device-supported' ONLY if the exact lead configuration is explicitly supported by a dedicated commercial device or published clinical protocol available to the project. Generic electrode availability, physical hardware acquisition capability, or general clinical practice is NOT sufficient to claim device support. Where exact device documentation is not established, the configuration is conservatively classified as 'clinically motivated simulated'.",
+  "configurations": {
+    "12": {
+      "lead_count": 12,
+      "leads": ["I", "II", "III", "aVR", "aVL", "aVF", "V1", "V2", "V3", "V4", "V5", "V6"],
+      "classification": "device-supported",
+      "motivation": "Full standard 12-lead diagnostic electrocardiogram (AHA/ACC/HRS guideline gold standard). Comprehensive spatial projection across frontal limb and horizontal precordial planes.",
+      "source": "Standard 12-lead clinical ECG machines (Cabrera / Mason-Likar electrode placement standard, e.g. Philips PageWriter, GE MAC)."
+    },
+    "10": {
+      "lead_count": 10,
+      "leads": ["I", "II", "aVR", "aVL", "V1", "V2", "V3", "V4", "V5", "V6"],
+      "classification": "clinically-motivated simulated",
+      "motivation": "Frontal monitoring bipolar pair (I, II) with augmented vectors (aVR, aVL) and complete precordial survey (V1-V6). Evaluates performance when inferior redundant derived leads (III, aVF) are masked while all precordial leads are intact.",
+      "source": "Clinically motivated simulated configuration. No commercial device natively records this exact 10-lead combination without III/aVF."
+    },
+    "8": {
+      "lead_count": 8,
+      "leads": ["I", "II", "V1", "V2", "V3", "V4", "V5", "V6"],
+      "classification": "clinically-motivated simulated",
+      "motivation": "The mathematically independent 8-channel subset (I, II, V1-V6). Evaluates diagnostic reasoning when derived limb leads (III, aVR, aVL, aVF) are not presented to the downstream model.",
+      "source": "Clinically motivated simulated configuration. Although standard digital hospital ECG carts physically acquire these 8 channels through electrodes, the exported clinical output standard is 12 leads. Classified conservatively as simulated."
+    },
+    "6": {
+      "lead_count": 6,
+      "leads": ["I", "II", "III", "aVR", "aVL", "aVF"],
+      "classification": "device-supported",
+      "motivation": "Complete frontal plane hexaxial reference system. Evaluates diagnostic reasoning restricted strictly to frontal limb vectors when all precordial chest leads are omitted.",
+      "source": "6-lead clinical handheld/portable devices with 3 physical electrode contacts generating the 6 limb leads (e.g. AliveCor KardiaMobile 6L FDA 510(k) K191406)."
+    },
+    "4": {
+      "lead_count": 4,
+      "leads": ["I", "II", "III", "V1"],
+      "classification": "clinically-motivated simulated",
+      "motivation": "Classic 4-electrode arrangement (Einthoven limb triangle I, II, III plus single chest exploring electrode V1 for septal/right ventricular rhythm monitoring).",
+      "source": "Clinically motivated simulated configuration. While 4-lead cables exist in hospital monitoring, display protocols vary between 1 and 3 concurrent channels. Classified conservatively as simulated."
+    },
+    "2": {
+      "lead_count": 2,
+      "leads": ["II", "V1"],
+      "classification": "clinically-motivated simulated",
+      "motivation": "Dual-lead rhythm monitoring vector pairing inferior limb vector (II) and right precordial vector (V1) for arrhythmia and bundle branch block differentiation.",
+      "source": "Clinically motivated simulated configuration representing dual-lead telemetry monitoring protocols. Designated as 'telemetry-like 2-lead configuration'."
+    },
+    "1": {
+      "lead_count": 1,
+      "leads": ["II"],
+      "classification": "clinically-motivated simulated",
+      "motivation": "Single-lead rhythm monitoring aligned along the long anatomical electrical axis of ventricular depolarization (base-to-apex vector).",
+      "source": "Clinically motivated simulated configuration representing wearable patch rhythm monitoring. Designated as 'ambulatory-like single-lead configuration'."
+    }
+  },
+  "overall_terminology": "fixed clinically/device-motivated lead configurations",
+  "summary": {
+    "device_supported_count": 2,
+    "clinically_motivated_simulated_count": 5,
+    "notes": "Conservatively restricts 'device-supported' strictly to Level 12 (standard 12-lead ECG) and Level 6 (KardiaMobile 6L 6-lead system), classifying all other simulated subsets as 'clinically motivated simulated'."
+  }
+}
